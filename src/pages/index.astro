@@ -1,0 +1,37 @@
+---
+
+import Navbar from '../sections/top.astro';
+import Cards from '../sections/cards.astro';
+import Slides from '../sections/slides.astro';
+import Alerts from '../sections/alerts.astro';
+import Qsc from '../sections/quickshrtcut.astro';
+import Btm from '../sections/bottom.astro';
+---
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description">
+		<meta name="viewport" content="width=device-width" />
+	</head>
+<main data-theme="kpz"> <!-- class="bg-gradient-to-r from-blue-200 via-sky-100 to-purple-200" -->
+<Navbar/>
+<div class="lg:container lg:mx-auto rounded-lg border-4">
+
+<Slides/>
+<Qsc/>
+<Alerts/>
+    <Cards/>
+</div>
+<Btm/>
+</main>
+    <!-- Swiper JS -->
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script type="module">
+    // import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js'
+</script>
+</html>

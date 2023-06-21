@@ -1,0 +1,58 @@
+---
+const img = 'https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg';
+const imgmockup = 'https://via.placeholder.com/900x400';
+
+const sideimg = 'https://via.placeholder.com/450x200'
+---
+<div class="lg:grid grid-cols-3 gap-2">
+    <div class="col-span-2">
+        <div class="swiper TopSlides w-full">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <img src={imgmockup} class="w-full" />
+              </div>
+              <div class="swiper-slide">
+                <img src={imgmockup} class="w-full" />
+              </div>
+              <div class="swiper-slide">
+                <img src={imgmockup} class="w-full" />
+              </div>
+                <!-- If we need pagination -->
+
+
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-scrollbar"></div>
+          </div>
+    </div>
+<div class="sm:grid lg:grid-cols-1 sm:grid-cols-2">
+    <img src={sideimg} class="w-full" />
+    <img src={sideimg} class="w-full" />
+</div>
+</div>
+
+  <script type="module">
+    const TopSlides = new Swiper('.TopSlides', {
+  // Optional parameters
+  loop: true,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});
+  </script>
+
