@@ -1,37 +1,28 @@
 ---
 const cardimg = 'https://via.placeholder.com/300x250'
 import Shopitem from '../components/Shopitem.astro';
+
+const shopitems = [
+  { name: 'Pikachu',buycount: 1,description:"ละเอียดยิบ" },
+  { name: 'Charizard',buycount: 12,description:"ละเอียดยิบ2" },
+  { name: 'Bulbasaur',buycount: 22,description:"ละเอียดยิบ3" },
+];
+
+
 ---
 <div class="grid xl:grid-cols-4 gap-3 m-2">
 
 <div class="carditems md:col-span-3">
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
-          <Shopitem
-          title="Test",
+
+{shopitems.map((data) => 
+         <Shopitem
+          title={data.name},
           href={cardimg},
-          buycount="1",
-          description="รายละเอียดไอเทม"
+          buycount={data.buycount.toString()},
+          description={data.description}
           />
-<Shopitem
-title="Test",
-href={cardimg},
-buycount="1",
-description="รายละเอียดไอเทม"
-/>
-<Shopitem
-title="Test",
-href={cardimg},
-buycount="1",
-description="รายละเอียดไอเทม"
-/>
-
-<Shopitem
-title="Test",
-href={cardimg},
-buycount="1",
-description="รายละเอียดไอเทม"
-/>
-
+)}
 
 
         </div>
