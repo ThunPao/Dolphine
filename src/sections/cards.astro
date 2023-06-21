@@ -1,70 +1,39 @@
 ---
 const cardimg = 'https://via.placeholder.com/300x250'
+import Shopitem from '../components/Shopitem.astro';
 ---
 <div class="grid xl:grid-cols-4 gap-3 m-2">
 
 <div class="carditems md:col-span-3">
-    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
-        <div>
-            <div class="card bg-base-100 shadow-xl">
-                <figure><img src={cardimg} alt="Img" class="w-full" /></figure>
-                <div class="card-body">
-                  <h2 class="card-title">Shoes!</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                  <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-        </div>
-        <div>
-            <div class="card bg-base-100 shadow-xl">
-                <figure><img src={cardimg} alt="Img" class="w-full" /></figure>
-                <div class="card-body">
-                  <h2 class="card-title">Shoes!</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                  <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-        </div>
-        <div>
-            <div class="card bg-base-100 shadow-xl">
-                <figure><img src={cardimg} alt="Img" class="w-full" /></figure>
-                <div class="card-body">
-                  <h2 class="card-title">Shoes!</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                  <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-        </div>
-        <div>
-            <div class="card bg-base-100 shadow-xl">
-                <figure><img src={cardimg} alt="Album" class="w-full"/></figure>
-                <div class="card-body">
-                    <h2 class="card-title">Shoes!</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                    <div class="card-actions justify-end">
-                      <button class="btn btn-primary">Buy Now</button>
-                    </div>
-                  </div>
-              </div>
-        </div>
-        <div>
-            <div class="card bg-base-100 shadow-xl">
-                <figure><img src={cardimg} alt="Album" class="w-full"/></figure>
-                <div class="card-body">
-                    <h2 class="card-title">Shoes!</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                    <div class="card-actions justify-end">
-                      <button class="btn btn-primary">Buy Now</button>
-                    </div>
-                  </div>
-              </div>
-        </div>
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+          <Shopitem
+          title="Test",
+          href={cardimg},
+          buycount="1",
+          description="รายละเอียดไอเทม"
+          />
+<Shopitem
+title="Test",
+href={cardimg},
+buycount="1",
+description="รายละเอียดไอเทม"
+/>
+<Shopitem
+title="Test",
+href={cardimg},
+buycount="1",
+description="รายละเอียดไอเทม"
+/>
+
+<Shopitem
+title="Test",
+href={cardimg},
+buycount="1",
+description="รายละเอียดไอเทม"
+/>
+
+
+
         </div>
 </div>
 <div class="side-carditems">
@@ -108,3 +77,16 @@ const cardimg = 'https://via.placeholder.com/300x250'
 </div>
 
 </div>
+
+<!-- Open the modal using ID.showModal() method -->
+<dialog id="my_modal_1" class="modal">
+  <form method="dialog" class="modal-box">
+    <h3 class="font-bold text-lg">ยืนยันการซื้อ</h3>
+    <p class="py-4">ซื้อ item ตอนนี้เลยหรือไม่?</p>
+    <div class="modal-action">
+      <!-- if there is a button in form, it will close the modal -->
+    <button class="btn btn-success">ซื้อทันที</button>
+      <button class="btn btn-warning">ยกเลิก</button>
+    </div>
+  </form>
+</dialog>

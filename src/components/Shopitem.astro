@@ -1,0 +1,36 @@
+---
+export interface Props {
+	title: string;
+	href: string;
+	buycount: string;
+	description: string;
+
+}
+
+const { href, title, buycount, description } = Astro.props;
+---
+
+<div class="card bg-base-100 shadow-xl">
+    <figure><img src={href} alt="Img" class="w-full" />
+    </figure>
+    <div class="md:flex justify-between p-1">
+      <div>
+        <div class="badge badge-success font-bold text-lg">
+          สินค้าเข้าใหม่</div>
+      </div>
+      <div>
+        <div class="badge badge-primary font-bold text-lg">ซื้อไปแล้ว {buycount} ครั้ง</div>
+      </div>
+  </div>
+    <div class="card-body">
+      <h2 class="card-title">{title}</h2>
+      <p>{description}</p>
+      <div class="card-actions justify-end">
+        <button class="btn btn-primary hover:scale-105 text-lg" onclick="my_modal_1.showModal()">
+          <i class="fa-solid fa-dollar-sign"></i>
+          ซื้อเลย</button>
+        <button class="btn btn-secondary hover:scale-105 text-lg">
+          <i class="fa-solid fa-cart-shopping"></i>หยิบใส่ตระก้า</button>
+      </div>
+    </div>
+  </div>
