@@ -36,14 +36,33 @@
   <script type="text/javascript">
 const themeToggle = document.getElementById('themeToggle');
 const mainElement = document.querySelector('main');
+const swapOnIcon = document.querySelector('.swap-on');
+const swapOffIcon = document.querySelector('.swap-off');
+
+// Check if theme preference is stored in localStorage
+const storedTheme = localStorage.getItem('theme');
+if (storedTheme) {
+  mainElement.setAttribute('data-theme', storedTheme);
+  themeToggle.checked = (storedTheme === 'emerald');
+  
+  // Toggle icon based on the stored theme preference
+  swapOnIcon.style.display = (storedTheme === 'emerald') ? 'block' : 'none';
+  swapOffIcon.style.display = (storedTheme === 'emerald') ? 'none' : 'block';
+}
 
 themeToggle.addEventListener('change', function() {
   if (this.checked) {
     mainElement.setAttribute('data-theme', 'emerald');
+    localStorage.setItem('theme', 'emerald'); // Store theme preference in localStorage
+    swapOnIcon.style.display = 'block'; // Show 'swap-on' icon
+    swapOffIcon.style.display = 'none'; // Hide 'swap-off' icon
   } else {
-    // mainElement.removeAttribute('data-theme');
     mainElement.setAttribute('data-theme', 'kpz');
-
+    localStorage.setItem('theme', 'kpz'); // Store theme preference in localStorage
+    swapOnIcon.style.display = 'none'; // Hide 'swap-on' icon
+    swapOffIcon.style.display = 'block'; // Show 'swap-off' icon
   }
 });
+
+
 </script>

@@ -1,0 +1,41 @@
+---
+export interface Props {
+    id: string;
+    open: string;
+}
+
+const {id, open} = Astro.props;
+---
+<style>
+dialog {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+
+
+<button onclick=`{${"Modal_"+id}.showModal()};`>{open}</button>
+
+<dialog id={"Modal_"+id}>
+  <slot name="main" />
+  <form method="dialog">
+    <slot name="close" />
+  </form>
+</dialog>
+
+
+
+<!-- The button to open modal -->
+<a href=`#modal_${id}` class="btn">open modal</a>
+<!-- Put this part before </body> tag -->
+<div class="modal" id=`modal_${id}`>
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Hello!</h3>
+    <p class="py-4">This modal works with anchor links</p>
+    <div class="modal-action">
+     <a href="#" class="btn">Yay!</a>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 ---
 export interface Props {
+  id: number;
 	title: string;
 	href: string;
 	buycount: string;
@@ -7,30 +8,55 @@ export interface Props {
 
 }
 
-const { href, title, buycount, description } = Astro.props;
+const { id, href, title, buycount, description } = Astro.props;
 ---
 
-<div class="card bg-base-100 shadow-xl">
-    <figure><img src={href} alt="Img" class="w-full" />
+<div class="card bg-base-200 shadow-xl hover:scale-105">
+  <button onclick="`${id}.showModal()`;">
+    <figure><img src={href} alt="Img" class="rounded-lg w-full" />
     </figure>
-    <div class="md:flex justify-between p-1">
+    <div class=" xs:flex sm:flex md:flex justify-between p-1">
       <div>
         <div class="badge badge-success font-bold text-lg">
           สินค้าเข้าใหม่</div>
       </div>
       <div>
-        <div class="badge badge-primary font-bold text-lg">ซื้อไปแล้ว {buycount} ครั้ง</div>
+        <div class="badge badge-primary font-bold text-lg">{buycount} ซื้อแล้ว</div>
       </div>
   </div>
     <div class="card-body">
       <h2 class="card-title">{title}</h2>
       <p>{description}</p>
-      <div class="card-actions justify-end">
-        <button class="btn btn-primary hover:scale-105 text-lg" onclick="my_modal_1.showModal()">
+      <div class="card-actions justify-end hidden">
+        <button class="btn btn-primary hover:scale-105 text-lg" onclick="my_modal_1.showModal();">
           <i class="fa-solid fa-dollar-sign"></i>
           ซื้อเลย</button>
         <button class="btn btn-secondary hover:scale-105 text-lg">
           <i class="fa-solid fa-cart-shopping"></i>หยิบใส่ตระก้า</button>
       </div>
     </div>
+  </button>
   </div>
+
+
+  <!-- <dialog id="Modal_{data.id}" class="modal">
+    <form method="dialog" class="modal-box">
+      <h3 class="font-bold text-lg">{title}</h3>
+      <p class="py-4">{description}</p>
+      <div class="modal-action">
+        <button class="btn">Close</button>
+      </div>
+    </form>
+  </dialog> -->
+
+
+  <!-- <button onclick="{id.showModal()}">swasdws</button> -->
+  <dialog id=`${id}` class="modal">
+    <form method="dialog" class="modal-box">
+      <h3 class="font-bold text-lg">awfawsfwas</h3>
+      <p class="py-4">awsgawgwas</p>
+      <div class="modal-action">
+        <button class="btn">Close</button>
+      </div>
+    </form>
+  </dialog>

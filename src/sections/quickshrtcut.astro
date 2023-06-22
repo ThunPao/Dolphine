@@ -1,17 +1,102 @@
 ---
 const img = 'https://via.placeholder.com/300x300';
+import Quickmenu from '../components/Quickmenu.astro';
+
+const data = [
+  { id:1,title: 'Pikachu',href: 1,description:"ละเอียดยิบ" },
+  { id:2,title: 'Charizard',href: 12,description:"ละเอียดยิบ2" },
+  { id:3,title: 'Bulbasaur',href: 22,description:"ละเอียดยิบ3" },
+  { id:3,title: 'Test',href: 22,description:"ละเอียดยิบ" },
+  { id:3,title: 'Test1aaa',href: 22,description:"ละเอียดยิบ" },
+  { id:3,title: 'Test1aaa',href: 22,description:"ละเอียดยิบ" },
+  { id:3,title: 'Test1aaa',href: 22,description:"ละเอียดยิบ" },
+  { id:3,title: 'Test1aaa',href: 22,description:"ละเอียดยิบ" },
+  { id:3,title: 'Test1aaa',href: 22,description:"ละเอียดยิบ" },
+  { id:3,title: 'Test1aaa',href: 22,description:"ละเอียดยิบ" },
+  { id:3,title: 'Test1aaa',href: 22,description:"ละเอียดยิบ" },
+  { id:3,title: 'Test1aaa',href: 22,description:"ละเอียดยิบ" },
+];
 ---
-<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 bg-base-200 light:bg-zinc-200 rounded-3xl">
-    <div class="p-3 d-flex hover:scale-110 overflow-x-hidden hover:overflow-visible">
-        <div class="card text-center">
-            <img class="mask mask-hexagon " src={img} />
-        <p class="text-3xl antialiased font-bold text-clip animate-marquee whitespace-nowrap">TestTsfsfsestTest</p>
-        </div>
+
+ <!-- <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 bg-base-200 light:bg-zinc-200 rounded-3xl">
+    {data.map((data) => 
+        <Quickmenu
+        id={data.id.toString()},
+         title={data.title},
+         href={img},
+         />
+)}
+</div>  -->
+
+
+  
+<div class="swiper MenuSlides w-full">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      {data.map((data) => 
+      <div class="swiper-slide">
+        <Quickmenu
+        id={data.id.toString()},
+         title={data.title},
+         href={img},
+         />
+      </div>
+      )}
     </div>
-    <div class="p-3 d-flex hover:scale-110 overflow-x-hidden hover:overflow-visible">
-        <div class="card text-center">
-            <img class="mask mask-hexagon" src={img} />
-        <p class="text-3xl antialiased font-bold text-clip animate-marquee whitespace-nowrap">TestTsfsfsestTest</p>
-        </div>
-    </div>
-</div>
+    <div class="swiper-scrollbar"></div>
+  </div>
+  <script type="module">
+    const MenuSlides = new Swiper('.MenuSlides', {
+  // Optional parameters
+  loop: false,
+  direction: "horizontal",
+//   freeMode: true,
+// effect: "coverflow",
+  mousewheel:true,
+  slidesPerView: 6,
+  spaceBetween: 30,
+  pauseOnMouseEnter:true,
+  grabCursor: true,
+//   coverflowEffect: {
+//         rotate: 50,
+//         stretch: 0,
+//         depth: 100,
+//         modifier: 0.5,
+//         slideShadows: false,
+//       },
+  autoplay: {
+   delay: 3000,
+ },
+ grid: {
+    rows: 1,
+  },
+  breakpoints: {
+    320:{
+    slidesPerView: 1,    
+},
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 6,
+          spaceBetween: 50,
+        },
+      },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+//   pagination: {
+//         el: ".swiper-pagination",
+//       },
+  
+});
+  </script>

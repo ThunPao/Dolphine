@@ -2,43 +2,46 @@
 const cardimg = 'https://via.placeholder.com/300x250'
 import Shopitem from '../components/Shopitem.astro';
 
+
+
+
+
 const shopitems = [
-  { name: 'Pikachu',buycount: 1,description:"ละเอียดยิบ" },
-  { name: 'Charizard',buycount: 12,description:"ละเอียดยิบ2" },
-  { name: 'Bulbasaur',buycount: 22,description:"ละเอียดยิบ3" },
+  { id: 1,name: 'Pikachu',buycount: 1,description:"ละเอียดยิบ" },
+  { id: 2,name: 'Charizard',buycount: 12,description:"ละเอียดยิบ2" },
+  { id: 3,name: 'Bulbasaur',buycount: 22,description:"ละเอียดยิบ3" },
 ];
 
 
 ---
-<div class="grid xl:grid-cols-4 gap-3 m-2">
+<div class="grid xl:grid-cols-4 gap-3 m-5">
 
 <div class="carditems md:col-span-3">
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
 
 {shopitems.map((data) => 
          <Shopitem
+         id={data.id},
           title={data.name},
           href={cardimg},
           buycount={data.buycount.toString()},
           description={data.description}
           />
 )}
-
-
         </div>
 </div>
-<div class="side-carditems">
+<div class="side-carditems bg-base-200 rounded-lg">
     <div class="overflow-x-auto">
         <div class="tabs tabs-boxed flex justify-center">
-            <a class="tab">Tab 1</a> 
-            <a class="tab tab-active">Active</a> 
-            <a class="tab">Tab 3</a>
+            <a class="tab">Ranking 1</a> 
+            <a class="tab tab-active">Ranking Active</a> 
+            <a class="tab">Ranking 3</a>
           </div>
         <table class="table">
           <!-- head -->
           <thead>
             <tr>
-              <th>#</th>
+              <th></th>
               <th>Name</th>
               <th>Job</th>
             </tr>
@@ -46,19 +49,19 @@ const shopitems = [
           <tbody>
             <!-- row 1 -->
             <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
+              <th><i class="fa-solid fa-xl fa-trophy text-amber-400"></i></th>
+              <td>AABBCCEEDDWW</i></td>
               <td>Quality Control Specialist</td>
             </tr>
             <!-- row 2 -->
             <tr>
-              <th>2</th>
+              <th><i class="fa-solid fa-xl fa-trophy text-zinc-300"></th>
               <td>Hart Hagerty</td>
               <td>Desktop Support Technician</td>
             </tr>
             <!-- row 3 -->
             <tr>
-              <th>3</th>
+              <th><i class="fa-solid fa-xl fa-trophy text-amber-600"></i></th>
               <td>Brice Swyre</td>
               <td>Tax Accountant</td>
             </tr>
@@ -81,3 +84,27 @@ const shopitems = [
     </div>
   </form>
 </dialog>
+
+
+
+<!-- {shopitems.map((data) => 
+<dialog id="Modal_{data.id}" class="modal">
+  <form method="dialog" class="modal-box">
+    <h3 class="font-bold text-lg">{data.name}</h3>
+    <p class="py-4">{data.description}</p>
+    <div class="modal-action">
+      <button class="btn">Close</button>
+    </div>
+  </form>
+</dialog>
+)} -->
+
+<!-- <dialog id="Modal_{data.id}" class="modal">
+  <form method="dialog" class="modal-box">
+    <h3 class="font-bold text-lg">awfwafws</h3>
+    <p class="py-4">wfwafwa</p>
+    <div class="modal-action">
+      <button class="btn">Close</button>
+    </div>
+  </form>
+</dialog> -->
