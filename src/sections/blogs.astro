@@ -1,0 +1,23 @@
+---
+
+const response = await fetch('http://universities.hipolabs.com/search?country=United+States');
+const raw = await response.json();
+
+const shopitems2 = [
+  { id: 1,name: 'Pikachu',buycount: 1,description:"ละเอียดยิบ" },
+  { id: 2,name: 'Charizard',buycount: 12,description:"ละเอียดยิบ2" },
+  { id: 3,name: 'Bulbasaur',buycount: 22,description:"ละเอียดยิบ3" },
+];
+
+
+// const randomUser = data.results[0];
+---
+<!-- Data fetched at build can be rendered in HTML -->
+<h1>User</h1>
+<h2>Test</h2>
+
+
+{raw.map((data) => 
+    <p>{data.country}</p>
+)}
+<!-- Data fetched at build can be passed to components as props -->
