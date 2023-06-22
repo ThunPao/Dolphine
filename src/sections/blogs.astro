@@ -13,10 +13,11 @@ const shopitems2 = [
 // const randomUser = data.results[0];
 ---
 <!-- Data fetched at build can be rendered in HTML -->
-<h1>User</h1>
-<h2>Test</h2>
-
-
+<h1>name</h1>
+{raw.slice(0, 10).map((data) => 
+    <p>{data.name}</p>
+  )}
+<h2>country</h2>
 {raw.map((data) => 
     <p>{data.country}</p>
 )}
