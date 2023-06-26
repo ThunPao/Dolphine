@@ -1,6 +1,7 @@
 ---
 const cardimg = 'https://via.placeholder.com/300x250'
 import Shopitem from '../components/Shopitem.astro';
+import Tabs from '../components/Tabs.svelte';
 
 const shopitems = [
   { id: 1,name: 'Pikachu',buycount: 1,description:"ละเอียดยิบ" },
@@ -28,41 +29,7 @@ const shopitems = [
 </div>
 <div class="side-carditems bg-base-200 rounded-lg">
     <div class="overflow-x-auto">
-        <div class="tabs tabs-boxed flex justify-center">
-            <a class="tab">Ranking 1</a> 
-            <a class="tab tab-active">Ranking Active</a> 
-            <a class="tab">Ranking 3</a>
-          </div>
-        <table class="table">
-          <!-- head -->
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Job</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- row 1 -->
-            <tr>
-              <th><i class="fa-solid fa-xl fa-trophy text-amber-400"></i></th>
-              <td>AABBCCEEDDWW</i></td>
-              <td>Quality Control Specialist</td>
-            </tr>
-            <!-- row 2 -->
-            <tr>
-              <th><i class="fa-solid fa-xl fa-trophy text-zinc-300"></th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-            </tr>
-            <!-- row 3 -->
-            <tr>
-              <th><i class="fa-solid fa-xl fa-trophy text-amber-600"></i></th>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-            </tr>
-          </tbody>
-        </table>
+      <Tabs client:load/>
       </div>
 </div>
 

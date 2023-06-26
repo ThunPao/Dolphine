@@ -11,7 +11,7 @@ export interface Props {
 const { id, href, title, buycount, description } = Astro.props;
 ---
 
-<div class="card bg-base-200 shadow-xl">
+<div class="card bg-base-200 shadow-lg hover:shadow-amber-500">
   <button onclick=`{${"shopinfo_"+id}.showModal()};`>
     <figure><img src={href} alt="Img" class="rounded-lg w-full" />
     </figure>
@@ -32,23 +32,23 @@ const { id, href, title, buycount, description } = Astro.props;
   </button>
   </div>
 
-  <dialog id={"shopinfo_"+id} class="modal">
-    <form method="dialog" class="modal-box">
+  <dialog id={"shopinfo_"+id} class="modal ">
+    <form method="dialog" class="modal-box shadow-lg shadow-amber-300">
       <h3 class="font-bold text-lg">รายละเอียดสินค้า</h3>
-      <figure><img src={href} alt="Img" class="rounded-lg w-full" />
+      <figure><img src={href} alt="Img" class="rounded-lg w-full shadow-lg shadow-stone-500" />
       </figure>
       <div class=" xs:flex sm:flex md:flex justify-between p-1">
-        <div>
           <div class="badge badge-success font-bold text-lg">
             สินค้าเข้าใหม่</div>
-        </div>
+
         <div>
           <div class="badge badge-primary font-bold text-lg">{buycount} ซื้อแล้ว</div>
         </div>
     </div>
+    <div class="modal-body">
       <h2 class="card-title">{title}</h2>
       <p class="bg-base-200 rounded p-2">{description}</p>
-     
+    </div>
         <div class="flex justify-end gap-2 mt-4">
         <button class="btn btn-primary hover:scale-105 text-lg" onclick="my_modal_1.showModal();">
           <i class="fa-solid fa-dollar-sign"></i>

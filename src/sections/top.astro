@@ -43,22 +43,22 @@ const swapOffIcon = document.querySelector('.swap-off');
 const storedTheme = localStorage.getItem('theme');
 if (storedTheme) {
   mainElement.setAttribute('data-theme', storedTheme);
-  themeToggle.checked = (storedTheme === 'emerald');
+  themeToggle.checked = (storedTheme === 'light');
   
   // Toggle icon based on the stored theme preference
-  swapOnIcon.style.display = (storedTheme === 'emerald') ? 'block' : 'none';
-  swapOffIcon.style.display = (storedTheme === 'emerald') ? 'none' : 'block';
+  swapOnIcon.style.display = (storedTheme === 'light') ? 'block' : 'none';
+  swapOffIcon.style.display = (storedTheme === 'light') ? 'none' : 'block';
 }
 
 themeToggle.addEventListener('change', function() {
   if (this.checked) {
-    mainElement.setAttribute('data-theme', 'emerald');
-    localStorage.setItem('theme', 'emerald'); // Store theme preference in localStorage
+    mainElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light'); // Store theme preference in localStorage
     swapOnIcon.style.display = 'block'; // Show 'swap-on' icon
     swapOffIcon.style.display = 'none'; // Hide 'swap-off' icon
   } else {
-    mainElement.setAttribute('data-theme', 'kpz');
-    localStorage.setItem('theme', 'kpz'); // Store theme preference in localStorage
+    mainElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark'); // Store theme preference in localStorage
     swapOnIcon.style.display = 'none'; // Hide 'swap-on' icon
     swapOffIcon.style.display = 'block'; // Show 'swap-off' icon
   }
