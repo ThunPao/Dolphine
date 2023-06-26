@@ -3,14 +3,35 @@ const cardimg = 'https://via.placeholder.com/300x250'
 import Shopitem from '../components/Shopitem.astro';
 import Tabs from '../components/Tabs.svelte';
 
-const shopitems = [
-  { id: 1,name: 'Pikachu',buycount: 1,description:"ละเอียดยิบ" },
-  { id: 2,name: 'Charizard',buycount: 12,description:"ละเอียดยิบ2" },
-  { id: 3,name: 'Bulbasaur',buycount: 22,description:"ละเอียดยิบ3" },
-];
+const response = await fetch('http://127.0.0.1:3005/shopitems');
+const shopitems = await response.json();
+
+
+import { readUpstash, postUpstash } from "../services/shop";
+// const shopitems2 = [
+//   { id: 1,name: 'Pikachu',buycount: 1,description:"ละเอียดยิบ" },
+//   { id: 2,name: 'Charizard',buycount: 12,description:"ละเอียดยิบ2" },
+//   { id: 3,name: 'Bulbasaur',buycount: 22,description:"ละเอียดยิบ3" },
+// ];
+
+let counter = await readUpstash("/counters");
+
+if (Astro.request.method === "POST") {
+  const start = Date.now();
+  counter = (await postUpstash(["INCR", "counter"])).result;
+  console.log(`latency to increment counter: ${Date.now() - start}ms`);
+  return Astro.redirect("/counters");
+}
 
 
 ---
+
+<form method="post">
+  <output>Counter: {counter}</output>
+  <button name="action" value="increment">Increment</button>
+</form>
+
+
 <div class="grid xl:grid-cols-4 gap-3 m-5">
 
 <div class="carditems md:col-span-3">
