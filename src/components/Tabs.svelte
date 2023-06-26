@@ -31,20 +31,6 @@ onMount(fetchData);
 
   </script>
 
-{#if data !== null}
-{#if data.length > 0}
-  <ul>
-    {#each data as item}
-      <li>{item.country}</li>
-    {/each}
-  </ul>
-{:else}
-  <p>No data available.</p>
-{/if}
-{:else}
-<p>Loading...</p>
-{/if}
-
 
 
   <div class="tabs d-flex justify-center">
@@ -71,7 +57,7 @@ onMount(fetchData);
         </tr>
       </thead>
       <tbody>
-        <!-- row 1 -->
+        <!-- row loop -->
         {#if data !== null}
 {#if data.length > 0}
 {#each data as item, index}
@@ -94,7 +80,25 @@ onMount(fetchData);
   <p>No data available.</p>
 {/if}
 {:else}
-<p>Loading...</p>
+{#each Array(5) as _, i}
+<tr class="animate-pulse">
+  {#if i === 0}
+  <th><i class="fa-solid fa-xl fa-trophy text-amber-400"></i></th>
+{:else if i === 1}
+<th><i class="fa-solid fa-xl fa-trophy text-zinc-300"></th>
+  {:else if i === 2}
+  <th><i class="fa-solid fa-xl fa-trophy text-amber-600"></i></th>
+  {:else}
+  <th></th>
+  {/if}
+<td>
+  <div class="h-4 bg-slate-700 rounded"></div>
+</td>
+<td>
+  <div class="h-3 bg-slate-700 rounded"></div>
+</td>
+</tr>
+{/each}
 {/if}
 
         <!-- <tr>

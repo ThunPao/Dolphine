@@ -50,7 +50,7 @@ const { id, href, title, buycount, description } = Astro.props;
       <p class="bg-base-200 rounded p-2">{description}</p>
     </div>
         <div class="flex justify-end gap-2 mt-4">
-        <button class="btn btn-primary hover:scale-105 text-lg" onclick="my_modal_1.showModal();">
+        <button class="btn btn-primary hover:scale-105 text-lg" onclick=`{${"cfbuy_"+id}.showModal()};`>
           <i class="fa-solid fa-dollar-sign"></i>
           ซื้อเลย</button>
           <button class="btn btn-secondary hover:scale-105 text-lg">
@@ -65,3 +65,16 @@ const { id, href, title, buycount, description } = Astro.props;
       <button></button>
     </form>
   </dialog>
+
+  <!-- Open the modal using ID.showModal() method -->
+<dialog id={"cfbuy_"+id} class="modal">
+  <form method="dialog" class="modal-box">
+    <h3 class="font-bold text-lg">ยืนยันการซื้อ</h3>
+    <p class="py-4">ซื้อ {title} ตอนนี้เลยหรือไม่?</p>
+    <div class="modal-action">
+      <!-- if there is a button in form, it will close the modal -->
+    <button class="btn btn-success">ซื้อทันที</button>
+      <button class="btn btn-warning">ยกเลิก</button>
+    </div>
+  </form>
+</dialog>
