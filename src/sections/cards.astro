@@ -7,27 +7,58 @@ const response = await fetch('http://127.0.0.1:3005/shopitems');
 const shopitems = await response.json();
 
 
-import { readUpstash, postUpstash } from "../services/shop";
+import { readUpstash, postUpstash,post2Upstash ,putUpstash} from "../services/shop";
+
+
 // const shopitems2 = [
 //   { id: 1,name: 'Pikachu',buycount: 1,description:"ละเอียดยิบ" },
 //   { id: 2,name: 'Charizard',buycount: 12,description:"ละเอียดยิบ2" },
 //   { id: 3,name: 'Bulbasaur',buycount: 22,description:"ละเอียดยิบ3" },
 // ];
+const increment = [
+  {
+  id:1,
+  INCR: 30
+}
+];
 
 let counter = await readUpstash("/counters");
 
 if (Astro.request.method === "POST") {
-  const start = Date.now();
-  counter = (await postUpstash(["INCR", "counter"])).result;
-  console.log(`latency to increment counter: ${Date.now() - start}ms`);
-  return Astro.redirect("/counters");
+  // console.log("BOOHA");
 }
-
-
 ---
+<script>
+  import {boo, readdata} from "../services/app2";
+const myButton = document.querySelector('button[name="mybtn"]');
+myButton!.addEventListener('click', handleButtonClick);
 
-<form method="post">
-  <output>Counter: {counter}</output>
+function handleButtonClick() {
+  boo();
+  
+ 
+
+  readdata("/counters").then(data => {
+  console.log("Data: ", data);
+  const incrValues = data.map(item => item.INCR);
+  console.log("INCR values: ", incrValues);
+}).catch(error => {
+  console.error(error);
+});
+}
+    </script>
+
+<button class="btn" name="mybtn">BOO!</button>
+
+
+
+
+
+
+
+
+<form method="POST">
+  <output>Counter: {counter[0].INCR}</output>
   <button name="action" value="increment">Increment</button>
 </form>
 
