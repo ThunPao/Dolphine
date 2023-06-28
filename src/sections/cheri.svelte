@@ -1,46 +1,56 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import type { Counter } from "../model/shopitem";
 
-  //   type Post = {
-  //     createdAt: Date;
-  //     image: any;
-  //     content: string;
-  //     title: string;
-  //     id: number;
-  //   };
+  let counters: Counter[] = [];
 
-  type counter = {
-    incr: string;
-    id: number;
-  };
-
-  let items: counter[] = [];
-  let loaded = false;
-
-  onMount(() => loadThings(false));
-
-  function loadThings(wait: boolean) {
-    if (typeof fetch !== "undefined") {
-      loaded = false;
-
-      fetch("http://127.0.0.1:3005/counters")
-        .then((response) => response.json())
-        .then((json) =>
-          setTimeout(
-            () => {
-              console.log("items" + items);
-              items = json;
-              loaded = true;
-            },
-            // Simulate a long load time.
-            wait ? 2000 : 0
-          )
-        );
+  async function getCounters() {
+    try {
+      const response = await fetch("http://127.0.0.1:3005/counters");
+      counters = await response.json();
+    } catch (error) {
+      console.error("Error fetching counters:", error);
     }
   }
+
+  async function updateCounter(id: number) {
+    const counter = counters.find((c) => c.id === id);
+    if (counter) {
+      counter.INCR += 1;
+
+      // Update the data on the server
+      try {
+        await fetch(`http://127.0.0.1:3005/counters/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(counter),
+        });
+
+        // Update the displayed data by fetching the updated counters
+        await getCounters();
+      } catch (error) {
+        console.error("Error updating counter:", error);
+      }
+    }
+  }
+
+  onMount(getCounters);
 </script>
 
-<table class="table-bordred">
-  {items}
-  {loaded}
-</table>
+<main>
+  {#if counters.length > 0}
+    {#each counters as counter}
+      <div>
+        <h1>Counter ID: {counter.id}</h1>
+        <h2>INCR: {counter.INCR}</h2>
+        <button class="btn" on:click={() => updateCounter(counter.id)}
+          >Increase</button
+        >
+      </div>
+    {/each}
+  {:else}
+    <p>Loading counters...</p>
+  {/if}
+</main>

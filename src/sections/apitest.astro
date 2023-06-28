@@ -53,3 +53,25 @@ if (Astro.request.method === "POST") {
   </label>
   <button>Submit</button>
 </form>
+
+<script>
+  import {boo, readdata} from "../services/app2";
+const myButton = document.querySelector('button[name="mybtn"]');
+myButton!.addEventListener('click', handleButtonClick);
+
+function handleButtonClick() {
+  boo();
+  
+ 
+
+  readdata("/counters").then(data => {
+  console.log("Data: ", data);
+  const incrValues = data.map(item => item.INCR);
+  console.log("INCR values: ", incrValues);
+}).catch(error => {
+  console.error(error);
+});
+}
+    </script>
+
+<button class="btn" name="mybtn">BOO!</button>
