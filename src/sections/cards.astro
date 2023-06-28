@@ -41,3 +41,20 @@ const shopitems = await response.json();
 </div>
 
 </div>
+
+
+<div class="collapse bg-base-200">
+  <input type="radio" name="my-accordion-1" /> 
+  <div class="collapse-title text-xl font-medium">
+    Click to open this one and close others
+  </div>
+  </div>
+  <div class="grid grid-cols-4 gap-2 p-2">
+  {shopitems.map((data) => 
+<div class="avatar">
+  <div class="w-24 rounded">
+    <img src={cardimg} />
+  </div>
+</div>
+)}
+</div>

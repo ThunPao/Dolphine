@@ -16,7 +16,7 @@ const { id, href, title, buycount, description } = Astro.props;
   <button onclick=`{${"shopinfo_"+id}.showModal()};`>
     <figure><img src={href} alt="Img" class="rounded-lg w-full" />
     </figure>
-    <div class=" xs:flex sm:flex md:flex justify-between p-1">
+    <div class="xs:flex sm:flex md:flex justify-between p-1">
       <div>
         <div class="badge badge-success font-bold text-lg py-4</div>">
           สินค้าเข้าใหม่</div>
@@ -38,7 +38,7 @@ const { id, href, title, buycount, description } = Astro.props;
       <h3 class="font-bold text-lg">รายละเอียดสินค้า</h3>
       <figure><img src={href} alt="Img" class="rounded-lg w-full shadow-lg shadow-stone-500" />
       </figure>
-      <div class=" xs:flex sm:flex md:flex justify-between p-1">
+      <div class="flex justify-between">
           <div class="badge badge-success font-bold text-lg">
             สินค้าเข้าใหม่</div>
 
@@ -49,16 +49,16 @@ const { id, href, title, buycount, description } = Astro.props;
     <div class="modal-body">
       <h2 class="card-title">{title}</h2>
       <p class="bg-base-200 rounded p-2">{description}</p>
-    </div>
+   
         <div class="flex justify-end gap-2 mt-4">
-<Btncf did={id} title={title}/>
+<Btncf did={id} title={title} client:load/>
           <button class="btn btn-secondary hover:scale-105 text-lg">
             <i class="fa-solid fa-cart-shopping"></i>หยิบใส่ตระก้า</button>
           </div>
       <div class="modal-action">
-        <button class="btn flex grow">ปิดหน้าต่างนี้</button>
+        <button class="btn flex grow">เลือกดูไอเทมอื่น</button>
       </div>
-      
+    </div>
     </form>
     <form method="dialog" class="modal-backdrop">
       <button></button>
