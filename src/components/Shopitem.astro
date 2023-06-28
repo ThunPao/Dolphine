@@ -51,11 +51,7 @@ const { id, href, title, buycount, description } = Astro.props;
       <p class="bg-base-200 rounded p-2">{description}</p>
     </div>
         <div class="flex justify-end gap-2 mt-4">
-        <!-- <button class="btn btn-primary hover:scale-105 text-lg" onclick=`{${"cfbuy_"+id}.showModal()};`> -->
-
 <Btncf did={id} title={title}/>
-
-          
           <button class="btn btn-secondary hover:scale-105 text-lg">
             <i class="fa-solid fa-cart-shopping"></i>หยิบใส่ตระก้า</button>
           </div>

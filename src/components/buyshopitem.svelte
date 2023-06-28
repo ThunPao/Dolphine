@@ -15,7 +15,9 @@
     <h3 class="font-bold text-lg">ยืนยันการซื้อ</h3>
     <p class="py-4">ซื้อ {title} ตอนนี้เลยหรือไม่?</p>
     <div class="modal-action">
-      <button class="btn btn-success">ซื้อทันที</button>
+      <button class="btn btn-success" on:click={() => console.log("TRIGGERED")}
+        >ซื้อทันที</button
+      >
       <button class="btn btn-warning">ยกเลิก</button>
     </div>
   </form>
