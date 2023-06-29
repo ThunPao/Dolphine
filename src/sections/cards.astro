@@ -13,26 +13,32 @@ const shopitems = await response.json();
 //   { id: 3,name: 'Bulbasaur',buycount: 22,description:"ละเอียดยิบ3" },
 // ];
 
+
+
 ---
 
 
 
-
-<div class="grid xl:grid-cols-4 gap-3 m-5">
+<div class="grid grid-cols-1 xl:grid-cols-4 gap-3 m-5">
 
 <div class="carditems md:col-span-3">
-    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+<!--  -->
+<div class="">
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" >
+          {shopitems.map((data) =>
+            <Shopitem
+            id={data.id},
+             title={data.name},
+             href={cardimg},
+             buycount={data.buycount.toString()},
+             description={data.description}
+             />
 
-{shopitems.map((data) => 
-         <Shopitem
-         id={data.id},
-          title={data.name},
-          href={cardimg},
-          buycount={data.buycount.toString()},
-          description={data.description}
-          />
-)}
+        )}
+
+
         </div>
+</div>
 </div>
 <div class="side-carditems bg-base-200 rounded-lg">
     <div class="overflow-x-auto">
@@ -43,18 +49,33 @@ const shopitems = await response.json();
 </div>
 
 
-<div class="collapse bg-base-200">
-  <input type="radio" name="my-accordion-1" /> 
-  <div class="collapse-title text-xl font-medium">
-    Click to open this one and close others
+<div class="bg-base-200 grid gap-2 p-3 justify-center">
+  <div class="text-2xl font-medium">
+    รายการไอเทมทั้งหมด
+    
   </div>
+
+  <button class="btn btn-secondary btn-sm md:btn-md lg:btn-md max-w-xs">🔍ค้นหาไอเทม</button>
+
+  <input type="text" placeholder="ระบุไอเทมที่สนใจ" class="input w-full max-w-sm" />
+
   </div>
-  <div class="grid grid-cols-4 gap-2 p-2">
+
+  <div class="grid gap-2 p-1">
   {shopitems.map((data) => 
-<div class="avatar">
-  <div class="w-24 rounded">
-    <img src={cardimg} />
+<div class="card card-side bg-base-100 shadow-xl">
+  <figure><img src={cardimg} alt="Movie"/></figure>
+  <div class="card-body">
+    <h2 class="card-title">New movie is released!</h2>
+    <p>Click the button to watch on Jetflix app.</p>
+    <div class="card-actions justify-end">
+      <button class="btn btn-primary">ซื้อไอเทม</button>
+    </div>
   </div>
 </div>
+
 )}
 </div>
+
+
+
