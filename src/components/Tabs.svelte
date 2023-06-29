@@ -26,6 +26,11 @@
   // Call the fetch function when the component is mounted
   onMount(fetchData);
   //
+
+  console.log(
+    "%cWarning: Unauthorized access!",
+    "color: red; font-size: 20px;"
+  );
 </script>
 
 <div class="tabs d-flex justify-center">

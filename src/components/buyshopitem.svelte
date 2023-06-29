@@ -1,10 +1,23 @@
 <script>
+  import toastr from "toastr";
   export let did;
   export let title;
-  let test = "Waiting";
+
   async function handleClick() {
+    // Display an info toast with no title
+    toastr.success(
+      "Success!",
+      "ซื้อสินค้า " + title + " สำเร็จ ยอดเงินคงเหลือ point",
+      {
+        timeOut: 5000,
+        positionClass: "toast-bottom-center",
+        newestOnTop: true,
+        progressBar: true,
+      }
+    );
+
     await new Promise((resolve) => setTimeout(resolve, 500));
-    test = "Success";
+
     console.log("Delayed log after 0.5 seconds");
   }
 </script>
