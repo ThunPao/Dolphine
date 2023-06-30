@@ -55,9 +55,22 @@ const shopitems = await response.json();
     
   </div>
 
-  <button class="btn btn-secondary btn-sm md:btn-md lg:btn-md max-w-xs">🔍ค้นหาไอเทม</button>
+  <div class="join">
+    <div>
+      <div>
+        <input class="input input-bordered join-item" placeholder="Search..."/>
+      </div>
+    </div>
+    <select class="select select-bordered join-item">
+      <option disabled selected>Category</option>
+      <option>Sci-fi</option>
+      <option>Drama</option>
+      <option>Action</option>
+    </select>
 
-  <input type="text" placeholder="ระบุไอเทมที่สนใจ" class="input w-full max-w-sm" />
+  </div>
+
+
 
   </div>
 
