@@ -4,7 +4,7 @@
 
 {#if mobile === "true"}
   <div class="join mb-12">
-    <div class="avatar">
+    <div class="avatar" onclick="my_modal_6.showModal()">
       <div class="w-20 rounded-full flex">
         <img
           alt="Profile"
@@ -49,3 +49,9 @@
     </ul>
   </details>
 {/if}
+
+
+
+
+
+
