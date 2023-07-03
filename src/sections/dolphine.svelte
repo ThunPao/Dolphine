@@ -20,6 +20,9 @@
     }
   }
 
+
+  
+
   function togglesub() {
     if (!cooldown) {
       sub = !sub;
@@ -50,7 +53,7 @@
 
   async function getblogdatas() {
     try {
-      const response = await fetch("http://127.0.0.1:3005/blogdata");
+      const response = await fetch("http://127.0.0.1:3005/blogdata/1");
       if (!response.ok) {
         throw new Error("Request failed");
       }
@@ -59,6 +62,41 @@
       // data = await response.json(); //showall
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async function toggleFavorite(playerId, blogId) {
+    try {
+      // Make a POST request to the server
+      const response = await fetch('http://localhost:3005/blogdata', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ player_id: playerId, blog_id: blogId }),
+       
+      });
+
+      // Check the response status
+      if (response.ok) {
+        getblogdatas();
+        // If the request is successful, update the local blogdata array
+        const data = await response.json();
+        if (data.message === 'Favorite blog added successfully') {
+          // Add the new favorite to the local blogdata array
+          blogdata.push({ player_id: playerId, blog_id: blogId });
+        } else if (data.message === 'Duplicate entry removed') {
+          // Remove the duplicate entry from the local blogdata array
+          blogdata = blogdata.filter(
+            (item) => item.player_id !== playerId || item.blog_id !== blogId
+          );
+        }
+      } else {
+        // If the request fails, display an error message
+        console.error('Error:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
     }
   }
 
@@ -127,7 +165,7 @@
             </div>
           </div>
 
-          <button on:click={toggleheart} class="">
+          <button on:click={toggleFavorite(1,data.id)} class="">
             <img
               class="rounded-t-lg w-full"
               src={data.img_cover}
@@ -135,27 +173,25 @@
             />
           </button>
           <div class="flex justify-end mr-3 p-3">
-            <b>{data.likes}</b>&nbsp Liked &nbsp 
-            
-            <button on:click={toggleheart(data.id)} class="text-2xl">
-              {#if blogdata !== null && blogdata.length > 0}
+            <b>{data.likes}</b>&nbsp Liked &nbsp
+            {#if blogdata !== null && blogdata.length > 0}
 
-
-<!-- index {index} BID {blogdata[index]?.blog_id} == {data.id} -->
-
-{data.likes}
-{blogdata[index]?.blog_id}
-
-<!-- { data.id === blogdata[index]?.blog_id ? 'TRUE' : 'FALSE'} -->
+            <button on:click={toggleFavorite(1,data.id)} class="text-2xl">
 <i
-        class="{data.id == blogdata[index]?.blog_id ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping"
-        style="{blogdata[index]?.blog_id == data.id ? 'color: #ff0000;' : ''}"
-        
+        class="{blogdata.find(item => item.blog_id === data.id) ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping"
+        style="{blogdata.find(item => item.blog_id === data.id) ? 'color: #ff0000;' : ''}"
       />
-              
-                  
-              {/if}
+     
             </button>
+          
+            {:else}
+            <button on:click={toggleFavorite(1,data.id)} class="text-2xl">
+            <i
+            class="fa-regular fa-heart active:animate-ping"
+          />
+        </button>
+            {/if}
+
           </div>
         </div>
       {/each}
