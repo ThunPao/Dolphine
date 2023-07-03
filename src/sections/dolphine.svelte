@@ -133,7 +133,7 @@
             <b>{data.likes}</b>&nbsp Liked &nbsp
             <button on:click={toggleheart} class="text-2xl">
               {#if blogdata !== null && blogdata.length > 0}
-                {#if blogdata[0].blog_id == data.id}
+                {#if blogdata[index].blog_id == data.id}
                   <!-- {#if heart === true} -->
                   <i
                     class="fa-solid fa-heart active:animate-ping"
