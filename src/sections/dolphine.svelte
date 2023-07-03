@@ -1,51 +1,100 @@
-
 <script>
-    // let nsfw = false;
-    const nsfw = 0;
-    
-    function togglensfw(){
-        // nsfw = !nsfw;
-        alert("TEST");
-        console.log("TEST");
-    }
+  let sub = false;
+  let cooldown = false;
+  let heart = false;
 
+  function toggleheart() {
+    if (!cooldown) {
+      heart = !heart;
+      cooldown = true;
+      setTimeout(() => {
+        cooldown = false;
+      }, 500); // 0.5 seconds cooldown
+    }
+  }
+
+  function togglesub() {
+    if (!cooldown) {
+      sub = !sub;
+      cooldown = true;
+      setTimeout(() => {
+        cooldown = false;
+      }, 500); // 0.5 seconds cooldown
+    }
+  }
 </script>
-<div class="card w-full bg-base-100 shadow-xl">
-    <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure>
-    <div class="lg:container lg:mx-auto rounded-lg">
-    <div class="card-body">
-<div class="join">
+
+<div class="card w-full bg-base-100 shadow-xl px-2">
+  <img
+    src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg"
+    alt="Shoes"
+  />
+  <div class="lg:container lg:mx-auto rounded-lg">
+    <div class="grid grid-rows-3 grid-flow-col gap-4 justify-start">
+      <div class="row-span-3">
         <div class="avatar">
-            <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <label class="swap swap-flip text-9xl">
-                    <input type="checkbox" />
-                    <div class="swap-on"><img src="/images/dpchan.png" alt=""></div>
-                    <div class="swap-off"><img src="/images/dpchan1.png" alt=""></div>
-                  </label>
-              
-              
-            </div>
-            <h2 class="card-title px-4">Dolphine!</h2>
+          <div
+            class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+          >
+            {#if sub === true}
+              <img src="/images/dpchan.png" alt="" />
+            {:else}
+              <img src="/images/dpchan1.png" alt="" />
+            {/if}
           </div>
-     
-    </div>
-    <p>If a dog chews shoes whose shoes does he choose?</p>
-      <div class="card-actions justify-end">
-        <button class="btn btn-primary">Buy Now</button>
+        </div>
       </div>
+      <div class="col-span-2 text-2xl font-medium pt-4">Dolphine</div>
+      <div class="row-span-2">
+        If a dog chews shoes whose shoes does he choose?
+      </div>
+    </div>
+
+    <div class="card-actions justify-end">
+      <button class="btn btn-secondary">ติดตาม</button>
     </div>
   </div>
 
   <div class="flex flex-col w-full mt-3">
     <div class="grid h-20 card bg-base-100 rounded-box place-items-center">
-sfs
-<button class="btn btn-secondary" on:click={() => {
-    togglensfw();
-  }}>HELLO</button>
-{#if nsfw === true}
-<img src="/images/dpchan.png" alt="">
-{:else}
-<img src="/images/dpchan1.png" alt="">
-{/if}
-    </div> 
-  </div>  </div>
+      sfs
+      <button
+        class="btn btn-secondary"
+        on:click={() => {
+          togglesub();
+        }}>HELLO</button
+      >
+      {#if sub === true}
+        true
+      {:else}
+        false
+      {/if}
+    </div>
+  </div>
+</div>
+<div class="container mx-auto flex justify-center mt-4">
+  <div class="card w-96 bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">Shoes!</h2>
+      <div class="text-sm truncate hover:text-clip">
+        Short Description faaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      </div>
+    </div>
+
+    <button on:click={toggleheart} class="">
+      <img class="rounded-t-lg" src="/images/dpchan1.png" alt="Shoes" />
+    </button>
+    <div class="flex justify-end mr-3">
+      <button on:click={toggleheart} class="text-2xl">
+        {#if heart === true}
+          <i
+            class="fa-solid fa-heart active:animate-ping"
+            style="color: #ff0000;"
+          />
+        {:else}
+          <i class="fa-regular fa-heart" />
+        {/if}
+      </button>
+    </div>
+  </div>
+</div>

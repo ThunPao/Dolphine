@@ -4,7 +4,7 @@
 
 {#if mobile === "true"}
   <div class="join mb-12">
-    <div class="avatar" onclick="my_modal_6.showModal()">
+    <div class="avatar" onclick="fast_menu.showModal()">
       <div class="w-20 rounded-full flex">
         <img
           alt="Profile"
@@ -21,7 +21,7 @@
     </div>
   </div>
 {:else}
-  <details class="dropdown">
+  <details class="dropdown dropdown-bottom dropdown-end">
     <summary class="">
       <div class="join">
         <div class="avatar">
@@ -44,14 +44,8 @@
     <ul
       class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
     >
-      <li><a>Item 1</a></li>
-      <li><a>Item 2</a></li>
+      <li><a href="/"><i class="fa-solid fa-house" />หนัาหลัก</a></li>
+      <li><a href="/dolphine">Dolphine Blogs</a></li>
     </ul>
   </details>
 {/if}
-
-
-
-
-
-
