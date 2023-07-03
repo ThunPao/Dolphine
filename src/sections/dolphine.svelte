@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { dataset_dev } from "svelte/internal";
 
   let sub = false;
   let cooldown = false;
@@ -7,9 +8,11 @@
 
   var url = "http://127.0.0.1:3005/";
 
-  function toggleheart() {
+  function toggleheart(id) {
+    console.log("Toggled + "+id);
     if (!cooldown) {
       heart = !heart;
+
       cooldown = true;
       setTimeout(() => {
         cooldown = false;
@@ -119,6 +122,8 @@
             <h2 class="card-title">{data.id} {data.title}</h2>
             <div class="text-sm">
               {data.description}
+
+
             </div>
           </div>
 
@@ -130,18 +135,25 @@
             />
           </button>
           <div class="flex justify-end mr-3 p-3">
-            <b>{data.likes}</b>&nbsp Liked &nbsp
-            <button on:click={toggleheart} class="text-2xl">
+            <b>{data.likes}</b>&nbsp Liked &nbsp 
+            
+            <button on:click={toggleheart(data.id)} class="text-2xl">
               {#if blogdata !== null && blogdata.length > 0}
-                {#if blogdata[index].blog_id == data.id}
-                  <!-- {#if heart === true} -->
-                  <i
-                    class="fa-solid fa-heart active:animate-ping"
-                    style="color: #ff0000;"
-                  />
-                {:else}
-                  <i class="fa-regular fa-heart" />
-                {/if}
+
+
+<!-- index {index} BID {blogdata[index]?.blog_id} == {data.id} -->
+
+{data.likes}
+{blogdata[index]?.blog_id}
+
+<!-- { data.id === blogdata[index]?.blog_id ? 'TRUE' : 'FALSE'} -->
+<i
+        class="{data.id == blogdata[index]?.blog_id ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping"
+        style="{blogdata[index]?.blog_id == data.id ? 'color: #ff0000;' : ''}"
+        
+      />
+              
+                  
               {/if}
             </button>
           </div>
