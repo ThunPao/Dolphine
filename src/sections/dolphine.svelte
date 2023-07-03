@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from "svelte";
+
   let sub = false;
   let cooldown = false;
   let heart = false;
@@ -22,6 +24,22 @@
       }, 500); // 0.5 seconds cooldown
     }
   }
+
+  let blogs = null;
+  async function getblogs() {
+    try {
+      const response = await fetch("http://127.0.0.1:3005/blogs");
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+      const responseData = await response.json();
+      blogs = responseData.slice(0, 5);
+      // data = await response.json(); //showall
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  onMount(getblogs);
 </script>
 
 <div class="card w-full bg-base-100 shadow-xl px-2">
@@ -72,29 +90,40 @@
     </div>
   </div>
 </div>
-<div class="container mx-auto flex justify-center mt-4">
-  <div class="card w-96 bg-base-100 shadow-xl">
-    <div class="card-body">
-      <h2 class="card-title">Shoes!</h2>
-      <div class="text-sm truncate hover:text-clip">
-        Short Description faaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-      </div>
-    </div>
+<div class="container mx-auto justify-center mt-4 grid grid-flow-row gap-4">
+  <div class="max-w-[690px] grid grid-rows-1 gap-4">
+    {#if blogs !== null && blogs.length > 0}
+      {#each blogs as data, index}
+        <div class="card w-full bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">{data.title}</h2>
+            <div class="text-sm">
+              {data.description}
+            </div>
+          </div>
 
-    <button on:click={toggleheart} class="">
-      <img class="rounded-t-lg" src="/images/dpchan1.png" alt="Shoes" />
-    </button>
-    <div class="flex justify-end mr-3">
-      <button on:click={toggleheart} class="text-2xl">
-        {#if heart === true}
-          <i
-            class="fa-solid fa-heart active:animate-ping"
-            style="color: #ff0000;"
-          />
-        {:else}
-          <i class="fa-regular fa-heart" />
-        {/if}
-      </button>
-    </div>
+          <button on:click={toggleheart} class="">
+            <img
+              class="rounded-t-lg w-full"
+              src={data.img_cover}
+              alt={data.title}
+            />
+          </button>
+          <div class="flex justify-end mr-3">
+            <b>{data.likes}</b>&nbsp Liked &nbsp
+            <button on:click={toggleheart} class="text-2xl">
+              {#if heart === true}
+                <i
+                  class="fa-solid fa-heart active:animate-ping"
+                  style="color: #ff0000;"
+                />
+              {:else}
+                <i class="fa-regular fa-heart" />
+              {/if}
+            </button>
+          </div>
+        </div>
+      {/each}
+    {/if}
   </div>
 </div>
