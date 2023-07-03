@@ -45,14 +45,14 @@
 <div class="card w-full bg-base-100 shadow-xl px-2">
   <img
     src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg"
-    alt="Shoes"
+    alt="Cover"
   />
   <div class="lg:container lg:mx-auto rounded-lg">
     <div class="grid grid-rows-3 grid-flow-col gap-4 justify-start">
       <div class="row-span-3">
         <div class="avatar">
           <div
-            class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+            class="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
           >
             {#if sub === true}
               <img src="/images/dpchan.png" alt="" />
@@ -75,7 +75,6 @@
 
   <div class="flex flex-col w-full mt-3">
     <div class="grid h-20 card bg-base-100 rounded-box place-items-center">
-      sfs
       <button
         class="btn btn-secondary"
         on:click={() => {
@@ -109,7 +108,7 @@
               alt={data.title}
             />
           </button>
-          <div class="flex justify-end mr-3">
+          <div class="flex justify-end mr-3 p-3">
             <b>{data.likes}</b>&nbsp Liked &nbsp
             <button on:click={toggleheart} class="text-2xl">
               {#if heart === true}
