@@ -5,6 +5,8 @@
   let cooldown = false;
   let heart = false;
 
+  var url = "http://127.0.0.1:3005/";
+
   function toggleheart() {
     if (!cooldown) {
       heart = !heart;
@@ -26,10 +28,13 @@
   }
 
   let blogs = null;
+  let blogdata = null;
+
   async function getblogs() {
     try {
-      const response = await fetch("http://127.0.0.1:3005/blogs");
+      const response = await fetch(url + "blogs");
       if (!response.ok) {
+        console.log("Fetching failed: " + response);
         throw new Error("Request failed");
       }
       const responseData = await response.json();
@@ -39,7 +44,23 @@
       console.error(error);
     }
   }
+
+  async function getblogdatas() {
+    try {
+      const response = await fetch("http://127.0.0.1:3005/blogdata");
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+      const responseData = await response.json();
+      blogdata = responseData.slice(0, 5);
+      // data = await response.json(); //showall
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   onMount(getblogs);
+  onMount(getblogdatas);
 </script>
 
 <div class="card w-full bg-base-100 shadow-xl px-2">
@@ -95,7 +116,7 @@
       {#each blogs as data, index}
         <div class="card w-full bg-base-100 shadow-xl">
           <div class="card-body">
-            <h2 class="card-title">{data.title}</h2>
+            <h2 class="card-title">{data.id} {data.title}</h2>
             <div class="text-sm">
               {data.description}
             </div>
@@ -111,13 +132,16 @@
           <div class="flex justify-end mr-3 p-3">
             <b>{data.likes}</b>&nbsp Liked &nbsp
             <button on:click={toggleheart} class="text-2xl">
-              {#if heart === true}
-                <i
-                  class="fa-solid fa-heart active:animate-ping"
-                  style="color: #ff0000;"
-                />
-              {:else}
-                <i class="fa-regular fa-heart" />
+              {#if blogdata !== null && blogdata.length > 0}
+                {#if blogdata[0].blog_id == data.id}
+                  <!-- {#if heart === true} -->
+                  <i
+                    class="fa-solid fa-heart active:animate-ping"
+                    style="color: #ff0000;"
+                  />
+                {:else}
+                  <i class="fa-regular fa-heart" />
+                {/if}
               {/if}
             </button>
           </div>
