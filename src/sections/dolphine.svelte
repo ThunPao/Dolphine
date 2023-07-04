@@ -61,6 +61,7 @@
       console.error(error);
     }
   }
+
   async function toggleFavorite(playerId, blogId) {
     try {
       // Make a POST request to the server
@@ -156,8 +157,11 @@
             />
           </button>
           <div class="flex justify-end mr-3 p-3">
-            <b>{data.likes}</b>&nbsp Liked &nbsp
+            <!-- <b>{data.likes}</b>&nbsp Liked &nbsp -->
+
             {#if blogdata !== null && blogdata.length > 0}
+              {blogdata.filter((item) => item.blogliked.includes(data.id))
+                .length}
               <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
                 <i
                   class="{blogdata.find((item) =>
