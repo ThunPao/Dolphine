@@ -9,7 +9,7 @@
   var url = "http://127.0.0.1:3005/";
 
   function toggleheart(id) {
-    console.log("Toggled + "+id);
+    console.log("Toggled + " + id);
     if (!cooldown) {
       heart = !heart;
 
@@ -19,9 +19,6 @@
       }, 500); // 0.5 seconds cooldown
     }
   }
-
-
-  
 
   function togglesub() {
     if (!cooldown) {
@@ -64,39 +61,27 @@
       console.error(error);
     }
   }
-
   async function toggleFavorite(playerId, blogId) {
     try {
       // Make a POST request to the server
-      const response = await fetch('http://localhost:3005/blogdata', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3005/blogdata", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ player_id: playerId, blog_id: blogId }),
-       
       });
 
       // Check the response status
       if (response.ok) {
         getblogdatas();
         // If the request is successful, update the local blogdata array
-        const data = await response.json();
-        if (data.message === 'Favorite blog added successfully') {
-          // Add the new favorite to the local blogdata array
-          blogdata.push({ player_id: playerId, blog_id: blogId });
-        } else if (data.message === 'Duplicate entry removed') {
-          // Remove the duplicate entry from the local blogdata array
-          blogdata = blogdata.filter(
-            (item) => item.player_id !== playerId || item.blog_id !== blogId
-          );
-        }
       } else {
         // If the request fails, display an error message
-        console.error('Error:', response.statusText);
+        console.error("Error:", response.statusText);
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      console.error("Error:", error.message);
     }
   }
 
@@ -160,12 +145,10 @@
             <h2 class="card-title">{data.id} {data.title}</h2>
             <div class="text-sm">
               {data.description}
-
-
             </div>
           </div>
 
-          <button on:click={toggleFavorite(1,data.id)} class="">
+          <button on:click={toggleFavorite(1, data.id)} class="">
             <img
               class="rounded-t-lg w-full"
               src={data.img_cover}
@@ -175,23 +158,25 @@
           <div class="flex justify-end mr-3 p-3">
             <b>{data.likes}</b>&nbsp Liked &nbsp
             {#if blogdata !== null && blogdata.length > 0}
-
-            <button on:click={toggleFavorite(1,data.id)} class="text-2xl">
-<i
-        class="{blogdata.find(item => item.blog_id === data.id) ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping"
-        style="{blogdata.find(item => item.blog_id === data.id) ? 'color: #ff0000;' : ''}"
-      />
-     
-            </button>
-          
+              <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
+                <i
+                  class="{blogdata.find((item) =>
+                    item.blogliked.includes(data.id)
+                  )
+                    ? 'fa-solid'
+                    : 'fa-regular'} fa-heart active:animate-ping"
+                  style={blogdata.find((item) =>
+                    item.blogliked.includes(data.id)
+                  )
+                    ? "color: #ff0000;"
+                    : ""}
+                />
+              </button>
             {:else}
-            <button on:click={toggleFavorite(1,data.id)} class="text-2xl">
-            <i
-            class="fa-regular fa-heart active:animate-ping"
-          />
-        </button>
+              <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
+                <i class="fa-regular fa-heart active:animate-ping" />
+              </button>
             {/if}
-
           </div>
         </div>
       {/each}
