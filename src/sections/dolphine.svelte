@@ -100,11 +100,14 @@
   onMount(getblogdata);
 </script>
 
-<div class="card w-full bg-base-100 shadow-xl px-2">
-  <img
-    src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg"
+<div class="card bg-base-100 shadow-xl px-2 w-full">
+  <!-- <img class="bg-cover inset-0"
+    src="images/00132-3553236710.png"
     alt="Cover"
-  />
+  /> -->
+  <div class="w-full h-96 relative bg-gradient-to-t">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('images/00132-3553236710.png'); background-position:top"></div>
+  </div>
   <div class="lg:container lg:mx-auto rounded-lg">
     <div class="grid grid-rows-3 grid-flow-col gap-4 justify-start">
       <div class="row-span-3">
