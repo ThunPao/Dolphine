@@ -14,6 +14,7 @@
     "@astrojs/tailwind": "^4.0.0",
     "astro": "^2.7.0",
     "font-awesome": "^4.7.0",
+    "gsap": "^3.12.2",
     "sass": "^1.63.6",
     "svelte": "^3.59.2",
     "swiper": "^9.4.1",

@@ -1,12 +1,28 @@
 ---
 import UserProfile from "../components/profileinfo.svelte";
+import '../styles/dplogo.scss';
+
+
 
 ---
+
+
+<script>
+import { gsap } from 'gsap';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tl = gsap.timeline({ repeat: -1 });
+  tl.to('h1', 30, { backgroundPosition: '-960px 0' });
+});
+
+</script>
 <div class="navbar bg-base-100 ">
     <div class="flex-1">
 
-    <a href="/" class="btn btn-ghost normal-case text-3xl text-cyan-200 font-bold">Dolphine</a>
-
+    <!-- <a href="/" class="btn btn-ghost normal-case text-3xl text-cyan-200 font-bold">Dolphine</a> -->
+    <div class="wrapper">
+      <h1 class="title">Dolphine<h1>
+    </div>
     
       
     </div>
@@ -40,7 +56,7 @@ import UserProfile from "../components/profileinfo.svelte";
               </label>
         </li>
         <li class="hidden sm:block">
-          <UserProfile/>
+          <UserProfile client:load/>
         </li>
       </ul>
     
@@ -77,6 +93,4 @@ themeToggle.addEventListener('change', function() {
   }
 });
 
-
 </script>
-
