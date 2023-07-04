@@ -16,7 +16,7 @@
     }
   }
 
-  let playerinfo = null;
+
   let blogs = null;
   let blogdata = null;
   let blogdata_p = null;
@@ -52,18 +52,7 @@
     }
   }
 
-  async function getplayers() {
-    try {
-      const response = await fetch(url + "player/1");
-      if (!response.ok) {
-        throw new Error("Request failed");
-      }
-      const responseData = await response.json();
-      playerinfo = responseData;
-    } catch (error) {
-      console.error(error);
-    }
-  }
+
 
   async function getblogdata() {
     try {
@@ -105,7 +94,7 @@
     }
   }
 
-  onMount(getplayers);
+
   onMount(getblogs);
   onMount(getblogdataplayer);
   onMount(getblogdata);
