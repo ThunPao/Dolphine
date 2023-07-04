@@ -54,7 +54,7 @@
 
   async function getplayers() {
     try {
-      const response = await fetch(url + "player/2");
+      const response = await fetch(url + "player/1");
       if (!response.ok) {
         throw new Error("Request failed");
       }
@@ -178,15 +178,6 @@
             />
           </button>
           <div class="flex justify-end mr-3 p-3">
-            {#if playerinfo !== null && playerinfo.length > 0}
-              {playerinfo.filter((item) => item.p_role === 1)
-                ? "MEMBER"
-                : "VIP"}
-              {#each playerinfo as pinfo}
-                {pinfo.name}
-              {/each}
-            {/if}
-
             {#if blogdata_p !== null && blogdata_p.length > 0}
               <!-- blogdata -->
               {#if blogdata !== null && blogdata.length > 0}
