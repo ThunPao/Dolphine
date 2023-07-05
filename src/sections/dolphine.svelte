@@ -17,6 +17,9 @@
   }
 
   let blogs = null;
+
+  // const { id, title, description } = blogs;
+
   let blogdata = null;
   let blogdata_p = null;
 
@@ -101,7 +104,7 @@
     src="images/00132-3553236710.png"
     alt="Cover"
   /> -->
-  <div class="w-full h-52 md:h-96 relative">
+  <div class="w-full h-52 md:h-[30rem] relative">
     <div
       class="absolute inset-0 bg-cover bg-top bg-no-repeat"
       style="background-image: url('images/00010.png');"
@@ -129,7 +132,10 @@
     </div>
 
     <div class="card-actions justify-end">
-      <button class="btn btn-secondary text-xl">ปลดล็อค VIP</button>
+      <button class="btn btn-secondary text-xl">
+        <i class="fa-solid fa-crown" />
+        VIP Available</button
+      >
     </div>
   </div>
 
