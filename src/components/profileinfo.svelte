@@ -1,5 +1,6 @@
 <script>
   export let mobile;
+  import { logout, tokencheck } from "../services/Authen";
 </script>
 
 {#if mobile === "true"}
@@ -44,8 +45,19 @@
     <ul
       class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
     >
-      <li><a href="/"><i class="fa-solid fa-house" />หนัาหลัก</a></li>
-      <li><a href="/dolphine">Dolphine Blogs</a></li>
+      <li><a href="/" class="hover:text-sky-400 hover:font-bold text-lg"><i class="fa-solid fa-house "/>หนัาหลัก</a></li>
+      <li><a href="/dolphine" class="hover:text-sky-400 hover:font-bold text-lg">Dolphine Blogs</a></li>
+      <li>
+        {#if $tokencheck}
+          <button on:click={logout} class="hover:text-sky-400 hover:font-bold text-lg"
+            ><i class="fa-solid fa-person-through-window " /> Logout</button
+          >
+        {:else}
+          <button onclick="loginuser_pop.showModal()" class="hover:text-sky-400 hover:font-bold text-lg"
+            ><i class="fa-solid fa-door-open" /> Login</button
+          >
+        {/if}
+      </li>
     </ul>
   </details>
 {/if}
