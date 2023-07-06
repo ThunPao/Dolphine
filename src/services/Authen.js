@@ -69,7 +69,7 @@ export async function logout() {
       // Display an info toast with no title
       toastr.success(
         "Successful Login.",
-        "ยินดีต้อนรับ " + data.username + "p_role" + data.p_role,
+        "เข้าสู่ระบบสำเร็จ " + username,
         {
           timeOut: 5000,
           positionClass: "toast-bottom-center",
