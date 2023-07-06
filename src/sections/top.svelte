@@ -4,6 +4,7 @@
   import FormAuth from "../components/formauth.svelte";
   import { gsap } from "gsap";
   import { onMount, tick } from "svelte";
+  import { logout, tokencheck } from "../services/Authen";
 
   onMount(async () => {
     await tick(); // Wait for the DOM to be fully updated
@@ -74,9 +75,15 @@
             <li><a>Link 2</a></li>
 
             <li>
-              <button onclick="loginuser_pop.showModal()"
-                ><i class="fa-solid fa-door-open" />ระบบสมาชิก</button
-              >
+              {#if $tokencheck}
+                <button on:click={logout}
+                  ><i class="fa-solid fa-person-through-window" /> Logout</button
+                >
+              {:else}
+                <button onclick="loginuser_pop.showModal()"
+                  ><i class="fa-solid fa-door-open" /> Login</button
+                >
+              {/if}
             </li>
           </ul>
         </details>
