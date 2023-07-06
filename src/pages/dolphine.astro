@@ -1,30 +1,33 @@
 ---
-import '../styles/base.scss';
-import DPSection from '../sections/dolphine.svelte'
-import Navbar from '../sections/top.astro';
-import Btm from '../sections/bottom.astro';
-
-
+import "../styles/base.scss";
+import DPSection from "../sections/dolphine.svelte";
+import Navbar from "../sections/top.svelte";
+import Btm from "../sections/bottom.astro";
 ---
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
-		<meta name="viewport" content="width=device-width" />
-	</head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    /><link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Kanit"
+    /></head
+  >
 
-  <link rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Kanit">
+  <main data-theme="dark" class="bg-base-300">
+    <Navbar client:load />
 
-
-  <main data-theme="dark" class="bg-base-300"> 
-    <Navbar/>
-
-<DPSection client:load/>
-<Btm/>
-
-</main>
+    <DPSection client:load />
+    <Btm />
+  </main>
 
 </html>

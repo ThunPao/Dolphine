@@ -1,45 +1,51 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount } from "svelte";
   import toastr from "toastr";
 
-  let token = localStorage.getItem('token');
+  let token = localStorage.getItem("token");
 
   async function handleLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-    const response = await fetch('http://127.0.0.1:3005/login', {
-      method: 'POST',
+    const response = await fetch("http://127.0.0.1:3005/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password }),
     });
 
     const data = await response.json();
     if (response.ok) {
       console.log(data);
       token = data.token;
-      localStorage.setItem('token', token);
-          // Display an info toast with no title
-    toastr.success(
-      "Successful Login.",
-      "ยินดีต้อนรับ " + data.username + "p_role"+data.p_role,
-      {
+      localStorage.setItem("token", token);
+      // Display an info toast with no title
+      toastr.success(
+        "Successful Login.",
+        "ยินดีต้อนรับ " + data.username + "p_role" + data.p_role,
+        {
+          timeOut: 5000,
+          positionClass: "toast-bottom-center",
+          newestOnTop: true,
+          progressBar: true,
+        }
+      );
+    } else {
+      toastr.error("Error.", "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", {
         timeOut: 5000,
         positionClass: "toast-bottom-center",
         newestOnTop: true,
         progressBar: true,
-      }
-    );
-    } else {
-      console.error(data.error);
+      });
+      // console.error(data.error);
     }
   }
 
   function handleLogout() {
     token = null;
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
   }
 
   onMount(() => {
@@ -47,9 +53,9 @@
       // Token exists in localStorage, you can perform necessary actions
       // to set the user as logged in, such as fetching user data.
       // You can also redirect the user to a logged-in area of your app.
-      console.log('User is logged in');
+      console.log("User is logged in");
     } else {
-      console.log('User is logged out');
+      console.log("User is logged out");
     }
   });
 </script>
@@ -87,8 +93,7 @@
     <div class="grid gap-3 justify-center text-center">
       <h1 class="font-bold text-4xl">Dolphine</h1>
       <h4>เข้าสู่ระบบ</h4>
-      ชื่อในเกมส์
-      รหัสผ่าน
+      ชื่อในเกมส์ รหัสผ่าน
 
       <div class="join grid gap-3">
         <input
@@ -97,19 +102,16 @@
           placeholder="Username"
           class="input input-bordered w-full max-w-xs"
         />
-      
+
         <input
           type="password"
           id="password"
           placeholder="Password"
           class="input input-bordered w-full max-w-xs"
         />
-      
+
         <button class="btn btn-accent" on:click={handleLogin}>LOG-IN</button>
       </div>
-
-
-
     </div>
 
     <!-- <p class="py-4">กดปุ่ม <kbd class="kbd">ESC</kbd> เพื่อปิด</p> -->

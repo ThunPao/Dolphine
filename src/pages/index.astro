@@ -1,50 +1,59 @@
 ---
-
-import Navbar from '../sections/top.astro';
-import Cards from '../sections/cards.astro';
-import Slides from '../sections/slides.astro';
-import Alerts from '../sections/alerts.astro';
-import Qsc from '../sections/quickshrtcut.astro';
-import Btm from '../sections/bottom.astro';
-import Blogs from '../sections/blogs.astro';
+import Navbar from "../sections/top.svelte";
+import Cards from "../sections/cards.astro";
+import Slides from "../sections/slides.astro";
+import Alerts from "../sections/alerts.astro";
+import Qsc from "../sections/quickshrtcut.astro";
+import Btm from "../sections/bottom.astro";
+import Blogs from "../sections/blogs.astro";
 // import Cheri from '../sections/cheri.svelte';
-import Intro from '../sections/intro.astro';
-import '../styles/base.scss';
+import Intro from "../sections/intro.astro";
+import "../styles/base.scss";
 // import Apitest from '../sections/apitest.astro';
 ---
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
-		<meta name="viewport" content="width=device-width" />
-	</head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Kanit">
-
-  <main data-theme="dark"> <!-- class="bg-gradient-to-r from-blue-200 via-sky-100 to-purple-200" -->
-<Navbar/>
-<Intro/>
-<div class="lg:container lg:mx-auto rounded-lg border-4 border-base-200">
-
-<Slides/>
-<Qsc/>
-<Alerts/>
-<!-- <Cheri client:load/> -->
-    <Cards/>
-    <Blogs/>
-</div>
-<Btm/>
-<!-- <Apitest/> -->
-</main>
-    <!-- Swiper JS -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    /><link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Kanit"
+    /></head
+  >
+
+  <main data-theme="dark">
+    <!-- class="bg-gradient-to-r from-blue-200 via-sky-100 to-purple-200" -->
+    <Navbar client:load />
+    <Intro />
+    <div class="lg:container lg:mx-auto rounded-lg border-4 border-base-200">
+      <Slides />
+      <Qsc />
+      <Alerts />
+      <!-- <Cheri client:load/> -->
+      <Cards />
+      <Blogs />
+    </div>
+    <Btm />
+    <!-- <Apitest/> -->
+  </main>
+  <!-- Swiper JS -->
+  <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
   />
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script type="module">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"
+  ></script>
+  <script type="module">
     // import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js'
-</script>
+  </script>
+
 </html>
