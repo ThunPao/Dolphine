@@ -1,6 +1,7 @@
----
+<script>
 import Profile from "../components/profileinfo.svelte";
----
+import { logout, tokencheck } from "../services/Authen";
+</script>
 
 <div class="mt-20"></div>
 <div class="btm-nav md:hidden z-50">
@@ -125,7 +126,41 @@ import Profile from "../components/profileinfo.svelte";
         <span class="indicator-item badge badge-primary">new</span>
         <div class="grid w-32 h-32 bg-base-300 place-items-center">content</div>
       </div>
+
+      <div class="grid w-32 h-32 bg-base-300 place-items-center">
+        {#if $tokencheck}
+        <button on:click={logout} class="hover:text-amber-400 hover:font-bold text-lg">
+        <div class="grid grid-rows-2 text-center">
+          
+          <!-- <button on:click={logout} class="hover:text-sky-400 hover:font-bold text-lg"
+          >
+          <i class="fa-solid fa-person-through-window fa-2xl"></i>Logout
+          </button
+          > -->
+      
+            <i class="fa-solid fa-person-through-window fa-2xl"></i>ออกจากระบบ
+        </div>
+      </button>
+          {:else}
+          <button onclick="loginuser_pop.showModal()" class="hover:text-sky-400 hover:font-bold text-lg">
+            <div class="grid grid-rows-2 text-center">
+              
+              <!-- <button on:click={logout} class="hover:text-sky-400 hover:font-bold text-lg"
+              >
+              <i class="fa-solid fa-person-through-window fa-2xl"></i>Logout
+              </button
+              > -->
+          
+              <i class="fa-solid fa-door-open fa-2xl"></i>เข้าสู่ระบบ
+            </div>
+          </button>
+        {/if}
+      </div>
     </div>
+
+
+
+
   </form>
 
   <form method="dialog" class="modal-backdrop">

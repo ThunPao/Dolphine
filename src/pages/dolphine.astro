@@ -2,7 +2,7 @@
 import "../styles/base.scss";
 import DPSection from "../sections/dolphine.svelte";
 import Navbar from "../sections/top.svelte";
-import Btm from "../sections/bottom.astro";
+import Btm from "../sections/bottom.svelte";
 ---
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ import Btm from "../sections/bottom.astro";
     <Navbar client:load />
 
     <DPSection client:load />
-    <Btm />
+    <Btm client:load/>
   </main>
 
 </html>

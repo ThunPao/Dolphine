@@ -4,7 +4,7 @@ import Cards from "../sections/cards.astro";
 import Slides from "../sections/slides.astro";
 import Alerts from "../sections/alerts.astro";
 import Qsc from "../sections/quickshrtcut.astro";
-import Btm from "../sections/bottom.astro";
+import Btm from "../sections/bottom.svelte";
 import Blogs from "../sections/blogs.astro";
 // import Cheri from '../sections/cheri.svelte';
 import Intro from "../sections/intro.astro";
@@ -42,7 +42,7 @@ import "../styles/base.scss";
       <Cards />
       <Blogs />
     </div>
-    <Btm />
+    <Btm client:load/>
     <!-- <Apitest/> -->
   </main>
   <!-- Swiper JS -->
