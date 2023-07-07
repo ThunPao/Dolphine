@@ -1,6 +1,6 @@
 <script>
   export let mobile;
-  import { logout, tokencheck } from "../services/Authen";
+  import { logout, tokencheck, currentuser } from "../services/Authen";
 </script>
 
 {#if mobile === "true"}
@@ -17,8 +17,13 @@
     <div class="indicator">
       <span
         class="indicator-item indicator-bottom badge bg-green-500 text-white font-medium"
-        >ออนไลน์</span
       >
+        {#if $currentuser != null}
+          {$currentuser[0].points} DP
+        {:else}
+          กรุณาล็อคอิน
+        {/if}
+      </span>
     </div>
   </div>
 {:else}
@@ -37,23 +42,40 @@
         <div class="indicator">
           <span
             class="indicator-item indicator-bottom badge bg-green-500 text-white font-medium"
-            >ออนไลน์</span
           >
+            {#if $currentuser != null}
+              {$currentuser[0].points} DP
+            {:else}
+              กรุณาล็อคอิน
+            {/if}
+          </span>
         </div>
       </div>
     </summary>
     <ul
       class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
     >
-      <li><a href="/" class="hover:text-sky-400 hover:font-bold text-lg"><i class="fa-solid fa-house "/>หนัาหลัก</a></li>
-      <li><a href="/dolphine" class="hover:text-sky-400 hover:font-bold text-lg">Dolphine Blogs</a></li>
+      <li>
+        <a href="/" class="hover:text-sky-400 hover:font-bold text-lg"
+          ><i class="fa-solid fa-house" />หนัาหลัก</a
+        >
+      </li>
+      <li>
+        <a href="/dolphine" class="hover:text-sky-400 hover:font-bold text-lg"
+          >Dolphine Blogs</a
+        >
+      </li>
       <li>
         {#if $tokencheck}
-          <button on:click={logout} class="hover:text-sky-400 hover:font-bold text-lg"
-            ><i class="fa-solid fa-person-through-window " /> Logout</button
+          <button
+            on:click={logout}
+            class="hover:text-sky-400 hover:font-bold text-lg"
+            ><i class="fa-solid fa-person-through-window" /> Logout</button
           >
         {:else}
-          <button onclick="loginuser_pop.showModal()" class="hover:text-sky-400 hover:font-bold text-lg"
+          <button
+            onclick="loginuser_pop.showModal()"
+            class="hover:text-sky-400 hover:font-bold text-lg"
             ><i class="fa-solid fa-door-open" /> Login</button
           >
         {/if}

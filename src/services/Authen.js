@@ -8,11 +8,53 @@ export let tokencheck = writable(localStorage.getItem("token"));
 
 // Create a writable store for the password field value
 export const password = writable('');
+export let currentuser = writable(null);
 
 
-export function handleLogout() {
+async function getPlayerInfo(token) {
+  const url = 'http://127.0.0.1:3005/playerinfo';
+  
+  const response = await fetch(url, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  
+  if (response.ok) {
+    const data = await response.json();
+    currentuser.set(data);
+    // currentuser.subscribe((p) => {
+    //   console.log(p);
+    // });
+    
+    return data;
+  } else {
+    tokencheck.set(null);
+    currentuser.set(null);
+    console.log("You are not authorized to access");
+    // throw new Error('Failed to retrieve player info.');
+  }
+}
+
+
+if(token){
+  getPlayerInfo(token)
+}else{
+  currentuser.set(null);
+
+}
+
+
+
+
+
+
+
+function handleLogout() {
   token = null;
   localStorage.removeItem("token");
+  currentuser.set(null);
+  tokencheck.set(null);
 }
 export async function logout() {
   password.set('');
@@ -27,8 +69,7 @@ export async function logout() {
     if (response.ok) {
         // console.log("Logout successful");
       // Logout successful
-      localStorage.removeItem("token"); // Remove the token from localStorage
-      tokencheck.set(null);
+      handleLogout();
       toastr.success("Logged out.", "ออกจากระบบเรียบร้อย", {
         timeOut: 5000,
         positionClass: "toast-bottom-center",
@@ -36,10 +77,6 @@ export async function logout() {
         progressBar: true,
       });
     } else {
-      localStorage.removeItem("token"); // Remove the token from localStorage
-      tokencheck.set(null);
-        // console.log("Logout failed");
-      // Logout failed
       toastr.error("เกิดข้อผิดพลาด", "Error", {
         timeOut: 5000,
         positionClass: "toast-bottom-center",
@@ -66,6 +103,7 @@ export async function logout() {
       token = data.token;
       localStorage.setItem("token", token);
       tokencheck.set(writable(localStorage.getItem("token")));
+      getPlayerInfo(data.token);
       // Display an info toast with no title
       toastr.success(
         "Successful Login.",
