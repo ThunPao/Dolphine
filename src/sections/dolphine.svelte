@@ -91,8 +91,11 @@ export let blogvipstate = false;
       // Check the response status
       if (response.ok) {
         getblogdata();
-        getblogdataplayer();
+        // getblogdataplayer();
+        if(currentuser != null){
+          getblogdataplayer();
 
+}
         // If the request is successful, update the local blogdata array
       } else {
         // If the request fails, display an error message
@@ -105,7 +108,11 @@ export let blogvipstate = false;
 
 
   onMount(getblogs);
+// {$currentuser != null ? $currentuser[0].username : ''}
+if(currentuser != null){
   onMount(getblogdataplayer);
+}
+
   onMount(getblogdata);
 </script>
 
@@ -142,9 +149,9 @@ export let blogvipstate = false;
       <div class="col-span-1 text-2xl font-medium pt-4">Dolphine</div>
       <div class="row-span-2">
         วันนี้กินอะไรดี
-        {#if $currentuser != null}
-{$currentuser[0].username}?
-{/if}
+        {$currentuser != null ? $currentuser[0].username : ''}
+
+
       </div>
     </div>
 
