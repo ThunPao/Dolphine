@@ -50,8 +50,9 @@ export let blogvipstate = false;
 
 
   async function getblogdataplayer() {
+    const currentid = $currentuser != null ? $currentuser[0].id : '';
     try {
-      const response = await fetch(url + "blogdata/1");
+      const response = await fetch(url + "blogdata/"+currentid);
       if (!response.ok) {
         throw new Error("Request failed");
       }
@@ -171,106 +172,73 @@ if(currentuser != null){
 <div class="container mx-auto justify-center mt-4 grid grid-flow-row gap-4">
   <div class="max-w-[690px] grid grid-rows-1 gap-4">
     {#if blogvipstate == false}
-    {#if blogs !== null && blogs.length > 0}
-      {#each blogs as data, index}
-        <div class="card w-full bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title">{data.id} {data.title}</h2>
-            <div class="text-sm">
-              {data.description}
+      <!-- Begin Loop -->
+      {#if blogs !== null && blogs.length > 0}
+        {#each blogs as data, index}
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">{data.id} {data.title}</h2>
+              <div class="text-sm">
+                {data.description}
+              </div>
+            </div>
+            <button on:click={() => {$currentuser ? toggleFavorite($currentuser[0].id, data.id) : notlogin()}}>
+              <button>
+                <img class="rounded-t-lg w-full" src={data.img_cover} alt={data.title} />
+              </button>
+              <div class="flex justify-end mr-3 p-3">
+                {#if blogdata_p !== null && blogdata_p.length > 0}
+                  <!-- blogdata -->
+                  {#if blogdata !== null && blogdata.length > 0}
+                    {blogdata.filter((item) => item.blogliked.includes(data.id)).length} Likes &nbsp;
+                  {/if}
+                  <button on:click={() => {$currentuser ? toggleFavorite($currentuser[0].id, data.id) : notlogin()}} class="text-2xl">
+                    <i class="{blogdata_p.find((item) => item.blogliked.includes(data.id)) ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping" style={blogdata_p.find((item) => item.blogliked.includes(data.id)) ? "color: #ff0000;" : ""} />
+                  </button>
+                {:else}
+                  <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
+                    <i class="fa-regular fa-heart active:animate-ping" />
+                  </button>
+                {/if}
+              </div>
+            </button>
+          </div>
+        {/each}
+      {/if}
+      <!-- End Loop -->
+    {:else}
+      <!-- blogsvip -->
+      {#if $blogsvip !== null && $blogsvip.length > 0}
+        {#each $blogsvip as data, index}
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">{data.id} {data.title}</h2>
+              <div class="text-sm">
+                {data.description}
+              </div>
+            </div>
+            <button on:click={toggleFavorite(1, data.id)} class="">
+              <img class="rounded-t-lg w-full" src={data.img_cover} alt={data.title} />
+            </button>
+            <div class="flex justify-end mr-3 p-3">
+              {#if blogdata_p !== null && blogdata_p.length > 0}
+                <!-- blogdata -->
+                {#if blogdata !== null && blogdata.length > 0}
+                  {blogdata.filter((item) => item.blogliked.includes(data.id)).length} Likes &nbsp;
+                {/if}
+                <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
+                  <i class="{blogdata_p.find((item) => item.blogliked.includes(data.id)) ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping" style={blogdata_p.find((item) => item.blogliked.includes(data.id)) ? "color: #ff0000;" : ""} />
+                </button>
+              {:else}
+                <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
+                  <i class="fa-regular fa-heart active:animate-ping" />
+                </button>
+              {/if}
             </div>
           </div>
-
-        
-        <button on:click={() => {$currentuser ? toggleFavorite($currentuser[0].id, data.id) : notlogin()}}>
-        
-          <button>
-            <img
-              class="rounded-t-lg w-full"
-              src={data.img_cover}
-              alt={data.title}
-            />
-          </button>
-          <div class="flex justify-end mr-3 p-3">
-            {#if blogdata_p !== null && blogdata_p.length > 0}
-              <!-- blogdata -->
-              {#if blogdata !== null && blogdata.length > 0}
-                {blogdata.filter((item) => item.blogliked.includes(data.id))
-                  .length} Likes &nbsp
-              {/if}
-
-              <button on:click={() => {$currentuser ? toggleFavorite($currentuser[0].id, data.id) : notlogin()}} class="text-2xl">
-                <i
-                  class="{blogdata_p.find((item) =>
-                    item.blogliked.includes(data.id)
-                  )
-                    ? 'fa-solid'
-                    : 'fa-regular'} fa-heart active:animate-ping"
-                  style={blogdata_p.find((item) =>
-                    item.blogliked.includes(data.id)
-                  )
-                    ? "color: #ff0000;"
-                    : ""}
-                />
-              </button>
-            {:else}
-              <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
-                <i class="fa-regular fa-heart active:animate-ping" />
-              </button>
-            {/if}
-          </div>
-        </div>
-      {/each}
-    {/if}
-    {:else}
-    {#if $blogsvip !== null && $blogsvip.length > 0}
-    {#each $blogsvip as data, index}
-      <div class="card w-full bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title">{data.id} {data.title}</h2>
-          <div class="text-sm">
-            {data.description}
-          </div>
-        </div>
-
-        <button on:click={toggleFavorite(1, data.id)} class="">
-          <img
-            class="rounded-t-lg w-full"
-            src={data.img_cover}
-            alt={data.title}
-          />
-        </button>
-        <div class="flex justify-end mr-3 p-3">
-          {#if blogdata_p !== null && blogdata_p.length > 0}
-            <!-- blogdata -->
-            {#if blogdata !== null && blogdata.length > 0}
-              {blogdata.filter((item) => item.blogliked.includes(data.id))
-                .length} Likes &nbsp
-            {/if}
-
-            <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
-              <i
-                class="{blogdata_p.find((item) =>
-                  item.blogliked.includes(data.id)
-                )
-                  ? 'fa-solid'
-                  : 'fa-regular'} fa-heart active:animate-ping"
-                style={blogdata_p.find((item) =>
-                  item.blogliked.includes(data.id)
-                )
-                  ? "color: #ff0000;"
-                  : ""}
-              />
-            </button>
-          {:else}
-            <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
-              <i class="fa-regular fa-heart active:animate-ping" />
-            </button>
-          {/if}
-        </div>
-      </div>
-    {/each}
-  {/if}
+        {/each}
+      {/if}
+      <!-- End Loop -->
     {/if}
   </div>
 </div>

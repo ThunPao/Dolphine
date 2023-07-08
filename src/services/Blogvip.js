@@ -14,6 +14,9 @@ export async function getblogsvip(token) {
         console.log("Fetching failed: " + response);
         throw new Error("Request failed");
       }
+      if(response.status == 401){
+      console.log("You are not authorized")
+      }
       const responseData = await response.json();
     //   blogsvip = responseData.slice(0, 5);
 

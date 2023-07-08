@@ -1,5 +1,6 @@
 <script>
-  import { handleRegister } from "../services/Authen";
+  import { handleRegister, reguser, regpwd, regpwdcf} from "../services/Authen";
+
 </script>
 
 <!-- Open the modal using ID.showModal() method -->
@@ -13,19 +14,29 @@
       <div class="join grid gap-3">
         <input
           type="text"
-          id="username"
+          id="regusername"
           placeholder="ชื่อในเกมส์"
           class="input input-bordered w-full max-w-xs"
+        bind:value={$reguser}
         />
 
         <input
           type="password"
-          id="password"
+          id="regpassword"
           placeholder="รหัสผ่าน"
           class="input input-bordered w-full max-w-xs"
+          bind:value={$regpwd}
         />
 
-        <button class="btn btn-accent" on:click={handleRegister}>Register</button>
+        <input
+        type="password"
+        id="confirmPassword"
+        placeholder="ยืนยันรหัสผ่าน"
+        class="input input-bordered w-full max-w-xs"
+        bind:value={$regpwdcf}
+      />
+
+        <button class="btn btn-accent" on:click={() => handleRegister()}>Register</button>
       </div>
     </div>
 
