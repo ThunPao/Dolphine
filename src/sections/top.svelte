@@ -2,6 +2,7 @@
   import UserProfiles from "../components/profileinfo.svelte";
   import "../styles/dplogo.scss";
   import FormAuth from "../components/formauth.svelte";
+  import FormReg from "../components/formregister.svelte";
   import { gsap } from "gsap";
   import { onMount, tick } from "svelte";
 
@@ -46,6 +47,7 @@
 </script>
 
 <FormAuth />
+<FormReg/>
 
 <div
   class="navbar backdrop-blur-sm backdrop-opacity-50 fixed z-50 bg-opacity-50 md:hover:bg-opacity-90 bg-gradient-to-b from-slate-200 dark:from-slate-800 from-0%"

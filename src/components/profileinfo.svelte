@@ -76,7 +76,12 @@
           <button
             onclick="loginuser_pop.showModal()"
             class="hover:text-sky-400 hover:font-bold text-lg"
-            ><i class="fa-solid fa-door-open" /> Login</button
+            ><i class="fa-solid fa-right-to-bracket" /> Login</button
+          >
+          <button
+            onclick="reguser_pop.showModal()"
+            class="hover:text-sky-400 hover:font-bold text-lg"
+            ><i class="fa-solid fa-door-open" /> Register</button
           >
         {/if}
       </li>
