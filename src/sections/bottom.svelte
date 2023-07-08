@@ -61,7 +61,7 @@
     <b class="text-cyan-200">Dolphine</b>
   </div>
   <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-    <a
+    <a href="/twitter"
       ><svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -73,7 +73,7 @@
         /></svg
       >
     </a>
-    <a
+    <a href="/youtube"
       ><svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -85,7 +85,7 @@
         /></svg
       ></a
     >
-    <a
+    <a href="/facebook"
       ><svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
