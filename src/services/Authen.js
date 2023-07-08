@@ -1,5 +1,8 @@
 import toastr from "toastr";
 import { writable } from "svelte/store";
+import {blogsvip} from "../services/Blogvip";
+import {getblogsvip} from "../services/Blogvip";
+
 
 
 let token = localStorage.getItem("token");
@@ -19,7 +22,7 @@ async function getPlayerInfo(token) {
       'Authorization': `Bearer ${token}`
     }
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     currentuser.set(data);
@@ -29,7 +32,7 @@ async function getPlayerInfo(token) {
     
     return data;
   } else {
-    tokencheck.set(null);
+    tokencheck.set(writable(localStorage.getItem("token")));
     currentuser.set(null);
     console.log("You are not authorized to access");
     // throw new Error('Failed to retrieve player info.');
@@ -55,6 +58,7 @@ function handleLogout() {
   localStorage.removeItem("token");
   currentuser.set(null);
   tokencheck.set(null);
+  blogsvip.set(null);
 }
 export async function logout() {
   password.set('');
@@ -104,6 +108,7 @@ export async function logout() {
       localStorage.setItem("token", token);
       tokencheck.set(writable(localStorage.getItem("token")));
       getPlayerInfo(data.token);
+      getblogsvip(data.token);
       // Display an info toast with no title
       toastr.success(
         "Successful Login.",

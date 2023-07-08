@@ -65,13 +65,13 @@
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
-      <li><a>Link</a></li>
-      <li>
+      <!-- <li><a>Link</a></li> -->
+      <li class="invisible">
         <details>
-          <summary> Parent</summary>
+          <summary> เมนู</summary>
           <ul class="p-2 bg-base-100 z-auto ">
-            <li><a href="#" class="hover:text-sky-400 hover:font-bold text-lg">About you</a></li>
-            <li><a href="#" class="hover:text-sky-400 hover:font-bold text-lg">Lavender Haze</a></li>
+            <li><a href="/about" class="hover:text-sky-400 hover:font-bold text-lg">About you</a></li>
+            <li><a href="/test" class="hover:text-sky-400 hover:font-bold text-lg">Lavender Haze</a></li>
           </ul>
         </details>
       </li>
