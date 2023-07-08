@@ -2,8 +2,8 @@ import toastr from "toastr";
 import { writable } from "svelte/store";
 import {blogsvip} from "../services/Blogvip";
 import {getblogsvip} from "../services/Blogvip";
-
-
+import Swal from 'sweetalert2'
+import '@sweetalert2/theme-borderless/borderless.scss';
 
 let token = localStorage.getItem("token");
 
@@ -26,14 +26,16 @@ async function getPlayerInfo(token) {
   if (response.ok) {
     const data = await response.json();
     currentuser.set(data);
+    // tokencheck.set(writable(localStorage.getItem("token")));
+
     // currentuser.subscribe((p) => {
     //   console.log(p);
     // });
     
     return data;
   } else {
-    tokencheck.set(writable(localStorage.getItem("token")));
     currentuser.set(null);
+    tokencheck.set(null);
     console.log("You are not authorized to access");
     // throw new Error('Failed to retrieve player info.');
   }
@@ -48,7 +50,14 @@ if(token){
 }
 
 
-
+export function notlogin(){
+  Swal.fire({
+    title: 'กรุณาล็อคอิน',
+    icon: 'error',
+    timer: 2000,
+    timerProgressBar: true,
+  })
+}
 
 
 
@@ -120,6 +129,13 @@ export async function logout() {
           progressBar: true,
         }
       );
+      Swal.fire({
+        title: 'เข้าสู่ระบบสำเร็จ',
+        text: 'คุณ '+ username,
+        icon: 'success',
+        timer: 2000,
+        timerProgressBar: true,
+      })
     } else {
       toastr.error("Error.", "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", {
         timeOut: 5000,

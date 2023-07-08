@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import {blogsvip} from "../services/Blogvip";
-  import {currentuser} from "../services/Authen"
+  import {currentuser, notlogin} from "../services/Authen"
 export let blogvipstate = false;
 
   let sub = false;
@@ -174,7 +174,10 @@ export let blogvipstate = false;
             </div>
           </div>
 
-          <button on:click={toggleFavorite(1, data.id)} class="">
+        
+        <button on:click={() => {$currentuser ? toggleFavorite($currentuser[0].id, data.id) : notlogin()}}>
+        
+          <button>
             <img
               class="rounded-t-lg w-full"
               src={data.img_cover}
@@ -189,7 +192,7 @@ export let blogvipstate = false;
                   .length} Likes &nbsp
               {/if}
 
-              <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
+              <button on:click={() => {$currentuser ? toggleFavorite($currentuser[0].id, data.id) : notlogin()}} class="text-2xl">
                 <i
                   class="{blogdata_p.find((item) =>
                     item.blogliked.includes(data.id)
