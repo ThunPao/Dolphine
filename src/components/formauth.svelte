@@ -8,7 +8,7 @@
   <form method="dialog" class="modal-box w-11/12 max-w-5xl">
     <h3 class="font-bold text-lg text-center">ระบบสมาชิก</h3>
 
-    <div
+    <!-- <div
       class="hidden gallery flex gap-4 items-center snap-x snap-mandatory overflow-x-scroll"
     >
       <div class="gallery__item min-w-[75%] snap-center">
@@ -32,7 +32,7 @@
           class="gallery__image object-cover w-[100%] h-[100%]"
         />
       </div>
-    </div>
+    </div> -->
     <div class="grid gap-3 justify-center text-center">
       <h1 class="font-bold text-4xl">Dolphine</h1>
       <h4>เข้าสู่ระบบ</h4>
