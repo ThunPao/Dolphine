@@ -9,7 +9,6 @@ export let blogvipstate = false;
   let sub = false;
   let cooldown = false;
 
-  // let blogvipstate = false;
 
   var url = "http://127.0.0.1:3005/";
 

@@ -1,5 +1,4 @@
 import { writable } from "svelte/store";
-import {tokencheck} from "../services/Authen";
 export let blogsvip = writable(null);
 export let blogdata = writable(null);
 export let blogdata_p = writable(null);
@@ -28,28 +27,28 @@ export async function getblogsvip(datatoken) {
     }
   });
       if (!response.ok) {
-        console.log("Fetching failed: " + response);
-        throw new Error("Request failed");
+        // console.log("Fetching failed: " + response);
+        // throw new Error("Request failed");
       }
       if(response.status == 401){
-      console.log("You are not authorized")
+      // console.log("You are not authorized")
       }
       const responseData = await response.json();
     //   blogsvip = responseData.slice(0, 5);
 
       blogsvip.set(responseData);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }
 
 
-  export async function getblogdataplayer(datatoken) {
+  export async function getblogdataplayer(token) {
     try {
     // let currentid = $currentuser != null ? $currentuser[0].id : '';
       const response = await fetch(url + "blogdatap", {
     headers: {
-      'Authorization': `Bearer ${datatoken}`
+      'Authorization': `Bearer ${token}`
     }
   });
 
@@ -66,9 +65,13 @@ export async function getblogsvip(datatoken) {
   }
 
   if(token){
-    getblogsvip(token);
     getblogdataplayer(token);
-    // console.log("BLOG VIP LOADED")
+
+      getblogsvip(token);
+
+
+
+      
   }else{
     blogsvip.set(null);
     blogdata_p.set(null);

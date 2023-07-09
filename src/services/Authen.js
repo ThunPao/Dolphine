@@ -24,7 +24,7 @@ const unsubscribePassword = regpwd.subscribe(value => {
 });
 
 
-export let tokencheck = writable(localStorage.getItem("token"));
+export const tokencheck = writable(localStorage.getItem('token'));
 
 // Create a writable store for the password field value
 export const password = writable('');
@@ -48,22 +48,23 @@ async function getPlayerInfo(token) {
     // currentuser.subscribe((p) => {
     //   console.log(p[0]);
     // });
+
     
     return data;
   } else {
     currentuser.set(null);
     tokencheck.set(null);
     console.log("You are not authorized to access");
+
     // throw new Error('Failed to retrieve player info.');
   }
 }
 
 
 if(token){
-  getPlayerInfo(token)
+  getPlayerInfo(token);
 }else{
   currentuser.set(null);
-
 }
 
 
