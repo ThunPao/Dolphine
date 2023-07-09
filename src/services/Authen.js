@@ -1,7 +1,6 @@
 import toastr from "toastr";
 import { writable } from "svelte/store";
-import {blogsvip} from "../services/Blogvip";
-import {getblogsvip} from "../services/Blogvip";
+import {blogsvip,getblogsvip,getblogdataplayer,blogdata_p} from "./Blogdatas";
 import Swal from 'sweetalert2'
 import '@sweetalert2/theme-borderless/borderless.scss';
 
@@ -47,7 +46,7 @@ async function getPlayerInfo(token) {
     // tokencheck.set(writable(localStorage.getItem("token")));
 
     // currentuser.subscribe((p) => {
-    //   console.log(p);
+    //   console.log(p[0]);
     // });
     
     return data;
@@ -86,6 +85,7 @@ function handleLogout() {
   currentuser.set(null);
   tokencheck.set(null);
   blogsvip.set(null);
+  blogdata_p.set(null);
   //
 reguser.set('');
 regpwd.set('');
@@ -139,9 +139,10 @@ export async function logout() {
       // console.log(data);
       token = data.token;
       localStorage.setItem("token", token);
-      tokencheck.set(writable(localStorage.getItem("token")));
+      tokencheck.set(writable(data.token));
       getPlayerInfo(data.token);
       getblogsvip(data.token);
+      getblogdataplayer(data.token);
       // Display an info toast with no title
       if (reglogin){
         reglogin = false

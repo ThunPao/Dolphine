@@ -1,7 +1,9 @@
 <script>
   import { onMount } from "svelte";
-  import {blogsvip} from "../services/Blogvip";
+  import {blogsvip,getblogdata,blogdata,blogdata_p,toggleFavorite} from "../services/Blogdatas";
   import {currentuser, notlogin} from "../services/Authen"
+
+
 export let blogvipstate = false;
 
   let sub = false;
@@ -24,12 +26,6 @@ export let blogvipstate = false;
 
 
   let blogs = null;
-  // let blogsvip = null;
-
-  // const { id, title, description } = blogs;
-
-  let blogdata = null;
-  let blogdata_p = null;
 
   async function getblogs() {
     try {
@@ -49,71 +45,14 @@ export let blogvipstate = false;
   }
 
 
-  async function getblogdataplayer() {
-    const currentid = $currentuser != null ? $currentuser[0].id : '';
-    try {
-      const response = await fetch(url + "blogdata/"+currentid);
-      if (!response.ok) {
-        throw new Error("Request failed");
-      }
-      const responseData = await response.json();
-      blogdata_p = responseData.slice(0, 5);
-      // data = await response.json(); //showall
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
-  async function getblogdata() {
-    try {
-      const response = await fetch(url + "blogdata");
-      if (!response.ok) {
-        throw new Error("Request failed");
-      }
-      const responseData = await response.json();
-      blogdata = responseData;
-      // data = await response.json(); //showall
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
-  async function toggleFavorite(playerId, blogId) {
-    try {
-      // Make a POST request to the server
-      const response = await fetch(url + "blogdata", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ player_id: playerId, blog_id: blogId }),
-      });
 
-      // Check the response status
-      if (response.ok) {
-        getblogdata();
-        // getblogdataplayer();
-        if(currentuser != null){
-          getblogdataplayer();
 
-}
-        // If the request is successful, update the local blogdata array
-      } else {
-        // If the request fails, display an error message
-        console.error("Error:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
-  }
 
 
   onMount(getblogs);
 // {$currentuser != null ? $currentuser[0].username : ''}
-if(currentuser != null){
-  onMount(getblogdataplayer);
-}
-
   onMount(getblogdata);
 </script>
 
@@ -147,7 +86,7 @@ if(currentuser != null){
           </div>
         </div>
       </div>
-      <div class="col-span-1 text-2xl font-medium pt-4">Dolphine</div>
+      <div class="col-span-1 text-2xl font-medium pt-4">Dolphine Cagayake!</div>
       <div class="row-span-2">
         วันนี้กินอะไรดี
         {$currentuser != null ? $currentuser[0].username : ''}
@@ -177,26 +116,30 @@ if(currentuser != null){
         {#each blogs as data, index}
           <div class="card w-full bg-base-100 shadow-xl">
             <div class="card-body">
-              <h2 class="card-title">{data.id} {data.title}</h2>
+              <h2 class="card-title">{data.title}</h2>
               <div class="text-sm">
                 {data.description}
+                
               </div>
             </div>
-            <button on:click={() => {$currentuser ? toggleFavorite($currentuser[0].id, data.id) : notlogin()}}>
+
+            <button on:click={() => {$currentuser ? toggleFavorite(data.id) : notlogin()}}>
               <button>
                 <img class="rounded-t-lg w-full" src={data.img_cover} alt={data.title} />
               </button>
               <div class="flex justify-end mr-3 p-3">
-                {#if blogdata_p !== null && blogdata_p.length > 0}
-                  <!-- blogdata -->
-                  {#if blogdata !== null && blogdata.length > 0}
-                    {blogdata.filter((item) => item.blogliked.includes(data.id)).length} Likes &nbsp;
-                  {/if}
-                  <button on:click={() => {$currentuser ? toggleFavorite($currentuser[0].id, data.id) : notlogin()}} class="text-2xl">
-                    <i class="{blogdata_p.find((item) => item.blogliked.includes(data.id)) ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping" style={blogdata_p.find((item) => item.blogliked.includes(data.id)) ? "color: #ff0000;" : ""} />
+<!-- blogdata -->
+{#if $blogdata !== null && $blogdata.length > 0}
+{$blogdata.filter((item) => item.blogliked.includes(data.id)).length} Likes &nbsp;
+{/if}
+                {#if $blogdata_p !== null && $blogdata_p.length > 0}
+
+                  
+                  <button on:click={() => {$currentuser ? toggleFavorite(data.id) : notlogin()}} class="text-2xl">
+                    <i class="{$blogdata_p.find((item) => item.blogliked.includes(data.id)) ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping" style={$blogdata_p.find((item) => item.blogliked.includes(data.id)) ? "color: #ff0000;" : ""} />
                   </button>
                 {:else}
-                  <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
+                  <button on:click={notlogin} class="text-2xl">
                     <i class="fa-regular fa-heart active:animate-ping" />
                   </button>
                 {/if}
@@ -210,34 +153,44 @@ if(currentuser != null){
       <!-- blogsvip -->
       {#if $blogsvip !== null && $blogsvip.length > 0}
         {#each $blogsvip as data, index}
-          <div class="card w-full bg-base-100 shadow-xl">
-            <div class="card-body">
-              <h2 class="card-title">{data.id} {data.title}</h2>
-              <div class="text-sm">
-                {data.description}
-              </div>
+        <div class="card w-full bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">{data.title}</h2>
+            <div class="text-sm">
+              {data.description}
+              
             </div>
-            <button on:click={toggleFavorite(1, data.id)} class="">
+          </div>
+
+          <button on:click={() => {$currentuser ? toggleFavorite(data.id) : notlogin()}}>
+            <button>
               <img class="rounded-t-lg w-full" src={data.img_cover} alt={data.title} />
             </button>
             <div class="flex justify-end mr-3 p-3">
-              {#if blogdata_p !== null && blogdata_p.length > 0}
-                <!-- blogdata -->
-                {#if blogdata !== null && blogdata.length > 0}
-                  {blogdata.filter((item) => item.blogliked.includes(data.id)).length} Likes &nbsp;
-                {/if}
-                <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
-                  <i class="{blogdata_p.find((item) => item.blogliked.includes(data.id)) ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping" style={blogdata_p.find((item) => item.blogliked.includes(data.id)) ? "color: #ff0000;" : ""} />
+<!-- blogdata -->
+{#if $blogdata !== null && $blogdata.length > 0}
+{$blogdata.filter((item) => item.blogliked.includes(data.id)).length} Likes &nbsp;
+{/if}
+
+
+              {#if $blogdata_p !== null && $blogdata_p.length > 0}
+          
+              
+                
+                
+                <button on:click={() => {$currentuser ? toggleFavorite(data.id) : notlogin()}} class="text-2xl">
+                  <i class="{$blogdata_p.find((item) => item.blogliked.includes(data.id)) ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping" style={$blogdata_p.find((item) => item.blogliked.includes(data.id)) ? "color: #ff0000;" : ""} />
                 </button>
               {:else}
-                <button on:click={toggleFavorite(1, data.id)} class="text-2xl">
+                <button on:click={notlogin} class="text-2xl">
                   <i class="fa-regular fa-heart active:animate-ping" />
                 </button>
               {/if}
             </div>
-          </div>
-        {/each}
-      {/if}
+          </button>
+        </div>
+      {/each}
+    {/if}
       <!-- End Loop -->
     {/if}
   </div>
