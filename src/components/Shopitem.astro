@@ -12,7 +12,9 @@ export interface Props {
 const { id, href, title, buycount, point, description } = Astro.props;
 ---
 
-<div class="card bg-base-200 shadow-lg hover:shadow-amber-500">
+<div
+  class="card bg-base-200 shadow-lg dark:hover:shadow-amber-500 hover:shadow-blue-500"
+>
   <button onclick=`{${"shopinfo_"+id}.showModal()};`>
     <figure><img src={href} alt="Img" class="rounded-lg w-full" /></figure>
     <div class="xs:flex sm:flex md:flex justify-between p-1">
@@ -35,25 +37,28 @@ const { id, href, title, buycount, point, description } = Astro.props;
 </div>
 
 <dialog id={"shopinfo_" + id} class="modal">
-  <form method="dialog" class="modal-box shadow-lg shadow-amber-300">
+  <form
+    method="dialog"
+    class="modal-box shadow-lg dark:shadow-amber-300 shadow-blue-300"
+  >
     <h3 class="font-bold text-lg">รายละเอียดสินค้า</h3>
     <div class="indicator w-full">
-      <span
+      <!-- <span
         class="invisible indicator-item indicator-top indicator-end badge badge-secondary"
         >ยอดนิยม</span
       >
       <span
         class="invisible indicator-item indicator-bottom mr-5 indicator-end badge badge-secondary"
         >{buycount} ซื้อแล้ว</span
-      >
+      > -->
       <span
-        class="indicator-item text-white indicator-bottom indicator-center p-3 mb-2 badge badge-info font-extrabold text-lg"
+        class="indicator-item text-white indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 font-extrabold text-lg"
       >
         {
           point > 0 ? (
             <p class="font-extrabold">{point} DP</p>
           ) : (
-            <p class="font-extrabold">ฟรี</p>
+            <p class="font-extrabold">แจกฟรี</p>
           )
         }
       </span>

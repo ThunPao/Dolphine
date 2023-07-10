@@ -20,7 +20,6 @@
         d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
       /></svg
     >
-    
   </button>
 
   <button>
@@ -43,7 +42,9 @@
     >
   </button>
 </div>
-<footer class="footer items-center p-4 bg-base-300 text-neutral-content">
+<footer
+  class="footer items-center p-4 bg-cyan-950 dark:bg-base-300 text-neutral-content"
+>
   <div class="items-center grid-flow-col">
     <svg
       width="36"
@@ -99,4 +100,4 @@
     >
   </div>
 </footer>
-<Fastmenu/>
+<Fastmenu />
