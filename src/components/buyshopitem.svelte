@@ -35,9 +35,9 @@
 <dialog id={"buyi_" + did} class="modal modal-bottom sm:modal-middle">
   <form class="modal-box" />
   <form method="dialog" class="modal-box">
-    <h3 class="font-bold text-lg">ยืนยันการซื้อ</h3>
+    <h3 class="font-bold text-2xl">ยืนยันการซื้อ</h3>
     <h4>
-      พ้อยท์คงเหลือ หลังจากซื้อ :
+      DP คงเหลือ หลังจากซื้อ :
       <!-- ({$currentuser?.points} -
       <span class=" text-amber-500">{point}</span>) = -->
       <span
@@ -49,7 +49,12 @@
           : "ไม่พอ"}</span
       >
     </h4>
-    <p class="py-4">ซื้อ {title} ในราคา {point} ตอนนี้เลยหรือไม่?</p>
+    <p class="py-4 dark:text-amber-100 text-blue-950 text-xl">
+      ซื้อ {title} ในราคา
+      <span class="dark:text-white text-black font-bold text-lg"
+        >{point} DP</span
+      > ตอนนี้เลยหรือไม่?
+    </p>
     <div class="modal-body" />
     <div class="modal-action">
       {#if $currentuser}
@@ -60,9 +65,7 @@
           on:click={() => {
             $currentuser?.points - point < 0 ? "" : handleClick();
           }}
-          >{$currentuser?.points - point < 0
-            ? "เงินไม่พอ"
-            : "ซื้อทันที"}</button
+          >{$currentuser?.points - point < 0 ? "DP ไม่พอ" : "ซื้อทันที"}</button
         >
       {:else}
         <button class="btn btn-success" onclick="loginuser_pop.showModal()"
