@@ -31,6 +31,7 @@ const shopitems = await response.json();
              title={data.name},
              href={cardimg},
              buycount={data.buycount.toString()},
+            point={data.point},
              description={data.description}
              />
 
@@ -79,8 +80,9 @@ const shopitems = await response.json();
 <div class="card card-side bg-base-100 shadow-xl">
   <figure><img src={cardimg} alt="Movie"/></figure>
   <div class="card-body">
-    <h2 class="card-title">New movie is released!</h2>
-    <p>Click the button to watch on Jetflix app.</p>
+    <h2 class="card-title">{data.name}</h2>
+    <p>{data.point}</p>
+
     <div class="card-actions justify-end">
       <button class="btn btn-primary">ซื้อไอเทม</button>
     </div>

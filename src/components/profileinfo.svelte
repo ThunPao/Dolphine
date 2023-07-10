@@ -18,8 +18,8 @@
       <span
         class="indicator-item indicator-bottom badge bg-green-500 text-white font-medium"
       >
-        {#if $currentuser != null}
-          {$currentuser[0].points} DP
+        {#if $currentuser}
+          {$currentuser.points} DP
         {:else}
           กรุณาล็อคอิน
         {/if}
@@ -43,8 +43,8 @@
           <span
             class="indicator-item indicator-bottom badge bg-green-500 text-white font-medium"
           >
-            {#if $currentuser != null}
-              {$currentuser[0].points} DP
+            {#if $currentuser}
+              {$currentuser.points} DP
             {:else}
               กรุณาล็อคอิน
             {/if}

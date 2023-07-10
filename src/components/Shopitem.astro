@@ -1,66 +1,74 @@
 ---
-import Btncf from '../components/buyshopitem.svelte';
+import Btncf from "../components/buyshopitem.svelte";
 export interface Props {
   id: number;
-	title: string;
-	href: string;
-	buycount: string;
-	description: string;
-
+  title: string;
+  href: string;
+  buycount: string;
+  point: number;
+  description: string;
 }
 
-const { id, href, title, buycount, description } = Astro.props;
+const { id, href, title, buycount, point, description } = Astro.props;
 ---
 
 <div class="card bg-base-200 shadow-lg hover:shadow-amber-500">
   <button onclick=`{${"shopinfo_"+id}.showModal()};`>
-    <figure><img src={href} alt="Img" class="rounded-lg w-full" />
-    </figure>
+    <figure><img src={href} alt="Img" class="rounded-lg w-full" /></figure>
     <div class="xs:flex sm:flex md:flex justify-between p-1">
       <div>
         <div class="badge badge-success font-bold text-lg py-4</div>">
-          สินค้าเข้าใหม่</div>
+          สินค้าเข้าใหม่
+        </div>
       </div>
       <div>
-        <div class="badge badge-primary font-bold text-lg py-4">{buycount} ซื้อแล้ว</div>
+        <div class="badge badge-primary font-bold text-lg py-4">
+          {buycount} ซื้อแล้ว
+        </div>
       </div>
-  </div>
+    </div>
     <div class="card-body">
       <h2 class="card-title">{title}</h2>
       <p>{description}</p>
-
     </div>
   </button>
-  </div>
+</div>
 
-  <dialog id={"shopinfo_"+id} class="modal ">
-    <form method="dialog" class="modal-box shadow-lg shadow-amber-300">
-      <h3 class="font-bold text-lg">รายละเอียดสินค้า</h3>
-      <figure><img src={href} alt="Img" class="rounded-lg w-full shadow-lg shadow-stone-500" />
-      </figure>
-      <div class="flex justify-between">
-          <div class="badge badge-success font-bold text-lg">
-            สินค้าเข้าใหม่</div>
+<dialog id={"shopinfo_" + id} class="modal">
+  <form method="dialog" class="modal-box shadow-lg shadow-amber-300">
+    <h3 class="font-bold text-lg">รายละเอียดสินค้า</h3>
+    <figure>
+      <img
+        src={href}
+        alt="Img"
+        class="rounded-lg w-full shadow-lg shadow-stone-500"
+      />
+    </figure>
+    <div class="flex justify-between">
+      <div class="badge badge-success font-bold text-lg">สินค้าเข้าใหม่</div>
 
-        <div>
-          <div class="badge badge-primary font-bold text-lg">{buycount} ซื้อแล้ว</div>
+      <div>
+        <div class="badge badge-primary font-bold text-lg">
+          {buycount} ซื้อแล้ว
         </div>
+      </div>
     </div>
     <div class="modal-body">
       <h2 class="card-title">{title}</h2>
       <p class="bg-base-200 rounded p-2">{description}</p>
-   
-        <div class="flex justify-end gap-2 mt-4">
-<Btncf did={id} title={title} client:load/>
-          <button class="btn btn-secondary hover:scale-105 text-lg">
-            <i class="fa-solid fa-cart-shopping"></i>หยิบใส่ตระก้า</button>
-          </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <Btncf did={id} title={title} point={point} client:load />
+        <button class="btn btn-secondary hover:scale-105 text-lg">
+          <i class="fa-solid fa-cart-shopping"></i>หยิบใส่ตระก้า</button
+        >
+      </div>
       <div class="modal-action">
         <button class="btn flex grow">เลือกดูไอเทมอื่น</button>
       </div>
     </div>
-    </form>
-    <form method="dialog" class="modal-backdrop">
-      <button></button>
-    </form>
-  </dialog>
+  </form>
+  <form method="dialog" class="modal-backdrop">
+    <button></button>
+  </form>
+</dialog>

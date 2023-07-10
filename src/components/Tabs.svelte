@@ -44,10 +44,10 @@
   onMount(shoptop);
   //
 
-  console.log(
-    "%cWarning: Unauthorized access!",
-    "color: red; font-size: 20px;"
-  );
+  // console.log(
+  //   "%cWarning: Unauthorized access!",
+  //   "color: red; font-size: 20px;"
+  // );
 </script>
 
 <div class="tabs d-flex justify-center">
@@ -124,7 +124,7 @@
     <thead>
       <tr>
         <th />
-        <th>ไอเทม</th>
+        <th>ชื่อสินค้า</th>
         <th>จำนวน</th>
       </tr>
     </thead>

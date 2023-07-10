@@ -1,13 +1,16 @@
 <script>
   import toastr from "toastr";
+  import { currentuser, notlogin } from "../services/Authen";
+
   export let did;
   export let title;
+  export let point;
 
   async function handleClick() {
     // Display an info toast with no title
     toastr.success(
       "Success!",
-      "ซื้อสินค้า " + title + " สำเร็จ ยอดเงินคงเหลือ point",
+      "ซื้อสินค้า " + title + " สำเร็จ ยอดเงินคงเหลือ " + point,
       {
         timeOut: 5000,
         positionClass: "toast-bottom-center",
@@ -28,20 +31,45 @@
   ><i class="fa-solid fa-dollar-sign" />
   ซื้อเลย</button
 >
+
 <dialog id={"buyi_" + did} class="modal modal-bottom sm:modal-middle">
   <form class="modal-box" />
   <form method="dialog" class="modal-box">
     <h3 class="font-bold text-lg">ยืนยันการซื้อ</h3>
-    <p class="py-4">ซื้อ {title} ตอนนี้เลยหรือไม่?</p>
+    <h4>
+      พ้อยท์คงเหลือ หลังจากซื้อ :
+      <!-- ({$currentuser?.points} -
+      <span class=" text-amber-500">{point}</span>) = -->
+      <span
+        class="font-bold {$currentuser?.points - point >= 0
+          ? 'text-amber-200'
+          : 'text-red-500'}"
+        >{$currentuser?.points - point >= 0
+          ? $currentuser?.points - point
+          : "ไม่พอ"}</span
+      >
+    </h4>
+    <p class="py-4">ซื้อ {title} ในราคา {point} ตอนนี้เลยหรือไม่?</p>
     <div class="modal-body" />
     <div class="modal-action">
-      <button
-        class="btn btn-success"
-        on:click={() => {
-          handleClick();
-        }}>ซื้อทันที</button
-      >
-      <button class="btn btn-warning">ยกเลิก</button>
+      {#if $currentuser}
+        <button
+          class="btn {$currentuser?.points - point < 0
+            ? 'btn-warning'
+            : 'btn-success'}"
+          on:click={() => {
+            $currentuser?.points - point < 0 ? "" : handleClick();
+          }}
+          >{$currentuser?.points - point < 0
+            ? "เงินไม่พอ"
+            : "ซื้อทันที"}</button
+        >
+      {:else}
+        <button class="btn btn-success" onclick="loginuser_pop.showModal()"
+          >กรุณาล็อคอิน</button
+        >
+      {/if}
+      <button class="btn btn-base-200">ยกเลิก</button>
     </div>
   </form>
 </dialog>

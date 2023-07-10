@@ -6,10 +6,12 @@ import '@sweetalert2/theme-borderless/borderless.scss';
 
 let token = localStorage.getItem("token");
 
+
+
 let reglogin = false;
-export const reguser = writable('');
-export const regpwd = writable('');
-export const regpwdcf = writable('');
+export let reguser = writable('');
+export let regpwd = writable('');
+export let regpwdcf = writable('');
 let reg_username;
 let reg_password;
 
@@ -30,8 +32,13 @@ export const tokencheck = writable(localStorage.getItem('token'));
 export const password = writable('');
 export let currentuser = writable(null);
 
+    // tokencheck.set(writable(localStorage.getItem("token")));
 
-async function getPlayerInfo(token) {
+    // currentuser.subscribe((p) => {
+    //   console.log(p[0]);
+    // });
+
+export async function getPlayerInfo(token) {
   const url = 'http://127.0.0.1:3005/playerinfo';
   
   const response = await fetch(url, {
@@ -39,30 +46,20 @@ async function getPlayerInfo(token) {
       'Authorization': `Bearer ${token}`
     }
   });
-
   if (response.ok) {
     const data = await response.json();
-    currentuser.set(data);
-    // tokencheck.set(writable(localStorage.getItem("token")));
-
-    // currentuser.subscribe((p) => {
-    //   console.log(p[0]);
-    // });
-
-    
+    currentuser.set(data[0]);
     return data;
   } else {
     currentuser.set(null);
     tokencheck.set(null);
     console.log("You are not authorized to access");
-
-    // throw new Error('Failed to retrieve player info.');
   }
 }
 
 
 if(token){
-  getPlayerInfo(token);
+  handleLoadinfo()
 }else{
   currentuser.set(null);
 }
@@ -92,6 +89,11 @@ reguser.set('');
 regpwd.set('');
 regpwdcf.set('');
 }
+async function handleLoadinfo(){
+  const data = await getPlayerInfo(token);
+  currentuser.set(data[0]);
+}
+
 export async function logout() {
   password.set('');
     const response = await fetch("http://127.0.0.1:3005/logout", {
@@ -141,7 +143,8 @@ export async function logout() {
       token = data.token;
       localStorage.setItem("token", token);
       tokencheck.set(writable(data.token));
-      getPlayerInfo(data.token);
+      // getPlayerInfo(data.token);
+      handleLoadinfo();
       getblogsvip(data.token);
       getblogdataplayer(data.token);
       // Display an info toast with no title

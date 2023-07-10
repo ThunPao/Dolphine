@@ -1,14 +1,18 @@
 <script>
   import { onMount } from "svelte";
-  import {blogsvip,getblogdata,blogdata,blogdata_p,toggleFavorite} from "../services/Blogdatas";
-  import {currentuser, notlogin} from "../services/Authen"
+  import {
+    blogsvip,
+    getblogdata,
+    blogdata,
+    blogdata_p,
+    toggleFavorite,
+  } from "../services/Blogdatas";
+  import { currentuser, notlogin } from "../services/Authen";
 
-
-export let blogvipstate = false;
+  export let blogvipstate = false;
 
   let sub = false;
   let cooldown = false;
-
 
   var url = "http://127.0.0.1:3005/";
 
@@ -22,7 +26,6 @@ export let blogvipstate = false;
       }, 500); // 0.5 seconds cooldown
     }
   }
-
 
   let blogs = null;
 
@@ -43,15 +46,7 @@ export let blogvipstate = false;
     }
   }
 
-
-
-
-
-
-
-
   onMount(getblogs);
-// {$currentuser != null ? $currentuser[0].username : ''}
   onMount(getblogdata);
 </script>
 
@@ -73,14 +68,16 @@ export let blogvipstate = false;
           <div
             class="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
           >
-          <button on:click={() => {
-            togglesub();
-          }}>
-            {#if sub === true}
-              <img src="/images/dpchan.png" alt="" />
-            {:else}
-              <img src="/images/dpchan1.png" alt="" />
-            {/if}
+            <button
+              on:click={() => {
+                togglesub();
+              }}
+            >
+              {#if sub === true}
+                <img src="/images/dpchan.png" alt="" />
+              {:else}
+                <img src="/images/dpchan1.png" alt="" />
+              {/if}
             </button>
           </div>
         </div>
@@ -88,9 +85,7 @@ export let blogvipstate = false;
       <div class="col-span-1 text-2xl font-medium pt-4">Dolphine Cagayake!</div>
       <div class="row-span-2">
         วันนี้กินอะไรดี
-        {$currentuser != null ? $currentuser[0].username : ''}
-
-
+        {$currentuser != null ? $currentuser.username : ""}
       </div>
     </div>
 
@@ -103,8 +98,7 @@ export let blogvipstate = false;
   </div>
 
   <div class="flex flex-col w-full mt-3">
-    <div class="grid h-20 card bg-base-100 rounded-box place-items-center">
-    </div>
+    <div class="grid h-20 card bg-base-100 rounded-box place-items-center" />
   </div>
 </div>
 <div class="container mx-auto justify-center mt-4 grid grid-flow-row gap-4">
@@ -118,24 +112,46 @@ export let blogvipstate = false;
               <h2 class="card-title">{data.title}</h2>
               <div class="text-sm">
                 {data.description}
-                
               </div>
             </div>
 
-            <button on:click={() => {$currentuser ? toggleFavorite(data.id) : notlogin()}}>
+            <button
+              on:click={() => {
+                $currentuser ? toggleFavorite(data.id) : notlogin();
+              }}
+            >
               <button>
-                <img class="rounded-t-lg w-full" src={data.img_cover} alt={data.title} />
+                <img
+                  class="rounded-t-lg w-full"
+                  src={data.img_cover}
+                  alt={data.title}
+                />
               </button>
               <div class="flex justify-end mr-3 p-3">
-<!-- blogdata -->
-{#if $blogdata !== null && $blogdata.length > 0}
-{$blogdata.filter((item) => item.blogliked.includes(data.id)).length} Likes &nbsp;
-{/if}
+                <!-- blogdata -->
+                {#if $blogdata !== null && $blogdata.length > 0}
+                  {$blogdata.filter((item) => item.blogliked.includes(data.id))
+                    .length} Likes &nbsp;
+                {/if}
                 {#if $blogdata_p !== null && $blogdata_p.length > 0}
-
-                  
-                  <button on:click={() => {$currentuser ? toggleFavorite(data.id) : notlogin()}} class="text-2xl">
-                    <i class="{$blogdata_p.find((item) => item.blogliked.includes(data.id)) ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping" style={$blogdata_p.find((item) => item.blogliked.includes(data.id)) ? "color: #ff0000;" : ""} />
+                  <button
+                    on:click={() => {
+                      $currentuser ? toggleFavorite(data.id) : notlogin();
+                    }}
+                    class="text-2xl"
+                  >
+                    <i
+                      class="{$blogdata_p.find((item) =>
+                        item.blogliked.includes(data.id)
+                      )
+                        ? 'fa-solid'
+                        : 'fa-regular'} fa-heart active:animate-ping"
+                      style={$blogdata_p.find((item) =>
+                        item.blogliked.includes(data.id)
+                      )
+                        ? "color: #ff0000;"
+                        : ""}
+                    />
                   </button>
                 {:else}
                   <button on:click={notlogin} class="text-2xl">
@@ -152,44 +168,63 @@ export let blogvipstate = false;
       <!-- blogsvip -->
       {#if $blogsvip !== null && $blogsvip.length > 0}
         {#each $blogsvip as data, index}
-        <div class="card w-full bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title">{data.title}</h2>
-            <div class="text-sm">
-              {data.description}
-              
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">{data.title}</h2>
+              <div class="text-sm">
+                {data.description}
+              </div>
             </div>
-          </div>
 
-          <button on:click={() => {$currentuser ? toggleFavorite(data.id) : notlogin()}}>
-            <button>
-              <img class="rounded-t-lg w-full" src={data.img_cover} alt={data.title} />
+            <button
+              on:click={() => {
+                $currentuser ? toggleFavorite(data.id) : notlogin();
+              }}
+            >
+              <button>
+                <img
+                  class="rounded-t-lg w-full"
+                  src={data.img_cover}
+                  alt={data.title}
+                />
+              </button>
+              <div class="flex justify-end mr-3 p-3">
+                <!-- blogdata -->
+                {#if $blogdata !== null && $blogdata.length > 0}
+                  {$blogdata.filter((item) => item.blogliked.includes(data.id))
+                    .length} Likes &nbsp;
+                {/if}
+
+                {#if $blogdata_p !== null && $blogdata_p.length > 0}
+                  <button
+                    on:click={() => {
+                      $currentuser ? toggleFavorite(data.id) : notlogin();
+                    }}
+                    class="text-2xl"
+                  >
+                    <i
+                      class="{$blogdata_p.find((item) =>
+                        item.blogliked.includes(data.id)
+                      )
+                        ? 'fa-solid'
+                        : 'fa-regular'} fa-heart active:animate-ping"
+                      style={$blogdata_p.find((item) =>
+                        item.blogliked.includes(data.id)
+                      )
+                        ? "color: #ff0000;"
+                        : ""}
+                    />
+                  </button>
+                {:else}
+                  <button on:click={notlogin} class="text-2xl">
+                    <i class="fa-regular fa-heart active:animate-ping" />
+                  </button>
+                {/if}
+              </div>
             </button>
-            <div class="flex justify-end mr-3 p-3">
-<!-- blogdata -->
-{#if $blogdata !== null && $blogdata.length > 0}
-{$blogdata.filter((item) => item.blogliked.includes(data.id)).length} Likes &nbsp;
-{/if}
-
-
-              {#if $blogdata_p !== null && $blogdata_p.length > 0}
-          
-              
-                
-                
-                <button on:click={() => {$currentuser ? toggleFavorite(data.id) : notlogin()}} class="text-2xl">
-                  <i class="{$blogdata_p.find((item) => item.blogliked.includes(data.id)) ? 'fa-solid' : 'fa-regular'} fa-heart active:animate-ping" style={$blogdata_p.find((item) => item.blogliked.includes(data.id)) ? "color: #ff0000;" : ""} />
-                </button>
-              {:else}
-                <button on:click={notlogin} class="text-2xl">
-                  <i class="fa-regular fa-heart active:animate-ping" />
-                </button>
-              {/if}
-            </div>
-          </button>
-        </div>
-      {/each}
-    {/if}
+          </div>
+        {/each}
+      {/if}
       <!-- End Loop -->
     {/if}
   </div>
