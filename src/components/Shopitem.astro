@@ -37,18 +37,44 @@ const { id, href, title, buycount, point, description } = Astro.props;
 <dialog id={"shopinfo_" + id} class="modal">
   <form method="dialog" class="modal-box shadow-lg shadow-amber-300">
     <h3 class="font-bold text-lg">รายละเอียดสินค้า</h3>
-    <figure>
-      <img
-        src={href}
-        alt="Img"
-        class="rounded-lg w-full shadow-lg shadow-stone-500"
-      />
-    </figure>
+    <div class="hidden indicator w-full">
+      <span
+        class="indicator-item indicator-top indicator-end badge badge-secondary"
+        >ยอดนิยม</span
+      >
+      <span
+        class="indicator-item indicator-bottom mr-5 indicator-end badge badge-secondary"
+        >{buycount} ซื้อแล้ว</span
+      >
+      <span
+        class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 font-extrabold text-lg"
+        >ราคา {point} DP</span
+      >
+
+      <div class="place-items-center w-full">
+        <figure>
+          <img src={href} alt="Img" class="rounded-lg w-full" />
+        </figure>
+      </div>
+    </div>
+    <div class="card w-full shadow-sm image-full">
+      <figure><img src={href} class="w-full" alt="Shoes" /></figure>
+      <div class="card-body">
+        <h2 class="card-title">Shoes!</h2>
+        <p>If a dog chews shoes whose shoes does he choose?</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
     <div class="flex justify-between">
-      <div class="badge badge-success font-bold text-lg">สินค้าเข้าใหม่</div>
+      <div class="hidden badge badge-success font-bold text-lg">
+        สินค้าเข้าใหม่
+      </div>
 
       <div>
-        <div class="badge badge-primary font-bold text-lg">
+        <div class="hidden badge badge-primary font-bold text-lg">
           {buycount} ซื้อแล้ว
         </div>
       </div>
