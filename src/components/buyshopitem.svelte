@@ -70,7 +70,7 @@
           : "ไม่พอ"}</span
       >
     </h4>
-    <p class="py-4 dark:text-sky-300 text-cyan-950 text-xl font-medium">
+    <p class="py-4 dark:text-yellow-200 text-cyan-950 text-xl font-medium">
       ซื้อ <span class="dark:text-white text-black font-bold">{title}</span>
       ในราคา
       <span class="dark:text-white text-black font-bold text-lg"
@@ -96,7 +96,7 @@
       <button class="btn btn-base-200 text-xl">ยกเลิก</button>
     </div>
     {#if platform !== "Unknown"}
-      กดปุ่ม<kbd class="kbd kbd-sm mt-2">Enter</kbd> เพื่อซื้อทันที
+      กดปุ่ม<kbd class="kbd kbd-sm mt-2 animate-bounce">Enter</kbd> เพื่อซื้อทันที
     {/if}
   </form>
 </dialog>

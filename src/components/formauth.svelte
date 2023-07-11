@@ -56,7 +56,7 @@
         <button class="btn btn-accent" on:click={handleLogin}>LOG-IN</button>
         <p class="mt-2">ยังไม่ได้สมัคร?</p>
         <button
-          class="font-bold text-amber-100 text-lg"
+          class="font-bold dark:text-amber-100 text-secondary text-lg"
           onclick="reguser_pop.showModal()">สมัครสมาชิก</button
         >
       </div>

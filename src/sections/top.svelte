@@ -47,7 +47,7 @@
 </script>
 
 <FormAuth />
-<FormReg/>
+<FormReg />
 
 <div
   class="navbar backdrop-blur-sm backdrop-opacity-50 fixed z-50 bg-opacity-50 md:hover:bg-opacity-90 bg-gradient-to-b from-slate-200 dark:from-slate-800 from-0%"
@@ -71,9 +71,18 @@
       <li class="invisible">
         <details>
           <summary> เมนู</summary>
-          <ul class="p-2 bg-base-100 z-auto ">
-            <li><a href="/about" class="hover:text-sky-400 hover:font-bold text-lg">About you</a></li>
-            <li><a href="/test" class="hover:text-sky-400 hover:font-bold text-lg">Lavender Haze</a></li>
+          <ul class="p-2 bg-base-100 z-auto">
+            <li>
+              <a
+                href="/about"
+                class="hover:text-sky-400 hover:font-bold text-lg">About you</a
+              >
+            </li>
+            <li>
+              <a href="/test" class="hover:text-sky-400 hover:font-bold text-lg"
+                >Lavender Haze</a
+              >
+            </li>
           </ul>
         </details>
       </li>

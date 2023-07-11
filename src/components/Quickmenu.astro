@@ -1,23 +1,32 @@
 ---
 export interface Props {
-    id: string;
-	title: string;
-	href: string;
+  id: string;
+  title: string;
+  href: string;
 }
 
 const { id, href, title } = Astro.props;
 ---
-<a href={id}>
-      <div class="hover:scale-100 d-flex scale-[80%] relative w-full h-60 overflow-x-hidden mask mask-hexagon">
-  <img src={href} alt="" class="absolute inset-0 object-cover w-full h-full transition duration-500 ease-in-out filter brightness-75 hover:brightness-100">
-  <div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold bg-gray-800 bg-opacity-20 transition duration-500 ease-in-out hover:bg-opacity-75">{title}</div>
+
+<div class="keen-slider__slide">
+  <a href={id}>
+    <div
+      class="hover:scale-100 d-flex scale-[80%] relative w-full h-60 overflow-x-hidden mask mask-hexagon"
+    >
+      <img
+        src={href}
+        alt=""
+        class="absolute inset-0 object-cover w-full h-full transition duration-500 ease-in-out filter brightness-75 hover:brightness-100"
+      />
+      <div
+        class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold bg-gray-800 bg-opacity-20 transition duration-500 ease-in-out hover:bg-opacity-75"
+      >
+        {title}
+      </div>
+    </div>
+  </a>
 </div>
-
-</a>
-
 <!-- <div class="scale-90 p-3 relative w-full h-full overflow-x-hidden mask mask-hexagon">
   <img src={href} alt="" class="absolute inset-0 object-cover w-full h-full transition duration-500 ease-in-out filter brightness-75 hover:brightness-100">
   <div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold bg-gray-800 bg-opacity-50 transition duration-500 ease-in-out hover:bg-opacity-75">Text Overlay</div>
 </div> -->
-
-  

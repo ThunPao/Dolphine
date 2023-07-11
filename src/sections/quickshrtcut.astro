@@ -18,85 +18,41 @@ const data = [
 ];
 ---
 
- <!-- <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 bg-base-200 light:bg-zinc-200 rounded-3xl">
-    {data.map((data) => 
-        <Quickmenu
-        id={data.id.toString()},
-         title={data.title},
-         href={img},
-         />
-)}
-</div>  -->
 
 
-  
-<div class="swiper MenuSlides w-full">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
+<div id="quickmenu-slides" class="keen-slider">
       <!-- Slides -->
       {data.map((data) => 
-      <div class="swiper-slide">
         <Quickmenu
         id={data.id.toString()},
          title={data.title},
          href={img},
          />
-      </div>
       )}
-    </div>
-    <div class="swiper-scrollbar"></div>
   </div>
-  <script type="module">
-    const MenuSlides = new Swiper('.MenuSlides', {
-  // Optional parameters
-  loop: false,
-  direction: "horizontal",
-//   freeMode: true,
-// effect: "coverflow",
-  mousewheel:true,
-  slidesPerView: 6,
-  spaceBetween: 30,
-  pauseOnMouseEnter:true,
-  grabCursor: false,
-//   coverflowEffect: {
-//         rotate: 50,
-//         stretch: 0,
-//         depth: 100,
-//         modifier: 0.5,
-//         slideShadows: false,
-//       },
-  autoplay: {
-   delay: 3000,
- },
- grid: {
-    rows: 1,
-  },
-  breakpoints: {
-    320:{
-    slidesPerView: 1,    
-},
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-
-        },
-        768: {
-          slidesPerView: 4,
-          spaceBetween: 40,
-        },
-        1024: {
-          slidesPerView: 6,
-          spaceBetween: 50,
-        },
-      },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: '.swiper-scrollbar',
-  },
-//   pagination: {
-//         el: ".swiper-pagination",
-//       },
+  <script>
+    import 'keen-slider/keen-slider.min.css'
+  import KeenSlider from 'keen-slider'
   
-});
+  var slider = new KeenSlider("#quickmenu-slides", {
+    breakpoints: {
+            "(min-width: 320px)": {
+              slides: { perView: 2 },
+            },
+            "(min-width: 640px)": {
+              slides: { perView: 3, spacing: 20 },
+            },
+            "(min-width: 768px)": {
+              slides: { perView: 4, spacing: 20 },
+            },
+            "(min-width: 1000px)": {
+              slides: { perView: 6, spacing: 15 },
+            },
+          },
+          slides: {
+            perView: 1,
+            spacing: 15,
+          },
+        })
+  
   </script>

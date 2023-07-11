@@ -12,30 +12,31 @@ export interface Props {
 const { id, href, title, buycount, point, description } = Astro.props;
 ---
 
-<div
-  class="card bg-base-200 shadow-lg dark:hover:shadow-amber-500 hover:shadow-blue-500"
->
-  <button onclick=`{${"shopinfo_"+id}.showModal()};`>
-    <figure><img src={href} alt="Img" class="rounded-lg w-full" /></figure>
-    <div class="xs:flex sm:flex md:flex justify-between p-1">
-      <div>
-        <div class="badge badge-success font-bold text-lg py-4</div>">
-          สินค้าเข้าใหม่
+<div class="keen-slider__slide">
+  <div
+    class="card bg-base-200 shadow-lg dark:hover:shadow-amber-500 hover:shadow-blue-500"
+  >
+    <button onclick=`{${"shopinfo_"+id}.showModal()};`>
+      <figure><img src={href} alt="Img" class="rounded-lg w-full" /></figure>
+      <div class="xs:flex sm:flex md:flex justify-between p-1">
+        <div>
+          <div class="badge badge-success font-bold text-lg py-4</div>">
+            สินค้าเข้าใหม่
+          </div>
+        </div>
+        <div>
+          <div class="badge badge-primary font-bold text-lg py-4">
+            {buycount} ซื้อแล้ว
+          </div>
         </div>
       </div>
-      <div>
-        <div class="badge badge-primary font-bold text-lg py-4">
-          {buycount} ซื้อแล้ว
-        </div>
+      <div class="card-body">
+        <h2 class="card-title">{title}</h2>
+        <p>{description}</p>
       </div>
-    </div>
-    <div class="card-body">
-      <h2 class="card-title">{title}</h2>
-      <p>{description}</p>
-    </div>
-  </button>
+    </button>
+  </div>
 </div>
-
 <dialog id={"shopinfo_" + id} class="modal">
   <form
     method="dialog"
