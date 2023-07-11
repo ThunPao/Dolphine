@@ -3,8 +3,9 @@ import { writable } from "svelte/store";
 import {blogsvip,getblogsvip,getblogdataplayer,blogdata_p} from "./Blogdatas";
 import Swal from 'sweetalert2'
 import '@sweetalert2/theme-borderless/borderless.scss';
+import jwt_decode from 'jwt-decode';
 
-let token = localStorage.getItem("token");
+export let token = localStorage.getItem("token");
 
 
 
@@ -38,7 +39,7 @@ export let currentuser = writable(null);
     //   console.log(p[0]);
     // });
 
-export async function getPlayerInfo(token) {
+async function getPlayerInfoold(token) {
   const url = 'http://127.0.0.1:3005/playerinfo';
   
   const response = await fetch(url, {
@@ -57,9 +58,58 @@ export async function getPlayerInfo(token) {
   }
 }
 
+export async function getPlayerInfo(token) {
+  const url = 'http://127.0.0.1:3005/playerinfo';
+
+  // Check if the token is expired
+  const isTokenExpired = () => {
+    const decodedToken = jwt_decode(token);
+    const currentTime = Math.floor(Date.now() / 1000);
+    return decodedToken.exp < currentTime;
+  };
+
+  if (isTokenExpired()) {
+    // Token is expired, refresh the page
+    location.reload();
+    Swal.fire({
+      title: 'TOKEN EXPIRED!',
+      icon: 'error',
+      timer: 2000,
+      timerProgressBar: true,
+    })
+    return;
+  }
+
+  const response = await fetch(url, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    currentuser.set(data[0]);
+    return data;
+  } else {
+    if(token){
+      token = null;
+      localStorage.removeItem("token");
+    tokencheck.set(null);
+    location.reload();
+    }
+    if(currentuser){
+      currentuser.set(null);
+    }
+
+    // handleLogout();
+    console.log("You are not authorized to access");
+  }
+}
+
 
 if(token){
-  handleLoadinfo()
+handleLoadinfo();
+
 }else{
   currentuser.set(null);
 }
@@ -89,9 +139,12 @@ reguser.set('');
 regpwd.set('');
 regpwdcf.set('');
 }
-async function handleLoadinfo(){
+export async function handleLoadinfo(){
   const data = await getPlayerInfo(token);
   currentuser.set(data[0]);
+  if(data[0].p_role > 1){
+    getblogsvip(token);
+  }
 }
 
 export async function logout() {
@@ -145,7 +198,10 @@ export async function logout() {
       tokencheck.set(writable(data.token));
       // getPlayerInfo(data.token);
       handleLoadinfo();
-      getblogsvip(data.token);
+if(currentuser?.p_role > 1){
+  getblogsvip(data.token);
+}
+      
       getblogdataplayer(data.token);
       // Display an info toast with no title
       if (reglogin){
@@ -209,7 +265,7 @@ export async function logout() {
       regpwd.set(password);
       reglogin = true;
       unsubscribeUsername();
-unsubscribePassword();
+      unsubscribePassword();
       // Registration successful
       const data = await response.json();
       // console.log('Registration successful:', data);

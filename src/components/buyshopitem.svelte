@@ -1,5 +1,4 @@
 <script>
-  import toastr from "toastr";
   import { currentuser, notlogin } from "../services/Authen";
   import { onMount } from "svelte";
   import { buyitem } from "../services/ShopController";
@@ -42,8 +41,6 @@
     </h3>
     <h4>
       DP คงเหลือ หลังจากซื้อ :
-      <!-- ({$currentuser?.points} -
-      <span class=" text-amber-500">{point}</span>) = -->
       <span
         class="font-bold {$currentuser?.points - point >= 0
           ? 'text-amber-200'

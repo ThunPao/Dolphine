@@ -1,35 +1,50 @@
 import toastr from "toastr";
-import { currentuser } from "../services/Authen";
-
+import { token,handleLoadinfo } from "../services/Authen";
+import {refreshshopitems} from "../sections/cards.astro";
 async function handleclick() {
-    // Display an info toast with no title
-    toastr.success(
-      "Success!",
-      "ซื้อสินค้า " + title + " สำเร็จ ยอดเงินคงเหลือ " + currentuser?.points,
-      {
-        timeOut: 5000,
-        positionClass: "toast-bottom-center",
-        newestOnTop: true,
-        progressBar: true,
-      }
-    );
-
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     console.log("Delayed log after 0.5 seconds");
   }
 
-  export function buyitem(did) {
-    console.log("Buyed "+did);
-    // Display an info toast with no title
-    toastr.success(
-      "Success!",
-      "ซื้อสินค้า title "+ " สำเร็จ ยอดเงินคงเหลือ " + currentuser?.points,
-      {
-        timeOut: 5000,
-        positionClass: "toast-bottom-center",
-        newestOnTop: true,
-        progressBar: true,
+  export async function buyitem(id) {
+    const url = 'http://127.0.0.1:3005/buyitem/'+id;
+  
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+
+    });
+    if (response.ok) {
+        const data = await response.json();
+        handleLoadinfo();
+        refreshshopitems();
+        toastr.success(
+            ""+ data.message,
+            "สำเร็จ!",
+             {
+              timeOut: 5000,
+              positionClass: "toast-bottom-center",
+              newestOnTop: true,
+              progressBar: true,
+            }
+          );
+      } else {
+        toastr.warning(
+            ""+ data.message,
+            "ซื้อสินค้าไม่สำเร็จ!",
+            {
+              timeOut: 5000,
+              positionClass: "toast-bottom-center",
+              newestOnTop: true,
+              progressBar: true,
+            }
+          );
       }
-    );
   }
+  
+
+

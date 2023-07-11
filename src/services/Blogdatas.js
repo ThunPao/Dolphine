@@ -67,7 +67,7 @@ export async function getblogsvip(datatoken) {
   if(token){
     getblogdataplayer(token);
 
-      getblogsvip(token);
+
 
 
 
