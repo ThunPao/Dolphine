@@ -1,6 +1,8 @@
 import toastr from "toastr";
 import { token,handleLoadinfo } from "../services/Authen";
 import {refreshshopitems} from "../sections/cards.astro";
+import {apiurl} from "../services/apiurl";
+
 async function handleclick() {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -8,7 +10,7 @@ async function handleclick() {
   }
 
   export async function buyitem(id) {
-    const url = 'http://127.0.0.1:3005/buyitem/'+id;
+    const url = apiurl+'buyitem/'+id;
   
     const response = await fetch(url, {
       method: 'POST',
