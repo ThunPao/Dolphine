@@ -1,13 +1,15 @@
 import toastr from "toastr";
+import { writable } from "svelte/store";
 import { token,handleLoadinfo } from "../services/Authen";
-import {refreshshopitems} from "../sections/cards.astro";
 import {apiurl} from "../services/apiurl";
 
-async function handleclick() {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+export let shopitems = writable(null);
 
-    console.log("Delayed log after 0.5 seconds");
-  }
+// async function handleclick() {
+//     await new Promise((resolve) => setTimeout(resolve, 500));
+
+//     console.log("Delayed log after 0.5 seconds");
+//   }
 
   export async function buyitem(id) {
     const url = apiurl+'buyitem/'+id;
@@ -23,7 +25,7 @@ async function handleclick() {
     if (response.ok) {
         const data = await response.json();
         handleLoadinfo();
-        refreshshopitems();
+        getshopitems();
         toastr.success(
             ""+ data.message,
             "สำเร็จ!",
@@ -47,6 +49,17 @@ async function handleclick() {
           );
       }
   }
-  
 
-
+  export async function getshopitems() {
+    try {
+      const response = await fetch(apiurl + "shopitems");
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+      const responseData = await response.json();
+      shopitems.set(responseData);
+      // data = await response.json(); //showall
+    } catch (error) {
+      console.error(error);
+    }
+  }
