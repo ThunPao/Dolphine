@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+import {apiurl} from '../services/apiurl';
   import {
     blogsvip,
     getblogdata,
@@ -14,7 +15,6 @@
   let sub = false;
   let cooldown = false;
 
-  var url = "http://127.0.0.1:3005/";
 
   function togglesub() {
     if (!cooldown) {
@@ -31,7 +31,7 @@
 
   async function getblogs() {
     try {
-      const response = await fetch(url + "blogs");
+      const response = await fetch(apiurl + "blogs");
       if (!response.ok) {
         console.log("Fetching failed: " + response);
         throw new Error("Request failed");

@@ -2,13 +2,14 @@
 const cardimg = 'https://via.placeholder.com/300x250'
 import Shopitem from '../components/Shopitem.astro';
 import Tabs from '../components/Tabs.svelte';
+import {apiurl} from '../services/apiurl';
 // const response = await fetch('http://127.0.0.1:3005/shopitems');
 // const shopitems = await response.json();
 
-const shopitems = await fetch('http://127.0.0.1:3005/shopitems').then(r => r.json());
+const shopitems = await fetch(apiurl+'shopitems').then(r => r.json());
 
 export async function refreshshopitems() {
-  const response = await fetch('http://127.0.0.1:3005/shopitems');
+  const response = await fetch(apiurl+'shopitems');
   if (response.ok) {
     console.log("OK!");
     var data = await response.json();

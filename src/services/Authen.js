@@ -4,6 +4,9 @@ import {blogsvip,getblogsvip,getblogdataplayer,blogdata_p} from "./Blogdatas";
 import Swal from 'sweetalert2'
 import '@sweetalert2/theme-borderless/borderless.scss';
 import jwt_decode from 'jwt-decode';
+import {apiurl} from "../services/apiurl";
+
+
 
 export let token = localStorage.getItem("token");
 
@@ -40,7 +43,7 @@ export let currentuser = writable(null);
     // });
 
 async function getPlayerInfoold(token) {
-  const url = 'http://127.0.0.1:3005/playerinfo';
+  const url = apiurl+'playerinfo';
   
   const response = await fetch(url, {
     headers: {
@@ -59,7 +62,7 @@ async function getPlayerInfoold(token) {
 }
 
 export async function getPlayerInfo(token) {
-  const url = 'http://127.0.0.1:3005/playerinfo';
+  const url = apiurl+'playerinfo';
 
   // Check if the token is expired
   const isTokenExpired = () => {
@@ -149,7 +152,7 @@ export async function handleLoadinfo(){
 
 export async function logout() {
   password.set('');
-    const response = await fetch("http://127.0.0.1:3005/logout", {
+    const response = await fetch(apiurl+"logout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -182,7 +185,7 @@ export async function logout() {
       const password = reglogin ? reg_password : document.getElementById("password").value;
 
 
-    const response = await fetch("http://127.0.0.1:3005/login", {
+    const response = await fetch(apiurl+"login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -252,7 +255,7 @@ if(currentuser?.p_role > 1){
     }
 
     // Make the API POST request
-    const response = await fetch('http://127.0.0.1:3005/register', {
+    const response = await fetch(apiurl+'register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

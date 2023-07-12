@@ -1,10 +1,10 @@
 import { writable } from "svelte/store";
+import {apiurl} from "../services/apiurl";
 export let blogsvip = writable(null);
 export let blogdata = writable(null);
 export let blogdata_p = writable(null);
 
 let token = localStorage.getItem("token");
-var url = "http://127.0.0.1:3005/";
 
 export async function getblogdata() {
   try {

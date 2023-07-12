@@ -1,12 +1,13 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Counter } from "../model/shopitem";
+  import {apiurl} from '../services/apiurl';
 
   let counters: Counter[] = [];
 
   async function getCounters() {
     try {
-      const response = await fetch("http://127.0.0.1:3005/counters");
+      const response = await fetch(apiurl+"counters");
       counters = await response.json();
     } catch (error) {
       console.error("Error fetching counters:", error);
@@ -20,7 +21,7 @@
 
       // Update the data on the server
       try {
-        await fetch(`http://127.0.0.1:3005/counters/${id}`, {
+        await fetch(apiurl+`counters/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
