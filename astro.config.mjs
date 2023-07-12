@@ -8,6 +8,7 @@ export default defineConfig({
   integrations: [tailwind(), svelte()],
   output: 'server',
   adapter: vercel(),
+
   // compressHTML: true,
   // build: {
   //   excludeMiddleware: true
