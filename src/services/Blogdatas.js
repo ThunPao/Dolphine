@@ -8,7 +8,7 @@ let token = localStorage.getItem("token");
 
 export async function getblogdata() {
   try {
-    const response = await fetch(url + "blogdata");
+    const response = await fetch(apiurl + "blogdata");
     if (!response.ok) {
       throw new Error("Request failed");
     }
@@ -21,7 +21,7 @@ export async function getblogdata() {
 }
 export async function getblogsvip(datatoken) {
     try {
-      const response = await fetch(url + "blogvip", {
+      const response = await fetch(apiurl + "blogvip", {
     headers: {
       'Authorization': `Bearer ${datatoken}`
     }
@@ -46,7 +46,7 @@ export async function getblogsvip(datatoken) {
   export async function getblogdataplayer(token) {
     try {
     // let currentid = $currentuser != null ? $currentuser[0].id : '';
-      const response = await fetch(url + "blogdatap", {
+      const response = await fetch(apiurl + "blogdatap", {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -82,7 +82,7 @@ export async function getblogsvip(datatoken) {
     try {
       token = localStorage.getItem("token");
       // Make a POST request to the server
-      const response = await fetch(url + "blogdata", {
+      const response = await fetch(apiurl + "blogdata", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

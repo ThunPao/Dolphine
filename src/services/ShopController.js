@@ -1,6 +1,6 @@
 import toastr from "toastr";
 import { token,handleLoadinfo } from "../services/Authen";
-// import {refreshshopitems} from "../sections/cards.astro";
+import {refreshshopitems} from "../sections/cards.astro";
 async function handleclick() {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
