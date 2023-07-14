@@ -6,3 +6,17 @@ import Alerts from "../sections/alerts.astro";
   <div class="chat-bubble">You underestimate my power!</div>
 </div>
 <Alerts />
+
+<button class="alert">Click me!</button>
+
+<script>
+  // Find all buttons with the `alert` class on the page.
+  const buttons = document.querySelectorAll("button.alert");
+
+  // Handle clicks on each button.
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      alert("Button was clicked!");
+    });
+  });
+</script>

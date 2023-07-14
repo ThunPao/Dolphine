@@ -1,6 +1,8 @@
 ---
 import Navbar from "../sections/top.svelte";
 import Cards from "../sections/cards.svelte";
+import SSRCards from "../sections/cardsfull.astro";
+
 import Slides from "../sections/slides.astro";
 import Alerts from "../sections/alerts.astro";
 import Qsc from "../sections/quickshrtcut.astro";
@@ -43,6 +45,7 @@ import "../styles/base.scss";
       <Alerts />
       <!-- <Cheri client:load/> -->
       <Cards client:only="svelte" />
+      <!-- <SSRCards /> SSR Astro-->
       <Blogs />
     </div>
     <Btm client:load />
