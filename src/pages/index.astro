@@ -9,6 +9,7 @@ import Blogs from "../sections/blogs.astro";
 // import Cheri from '../sections/cheri.svelte';
 import Intro from "../sections/intro.astro";
 import "../styles/base.scss";
+
 // import Apitest from '../sections/apitest.astro';
 ---
 
@@ -41,7 +42,7 @@ import "../styles/base.scss";
       <Qsc />
       <Alerts />
       <!-- <Cheri client:load/> -->
-      <Cards client:load/>
+      <Cards client:only />
       <Blogs />
     </div>
     <Btm client:load />
