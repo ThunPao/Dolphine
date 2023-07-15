@@ -100,4 +100,4 @@
     >
   </div>
 </footer>
-<Fastmenu />
+<Fastmenu/>

@@ -1,7 +1,7 @@
 <script>
   const cardimg = "https://via.placeholder.com/300x250";
   import Shopcard from "../components/Shopitem.svelte";
-  import { shopitems, getshopitems } from "../services/ShopController";
+  import { getshopitems,shopitems } from "../services/ShopController";
   import Tabs from "../components/Tabs.svelte";
   // import "../services/Sliders";
   import { onMount, tick, afterUpdate } from "svelte";
@@ -11,11 +11,12 @@
   let slider;
 
   onMount(async () => {
+    getshopitems();
     await tick(); // Wait for the DOM to be fully updated
   });
 
   afterUpdate(() => {
-    // if ($shopitems !== null && $shopitems.length > 0) {
+    if ($shopitems !== null && $shopitems.length > 0) {
     slider = new KeenSlider("#shopitem-slides", {
       breakpoints: {
         "(min-width: 400px)": {
@@ -33,8 +34,7 @@
         spacing: 15,
       },
     });
-    // }
-    getshopitems();
+    }
   });
 </script>
 
@@ -50,8 +50,11 @@
 
         <!-- Slides -->
         <!-- {shopitems.map((data: any) => -->
-        {#if $shopitems !== null && $shopitems.length > 0}
-          {#each $shopitems as data}
+        {#if $shopitems !== null}
+        {#if $shopitems.length > 0}
+          <!-- {#each $shopitems as data} -->
+          {#each $shopitems.slice(0, 10) as data}
+
             <Shopcard
               id={data.id}
               title={data.name}
@@ -61,6 +64,9 @@
               description={data.description}
             />
           {/each}
+          {/if}
+          {:else}
+          LOADING ...
         {/if}
 
         <!-- )} -->
@@ -95,7 +101,8 @@
 
 <div class="grid gap-2 p-1">
   {#if $shopitems !== null && $shopitems.length > 0}
-    {#each $shopitems as data}
+    {#each $shopitems.slice(0, 10) as data}
+
       <div class="card card-side bg-base-100 shadow-xl">
         <figure><img src={cardimg} alt="Movie" /></figure>
         <div class="card-body">

@@ -1,11 +1,12 @@
 <script>
   import { onMount } from "svelte";
+  import { shopitems } from "../services/ShopController";
+
   let tabs = ["อันดับ #1", "ไอเทมยอดนิยม", "อันดับ #3"];
   let activeTabIndex = 1;
 
   //
   let data = null;
-  let buymost = null;
 
   const LIMIT = 5;
 
@@ -25,40 +26,26 @@
     }
   }
 
-  async function shoptop() {
-    try {
-      const response = await fetch("http://127.0.0.1:3005/shoptop");
-      if (!response.ok) {
-        throw new Error("Request failed");
-      }
-      const responseData = await response.json();
-      buymost = responseData.slice(0, LIMIT);
-      // data = await response.json(); //showall
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   // Call the fetch function when the component is mounted
   onMount(fetchData);
-  onMount(shoptop);
   //
 
   // console.log(
   //   "%cWarning: Unauthorized access!",
   //   "color: red; font-size: 20px;"
   // );
+
 </script>
 
 <div class="tabs d-flex justify-center">
   {#each tabs as tab, index}
-    <a
+    <p
       class="tab tab-bordered"
       class:tab-active={activeTabIndex == index}
       on:click={() => (activeTabIndex = index)}
-    >
+      aria-hidden="true">
       {tab}
-    </a>
+    </p>
   {/each}
 </div>
 
@@ -130,9 +117,9 @@
     </thead>
     <tbody>
       <!-- row loop -->
-      {#if buymost !== null}
-        {#if buymost.length > 0}
-          {#each buymost as item, index}
+      {#if $shopitems !== null}
+        {#if $shopitems.length > 0}
+          {#each $shopitems.slice(0, 6) as item, index}
             <tr>
               {#if index === 0}
                 <th><i class="fa-solid fa-xl fa-trophy text-amber-400" /></th>

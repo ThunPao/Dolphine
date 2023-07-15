@@ -26,6 +26,7 @@ export let shopitems = writable(null);
         const data = await response.json();
         handleLoadinfo();
         getshopitems();
+        // location.reload();
         toastr.success(
             ""+ data.message,
             "สำเร็จ!",
@@ -58,6 +59,9 @@ export let shopitems = writable(null);
       }
       const responseData = await response.json();
       shopitems.set(responseData);
+  shopitems.update(items => [...items].sort((a, b) => b.buycount - a.buycount));
+      
+      return shopitems;
       // data = await response.json(); //showall
     } catch (error) {
       console.error(error);

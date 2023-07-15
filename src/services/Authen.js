@@ -66,13 +66,19 @@ export async function getPlayerInfo(token) {
 
   // Check if the token is expired
   const isTokenExpired = () => {
-    const decodedToken = jwt_decode(token);
-    const currentTime = Math.floor(Date.now() / 1000);
+    if(token){
+      const decodedToken = jwt_decode(token);
+      const currentTime = Math.floor(Date.now() / 1000);
     return decodedToken.exp < currentTime;
+    }else{
+      return null;
+    }
+
   };
 
-  if (isTokenExpired()) {
     // Token is expired, refresh the page
+
+  if (isTokenExpired()) {
     location.reload();
     Swal.fire({
       title: 'TOKEN EXPIRED!',
