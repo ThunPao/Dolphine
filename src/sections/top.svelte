@@ -5,6 +5,8 @@
   import FormReg from "../components/formregister.svelte";
   import { gsap } from "gsap";
   import { onMount, tick } from "svelte";
+let logoimg = "images/dpbg.png";
+
 
   onMount(async () => {
     await tick(); // Wait for the DOM to be fully updated
@@ -58,7 +60,7 @@
     <a href="/" class="hover:scale-110">
       <div class="wrapper">
         <h1
-          class="border-s-8 stroke-slate-500 title text-3xl md:text-4xl font-bold"
+          class="border-s-8 stroke-slate-500 title text-3xl md:text-4xl font-bold " style="background-image: url('{logoimg}')"
         >
           Dolphine
         </h1>

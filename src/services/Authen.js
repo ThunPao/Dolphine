@@ -1,8 +1,7 @@
 import toastr from "toastr";
 import { writable } from "svelte/store";
 import {blogsvip,getblogsvip,getblogdataplayer,blogdata_p} from "./Blogdatas";
-import Swal from 'sweetalert2'
-import '@sweetalert2/theme-borderless/borderless.scss';
+import Swal from 'sweetalert2';
 import jwt_decode from 'jwt-decode';
 import {apiurl} from "../services/apiurl";
 

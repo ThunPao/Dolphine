@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
 import {apiurl} from '../services/apiurl';
+import Swal from 'sweetalert2'
   import {
     blogsvip,
     getblogdata,
@@ -18,12 +19,21 @@ import {apiurl} from '../services/apiurl';
 
   function togglesub() {
     if (!cooldown) {
-      sub = !sub;
+      if($blogsvip !== null){
+        sub = !sub;
       cooldown = true;
       blogvipstate = !blogvipstate;
       setTimeout(() => {
         cooldown = false;
       }, 500); // 0.5 seconds cooldown
+      }else{
+        Swal.fire({
+      title: 'เข้าถึงได้เฉพาะสมาชิกระดับ VIP ขึ้นไป',
+      icon: 'info',
+    })
+      }
+
+
     }
   }
 

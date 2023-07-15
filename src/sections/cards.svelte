@@ -9,11 +9,15 @@
   import "keen-slider/keen-slider.min.css";
 
   let slider;
+  let searchQuery = '';
 
   onMount(async () => {
     getshopitems();
     await tick(); // Wait for the DOM to be fully updated
   });
+  function filterShopItems(item) {
+    return item.name.toLowerCase().includes(searchQuery.toLowerCase());
+  }
 
   afterUpdate(() => {
     if ($shopitems !== null && $shopitems.length > 0) {
@@ -35,6 +39,7 @@
       },
     });
     }
+    shopitems.update(items => items);
   });
 </script>
 
@@ -87,7 +92,7 @@
   <div class="join">
     <div>
       <div>
-        <input class="input input-bordered join-item" placeholder="Search..." />
+        <input class="input input-bordered join-item" placeholder="Search..." bind:value={searchQuery} />
       </div>
     </div>
     <select class="select select-bordered join-item">
@@ -101,19 +106,30 @@
 
 <div class="grid gap-2 p-1">
   {#if $shopitems !== null && $shopitems.length > 0}
-    {#each $shopitems.slice(0, 10) as data}
-
-      <div class="card card-side bg-base-100 shadow-xl">
-        <figure><img src={cardimg} alt="Movie" /></figure>
-        <div class="card-body">
-          <h2 class="card-title">{data.name}</h2>
-          <p>{data.point}</p>
-
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">ซื้อไอเทม</button>
-          </div>
+    {#each $shopitems.filter(filterShopItems).slice(0, 5) as data}
+    <div class="card card-side bg-base-100 shadow-xl">
+      <figure><img src={cardimg} alt="Movie" /></figure>
+      <div class="card-body">
+        <h2 class="card-title">{data.name}</h2>
+        <p>{data.point}</p>
+    
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">ซื้อไอเทม</button>
         </div>
       </div>
+    </div>
     {/each}
+    {#if $shopitems.filter(filterShopItems).length === 0}
+    <div class="mockup-window border border-base-300">
+      <div class="flex justify-center px-4 py-16 border-t border-base-300 text-4xl">ไม่พบไอเทม</div>
+    </div>
+    {/if}
+  {:else}
+    <p>No shop items found.</p>
   {/if}
 </div>
+
+
+
+
+
