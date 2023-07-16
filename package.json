@@ -15,7 +15,6 @@
     "@astrojs/svelte": "^3.0.0",
     "@astrojs/tailwind": "^4.0.0",
     "@astrojs/vercel": "^3.7.0",
-    "@fortune-inc/tw-voucher": "^1.0.10",
     "@sweetalert2/theme-borderless": "^5.0.15",
     "@sweetalert2/themes": "^5.0.15",
     "astro": "^2.8.1",

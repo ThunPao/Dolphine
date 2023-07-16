@@ -36,14 +36,15 @@
         bind:value={$regpwdcf}
       />
 
-        <button class="btn btn-accent" on:click={() => handleRegister()}>Register</button>
+        <button class="btn btn-accent" on:click={() => handleRegister()}>สมัครสมาชิก</button>
       </div>
     </div>
 
     <!-- <p class="py-4">กดปุ่ม <kbd class="kbd">ESC</kbd> เพื่อปิด</p> -->
     <div class="modal-action">
       <!-- if there is a button in form, it will close the modal -->
-      <button class="btn">Close</button>
+      <button class="btn flex grow">ปิดหน้าต่างนี้</button>
+
     </div>
   </form>
 </dialog>

@@ -61,6 +61,14 @@
         >
       </li>
       <li>
+        <button
+            onclick="topup.showModal()"
+            class="hover:text-sky-400 hover:font-bold text-lg"
+            ><i class="fa-solid fa-right-to-bracket" /> เติมเงิน</button
+          >
+      </li>
+
+      <li>
         <a href="/dolphine" class="hover:text-sky-400 hover:font-bold text-lg"
           >Dolphine Blogs</a
         >
@@ -76,15 +84,11 @@
           <button
             onclick="loginuser_pop.showModal()"
             class="hover:text-sky-400 hover:font-bold text-lg"
-            ><i class="fa-solid fa-right-to-bracket" /> Login</button
-          >
-          <button
-            onclick="reguser_pop.showModal()"
-            class="hover:text-sky-400 hover:font-bold text-lg"
-            ><i class="fa-solid fa-door-open" /> Register</button
+            ><i class="fa-solid fa-right-to-bracket" /> เข้าสู่ระบบ</button
           >
         {/if}
       </li>
     </ul>
+
   </details>
 {/if}

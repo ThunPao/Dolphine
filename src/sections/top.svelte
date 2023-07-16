@@ -5,6 +5,8 @@
   import FormReg from "../components/formregister.svelte";
   import { gsap } from "gsap";
   import { onMount, tick } from "svelte";
+  import Topup from "../components/topup.svelte";
+
 let logoimg = "images/dpbg.png";
 
 
@@ -50,6 +52,7 @@ let logoimg = "images/dpbg.png";
 
 <FormAuth />
 <FormReg />
+<Topup />
 
 <div
   class="navbar backdrop-blur-sm backdrop-opacity-50 fixed z-50 bg-opacity-50 md:hover:bg-opacity-90 bg-gradient-to-b from-slate-200 dark:from-slate-800 from-0%"

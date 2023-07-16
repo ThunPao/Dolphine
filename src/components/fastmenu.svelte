@@ -27,8 +27,14 @@
           </div>
         </div>
         <div class="indicator">
-          <span class="indicator-item badge badge-primary">new</span>
-          <div class="grid w-32 h-32 bg-base-300 place-items-center">content</div>
+          <!-- <span class="indicator-item badge badge-primary">new</span> -->
+          <div class="grid w-32 h-32 bg-base-300 place-items-center">
+<button onclick="topup.showModal()">
+            <div class="grid grid-rows-2 text-center">
+              <i class="fa-solid fa-wallet fa-2xl" />เติมเงิน
+            </div>
+          </button>
+          </div>
         </div>
   
         <div class="grid w-32 h-32 bg-base-300 place-items-center">
