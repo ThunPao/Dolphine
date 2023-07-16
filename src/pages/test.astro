@@ -1,11 +1,12 @@
 ---
-import Alerts from "../sections/alerts.astro";
+import Topup from "../components/topup.svelte";
+
 ---
 
 <div class="chat chat-end">
   <div class="chat-bubble">You underestimate my power!</div>
 </div>
-<Alerts />
+<Topup client:only/>
 
 <button class="alert">Click me!</button>
 
