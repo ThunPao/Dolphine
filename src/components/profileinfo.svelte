@@ -64,7 +64,7 @@
         <button
             onclick="topup.showModal()"
             class="hover:text-sky-400 hover:font-bold text-lg"
-            ><i class="fa-solid fa-right-to-bracket" /> เติมเงิน</button
+            ><i class="fa-solid fa-wallet" /> เติมเงิน</button
           >
       </li>
 
