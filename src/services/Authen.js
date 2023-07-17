@@ -170,14 +170,14 @@ export async function logout() {
       // Logout successful
       handleLogout();
       toastr.success("Logged out.", "ออกจากระบบเรียบร้อย", {
-        timeOut: 5000,
+        timeOut: 3000,
         positionClass: "toast-bottom-center",
         newestOnTop: true,
         progressBar: true,
       });
     } else {
       toastr.error("เกิดข้อผิดพลาด", "Error", {
-        timeOut: 5000,
+        timeOut: 3000,
         positionClass: "toast-bottom-center",
         newestOnTop: true,
         progressBar: true,
@@ -222,7 +222,7 @@ if(currentuser?.p_role > 1){
         "Successful Login.",
         "เข้าสู่ระบบสำเร็จ " + username,
         {
-          timeOut: 5000,
+          timeOut: 3000,
           positionClass: "toast-bottom-center",
           newestOnTop: true,
           progressBar: true,
@@ -232,7 +232,7 @@ if(currentuser?.p_role > 1){
         title: 'เข้าสู่ระบบสำเร็จ',
         text: 'คุณ '+ username,
         icon: 'success',
-        timer: 2000,
+        timer: 1000,
         timerProgressBar: true,
       })
     } else {
