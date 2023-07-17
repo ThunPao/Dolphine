@@ -3,13 +3,10 @@ import tailwind from "@astrojs/tailwind";
 import svelte from "@astrojs/svelte";
 import vercel from '@astrojs/vercel/serverless';
 import node from "@astrojs/node";
-import image from "@astrojs/image";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), svelte(), image({
-    serviceEntryPoint: '@astrojs/image/sharp',
-  })],
+  integrations: [tailwind(), svelte()],
   output: 'server',
   // adapter: vercel(),
   adapter: node({
