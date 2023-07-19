@@ -105,11 +105,13 @@
       <h2 class="card-title">{title}</h2>
       <p class="bg-base-200 rounded p-2">{description}</p>
 
-      <div class="flex justify-end gap-2 mt-4">
+      <div class="flex justify-center gap-2 mt-4">
         <Btncf did={id} {title} {point} {limits} />
-        <button class="btn btn-secondary hover:scale-105 text-lg">
-          <i class="fa-solid fa-cart-shopping" />หยิบใส่ตระก้า</button
-        >
+        {#if limits > 0}
+          <button class="btn btn-secondary hover:scale-105 text-lg">
+            <i class="fa-solid fa-cart-shopping" />หยิบใส่ตระก้า</button
+          >
+        {/if}
       </div>
       <div class="modal-action">
         <button class="btn flex grow">เลือกดูไอเทมอื่น</button>
