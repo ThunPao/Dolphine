@@ -17,7 +17,14 @@ const { id, href, title, buycount, point, description } = Astro.props;
     class="card bg-base-200 shadow-lg dark:hover:shadow-amber-500 hover:shadow-blue-500"
   >
     <button onclick=`{${"shopinfo_"+id}.showModal()};`>
-      <figure><img src={href} alt="Img" class="rounded-lg w-full" /></figure>
+      <div class="indicator">
+        <span
+          class="indicator-item indicator-top mt-5 indicator-center badge badge-secondary"
+          >สินค้าเข้าใหม่</span
+        >
+        <img src={href} alt="Img" class="rounded-lg w-full" />
+      </div>
+      <figure></figure>
       <div class="xs:flex sm:flex md:flex justify-between p-1">
         <div>
           <div class="badge badge-success font-bold text-lg py-4</div>">

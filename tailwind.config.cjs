@@ -12,7 +12,7 @@ module.exports = {
 			"light",
 			"dark",
 			// "cupcake",
-			// "bumblebee",
+			"bumblebee",
 			// "emerald",
 			// "corporate",
 			// "synthwave",
@@ -63,5 +63,5 @@ module.exports = {
 			},
 		  ],
 	  },
-	  darkMode: ['class', '[data-theme="dark"]']
+	  darkMode: ['class', '[data-theme="kpz"]']
 }

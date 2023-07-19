@@ -7,8 +7,7 @@
   import { onMount, tick } from "svelte";
   import Topup from "../components/topup.svelte";
 
-let logoimg = "images/dpbg.png";
-
+  let logoimg = "images/dpbg.png";
 
   onMount(async () => {
     await tick(); // Wait for the DOM to be fully updated
@@ -41,8 +40,8 @@ let logoimg = "images/dpbg.png";
         swapOnIcon.style.display = "block"; // Show 'swap-on' icon
         swapOffIcon.style.display = "none"; // Hide 'swap-off' icon
       } else {
-        mainElement.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark"); // Store theme preference in localStorage
+        mainElement.setAttribute("data-theme", "kpz");
+        localStorage.setItem("theme", "kpz"); // Store theme preference in localStorage
         swapOnIcon.style.display = "none"; // Hide 'swap-on' icon
         swapOffIcon.style.display = "block"; // Show 'swap-off' icon
       }
@@ -63,7 +62,8 @@ let logoimg = "images/dpbg.png";
     <a href="/" class="hover:scale-110">
       <div class="wrapper">
         <h1
-          class="border-s-8 stroke-slate-500 title text-3xl md:text-4xl font-bold " style="background-image: url('{logoimg}')"
+          class="border-s-8 stroke-slate-500 title text-3xl md:text-4xl font-bold"
+          style="background-image: url('{logoimg}')"
         >
           Dolphine
         </h1>

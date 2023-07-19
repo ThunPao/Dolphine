@@ -6,6 +6,7 @@
   export let did;
   export let title;
   export let point;
+  export let limits;
 
   let platform = "";
 
@@ -27,13 +28,16 @@
   });
 </script>
 
-<button
-  class="btn btn-primary hover:scale-105 text-lg"
-  onclick="{'buyi_' + did}.showModal();"
-  ><i class="fa-solid fa-dollar-sign" />
-  ซื้อเลย</button
->
-
+{#if limits > 0}
+  <button
+    class="btn btn-primary hover:scale-105 text-lg"
+    onclick="{'buyi_' + did}.showModal();"
+    ><i class="fa-solid fa-dollar-sign" />
+    ซื้อเลย</button
+  >
+{:else}
+  <button class="btn btn-warning hover:scale-105 text-lg"> สินค้าหมด</button>
+{/if}
 <dialog id={"buyi_" + did} class="modal modal-bottom sm:modal-middle">
   <form method="dialog" class="modal-box text-center">
     <h3 class="font-bold text-2xl text-cyan-400 dark:text-cyan-200">
