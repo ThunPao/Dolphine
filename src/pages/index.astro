@@ -11,8 +11,7 @@ import Blogs from "../sections/blogs.astro";
 // import Cheri from '../sections/cheri.svelte';
 import Intro from "../sections/intro.astro";
 import "../styles/base.scss";
-import '@sweetalert2/theme-borderless/borderless.scss';
-
+import "@sweetalert2/theme-borderless/borderless.scss";
 
 // import Apitest from '../sections/apitest.astro';
 ---
@@ -37,17 +36,19 @@ import '@sweetalert2/theme-borderless/borderless.scss';
     /></head
   >
 
-  <main data-theme="dark">
+  <main data-theme="kpz" class="bg-base-300">
     <!-- class="bg-gradient-to-r from-blue-200 via-sky-100 to-purple-200" -->
     <Navbar client:load />
     <Intro />
-    <div class="lg:container lg:mx-auto rounded-lg border-4 border-base-200">
+    <div
+      class="lg:container lg:mx-auto rounded-lg border-4 border-base-200 bg-base-100"
+    >
       <Slides />
       <Qsc />
       <Alerts />
       <!-- <Cheri client:load/> -->
       <Cards client:only="svelte" />
-      <!-- <SSRCards/>  -->
+      <!-- <SSRCards /> -->
       <!-- SSR Astro -->
       <Blogs />
     </div>

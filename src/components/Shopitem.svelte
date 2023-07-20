@@ -1,26 +1,50 @@
 <script>
-import Btncf from "./buyshopitem.svelte";
+  import Btncf from "./buyshopitem.svelte";
 
-export let id;
-export let title;
-export let href;
-export let buycount;
-export let point;
-export let description;
-
-
+  export let id;
+  export let title;
+  export let href;
+  export let buycount;
+  export let point;
+  export let limits;
+  export let description;
 </script>
 
 <div class="keen-slider__slide">
   <div
     class="card bg-base-200 shadow-lg dark:hover:shadow-amber-500 hover:shadow-blue-500"
   >
-    <button onclick="{'shopinfo_' + id}.showModal()"> 
-      <figure><img src={href} alt="Img" class="rounded-lg w-full" /></figure>
+    <button onclick="{'shopinfo_' + id}.showModal()">
+      <!-- <img src={href} alt="Img" class="rounded-lg w-full" /> -->
+
+      <div class="indicator w-full">
+        <span
+          class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 font-extrabold sm:text-lg md:text-xl"
+        >
+          {#if point > 0}
+            <p class="font-extrabold text-info">{point} DP</p>
+          {:else}
+            <p class="font-extrabold text-success">แจกฟรี</p>
+          {/if}
+        </span>
+
+        <div class="place-items-center w-full">
+          <figure>
+            <img src={href} alt="Img" class="rounded-lg w-full" />
+          </figure>
+        </div>
+      </div>
+
       <div class="xs:flex sm:flex md:flex justify-between p-1">
         <div>
-          <div class="badge badge-success font-bold text-lg py-4</div>">
-            สินค้าเข้าใหม่
+          <div class="badge badge-info font-bold text-md py-3">
+            {#if limits > 0}
+              คงเหลือ {limits}
+            {:else if limits < 0}
+              ไม่จำกัดการซื้อ
+            {:else if limits <= 0}
+              สินค้าหมด
+            {/if}
           </div>
         </div>
         <div>
@@ -30,8 +54,8 @@ export let description;
         </div>
       </div>
       <div class="card-body">
-        <h2 class="card-title">{title}</h2>
-        <p>{description}</p>
+        <h2 class="card-title text-center">{title}</h2>
+        <!-- <p>{description}</p> -->
       </div>
     </button>
   </div>
@@ -55,10 +79,10 @@ export let description;
         class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 font-extrabold sm:text-lg md:text-xl"
       >
         {#if point > 0}
-            <p class="font-extrabold text-info">{point} DP</p>
-          {:else}
-            <p class="font-extrabold text-success">แจกฟรี</p>
-          {/if}
+          <p class="font-extrabold text-info">{point} DP</p>
+        {:else}
+          <p class="font-extrabold text-success">แจกฟรี</p>
+        {/if}
       </span>
 
       <div class="place-items-center w-full">
@@ -83,11 +107,14 @@ export let description;
       <h2 class="card-title">{title}</h2>
       <p class="bg-base-200 rounded p-2">{description}</p>
 
-      <div class="flex justify-end gap-2 mt-4">
-        <Btncf did={id} title={title} point={point}/>
-        <button class="btn btn-secondary hover:scale-105 text-lg">
-          <i class="fa-solid fa-cart-shopping"></i>หยิบใส่ตระก้า</button
-        >
+      <div class="flex justify-center gap-2 mt-4">
+        <Btncf did={id} {title} {point} {limits} />
+
+        {#if limits > 0 || limits < 0}
+          <button class="btn btn-secondary hover:scale-105 text-lg">
+            <i class="fa-solid fa-cart-shopping" />หยิบใส่ตระก้า</button
+          >
+        {/if}
       </div>
       <div class="modal-action">
         <button class="btn flex grow">เลือกดูไอเทมอื่น</button>
@@ -95,6 +122,6 @@ export let description;
     </div>
   </form>
   <form method="dialog" class="modal-backdrop">
-    <button></button>
+    <button />
   </form>
 </dialog>

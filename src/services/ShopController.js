@@ -22,32 +22,34 @@ export let shopitems = writable(null);
       },
 
     });
-    if (response.ok) {
-        const data = await response.json();
-        handleLoadinfo();
-        getshopitems();
-        // location.reload();
-        toastr.success(
-            ""+ data.message,
-            "สำเร็จ!",
-             {
-              timeOut: 5000,
-              positionClass: "toast-bottom-center",
-              newestOnTop: true,
-              progressBar: true,
-            }
-          );
+    if (!response.ok) {
+      const data = await response.json();
+        
+      toastr.warning(
+          ""+ data.message,
+          "ซื้อสินค้าไม่สำเร็จ!",
+          {
+            timeOut: 3000,
+            positionClass: "toast-bottom-center",
+            newestOnTop: true,
+            progressBar: true,
+          }
+        );
       } else {
-        toastr.warning(
-            ""+ data.message,
-            "ซื้อสินค้าไม่สำเร็จ!",
-            {
-              timeOut: 5000,
-              positionClass: "toast-bottom-center",
-              newestOnTop: true,
-              progressBar: true,
-            }
-          );
+          const data = await response.json();
+          handleLoadinfo();
+          getshopitems();
+          // location.reload();
+          toastr.success(
+              ""+ data.message,
+              "สำเร็จ!",
+               {
+                timeOut: 3000,
+                positionClass: "toast-bottom-center",
+                newestOnTop: true,
+                progressBar: true,
+              }
+            );
       }
   }
 

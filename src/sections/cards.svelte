@@ -1,7 +1,7 @@
 <script>
   const cardimg = "https://via.placeholder.com/300x250";
   import Shopcard from "../components/Shopitem.svelte";
-  import { getshopitems,shopitems } from "../services/ShopController";
+  import { getshopitems, shopitems } from "../services/ShopController";
   import Tabs from "../components/Tabs.svelte";
   // import "../services/Sliders";
   import { onMount, tick, afterUpdate } from "svelte";
@@ -9,7 +9,7 @@
   import "keen-slider/keen-slider.min.css";
 
   let slider;
-  let searchQuery = '';
+  let searchQuery = "";
 
   onMount(async () => {
     getshopitems();
@@ -18,28 +18,30 @@
   function filterShopItems(item) {
     return item.name.toLowerCase().includes(searchQuery.toLowerCase());
   }
+  function gofinditem() {
+    shopitems.update((items) => items);
+  }
 
   afterUpdate(() => {
     if ($shopitems !== null && $shopitems.length > 0) {
-    slider = new KeenSlider("#shopitem-slides", {
-      breakpoints: {
-        "(min-width: 400px)": {
-          slides: { perView: 2, spacing: 5 },
+      slider = new KeenSlider("#shopitem-slides", {
+        breakpoints: {
+          "(min-width: 400px)": {
+            slides: { perView: 2, spacing: 5 },
+          },
+          "(min-width: 768px)": {
+            slides: { perView: 3, spacing: 10 },
+          },
+          "(min-width: 1000px)": {
+            slides: { perView: 4, spacing: 10 },
+          },
         },
-        "(min-width: 768px)": {
-          slides: { perView: 3, spacing: 10 },
+        slides: {
+          perView: 1,
+          spacing: 15,
         },
-        "(min-width: 1000px)": {
-          slides: { perView: 4, spacing: 10 },
-        },
-      },
-      slides: {
-        perView: 1,
-        spacing: 15,
-      },
-    });
+      });
     }
-    shopitems.update(items => items);
   });
 </script>
 
@@ -56,21 +58,21 @@
         <!-- Slides -->
         <!-- {shopitems.map((data: any) => -->
         {#if $shopitems !== null}
-        {#if $shopitems.length > 0}
-          <!-- {#each $shopitems as data} -->
-          {#each $shopitems.slice(0, 10) as data}
-
-            <Shopcard
-              id={data.id}
-              title={data.name}
-              href={cardimg}
-              buycount={data.buycount}
-              point={data.point}
-              description={data.description}
-            />
-          {/each}
+          {#if $shopitems.length > 0}
+            <!-- {#each $shopitems as data} -->
+            {#each $shopitems.slice(0, 10) as data}
+              <Shopcard
+                id={data.id}
+                title={data.name}
+                href={cardimg}
+                buycount={data.buycount}
+                point={data.point}
+                limits={data.limits}
+                description={data.description}
+              />
+            {/each}
           {/if}
-          {:else}
+        {:else}
           LOADING ...
         {/if}
 
@@ -92,7 +94,12 @@
   <div class="join">
     <div>
       <div>
-        <input class="input input-bordered join-item" placeholder="Search..." bind:value={searchQuery} />
+        <input
+          class="input input-bordered join-item"
+          placeholder="Search..."
+          bind:value={searchQuery}
+          on:keyup={gofinditem}
+        />
       </div>
     </div>
     <select class="select select-bordered join-item">
@@ -107,29 +114,31 @@
 <div class="grid gap-2 p-1">
   {#if $shopitems !== null && $shopitems.length > 0}
     {#each $shopitems.filter(filterShopItems).slice(0, 5) as data}
-    <div class="card card-side bg-base-100 shadow-xl">
-      <figure><img src={cardimg} alt="Movie" /></figure>
-      <div class="card-body">
-        <h2 class="card-title">{data.name}</h2>
-        <p>{data.point}</p>
-    
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary">ซื้อไอเทม</button>
+      <div class="card card-side bg-base-100 shadow-xl">
+        <figure><img src={cardimg} alt="Movie" /></figure>
+        <div class="card-body">
+          <h2 class="card-title">{data.name}</h2>
+          <p>{data.point}</p>
+
+          <div class="card-actions justify-end">
+            <button
+              onclick="{'shopinfo_' + data.id}.showModal()"
+              class="btn btn-primary">ซื้อไอเทม</button
+            >
+          </div>
         </div>
       </div>
-    </div>
     {/each}
     {#if $shopitems.filter(filterShopItems).length === 0}
-    <div class="mockup-window border border-base-300">
-      <div class="flex justify-center px-4 py-16 border-t border-base-300 text-4xl">ไม่พบไอเทม</div>
-    </div>
+      <div class="mockup-window border border-base-300">
+        <div
+          class="flex justify-center px-4 py-16 border-t border-base-300 text-4xl"
+        >
+          ไม่พบไอเทม
+        </div>
+      </div>
     {/if}
   {:else}
     <p>No shop items found.</p>
   {/if}
 </div>
-
-
-
-
-
