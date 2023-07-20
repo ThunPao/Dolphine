@@ -37,11 +37,13 @@
 
       <div class="xs:flex sm:flex md:flex justify-between p-1">
         <div>
-          <div class="badge badge-success font-bold text-md py-3">
-            {#if limits <= 0}
-              สินค้าหมด
-            {:else}
+          <div class="badge badge-info font-bold text-md py-3">
+            {#if limits > 0}
               คงเหลือ {limits}
+            {:else if limits < 0}
+              ไม่จำกัดการซื้อ
+            {:else if limits <= 0}
+              สินค้าหมด
             {/if}
           </div>
         </div>
@@ -107,7 +109,8 @@
 
       <div class="flex justify-center gap-2 mt-4">
         <Btncf did={id} {title} {point} {limits} />
-        {#if limits > 0}
+
+        {#if limits > 0 || limits < 0}
           <button class="btn btn-secondary hover:scale-105 text-lg">
             <i class="fa-solid fa-cart-shopping" />หยิบใส่ตระก้า</button
           >
