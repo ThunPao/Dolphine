@@ -76,7 +76,7 @@
         >{buycount} ซื้อแล้ว</span
       > -->
       <span
-        class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 font-extrabold sm:text-lg md:text-xl"
+        class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-200 font-extrabold sm:text-lg md:text-xl"
       >
         {#if point > 0}
           <p class="font-extrabold text-info">{point} DP</p>

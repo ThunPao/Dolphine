@@ -44,25 +44,25 @@
     <h3 class="font-bold text-2xl text-cyan-400 dark:text-cyan-200">
       ยืนยันการซื้อ
     </h3>
-    <h4>
-      DP คงเหลือ หลังจากซื้อ :
+    <p class="py-4 dark:text-yellow-200 text-cyan-950 text-xl font-medium">
+      ซื้อ
+      <span class="dark:text-white text-black font-bold">{title}</span><br />
+      ในราคา
+      <span class="dark:text-white text-black font-bold text-lg"
+        >{point} DP</span
+      > <br />ตอนนี้เลยหรือไม่?
+    </p>
+    <h4 class="badge badge-base-200 p-3">
+      DP คงเหลือ หลังจากซื้อ :&nbsp;
       <span
         class="font-bold {$currentuser?.points - point >= 0
-          ? 'text-amber-200'
+          ? 'text-amber-400'
           : 'text-red-500 animate-pulse'}"
         >{$currentuser?.points - point >= 0
           ? $currentuser?.points - point
           : "ไม่พอ"}</span
       >
     </h4>
-    <p class="py-4 dark:text-yellow-200 text-cyan-950 text-xl font-medium">
-      ซื้อ <span class="dark:text-white text-black font-bold">{title}</span>
-      ในราคา
-      <span class="dark:text-white text-black font-bold text-lg"
-        >{point} DP</span
-      > <br />ตอนนี้เลยหรือไม่?
-    </p>
-
     <div class="modal-action justify-center">
       {#if $currentuser}
         <button

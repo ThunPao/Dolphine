@@ -53,9 +53,7 @@
           bind:value={$password}
         />
 
-        <button class="btn btn-accent" on:click={handleLogin}
-          >เข้าสู่ระบบ</button
-        >
+        <button class="btn btn-info" on:click={handleLogin}>เข้าสู่ระบบ</button>
         <p class="mt-2">ยังไม่ได้สมัคร?</p>
         <button
           class="font-bold dark:text-amber-100 text-secondary text-lg"
