@@ -10,9 +10,9 @@
   export let description;
 </script>
 
-<div class="keen-slider__slide">
+<div class="keen-slider__slide px-1 pb-1">
   <div
-    class="card bg-base-200 shadow-lg dark:hover:shadow-amber-500 hover:shadow-blue-500"
+    class="card bg-base-200 shadow-md dark:hover:shadow-amber-500 hover:shadow-blue-500"
   >
     <button onclick="{'shopinfo_' + id}.showModal()">
       <!-- <img src={href} alt="Img" class="rounded-lg w-full" /> -->
@@ -63,7 +63,7 @@
 <dialog id={"shopinfo_" + id} class="modal">
   <form
     method="dialog"
-    class="modal-box shadow-lg dark:shadow-amber-300 shadow-blue-300"
+    class="modal-box shadow-md dark:shadow-amber-300 shadow-blue-300"
   >
     <h3 class="font-bold text-lg">รายละเอียดสินค้า</h3>
     <div class="indicator w-full">

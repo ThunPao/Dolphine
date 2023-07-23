@@ -52,14 +52,14 @@
       <!-- <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" > -->
 
       <!-- Slider main container -->
-      <div id="shopitem-slides" class="keen-slider">
+      <div id="shopitem-slides" class="keen-slider ">
         <!-- Additional required wrapper -->
 
         <!-- Slides -->
         <!-- {shopitems.map((data: any) => -->
+
         {#if $shopitems !== null}
           {#if $shopitems.length > 0}
-            <!-- {#each $shopitems as data} -->
             {#each $shopitems.slice(0, 10) as data}
               <Shopcard
                 id={data.id}
