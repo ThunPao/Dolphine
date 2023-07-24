@@ -9,10 +9,11 @@ module.exports = {
 	plugins: [require("daisyui")],
 	daisyui: {
 		themes: [
+			
 			"light",
 			"dark",
 			// "cupcake",
-			"bumblebee",
+			// "bumblebee",
 			// "emerald",
 			// "corporate",
 			// "synthwave",
@@ -48,7 +49,7 @@ module.exports = {
 							 
 					"accent": "#fca5a5",
 							 
-					"neutral": "#6b7280",
+					"neutral": "#2a323c",
 							 
 					"base-100": "#1f2937",
 							 
@@ -59,8 +60,20 @@ module.exports = {
 					"warning": "#fbbf24",
 							 
 					"error": "#e11d48",
+
+					".modal-box": {
+						"color": "#FFFFFF",
+					  },
+					  ".btn-success": {
+						"color": "#FFFFFF",
+					  },
+					// ".hero-overlay": {
+					// 	"background-color": "hsl(208, 15%, 24% / var(--tw-bg-opacity))",
+
+					// }
 							 },
 			},
+
 		  ],
 	  },
 	  darkMode: ['class', '[data-theme="kpz"]']

@@ -4,6 +4,7 @@ import {blogsvip,getblogsvip,getblogdataplayer,blogdata_p} from "./Blogdatas";
 import Swal from 'sweetalert2';
 import jwt_decode from 'jwt-decode';
 import {apiurl} from "../services/apiurl";
+import {shopitems} from "../services/ShopController";
 
 
 
@@ -41,24 +42,6 @@ export let currentuser = writable(null);
     //   console.log(p[0]);
     // });
 
-async function getPlayerInfoold(token) {
-  const url = apiurl+'playerinfo';
-  
-  const response = await fetch(url, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  });
-  if (response.ok) {
-    const data = await response.json();
-    currentuser.set(data[0]);
-    return data;
-  } else {
-    currentuser.set(null);
-    tokencheck.set(null);
-    console.log("You are not authorized to access");
-  }
-}
 
 export async function getPlayerInfo(token) {
   const url = apiurl+'playerinfo';
@@ -96,7 +79,7 @@ export async function getPlayerInfo(token) {
 
   if (response.ok) {
     const data = await response.json();
-    currentuser.set(data[0]);
+    currentuser.set(data);
     return data;
   } else {
     if(token){
@@ -149,18 +132,42 @@ regpwdcf.set('');
 }
 export async function handleLoadinfo(){
   const data = await getPlayerInfo(token);
-  currentuser.set(data[0]);
-  if(data[0].p_role > 1){
+  currentuser.set(data);
+  if(data.p_role > 1){
     getblogsvip(token);
   }
 }
+
+
+export function updateplayerinfo(id) {
+
+  // Subscribe to the 'shopitems' store to get the actual array data
+  let shopItemsData;
+  const unsubscribe = shopitems.subscribe(value => {
+    shopItemsData = value;
+  });
+
+  // Find the item with the provided id from the shop items data
+  const selectedItem = shopItemsData.find(item => item.id === id);
+
+  if (selectedItem) {
+    // Calculate the new point for the current user by decreasing the point based on the selected item
+    const newPoint = currentuser.point - selectedItem.point;
+    // Update the point of the current user in the currentuser store
+    currentuser.update(user => ({ ...user, point: newPoint }));
+
+    // Unsubscribe from the 'shopitems' store to avoid memory leaks
+    unsubscribe();
+  }
+}
+
 
 export async function logout() {
   password.set('');
     const response = await fetch(apiurl+"logout", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, // Include the authentication bearer token
       },
     });
@@ -214,8 +221,9 @@ if(currentuser?.p_role > 1){
       // Display an info toast with no title
       if (reglogin){
         reglogin = false
-        reguser = '';
-        regpwd = '';
+        reguser.set('');
+regpwd.set('');
+regpwdcf.set('');
       } 
 
       toastr.success(

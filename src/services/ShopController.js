@@ -1,6 +1,6 @@
 import toastr from "toastr";
 import { writable } from "svelte/store";
-import { token,handleLoadinfo } from "../services/Authen";
+import { token,handleLoadinfo,updateplayerinfo } from "../services/Authen";
 import {apiurl} from "../services/apiurl";
 
 export let shopitems = writable(null);
@@ -17,13 +17,14 @@ export let shopitems = writable(null);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json', if body using this
         'Authorization': `Bearer ${token}`
       },
 
     });
     if (!response.ok) {
       const data = await response.json();
+      console.log(data.message);
         
       toastr.warning(
           ""+ data.message,
@@ -37,8 +38,10 @@ export let shopitems = writable(null);
         );
       } else {
           const data = await response.json();
-          handleLoadinfo();
-          getshopitems();
+          // handleLoadinfo();
+          updateplayerinfo(id);
+          // getshopitems();
+          updateShopItem(id);
           // location.reload();
           toastr.success(
               ""+ data.message,
@@ -52,6 +55,21 @@ export let shopitems = writable(null);
             );
       }
   }
+
+  function updateShopItem(id) {
+    shopitems.update(items => {
+      const updatedItems = items.map(item => {
+        if (item.id === id) {
+          const newBuyCount = item.buycount + 1; // Increase buycount by 1
+          const newLimits = item.limits - 1; // Decrease limits by 1
+          return { ...item, buycount: newBuyCount, limits: newLimits };
+        }
+        return item;
+      });
+      return updatedItems;
+    });
+  }
+
 
   export async function getshopitems() {
     try {
