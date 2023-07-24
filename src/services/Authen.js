@@ -140,24 +140,33 @@ export async function handleLoadinfo(){
 
 
 export function updateplayerinfo(id) {
-
-  // Subscribe to the 'shopitems' store to get the actual array data
-  let shopItemsData;
-  const unsubscribe = shopitems.subscribe(value => {
-    shopItemsData = value;
+  // Subscribe to the 'currentuser' store to get the actual user data
+  let currentUserData;
+  const unsubscribeUser = currentuser.subscribe(value => {
+    currentUserData = value;
+  });
+  let currentshopData;
+  const unsubscribeShop = shopitems.subscribe(value => {
+    currentshopData = value;
   });
 
-  // Find the item with the provided id from the shop items data
+
+  // Access the current value of the 'shopitems' store
+  const shopItemsData = currentshopData;
+
+  // Find the item with the provided id from the current 'shopitems' data
   const selectedItem = shopItemsData.find(item => item.id === id);
 
-  if (selectedItem) {
+  if (selectedItem && currentUserData) {
     // Calculate the new point for the current user by decreasing the point based on the selected item
-    const newPoint = currentuser.point - selectedItem.point;
-    // Update the point of the current user in the currentuser store
-    currentuser.update(user => ({ ...user, point: newPoint }));
+    const newPoint = currentUserData.points - selectedItem.point;
 
-    // Unsubscribe from the 'shopitems' store to avoid memory leaks
-    unsubscribe();
+    // Update the point of the current user in the 'currentuser' store
+    currentuser.update(user => ({ ...user, points: newPoint }));
+
+    // Unsubscribe from the 'currentuser' store to avoid memory leaks
+    unsubscribeUser();
+    unsubscribeShop();
   }
 }
 

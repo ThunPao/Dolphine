@@ -23,6 +23,9 @@ export let shopitems = writable(null);
 
     });
     if (!response.ok) {
+      if(response.status === 404){
+        getshopitems();
+  }
       const data = await response.json();
       console.log(data.message);
         
@@ -40,7 +43,6 @@ export let shopitems = writable(null);
           const data = await response.json();
           // handleLoadinfo();
           updateplayerinfo(id);
-          // getshopitems();
           updateShopItem(id);
           // location.reload();
           toastr.success(
