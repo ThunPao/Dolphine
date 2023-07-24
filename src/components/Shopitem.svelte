@@ -36,16 +36,20 @@
       </div>
 
       <div class="xs:flex sm:flex md:flex justify-between p-1">
-        <div>
-          <div class="badge badge-info font-bold text-md py-3">
-            {#if limits > 0}
+        <div class="font-bold text-md">
+          {#if limits > 0}
+            <div
+              class="badge badge-warning py-3 {limits <= 10
+                ? 'animate-pulse'
+                : ''}"
+            >
               คงเหลือ {limits}
-            {:else if limits < 0}
-              ไม่จำกัดการซื้อ
-            {:else if limits <= 0}
-              สินค้าหมด
-            {/if}
-          </div>
+            </div>
+          {:else if limits < 0}
+            <div class="badge badge-info py-3">ไม่จำกัดการซื้อ</div>
+          {:else if limits <= 0}
+            <div class="badge badge-error py-3">สินค้าหมด</div>
+          {/if}
         </div>
         <div>
           <div class="badge badge-primary font-bold text-lg py-4">
@@ -110,11 +114,11 @@
       <div class="flex justify-center gap-2 mt-4">
         <Btncf did={id} {title} {point} {limits} />
 
-        {#if limits > 0 || limits < 0}
+        <!-- {#if limits > 0 || limits < 0}
           <button class="btn btn-secondary hover:scale-105 text-lg">
             <i class="fa-solid fa-cart-shopping" />หยิบใส่ตระก้า</button
           >
-        {/if}
+        {/if} -->
       </div>
       <div class="modal-action">
         <button class="btn flex grow">เลือกดูไอเทมอื่น</button>
