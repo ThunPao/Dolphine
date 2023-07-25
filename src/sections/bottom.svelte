@@ -2,8 +2,21 @@
   import Profile from "../components/profileinfo.svelte";
   import Fastmenu from "../components/fastmenu.svelte";
   import { setCookie, getCookie } from "../services/cookies.js";
+  import { writable } from "svelte/store";
 
-  const terms = getCookie("terms");
+  // const terms = getCookie("terms");
+
+  let isTerms = writable(getCookie("terms"));
+
+  function setterms_Cookie(data) {
+    if (data) {
+      isTerms.set("true");
+      setCookie("terms", "true", 1);
+    } else {
+      isTerms.set(null);
+      setCookie("terms", "false", 1);
+    }
+  }
 </script>
 
 <div class="mt-20" />
@@ -104,7 +117,8 @@
   </div>
 </footer>
 <Fastmenu />
-{#if terms != "true"}
+
+{#if !$isTerms}
   <div class="alert sticky bottom-28 md:bottom-0">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -120,10 +134,12 @@
     >
     <span>we use cookies for no reason.</span>
     <div>
-      <button class="btn btn-sm">Deny</button>
+      <!-- <button class="btn btn-sm" on:click={cookieaccept(false)}>Deny</button> -->
       <button
         class="btn btn-sm btn-primary"
-        on:click={setCookie("terms", "true", 1)}>Accept</button
+        on:click={() => {
+          setterms_Cookie(true);
+        }}>Accept</button
       >
     </div>
   </div>
@@ -141,12 +157,14 @@
         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
       /></svg
     >
-    <span> You're {terms}?</span>
+    <span> You're {$isTerms}?</span>
     <div>
-      <button class="btn btn-sm" on:click={setCookie("terms", "false", 1)}
-        >Deny</button
+      <button
+        class="btn btn-sm"
+        on:click={() => {
+          setterms_Cookie(false);
+        }}>Deny</button
       >
-      <button class="btn btn-sm btn-primary">Accept</button>
     </div>
   </div>
 {/if}
