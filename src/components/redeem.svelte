@@ -13,14 +13,14 @@
     <div class="p-3">
       <input
         type="text"
-        id="voucherurl"
+        id="redeemcode"
         placeholder="รหัสแลกรับ"
         class="input input-bordered w-full max-w-xs"
         bind:value={$inputValue}
         on:input={(event) => ($inputValue = event.target.value)}
       />
       <div class="justify-center p-3">
-        {#if $inputValue.length >= 16}
+        {#if $inputValue.length >= 1}
           <button class="btn btn-success text-2xl text-white" on:click={redeem}>
             ยืนยันการกรอกโค๊ด
           </button>

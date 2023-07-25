@@ -38,5 +38,37 @@ export async function topup(){
       }
 }
 export async function redeem(){
+  Swal.fire({
+    title: 'กำลังรับข้อมูล กรุณารอสักครู่...',
+    icon: 'info',
+    timer: 10000,
+    timerProgressBar: true,
+  })
+const redeemcode = document.getElementById("redeemcode").value;
+const response = await fetch(apiurl+"redeem", {
+  method: "POST",
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ code: redeemcode }),
+  });
+  const data = await response.json();
+  if (response.ok) {
+    handleLoadinfo();
+    Swal.fire({
+        title: data.message,
+        icon: 'success',
+        timer: 5000,
+        timerProgressBar: true,
+      })
+  } else {
 
+    Swal.fire({
+        title: data.error,
+        icon: 'error',
+        timer: 5000,
+        timerProgressBar: true,
+      })
+  }
 }

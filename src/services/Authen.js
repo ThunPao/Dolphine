@@ -44,6 +44,8 @@ export let currentuser = writable(null);
 
 
 export async function getPlayerInfo(token) {
+  if(token){
+try {
   const url = apiurl+'playerinfo';
 
   // Check if the token is expired
@@ -61,7 +63,7 @@ export async function getPlayerInfo(token) {
     // Token is expired, refresh the page
 
   if (isTokenExpired()) {
-    location.reload();
+    // location.reload();
     Swal.fire({
       title: 'TOKEN EXPIRED!',
       icon: 'error',
@@ -86,7 +88,7 @@ export async function getPlayerInfo(token) {
       token = null;
       localStorage.removeItem("token");
     tokencheck.set(null);
-    location.reload();
+    // location.reload();
     }
     if(currentuser){
       currentuser.set(null);
@@ -95,6 +97,10 @@ export async function getPlayerInfo(token) {
     // handleLogout();
     console.log("You are not authorized to access");
   }
+} catch (error) {
+  console.error("Error:", error.message);
+}
+}
 }
 
 

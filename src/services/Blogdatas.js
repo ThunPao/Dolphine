@@ -19,7 +19,11 @@ export async function getblogdata() {
     console.error(error);
   }
 }
+
+  
+
 export async function getblogsvip(datatoken) {
+  if(token){
     try {
       const response = await fetch(apiurl + "blogvip", {
     headers: {
@@ -41,9 +45,11 @@ export async function getblogsvip(datatoken) {
       // console.error(error);
     }
   }
+  }
 
 
   export async function getblogdataplayer(token) {
+    if(token){
     try {
     // let currentid = $currentuser != null ? $currentuser[0].id : '';
       const response = await fetch(apiurl + "blogdatap", {
@@ -62,21 +68,13 @@ export async function getblogsvip(datatoken) {
     } catch (error) {
       console.error(error);
     }
-  }
-
-  if(token){
-    getblogdataplayer(token);
-
-
-
-
-
-      
   }else{
     blogsvip.set(null);
     blogdata_p.set(null);
-    // console.log("NULL TOKEN")
   }
+  }
+
+
 
   export async function toggleFavorite(blogId) {
     try {
