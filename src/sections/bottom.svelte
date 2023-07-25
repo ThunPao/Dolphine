@@ -1,7 +1,7 @@
 <script>
   import Profile from "../components/profileinfo.svelte";
   import Fastmenu from "../components/fastmenu.svelte";
-  import { setCookie, getCookie } from "../services/cookies.js";
+  import { setCookie, getCookie, clearCookie } from "../services/cookies.js";
   import { writable } from "svelte/store";
 
   // const terms = getCookie("terms");
@@ -14,7 +14,7 @@
       setCookie("terms", "true", 1);
     } else {
       isTerms.set(null);
-      setCookie("terms", "false", 1);
+      clearCookie("terms");
     }
   }
 </script>
@@ -157,13 +157,13 @@
         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
       /></svg
     >
-    <span> You're {$isTerms}?</span>
+    <span> Cookie terms = {$isTerms}?</span>
     <div>
       <button
         class="btn btn-sm"
         on:click={() => {
           setterms_Cookie(false);
-        }}>Deny</button
+        }}>Clear Cookie</button
       >
     </div>
   </div>

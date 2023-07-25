@@ -22,6 +22,19 @@ export function setCookie(name, value, daysToExpire) {
     }
     return "";
   }
+  // Function to clear a cookie by name
+  export function clearCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  }
+
+  // Function to clear all cookies
+function clearAllCookies() {
+    const cookies = document.cookie.split("; ");
+    for (const cookie of cookies) {
+      const [name] = cookie.split("=");
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    }
+  }
   
   // Example usage
 //   document.getElementById("set-cookie").addEventListener("click", function() {

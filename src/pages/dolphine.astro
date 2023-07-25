@@ -9,8 +9,8 @@ import Btm from "../sections/bottom.svelte";
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Dolphine</title> 
-    <link rel="icon" type="image/png" href="images/DPicon.png">
+    <title>Dolphine</title>
+    <link rel="icon" type="image/png" href="images/DPicon.png" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link
@@ -29,7 +29,8 @@ import Btm from "../sections/bottom.svelte";
     <Navbar client:load />
 
     <DPSection client:load />
-    <Btm client:load/>
+    <Btm client:only />
   </main>
+
 
 </html>
