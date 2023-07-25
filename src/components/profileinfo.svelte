@@ -2,7 +2,6 @@
   export let mobile;
   import { logout, tokencheck, currentuser } from "../services/Authen";
   import { clearinput } from "../services/fieldcontrol";
-
 </script>
 
 {#if mobile === "true"}
@@ -64,15 +63,23 @@
       </li>
       <li>
         <button
-            onclick="topup.showModal()" on:click={clearinput}
-            class="hover:text-sky-400 hover:font-bold text-lg"
-            ><i class="fa-solid fa-wallet" /> เติมเงิน</button
-          >
+          onclick="topup.showModal()"
+          on:click={clearinput}
+          class="hover:text-sky-400 hover:font-bold text-lg"
+          ><i class="fa-solid fa-wallet" /> เติมเงิน</button
+        >
       </li>
-
+      <li>
+        <button
+          onclick="redeem.showModal()"
+          on:click={clearinput}
+          class="hover:text-sky-400 hover:font-bold text-lg"
+          ><i class="fa-solid fa-barcode" /> กรอกโค๊ด</button
+        >
+      </li>
       <li>
         <a href="/dolphine" class="hover:text-sky-400 hover:font-bold text-lg"
-          >Dolphine Blogs</a
+          ><i class="fa-regular fa-user" />Dolphine Blogs</a
         >
       </li>
       <li>
@@ -91,6 +98,5 @@
         {/if}
       </li>
     </ul>
-
   </details>
 {/if}

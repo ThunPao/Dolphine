@@ -6,6 +6,7 @@
   import { gsap } from "gsap";
   import { onMount, tick } from "svelte";
   import Topup from "../components/topup.svelte";
+  import Redeem from "../components/redeem.svelte";
 
   let logoimg = "images/dpbg.png";
 
@@ -52,6 +53,7 @@
 <FormAuth />
 <FormReg />
 <Topup />
+<Redeem />
 
 <div
   class="navbar backdrop-blur-sm backdrop-opacity-50 fixed z-50 bg-opacity-50 md:hover:bg-opacity-90 bg-gradient-to-b from-slate-200 dark:from-slate-800 from-0%"
