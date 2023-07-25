@@ -2,6 +2,7 @@
   import { redeem } from "../services/topup.js";
   import { inputValue } from "../services/fieldcontrol.js";
   inputValue.set("");
+  const redeemCodeRegex = /^[A-Za-z0-9]+$/;
 </script>
 
 <dialog id="redeem" class="modal modal-bottom sm:modal-middle">
@@ -20,19 +21,23 @@
         on:input={(event) => ($inputValue = event.target.value)}
       />
       <div class="justify-center p-3">
-        {#if $inputValue.length >= 1}
-          <button class="btn btn-success text-2xl text-white" on:click={redeem}>
+        {#if redeemCodeRegex.test($inputValue) && $inputValue.length > 1}
+          <button
+            title="คลิก"
+            class="btn btn-success text-2xl text-white"
+            on:click={redeem}
+          >
             ยืนยันการกรอกโค๊ด
           </button>
         {:else}
-          <button class="btn btn-disabled text-lg text-red-300">
+          <button title="คลิก" class="btn btn-disabled text-lg text-red-300">
             กรอกโค๊ดรหัสแลกรับให้ถูกต้อง
           </button>
         {/if}
       </div>
     </div>
     <div class="modal-action">
-      <button class="btn flex grow">ปิดหน้าต่างนี้</button>
+      <button title="คลิก" class="btn flex grow">ปิดหน้าต่างนี้</button>
     </div>
   </form>
 </dialog>

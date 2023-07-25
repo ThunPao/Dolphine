@@ -21,18 +21,22 @@
       />
       <div class="justify-center p-3">
         {#if $inputValue.includes("https://gift.truemoney.com")}
-          <button class="btn btn-success text-2xl text-white" on:click={topup}>
+          <button
+            title="คลิก"
+            class="btn btn-success text-2xl text-white"
+            on:click={topup}
+          >
             ยืนยันการเติมเงิน
           </button>
         {:else}
-          <button class="btn btn-disabled text-lg text-red-300">
+          <button title="คลิก" class="btn btn-disabled text-lg text-red-300">
             กรอกลิงก์ซองของขวัญให้ถูกต้อง
           </button>
         {/if}
       </div>
     </div>
     <div class="modal-action">
-      <button class="btn flex grow">ปิดหน้าต่างนี้</button>
+      <button title="คลิก" class="btn flex grow">ปิดหน้าต่างนี้</button>
     </div>
   </form>
 </dialog>

@@ -10,6 +10,9 @@ export async function getblogdata() {
   try {
     const response = await fetch(apiurl + "blogdata");
     if (!response.ok) {
+      if(response.status === 429) {
+        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+      }
       throw new Error("Request failed");
     }
     const responseData = await response.json();
@@ -74,6 +77,9 @@ export async function getblogsvip(datatoken) {
   }
   }
 
+  if(token){
+    getblogdataplayer(token);
+  }
 
 
   export async function toggleFavorite(blogId) {

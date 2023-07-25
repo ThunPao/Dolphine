@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
-import {apiurl} from '../services/apiurl';
-import Swal from 'sweetalert2'
+  import { apiurl } from "../services/apiurl";
+  import Swal from "sweetalert2";
   import {
     blogsvip,
     getblogdata,
@@ -16,24 +16,21 @@ import Swal from 'sweetalert2'
   let sub = false;
   let cooldown = false;
 
-
   function togglesub() {
     if (!cooldown) {
-      if($blogsvip !== null){
+      if ($blogsvip !== null) {
         sub = !sub;
-      cooldown = true;
-      blogvipstate = !blogvipstate;
-      setTimeout(() => {
-        cooldown = false;
-      }, 500); // 0.5 seconds cooldown
-      }else{
+        cooldown = true;
+        blogvipstate = !blogvipstate;
+        setTimeout(() => {
+          cooldown = false;
+        }, 500); // 0.5 seconds cooldown
+      } else {
         Swal.fire({
-      title: 'เข้าถึงได้เฉพาะสมาชิกระดับ VIP ขึ้นไป',
-      icon: 'info',
-    })
+          title: "เข้าถึงได้เฉพาะสมาชิกระดับ VIP ขึ้นไป",
+          icon: "info",
+        });
       }
-
-
     }
   }
 
@@ -79,6 +76,7 @@ import Swal from 'sweetalert2'
             class="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
           >
             <button
+              title="คลิก"
               on:click={() => {
                 togglesub();
               }}
@@ -100,7 +98,7 @@ import Swal from 'sweetalert2'
     </div>
 
     <div class="card-actions justify-end">
-      <button class="hidden btn btn-secondary text-xl">
+      <button title="คลิก" class="hidden btn btn-secondary text-xl">
         <i class="fa-solid fa-crown" />
         VIP Available</button
       >
@@ -126,11 +124,12 @@ import Swal from 'sweetalert2'
             </div>
 
             <button
+              title="คลิก"
               on:click={() => {
                 $currentuser ? toggleFavorite(data.id) : notlogin();
               }}
             >
-              <button>
+              <button title="คลิก">
                 <img
                   class="rounded-t-lg w-full"
                   src={data.img_cover}
@@ -145,6 +144,7 @@ import Swal from 'sweetalert2'
                 {/if}
                 {#if $blogdata_p !== null && $blogdata_p.length > 0}
                   <button
+                    title="คลิก"
                     on:click={() => {
                       $currentuser ? toggleFavorite(data.id) : notlogin();
                     }}
@@ -164,7 +164,7 @@ import Swal from 'sweetalert2'
                     />
                   </button>
                 {:else}
-                  <button on:click={notlogin} class="text-2xl">
+                  <button title="คลิก" on:click={notlogin} class="text-2xl">
                     <i class="fa-regular fa-heart active:animate-ping" />
                   </button>
                 {/if}
@@ -187,11 +187,12 @@ import Swal from 'sweetalert2'
             </div>
 
             <button
+              title="คลิก"
               on:click={() => {
                 $currentuser ? toggleFavorite(data.id) : notlogin();
               }}
             >
-              <button>
+              <button title="คลิก">
                 <img
                   class="rounded-t-lg w-full"
                   src={data.img_cover}
@@ -207,6 +208,7 @@ import Swal from 'sweetalert2'
 
                 {#if $blogdata_p !== null && $blogdata_p.length > 0}
                   <button
+                    title="คลิก"
                     on:click={() => {
                       $currentuser ? toggleFavorite(data.id) : notlogin();
                     }}
@@ -226,7 +228,7 @@ import Swal from 'sweetalert2'
                     />
                   </button>
                 {:else}
-                  <button on:click={notlogin} class="text-2xl">
+                  <button title="คลิก" on:click={notlogin} class="text-2xl">
                     <i class="fa-regular fa-heart active:animate-ping" />
                   </button>
                 {/if}

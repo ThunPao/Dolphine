@@ -30,7 +30,11 @@
       <div class="indicator">
         <!-- <span class="indicator-item badge badge-primary">new</span> -->
         <div class="grid w-32 h-32 bg-base-300 place-items-center">
-          <button onclick="topup.showModal()" on:click={clearinput}>
+          <button
+            title="คลิก"
+            onclick="topup.showModal()"
+            on:click={clearinput}
+          >
             <div class="grid grid-rows-2 text-center">
               <i class="fa-solid fa-wallet fa-2xl" />เติมเงิน
             </div>
@@ -41,7 +45,11 @@
       <div class="indicator">
         <!-- <span class="indicator-item badge badge-primary">new</span> -->
         <div class="grid w-32 h-32 bg-base-300 place-items-center">
-          <button onclick="redeem.showModal()" on:click={clearinput}>
+          <button
+            title="คลิก"
+            onclick="redeem.showModal()"
+            on:click={clearinput}
+          >
             <div class="grid grid-rows-2 text-center">
               <i class="fa-solid fa-barcode fa-2xl" />กรอกโค๊ด
             </div>
@@ -52,11 +60,12 @@
       <div class="grid w-32 h-32 bg-base-300 place-items-center">
         {#if $tokencheck}
           <button
+            title="คลิก"
             on:click={logout}
             class="hover:text-amber-400 hover:font-bold text-lg"
           >
             <div class="grid grid-rows-2 text-center">
-              <!-- <button on:click={logout} class="hover:text-sky-400 hover:font-bold text-lg"
+              <!-- <button title="คลิก" on:click={logout} class="hover:text-sky-400 hover:font-bold text-lg"
             >
             <i class="fa-solid fa-person-through-window fa-2xl"></i>Logout
             </button
@@ -67,11 +76,12 @@
           </button>
         {:else}
           <button
+            title="คลิก"
             onclick="loginuser_pop.showModal()"
             class="hover:text-sky-400 hover:font-bold text-lg"
           >
             <div class="grid grid-rows-2 text-center">
-              <!-- <button on:click={logout} class="hover:text-sky-400 hover:font-bold text-lg"
+              <!-- <button title="คลิก" on:click={logout} class="hover:text-sky-400 hover:font-bold text-lg"
                 >
                 <i class="fa-solid fa-person-through-window fa-2xl"></i>Logout
                 </button
@@ -86,6 +96,6 @@
   </form>
 
   <form method="dialog" class="modal-backdrop">
-    <button />
+    <button title="คลิก" />
   </form>
 </dialog>

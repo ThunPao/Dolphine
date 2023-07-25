@@ -96,7 +96,7 @@
       <li>
         <label class="swap swap-rotate scale-75">
           <!-- this hidden checkbox controls the state -->
-          <input type="checkbox" id="themeToggle" />
+          <input title="คลิกเพื่อสลับโหมดสี" type="checkbox" id="themeToggle" />
 
           <!-- sun icon -->
           <svg

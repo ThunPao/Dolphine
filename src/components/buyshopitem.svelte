@@ -30,13 +30,16 @@
 
 {#if limits > 0 || limits < 0}
   <button
+    title="คลิก"
     class="btn btn-primary hover:scale-105 text-lg"
     onclick="{'buyi_' + did}.showModal();"
     ><i class="fa-solid fa-dollar-sign" />
     ซื้อเลย</button
   >
 {:else if limits <= 0}
-  <button class="btn btn-warning hover:scale-105 text-lg"> สินค้าหมด</button>
+  <button title="คลิก" class="btn btn-warning hover:scale-105 text-lg">
+    สินค้าหมด</button
+  >
 {/if}
 
 <dialog id={"buyi_" + did} class="modal modal-bottom sm:modal-middle">
@@ -66,6 +69,7 @@
     <div class="modal-action justify-center">
       {#if $currentuser}
         <button
+          title="คลิก"
           class="btn text-xl {$currentuser?.points - point < 0
             ? 'btn-warning'
             : 'btn-success'}"
@@ -74,11 +78,13 @@
           }}>{$currentuser?.points - point < 0 ? "DP ไม่พอ" : "ตกลง"}</button
         >
       {:else}
-        <button class="btn btn-success" onclick="loginuser_pop.showModal()"
-          >กรุณาล็อคอิน</button
+        <button
+          title="คลิก"
+          class="btn btn-success"
+          onclick="loginuser_pop.showModal()">กรุณาล็อคอิน</button
         >
       {/if}
-      <button class="btn btn-base-200 text-xl">ยกเลิก</button>
+      <button title="คลิก" class="btn btn-base-200 text-xl">ยกเลิก</button>
     </div>
     {#if platform !== "Unknown"}
       กดปุ่ม<kbd class="kbd kbd-sm mt-2 animate-bounce">Enter</kbd> เพื่อซื้อทันที

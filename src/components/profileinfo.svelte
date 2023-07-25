@@ -63,6 +63,7 @@
       </li>
       <li>
         <button
+          title="คลิก"
           onclick="topup.showModal()"
           on:click={clearinput}
           class="hover:text-sky-400 hover:font-bold text-lg"
@@ -71,6 +72,7 @@
       </li>
       <li>
         <button
+          title="คลิก"
           onclick="redeem.showModal()"
           on:click={clearinput}
           class="hover:text-sky-400 hover:font-bold text-lg"
@@ -85,12 +87,14 @@
       <li>
         {#if $tokencheck}
           <button
+            title="คลิก"
             on:click={logout}
             class="hover:text-sky-400 hover:font-bold text-lg"
             ><i class="fa-solid fa-person-through-window" /> Logout</button
           >
         {:else}
           <button
+            title="คลิก"
             onclick="loginuser_pop.showModal()"
             class="hover:text-sky-400 hover:font-bold text-lg"
             ><i class="fa-solid fa-right-to-bracket" /> เข้าสู่ระบบ</button

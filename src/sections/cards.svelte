@@ -52,7 +52,7 @@
       <!-- <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" > -->
 
       <!-- Slider main container -->
-      <div id="shopitem-slides" class="keen-slider ">
+      <div id="shopitem-slides" class="keen-slider">
         <!-- Additional required wrapper -->
 
         <!-- Slides -->
@@ -102,7 +102,7 @@
         />
       </div>
     </div>
-    <select class="select select-bordered join-item">
+    <select title="เลือก" class="select select-bordered join-item">
       <option disabled selected>Category</option>
       <option>Sci-fi</option>
       <option>Drama</option>
@@ -122,6 +122,7 @@
 
           <div class="card-actions justify-end">
             <button
+              title="คลิก"
               onclick="{'shopinfo_' + data.id}.showModal()"
               class="btn btn-primary">ซื้อไอเทม</button
             >

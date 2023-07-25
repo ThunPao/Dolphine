@@ -1,6 +1,10 @@
 <script>
-  import { handleRegister, reguser, regpwd, regpwdcf} from "../services/Authen";
-
+  import {
+    handleRegister,
+    reguser,
+    regpwd,
+    regpwdcf,
+  } from "../services/Authen";
 </script>
 
 <!-- Open the modal using ID.showModal() method -->
@@ -17,7 +21,7 @@
           id="regusername"
           placeholder="ชื่อในเกมส์"
           class="input input-bordered w-full max-w-xs"
-        bind:value={$reguser}
+          bind:value={$reguser}
         />
 
         <input
@@ -29,22 +33,25 @@
         />
 
         <input
-        type="password"
-        id="confirmPassword"
-        placeholder="ยืนยันรหัสผ่าน"
-        class="input input-bordered w-full max-w-xs"
-        bind:value={$regpwdcf}
-      />
+          type="password"
+          id="confirmPassword"
+          placeholder="ยืนยันรหัสผ่าน"
+          class="input input-bordered w-full max-w-xs"
+          bind:value={$regpwdcf}
+        />
 
-        <button class="btn btn-accent" on:click={() => handleRegister()}>สมัครสมาชิก</button>
+        <button
+          title="คลิก"
+          class="btn btn-accent"
+          on:click={() => handleRegister()}>สมัครสมาชิก</button
+        >
       </div>
     </div>
 
     <!-- <p class="py-4">กดปุ่ม <kbd class="kbd">ESC</kbd> เพื่อปิด</p> -->
     <div class="modal-action">
       <!-- if there is a button in form, it will close the modal -->
-      <button class="btn flex grow">ปิดหน้าต่างนี้</button>
-
+      <button title="คลิก" class="btn flex grow">ปิดหน้าต่างนี้</button>
     </div>
   </form>
 </dialog>

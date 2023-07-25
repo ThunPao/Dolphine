@@ -14,7 +14,7 @@
   <div
     class="card bg-base-200 shadow-md dark:hover:shadow-amber-500 hover:shadow-blue-500"
   >
-    <button onclick="{'shopinfo_' + id}.showModal()">
+    <button title="คลิก" onclick="{'shopinfo_' + id}.showModal()">
       <!-- <img src={href} alt="Img" class="rounded-lg w-full" /> -->
 
       <div class="indicator w-full">
@@ -52,7 +52,7 @@
           {/if}
         </div>
         <div>
-          <div class="badge badge-primary font-bold text-lg py-4">
+          <div class="badge badge-base-200 font-bold text-md py-2">
             {buycount} ซื้อแล้ว
           </div>
         </div>
@@ -107,25 +107,29 @@
         </div>
       </div>
     </div>
-    <div class="modal-body">
-      <h2 class="card-title">{title}</h2>
-      <p class="bg-base-200 rounded p-2">{description}</p>
+    <div class="modal-body text-clip overflow-hidden">
+      <h2 class="card-title">
+        {title}
+      </h2>
+      <p class="bg-base-200 rounded p-2">
+        {description}
+      </p>
 
       <div class="flex justify-center gap-2 mt-4">
         <Btncf did={id} {title} {point} {limits} />
 
         <!-- {#if limits > 0 || limits < 0}
-          <button class="btn btn-secondary hover:scale-105 text-lg">
+          <button title="คลิก" class="btn btn-secondary hover:scale-105 text-lg">
             <i class="fa-solid fa-cart-shopping" />หยิบใส่ตระก้า</button
           >
         {/if} -->
       </div>
       <div class="modal-action">
-        <button class="btn flex grow">เลือกดูไอเทมอื่น</button>
+        <button title="คลิก" class="btn flex grow">เลือกดูไอเทมอื่น</button>
       </div>
     </div>
   </form>
   <form method="dialog" class="modal-backdrop">
-    <button />
+    <button title="คลิก" />
   </form>
 </dialog>

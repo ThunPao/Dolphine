@@ -53,9 +53,12 @@
           bind:value={$password}
         />
 
-        <button class="btn btn-info" on:click={handleLogin}>เข้าสู่ระบบ</button>
+        <button title="คลิก" class="btn btn-info" on:click={handleLogin}
+          >เข้าสู่ระบบ</button
+        >
         <p class="mt-2">ยังไม่ได้สมัคร?</p>
         <button
+          title="คลิก"
           class="font-bold dark:text-amber-100 text-secondary text-lg"
           onclick="reguser_pop.showModal()">สมัครสมาชิก</button
         >
@@ -65,7 +68,7 @@
     <!-- <p class="py-4">กดปุ่ม <kbd class="kbd">ESC</kbd> เพื่อปิด</p> -->
     <div class="modal-action">
       <!-- if there is a button in form, it will close the modal -->
-      <button class="btn flex grow">ปิดหน้าต่างนี้</button>
+      <button title="คลิก" class="btn flex grow">ปิดหน้าต่างนี้</button>
     </div>
   </form>
 </dialog>
