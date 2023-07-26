@@ -28,8 +28,10 @@
     </div>
   </div>
 {:else}
-  <details class="dropdown dropdown-bottom dropdown-end">
-    <summary class="">
+  <div class="dropdown dropdown-bottom dropdown-end">
+    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+    <!-- svelte-ignore a11y-label-has-associated-control -->
+    <label tabindex="0" class="mr-5" title="คลิกเพื่อเปิดเมนู">
       <div class="join">
         <div class="avatar">
           <div class="w-16 rounded-full flex">
@@ -52,8 +54,10 @@
           </span>
         </div>
       </div>
-    </summary>
+    </label>
+    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
     <ul
+      tabindex="0"
       class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
     >
       <li>
@@ -102,5 +106,5 @@
         {/if}
       </li>
     </ul>
-  </details>
+  </div>
 {/if}
