@@ -95,26 +95,22 @@
     <div>
       <div>
         <input
-          class="input input-bordered join-item"
-          placeholder="Search..."
+          class="input input-bordered join-item rounded-lg"
+          placeholder="พิมพ์ชื่อไอเทม..."
           bind:value={searchQuery}
           on:keyup={gofinditem}
         />
       </div>
     </div>
-    <select title="เลือก" class="select select-bordered join-item">
+    <!-- <select title="เลือก" class="select select-bordered join-item">
       <option disabled selected>Category</option>
       <option>Sci-fi</option>
       <option>Drama</option>
       <option>Action</option>
-    </select>
+    </select> -->
   </div>
 </div>
-
-<div class="grid gap-2 p-1">
-  {#if $shopitems !== null && $shopitems.length > 0}
-    {#each $shopitems.filter(filterShopItems).slice(0, 5) as data}
-      <div class="card card-side bg-base-100 shadow-xl">
+<!-- <div class="card card-side bg-base-100 shadow-xl">
         <figure><img src={cardimg} alt="Movie" /></figure>
         <div class="card-body">
           <h2 class="card-title">{data.name}</h2>
@@ -127,6 +123,27 @@
               class="btn btn-primary">ซื้อไอเทม</button
             >
           </div>
+        </div>
+      </div> -->
+<div
+  class="grid gap-2 xl:grid-rows-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 p-1"
+>
+  {#if $shopitems !== null && $shopitems.length > 0}
+    {#each $shopitems.filter(filterShopItems).slice(0, 18) as data}
+      <div
+        class="d-flex relative w-full h-60 overflow-x-hidden p-2 rounded-sm"
+        type="button"
+        onclick="{'shopinfo_' + data.id}.showModal()"
+      >
+        <img
+          src={cardimg}
+          alt=""
+          class="absolute inset-0 object-cover w-full h-full transition duration-500 ease-in-out filter brightness-75 hover:brightness-100"
+        />
+        <div
+          class="absolute inset-0 flex items-end p-2 justify-center text-white text-xl font-bold bg-gray-800 bg-opacity-20 transition duration-500 ease-in-out hover:bg-opacity-75"
+        >
+          {data.name}
         </div>
       </div>
     {/each}

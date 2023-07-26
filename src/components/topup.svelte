@@ -6,6 +6,9 @@
 
 <dialog id="topup" class="modal modal-bottom sm:modal-middle">
   <form method="dialog" class="modal-box text-center">
+    <!-- Recommend -->
+
+    <!-- End Recommend -->
     <h1 class="font-bold text-4xl text-amber-400 dark:text-amber-200">
       เติมเงิน
     </h1>
@@ -39,4 +42,15 @@
       <button title="คลิก" class="btn flex grow">ปิดหน้าต่างนี้</button>
     </div>
   </form>
+  <div class="mockup-phone border-primary scale-[70%] md:scale-100">
+    <div class="camera" />
+    <div class="display">
+      <div class="artboard artboard-demo phone-1">
+        Hi.
+        <span class="countdown font-mono text-6xl">
+          <span style="--value:47;" />
+        </span>
+      </div>
+    </div>
+  </div>
 </dialog>

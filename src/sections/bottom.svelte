@@ -143,7 +143,7 @@
       >
     </div>
   </div>
-{:else}
+  <!-- {:else}
   <div class="alert sticky bottom-28 md:bottom-0">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -166,5 +166,5 @@
         }}>Clear Cookie</button
       >
     </div>
-  </div>
+  </div> -->
 {/if}

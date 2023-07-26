@@ -57,8 +57,10 @@
           </div>
         </div>
       </div>
-      <div class="card-body">
-        <h2 class="card-title text-center">{title}</h2>
+      <div class="card-body h-24">
+        <p class="text-center text-lg text-clip">
+          {title}
+        </p>
         <!-- <p>{description}</p> -->
       </div>
     </button>
