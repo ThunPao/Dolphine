@@ -75,7 +75,7 @@
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
       <!-- <li><a>Link</a></li> -->
-      <li class="invisible">
+      <!-- <li class="invisible">
         <details>
           <summary> เมนู</summary>
           <ul class="p-2 bg-base-100 z-auto">
@@ -92,7 +92,7 @@
             </li>
           </ul>
         </details>
-      </li>
+      </li> -->
       <li>
         <label class="swap swap-rotate scale-75">
           <!-- this hidden checkbox controls the state -->

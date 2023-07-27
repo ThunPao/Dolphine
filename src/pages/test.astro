@@ -1,23 +1,21 @@
 ---
-import Topup from "../components/topup.svelte";
-
+const personPromise = fetch("http://127.0.0.1:3005/shopitems")
+  .then((response) => response.json())
+  .then((arr) => arr[0].name);
+const factPromise = fetch("http://127.0.0.1:3005/shopitems")
+  .then((response) => response.json())
+  .then((factData) => factData[0].description);
 ---
 
-<div class="chat chat-end">
-  <div class="chat-bubble">You underestimate my power!</div>
-</div>
-<Topup client:only/>
-
-<button class="alert">Click me!</button>
-
-<script>
-  // Find all buttons with the `alert` class on the page.
-  const buttons = document.querySelectorAll("button.alert");
-
-  // Handle clicks on each button.
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      alert("Button was clicked!");
-    });
-  });
-</script>
+<html>
+  <head>
+    <title>A name and a description</title>
+  </head>
+  <body>
+    <div class="bg-white">Shopitems</div>
+    <h2>A name</h2>
+    <p>{personPromise}</p>
+    <h2>A fact</h2>
+    <p>{factPromise}</p>
+  </body>
+</html>

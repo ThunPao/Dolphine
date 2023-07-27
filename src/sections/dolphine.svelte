@@ -16,6 +16,9 @@
   let sub = false;
   let cooldown = false;
 
+  let logoimgvip = "images/dpchan.png";
+  let logoimg = "images/dpchan1.png";
+
   function togglesub() {
     if (!cooldown) {
       if ($blogsvip !== null) {
@@ -82,9 +85,9 @@
               }}
             >
               {#if sub === true}
-                <img src="/images/dpchan.png" alt="" />
+                <img src={logoimgvip} alt="" />
               {:else}
-                <img src="/images/dpchan1.png" alt="" />
+                <img src={logoimg} alt="" />
               {/if}
             </button>
           </div>
