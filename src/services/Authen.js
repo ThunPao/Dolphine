@@ -242,7 +242,7 @@ regpwd.set('');
 regpwdcf.set('');
       } 
 
-      toastr.success(
+      toastr.info(
         "Successful Login.",
         "เข้าสู่ระบบสำเร็จ " + username,
         {
