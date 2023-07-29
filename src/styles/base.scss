@@ -14,4 +14,9 @@ body {
     // color: #fff;
     // font-size: 1em;
 }
+div:where(.swal2-container) .swal2-html-container{
+    color: #b1efff !important;
+}
+
+
   @import "@sweetalert2/theme-borderless/borderless.min.css";
