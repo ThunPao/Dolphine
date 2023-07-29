@@ -63,6 +63,7 @@ try {
     // Token is expired, refresh the page
 
   if (isTokenExpired()) {
+    handleLogout();
     // location.reload();
     Swal.fire({
       title: 'TOKEN EXPIRED!',

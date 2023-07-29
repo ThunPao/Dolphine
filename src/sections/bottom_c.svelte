@@ -116,7 +116,7 @@
     >
   </div>
 </footer>
-<Fastmenu />
+<Fastmenu/>
 
 {#if !$isTerms}
   <div class="alert sticky bottom-28 md:bottom-0">

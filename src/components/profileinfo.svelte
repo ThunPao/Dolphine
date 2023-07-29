@@ -2,6 +2,7 @@
   export let mobile;
   import { logout, tokencheck, currentuser } from "../services/Authen";
   import { clearinput } from "../services/fieldcontrol";
+
 </script>
 
 {#if mobile === "true"}
