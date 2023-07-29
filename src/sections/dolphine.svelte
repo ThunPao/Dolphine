@@ -30,7 +30,7 @@
         }, 500); // 0.5 seconds cooldown
       } else {
         Swal.fire({
-          title: "เข้าถึงได้เฉพาะสมาชิกระดับ VIP ขึ้นไป",
+          title: "สิทธ์พิเศษสำหรับสมาชิกระดับ VIP ขึ้นไป",
           icon: "info",
         });
       }

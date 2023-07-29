@@ -88,7 +88,7 @@
   </div>
 </div>
 
-<div class="bg-base-200 grid gap-2 p-3 justify-center">
+<div class="bg-base-200 grid gap-2 p-3 justify-center focus:bg-white">
   <div class="text-2xl font-medium">รายการไอเทมทั้งหมด</div>
 
   <div class="join">
@@ -126,7 +126,7 @@
         </div>
       </div> -->
 <div
-  class="grid gap-2 xl:grid-rows-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 p-1"
+  class="grid gap-2 xl:grid-rows-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 p-1"
 >
   {#if $shopitems !== null && $shopitems.length > 0}
     {#each $shopitems.filter(filterShopItems).slice(0, 18) as data}
@@ -141,7 +141,7 @@
           class="absolute inset-0 object-cover w-full h-full transition duration-500 ease-in-out filter brightness-75 hover:brightness-100"
         />
         <div
-          class="absolute inset-0 flex items-end p-2 justify-center text-white text-xl font-bold bg-gray-800 bg-opacity-20 transition duration-500 ease-in-out hover:bg-opacity-75"
+          class="absolute inset-0 flex items-end p-2 justify-center text-white text-sm font-bold bg-gray-800 bg-opacity-20 transition duration-500 ease-in-out hover:bg-opacity-75"
         >
           {data.name}
         </div>
