@@ -48,31 +48,32 @@ export async function getPlayerInfo(token) {
 try {
   const url = apiurl+'playerinfo';
 
-  // Check if the token is expired
-  const isTokenExpired = () => {
-    if(token){
-      const decodedToken = jwt_decode(token);
-      const currentTime = Math.floor(Date.now() / 1000);
-    return decodedToken.exp < currentTime;
-    }else{
-      return null;
-    }
+  // // Check if the token is expired
+  // const isTokenExpired = () => {
+  //   if(token){
+  //     const decodedToken = jwt_decode(token);
+  //     const currentTime = Math.floor(Date.now() / 1000);
+  //   return decodedToken.exp < currentTime;
+  //   }else{
+  //     return null;
+  //   }
 
-  };
+  // };
 
-    // Token is expired, refresh the page
+  //   // Token is expired, refresh the page
 
-  if (isTokenExpired()) {
-    handleLogout();
-    // location.reload();
-    Swal.fire({
-      title: 'TOKEN EXPIRED!',
-      icon: 'error',
-      timer: 2000,
-      timerProgressBar: true,
-    })
-    return;
-  }
+  // if (isTokenExpired()) {
+    
+  //   handleLogout();
+  //   // location.reload();
+  //   Swal.fire({
+  //     title: 'TOKEN EXPIRED!',
+  //     icon: 'error',
+  //     timer: 2000,
+  //     timerProgressBar: true,
+  //   })
+  //   return;
+  // }
 
   const response = await fetch(url, {
     headers: {
@@ -81,11 +82,18 @@ try {
   });
 
   if (response.ok) {
+    
     const data = await response.json();
     currentuser.set(data);
     return data;
   } else {
     if(token){
+      Swal.fire({
+        title: 'TOKEN EXPIRED!',
+        icon: 'error',
+        timer: 2000,
+        timerProgressBar: true,
+      })
       token = null;
       localStorage.removeItem("token");
     tokencheck.set(null);
@@ -260,7 +268,7 @@ regpwdcf.set('');
         timerProgressBar: true,
       })
     } else {
-      toastr.error("Error.", "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", {
+      toastr.error(data.error, "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", {
         timeOut: 5000,
         positionClass: "toast-bottom-center",
         newestOnTop: true,

@@ -69,12 +69,13 @@
             {#each $shopitems.slice(0, 10) as data}
               <Shopcard
                 id={data.id}
-                title={data.name}
+                name={data.name}
                 href={cardimg}
                 buycount={data.buycount}
                 point={data.point}
                 limits={data.limits}
                 description={data.description}
+                title={data.titles}
               />
             {/each}
           {/if}

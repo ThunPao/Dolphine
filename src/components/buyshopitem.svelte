@@ -4,7 +4,7 @@
   import { buyitem } from "../services/ShopController";
 
   export let did;
-  export let title;
+  export let name;
   export let point;
   export let limits;
 
@@ -49,7 +49,7 @@
     </h3>
     <p class="py-4 dark:text-yellow-200 text-cyan-950 text-xl font-medium">
       ซื้อ
-      <span class="dark:text-white text-black font-bold">{title}</span><br />
+      <span class="dark:text-white text-black font-bold">{name}</span><br />
       ในราคา
       <span class="dark:text-white text-black font-bold text-lg"
         >{point} DP</span

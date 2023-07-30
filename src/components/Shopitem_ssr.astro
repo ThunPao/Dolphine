@@ -2,14 +2,14 @@
 import Btncf from "./buyshopitem.svelte";
 export interface Props {
   id: number;
-  title: string;
+  name: string;
   href: string;
   buycount: string;
   point: number;
   description: string;
 }
 
-const { id, href, title, buycount, point, description } = Astro.props;
+const { id, href, name, buycount, point, description } = Astro.props;
 ---
 
 <div class="keen-slider__slide">
@@ -38,7 +38,7 @@ const { id, href, title, buycount, point, description } = Astro.props;
         </div>
       </div>
       <div class="card-body">
-        <h2 class="card-title">{title}</h2>
+        <h2 class="card-title">{name}</h2>
         <p>{description}</p>
       </div>
     </button>
@@ -90,11 +90,11 @@ const { id, href, title, buycount, point, description } = Astro.props;
       </div>
     </div>
     <div class="modal-body">
-      <h2 class="card-title">{title}</h2>
+      <h2 class="card-title">{name}</h2>
       <p class="bg-base-200 rounded p-2">{description}</p>
 
       <div class="flex justify-end gap-2 mt-4">
-        <Btncf did={id} title={title} point={point} client:load />
+        <!-- <Btncf did={id} name={name} point={point} client:load /> -->
         <button class="btn btn-secondary hover:scale-105 text-lg">
           <i class="fa-solid fa-cart-shopping"></i>หยิบใส่ตระก้า</button
         >

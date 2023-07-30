@@ -2,12 +2,13 @@
   import Btncf from "./buyshopitem.svelte";
 
   export let id;
-  export let title;
+  export let name;
   export let href;
   export let buycount;
   export let point;
   export let limits;
   export let description;
+  export let title;
 </script>
 
 <div class="keen-slider__slide px-1 pb-1">
@@ -59,7 +60,7 @@
       </div>
       <div class="card-body h-24">
         <p class="text-center text-lg text-clip">
-          {title}
+          {name}
         </p>
         <!-- <p>{description}</p> -->
       </div>
@@ -111,14 +112,26 @@
     </div>
     <div class="modal-body text-clip overflow-hidden ">
       <h2 class="card-title">
-        {title}
+        {name}
       </h2>
-      <p class="bg-base-200 rounded p-2">
+      <div class="bg-base-200 rounded p-2">
         {description}
-      </p>
+      </div>
+      <br>
+      <div class="p-2 rounded-lg bg-base-300">เมื่อซื้อ จะได้รับไอเทมดังต่อไปนี้<br>
+        {#if title && title.includes(',')}
+          {#each title.split(',') as item}
+            <li>{item}</li>
+          {/each}
+        {:else if title}
+          <li>{title}</li>
+        {:else}
+          <li>No data available</li>
+        {/if}
+      </div>
 
       <div class="flex justify-center gap-2 mt-4">
-        <Btncf did={id} {title} {point} {limits} />
+        <Btncf did={id} name={name} point={point} limits={limits} />
 
         <!-- {#if limits > 0 || limits < 0}
           <button title="คลิก" class="btn btn-secondary hover:scale-105 text-lg">
