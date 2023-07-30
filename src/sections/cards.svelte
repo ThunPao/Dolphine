@@ -44,11 +44,17 @@
     }
   });
 </script>
-
 <div class="grid grid-cols-1 xl:grid-cols-4 gap-3 m-5">
   <div class="carditems md:col-span-3">
     <!--  -->
-    <div class="">
+    <div class="alert shadow-lg">
+      <i class="fa-solid fa-rocket fa-2xl text-info mt-4 md:mt-0"></i>
+      <div>
+        <h3 class="font-bold text-lg">Trends สินค้าติดเทรนด์!</h3>
+        <div class="text-xs">สินค้าที่มีคนซื้อมากที่สุด</div>
+      </div>
+    </div>
+    <div class="mt-2">
       <!-- <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" > -->
 
       <!-- Slider main container -->

@@ -64,7 +64,7 @@
     <a href="/" class="hover:scale-110">
       <div class="wrapper">
         <h1
-          class="border-s-8 stroke-slate-500 title text-3xl md:text-4xl font-bold"
+          class="border-s-8 stroke-slate-500 title text-3xl md:text-4xl font-bold txtfont"
           style="background-image: url('{logoimg}')"
         >
           Dolphine

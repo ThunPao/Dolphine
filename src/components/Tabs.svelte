@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { shopitems } from "../services/ShopController";
 
-  let tabs = ["อันดับ #1", "ไอเทมยอดนิยม", "อันดับ #3"];
+  let tabs = ["ไอเทมเข้าใหม่", "ไอเทมยอดนิยม", "อันดับ #3"];
   let activeTabIndex = 1;
 
   //
@@ -120,7 +120,7 @@
       {#if $shopitems !== null}
         {#if $shopitems.length > 0}
           {#each $shopitems.slice(0, 6) as item, index}
-            <tr>
+            <tr onclick="{'shopinfo_' + item.id}.showModal()" class="hover:bg-base-100" title="ดูรายละเอียด" >
               {#if index === 0}
                 <th><i class="fa-solid fa-xl fa-trophy text-amber-400" /></th>
               {:else if index === 1}
