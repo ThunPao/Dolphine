@@ -12,7 +12,7 @@
 
 <div class="keen-slider__slide px-1 pb-1">
   <div
-    class="card bg-base-200 shadow-md dark:hover:shadow-amber-500 hover:shadow-blue-500"
+    class="card shadow-md dark:hover:shadow-amber-500 hover:shadow-blue-500 bg-base-200"
   >
     <button title="คลิก" onclick="{'shopinfo_' + id}.showModal()">
       <!-- <img src={href} alt="Img" class="rounded-lg w-full" /> -->
@@ -109,7 +109,7 @@
         </div>
       </div>
     </div>
-    <div class="modal-body text-clip overflow-hidden">
+    <div class="modal-body text-clip overflow-hidden ">
       <h2 class="card-title">
         {title}
       </h2>
