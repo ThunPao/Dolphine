@@ -3,7 +3,7 @@ import "keen-slider/keen-slider.min.css";
 
 
   // Initialize the slider
-  let slider = new KeenSlider("#shopitem-slides", {
+  let keenslider = new KeenSlider("#shopitem-slides", {
     breakpoints: {
       "(min-width: 400px)": {
         slides: { perView: 2, spacing: 5 },

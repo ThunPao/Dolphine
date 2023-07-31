@@ -27,7 +27,7 @@ export let shopitems = writable(null);
         getshopitems();
   }
       const data = await response.json();
-      console.log(data.message);
+      // console.log(data.message);
         
       toastr.warning(
           ""+ data.message,

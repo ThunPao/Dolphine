@@ -34,7 +34,6 @@
   //   "%cWarning: Unauthorized access!",
   //   "color: red; font-size: 20px;"
   // );
-
 </script>
 
 <div class="tabs d-flex justify-center">
@@ -43,7 +42,8 @@
       class="tab tab-bordered"
       class:tab-active={activeTabIndex == index}
       on:click={() => (activeTabIndex = index)}
-      aria-hidden="true">
+      aria-hidden="true"
+    >
       {tab}
     </p>
   {/each}
@@ -119,8 +119,12 @@
       <!-- row loop -->
       {#if $shopitems !== null}
         {#if $shopitems.length > 0}
-          {#each $shopitems.slice(0, 6) as item, index}
-            <tr onclick="{'shopinfo_' + item.id}.showModal()" class="hover:bg-base-100" title="ดูรายละเอียด" >
+          {#each $shopitems.slice(0, 9) as item, index}
+            <tr
+              onclick="{'shopinfo_' + item.id}.showModal()"
+              class="hover:bg-base-100 cursor-zoom-in"
+              title="ดูรายละเอียด"
+            >
               {#if index === 0}
                 <th><i class="fa-solid fa-xl fa-trophy text-amber-400" /></th>
               {:else if index === 1}

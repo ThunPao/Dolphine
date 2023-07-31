@@ -13,7 +13,7 @@
 
 <div class="keen-slider__slide px-1 pb-1">
   <div
-    class="card shadow-md dark:hover:shadow-amber-500 hover:shadow-blue-500 bg-base-200"
+    class="card card-compact shadow-md dark:hover:shadow-amber-500 hover:shadow-blue-500 bg-base-200 dark:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
   >
     <button title="คลิก" onclick="{'shopinfo_' + id}.showModal()">
       <!-- <img src={href} alt="Img" class="rounded-lg w-full" /> -->
@@ -36,33 +36,33 @@
         </div>
       </div>
 
-      <div class="xs:flex sm:flex md:flex justify-between p-1">
-        <div class="font-bold text-md">
-          {#if limits > 0}
-            <div
-              class="badge badge-warning py-3 {limits <= 10
-                ? 'animate-pulse'
-                : ''}"
-            >
-              คงเหลือ {limits}
-            </div>
-          {:else if limits < 0}
-            <div class="badge badge-info py-3">ไม่จำกัดการซื้อ</div>
-          {:else if limits <= 0}
-            <div class="badge badge-error py-3">สินค้าหมด</div>
-          {/if}
-        </div>
-        <div>
-          <div class="badge badge-base-200 font-bold text-md py-2">
-            {buycount} ซื้อแล้ว
+      <div class="card-body">
+        <h2 class="card-title h-10 text-lg justify-center leading-none">
+          {name}
+        </h2>
+        <!-- <p>{description}</p> -->
+        <div
+          class="card-actions justify-center md:justify-between align-bottom h-10"
+        >
+          <div class="font-bold text-md">
+            {#if limits > 0}
+              <div
+                class="badge badge-warning md:py-3 {limits <= 10
+                  ? 'animate-pulse'
+                  : ''}"
+              >
+                เหลือ {limits}
+              </div>
+            {:else if limits < 0}
+              <div class="badge badge-info md:py-3">สินค้าประจำ</div>
+            {:else if limits <= 0}
+              <div class="badge badge-error md:py-3">สินค้าหมด</div>
+            {/if}
+          </div>
+          <div class="badge badge-base-200 font-medium text-md md:py-3">
+            {buycount} ขายแล้ว
           </div>
         </div>
-      </div>
-      <div class="card-body h-24">
-        <p class="text-center text-lg text-clip">
-          {name}
-        </p>
-        <!-- <p>{description}</p> -->
       </div>
     </button>
   </div>
@@ -110,28 +110,31 @@
         </div>
       </div>
     </div>
-    <div class="modal-body text-clip overflow-hidden ">
+    <div class="modal-body text-clip overflow-hidden">
       <h2 class="card-title">
         {name}
       </h2>
       <div class="bg-base-200 rounded p-2">
         {description}
       </div>
-      <br>
-      <div class="p-2 rounded-lg bg-base-300">เมื่อซื้อ จะได้รับไอเทมดังต่อไปนี้<br>
-        {#if title && title.includes(',')}
-          {#each title.split(',') as item}
-            <li>{item}</li>
-          {/each}
-        {:else if title}
+
+      {#if title && title.includes(",")}
+        {#each title.split(",") as item}
+          <li>{item}</li>
+        {/each}
+      {:else if title}
+        <br />
+        <div class="p-2 rounded-lg bg-base-300">
+          เมื่อซื้อ จะได้รับไอเทมดังต่อไปนี้<br />
           <li>{title}</li>
-        {:else}
-          <li>No data available</li>
-        {/if}
-      </div>
+        </div>
+
+        <!-- {:else}
+          <li>No data available</li> -->
+      {/if}
 
       <div class="flex justify-center gap-2 mt-4">
-        <Btncf did={id} name={name} point={point} limits={limits} />
+        <Btncf did={id} {name} {point} {limits} />
 
         <!-- {#if limits > 0 || limits < 0}
           <button title="คลิก" class="btn btn-secondary hover:scale-105 text-lg">
