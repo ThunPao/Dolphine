@@ -16,8 +16,6 @@
     class="card card-compact shadow-md dark:hover:shadow-amber-500 hover:shadow-blue-500 bg-base-200 dark:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
   >
     <button title="คลิก" onclick="{'shopinfo_' + id}.showModal()">
-      <!-- <img src={href} alt="Img" class="rounded-lg w-full" /> -->
-
       <div class="indicator w-full">
         <span
           class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 font-extrabold sm:text-lg md:text-xl"
@@ -40,7 +38,6 @@
         <h2 class="card-title h-10 text-lg justify-center leading-none">
           {name}
         </h2>
-        <!-- <p>{description}</p> -->
         <div
           class="card-actions justify-center md:justify-between align-bottom h-10"
         >
@@ -67,21 +64,13 @@
     </button>
   </div>
 </div>
-<dialog id={"shopinfo_" + id} class="modal">
+<!-- <dialog id={"shopinfo_" + id} class="modal">
   <form
     method="dialog"
     class="modal-box shadow-md dark:shadow-amber-300 shadow-blue-300"
   >
     <h3 class="font-bold text-lg">รายละเอียดสินค้า</h3>
     <div class="indicator w-full">
-      <!-- <span
-        class="invisible indicator-item indicator-top indicator-end badge badge-secondary"
-        >ยอดนิยม</span
-      >
-      <span
-        class="invisible indicator-item indicator-bottom mr-5 indicator-end badge badge-secondary"
-        >{buycount} ซื้อแล้ว</span
-      > -->
       <span
         class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-200 font-extrabold sm:text-lg md:text-xl"
       >
@@ -128,19 +117,10 @@
           เมื่อซื้อ จะได้รับไอเทมดังต่อไปนี้<br />
           <li>{title}</li>
         </div>
-
-        <!-- {:else}
-          <li>No data available</li> -->
       {/if}
 
       <div class="flex justify-center gap-2 mt-4">
         <Btncf did={id} {name} {point} {limits} />
-
-        <!-- {#if limits > 0 || limits < 0}
-          <button title="คลิก" class="btn btn-secondary hover:scale-105 text-lg">
-            <i class="fa-solid fa-cart-shopping" />หยิบใส่ตระก้า</button
-          >
-        {/if} -->
       </div>
       <div class="modal-action">
         <button title="คลิก" class="btn flex grow">เลือกดูไอเทมอื่น</button>
@@ -150,4 +130,4 @@
   <form method="dialog" class="modal-backdrop">
     <button title="คลิก" />
   </form>
-</dialog>
+</dialog> -->

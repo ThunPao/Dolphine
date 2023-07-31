@@ -22,18 +22,20 @@ export default defineConfig({
   //   format: 'file'
   // },
 
-  // output: 'server',
-  //   compressHTML: true,
-  // adapter: node({
-  //   mode: "standalone"
-  // }),
-
   output: 'server',
-  adapter: vercel(),
-  compressHTML: true,
-  build: {
-    excludeMiddleware: true
-  },
+    compressHTML: true,
+  adapter: node({
+    mode: "standalone"
+  }),
+
+  // output: 'server',
+  // adapter: vercel(),
+  // compressHTML: true,
+  // build: {
+  //   excludeMiddleware: true
+  // },
+
+
   experimental: {
     viewTransitions: true,
   },

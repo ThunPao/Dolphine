@@ -9,7 +9,7 @@
   import KeenSlider from "keen-slider";
   import "keen-slider/keen-slider.min.css";
 
-  let slider;
+  let slider = null;
   let searchQuery = "";
   let displaymode = false;
   function swapdisplaymode() {
@@ -26,9 +26,12 @@
     shopitems.update((items) => items);
   }
 
-  afterUpdate(() => {
-    if ($shopitems !== null && $shopitems.length > 0) {
+
+  // Function to initialize the KeenSlider
+  function initializeSlider() {
+    if ($shopitems !== null && $shopitems.length > 0 && !slider) {
       slider = new KeenSlider("#shopitem-slides", {
+        renderMode: performance,
         breakpoints: {
           "(min-width: 400px)": {
             slides: { perView: 2, spacing: 5 },
@@ -46,7 +49,35 @@
         },
       });
     }
-  });
+  }
+
+    // Call initializeSlider() once the component is mounted
+    onMount(initializeSlider);
+
+// Call initializeSlider() again after every update
+afterUpdate(initializeSlider);
+
+  // afterUpdate(() => {
+  //   if ($shopitems !== null && $shopitems.length > 0 && !slider) {
+  //     slider = new KeenSlider("#shopitem-slides", {
+  //       breakpoints: {
+  //         "(min-width: 400px)": {
+  //           slides: { perView: 2, spacing: 5 },
+  //         },
+  //         "(min-width: 768px)": {
+  //           slides: { perView: 3, spacing: 10 },
+  //         },
+  //         "(min-width: 1000px)": {
+  //           slides: { perView: 4, spacing: 10 },
+  //         },
+  //       },
+  //       slides: {
+  //         perView: 2,
+  //         spacing: 5,
+  //       },
+  //     });
+  //   }
+  // });
 </script>
 
 <div class="grid grid-cols-1 xl:grid-cols-4 gap-3 xl:m-5">
@@ -69,7 +100,6 @@
       <!-- Slider main container -->
       <div id="shopitem-slides" class="keen-slider">
         <!-- Additional required wrapper -->
-
         <!-- Slides -->
         {#if $shopitems !== null}
           {#if $shopitems.length > 0}
