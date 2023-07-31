@@ -16,7 +16,7 @@
     "@astrojs/vercel": "^3.7.0",
     "@sweetalert2/theme-borderless": "^5.0.15",
     "@sweetalert2/themes": "^5.0.15",
-    "astro": "^2.8.1",
+    "astro": "^2.9.6",
     "font-awesome": "^4.7.0",
     "gsap": "^3.12.2",
     "install": "^0.13.0",

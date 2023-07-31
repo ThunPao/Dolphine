@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/DevTest.astro";
+import { ViewTransitions } from "astro:transitions";
 ---
 
 <!DOCTYPE html>
@@ -9,9 +10,33 @@ import Layout from "../layouts/DevTest.astro";
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
   </head>
   <body>
     <Layout />
+    <a href="#" type="button" class="btn btn-info">HHHSassfasasfsf</a>
+
+    <style is:global>
+      :root {
+        --accent: 124, 58, 237;
+        --accent-gradient: linear-gradient(
+          45deg,
+          rgb(var(--accent)),
+          #da62c4 30%,
+          white 60%
+        );
+      }
+      html {
+        font-family: system-ui, sans-serif;
+        background-color: #f6f6f6;
+      }
+      code {
+        font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+      }
+    </style>
+    <header>
+      <a transition:name="test2" href="#">sfwassfasasfsf</a>
+    </header>
   </body>
 </html>

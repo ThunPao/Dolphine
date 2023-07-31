@@ -10,7 +10,7 @@ export default defineConfig({
   output: 'server',
   adapter: node({
     mode: "hybrid"
-  })
+  }),
 
 
   // output: 'server',
@@ -24,4 +24,7 @@ export default defineConfig({
   // build: {
   //   excludeMiddleware: true
   // }
+  experimental: {
+    viewTransitions: true,
+  },
 });
