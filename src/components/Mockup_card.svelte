@@ -1,13 +1,13 @@
 <div
   role="status"
-  class="max-w-sm border border-gray-200 rounded shadow animate-pulse dark:border-gray-700"
+  class="max-w-sm border border-gray-200 rounded shadow animate-pulse dark:border-gray-700 mx-2"
 >
   <div
     class="flex items-center justify-center h-60 mb-4 bg-gray-300 rounded dark:bg-gray-700"
   >
     <div class="indicator">
       <span
-        class="indicator-item indicator-bottom indicator-center badge bg-gray-200 w-24"
+        class="indicator-item indicator-bottom indicator-center badge bg-gray-300 dark:bg-gray-700 w-24"
       />
       <div class="grid h-60 place-items-center">
         <svg
@@ -27,11 +27,11 @@
       </div>
     </div>
   </div>
-  <div class="join flex justify-between p-2">
-    <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-24 mb-4" />
-    <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-24 mb-4" />
-  </div>
   <div
     class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5 mx-10 mt-5"
   />
+  <div class="join flex justify-between p-2 w-48">
+    <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-16 mb-4" />
+    <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-16 mb-4" />
+  </div>
 </div>

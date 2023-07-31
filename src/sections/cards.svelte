@@ -49,7 +49,7 @@
   });
 </script>
 
-<div class="grid grid-cols-1 xl:grid-cols-4 gap-3 m-5">
+<div class="grid grid-cols-1 xl:grid-cols-4 gap-3 xl:m-5">
   <div class="carditems md:col-span-3">
     <!--  -->
     <div class="alert shadow-lg">
@@ -87,6 +87,7 @@
             {/each}
           {/if}
         {:else}
+          <MockupCard />
           <MockupCard />
         {/if}
       </div>
