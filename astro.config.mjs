@@ -7,23 +7,33 @@ import node from "@astrojs/node";
 export default defineConfig({
   integrations: [tailwind(), svelte()],
 
-  output: 'server',
-  adapter: node({
-    mode: "hybrid"
-  }),
-
-
   // output: 'server',
   // adapter: node({
-  //   mode: "standalone"
-  // })
+  //   mode: "hybrid"
+  // }),
 
 
-  // adapter: vercel(),
+
+  // output: 'static',
   // compressHTML: true,
+  // // trailingSlash: 'always',
   // build: {
-  //   excludeMiddleware: true
-  // }
+  //   // Example: Generate `page.html` instead of `page/index.html` during build.
+  //   format: 'file'
+  // },
+
+  // output: 'server',
+  //   compressHTML: true,
+  // adapter: node({
+  //   mode: "standalone"
+  // }),
+
+  output: 'server',
+  adapter: vercel(),
+  compressHTML: true,
+  build: {
+    excludeMiddleware: true
+  },
   experimental: {
     viewTransitions: true,
   },
