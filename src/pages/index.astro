@@ -14,7 +14,7 @@ import "../styles/base.scss";
 import Shopinfo from "../components/Shopinfo.svelte";
 import Btncf from "../components/buyshopitem.svelte";
 
-
+let logoimg = "images/dpchan1.png";
 // import Apitest from '../sections/apitest.astro';
 ---
 
@@ -35,7 +35,15 @@ import Btncf from "../components/buyshopitem.svelte";
     /><link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Kanit"
-    /></head
+    />
+    
+    <meta property="og:title" content="Dolphine!">
+<meta property="og:description" content="เว็บไซต์ของ Dolphine">
+<meta property="og:image" content={logoimg}>
+<meta property="og:url" content="http://dolphine.servegame.com/">
+<meta property="og:type" content="website">
+    
+    </head
   >
 
   <main data-theme="kpz" class="bg-base-300">

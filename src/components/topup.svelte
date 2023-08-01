@@ -2,11 +2,27 @@
   import { topup } from "../services/topup.js";
   import { inputValue } from "../services/fieldcontrol.js";
   inputValue.set("");
+let topupimg = ["images/topup/step1.jpg","images/topup/step2.jpg"];
+let tabs = ["Step 1", "Step 2"];
+let activeTabIndex = 0;
 </script>
 
 <dialog id="topup" class="modal modal-bottom sm:modal-middle">
   <form method="dialog" class="modal-box text-center">
     <!-- Recommend -->
+
+      <div class="flex justify-center">
+        <img src={topupimg[activeTabIndex]} alt="วิธีเติมเงิน" class="h-96 w-fit">
+      </div>
+      <div class="tabs tabs-boxed flex justify-center">
+        {#each tabs as tab, index}
+        <p class="tab text-2xl"
+        class:tab-active={activeTabIndex == index}
+      on:click={() => (activeTabIndex = index)}
+      aria-hidden="true"
+        >{tab}</p> 
+        {/each}
+      </div>
 
     <!-- End Recommend -->
     <h1 class="font-bold text-4xl text-amber-400 dark:text-amber-200">
@@ -42,15 +58,5 @@
       <button title="คลิก" class="btn flex grow">ปิดหน้าต่างนี้</button>
     </div>
   </form>
-  <div class="mockup-phone border-primary scale-[70%] md:scale-100">
-    <div class="camera" />
-    <div class="display">
-      <div class="artboard artboard-demo phone-1">
-        Hi.
-        <span class="countdown font-mono text-6xl">
-          <span style="--value:47;" />
-        </span>
-      </div>
-    </div>
-  </div>
+
 </dialog>

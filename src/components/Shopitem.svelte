@@ -107,6 +107,7 @@
             <button
               title="คลิก"
               onclick="shopinfo.showModal()"
+              on:click={setShopdata}
               class="btn btn-primary">ซื้อไอเทม</button
             >
           </div>

@@ -17,21 +17,6 @@
     ({ id, name, href, buycount, point, limits, description, title } = data);
   });
 
-  // Perform any actions when the component is mounted
-  onMount(() => {
-    // You can now access the shop item data here (e.g., log the data)
-    console.log('Shop item data:', {
-      id,
-      name,
-      href,
-      buycount,
-      point,
-      limits,
-      description,
-      title,
-    });
-  });
-
   let platform = "";
 
   onMount(() => {
