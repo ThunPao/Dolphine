@@ -3,10 +3,34 @@
   import { onMount } from "svelte";
   import { buyitem } from "../services/ShopController";
 
-  export let did;
-  export let name;
-  export let point;
-  export let limits;
+  // export let did;
+  // export let name;
+  // export let point;
+  // export let limits;
+    // import {id,name,href,buycount,point,limits,description,title} from "../components/Shopitem.svelte"
+    import {shopData} from "../services/ShopController";
+  // Define the variables where you want to store the shop item data
+  let id, name, href, buycount, point, limits, description, title;
+
+  // Subscribe to the shopData store to get updates
+  shopData.subscribe((data) => {
+    ({ id, name, href, buycount, point, limits, description, title } = data);
+  });
+
+  // Perform any actions when the component is mounted
+  onMount(() => {
+    // You can now access the shop item data here (e.g., log the data)
+    console.log('Shop item data:', {
+      id,
+      name,
+      href,
+      buycount,
+      point,
+      limits,
+      description,
+      title,
+    });
+  });
 
   let platform = "";
 
@@ -27,22 +51,7 @@
     }
   });
 </script>
-
-{#if limits > 0 || limits < 0}
-  <button
-    title="คลิก"
-    class="btn btn-primary hover:scale-105 text-lg"
-    onclick="{'buyi_' + did}.showModal();"
-    ><i class="fa-solid fa-dollar-sign" />
-    ซื้อเลย</button
-  >
-{:else if limits <= 0}
-  <button title="คลิก" class="btn btn-warning hover:scale-105 text-lg">
-    สินค้าหมด</button
-  >
-{/if}
-
-<dialog id={"buyi_" + did} class="modal modal-bottom sm:modal-middle">
+<dialog id="buyitem" class="modal modal-bottom sm:modal-middle">
   <form method="dialog" class="modal-box text-center">
     <h3 class="font-bold text-2xl text-cyan-400 dark:text-cyan-200">
       ยืนยันการซื้อ
@@ -74,7 +83,7 @@
             ? 'btn-warning'
             : 'btn-success'}"
           on:click={() => {
-            $currentuser?.points - point < 0 ? "" : buyitem(did);
+            $currentuser?.points - point < 0 ? "" : buyitem(id);
           }}>{$currentuser?.points - point < 0 ? "DP ไม่พอ" : "ตกลง"}</button
         >
       {:else}

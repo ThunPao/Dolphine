@@ -92,3 +92,16 @@ export let shopitems = writable(null);
       console.error(error);
     }
   }
+
+  // Define the initial data structure for a shop item
+const initialShopData = {
+  id: null,
+  name: '',
+  href: '',
+  buycount: 0,
+  point: 0,
+  limits: 0,
+  description: '',
+  title: '',
+};
+export const shopData = writable(initialShopData);

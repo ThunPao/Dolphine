@@ -6,12 +6,14 @@ import Cards from "../sections/cards.svelte";
 import Slides from "../sections/slides.astro";
 import Alerts from "../sections/alerts.astro";
 import Qsc from "../sections/quickshrtcut.astro";
-import Testfa from "../sections/test.svelte";
 import Btm from "../sections/bottom.astro";
 // import Blogs from "../sections/blogs.astro";
 // import Cheri from '../sections/cheri.svelte';
 import Intro from "../sections/intro.astro";
 import "../styles/base.scss";
+import Shopinfo from "../components/Shopinfo.svelte";
+import Btncf from "../components/buyshopitem.svelte";
+
 
 // import Apitest from '../sections/apitest.astro';
 ---
@@ -48,6 +50,8 @@ import "../styles/base.scss";
       <Alerts />
       <!-- <Cheri client:load/> -->
       <Cards client:only="svelte" />
+      <Shopinfo client:load />
+      <Btncf client:load />
       <!-- <SSRCards /> -->
       <!-- SSR Astro -->
       <!-- <Blogs /> -->
