@@ -1,6 +1,6 @@
 <script>
   // import {id,name,href,buycount,point,limits,description,title} from "../components/Shopitem.svelte"
-  import {shopData} from "../services/ShopController";
+  import { shopData } from "../services/ShopController";
   // import { onMount } from 'svelte';
   // Define the variables where you want to store the shop item data
   let id, name, href, buycount, point, limits, description, title;
@@ -10,6 +10,7 @@
     ({ id, name, href, buycount, point, limits, description, title } = data);
   });
 </script>
+
 <dialog id="shopinfo" class="modal">
   <form
     method="dialog"
@@ -54,13 +55,17 @@
       </div>
 
       {#if title && title.includes(",")}
-        {#each title.split(",") as item}
-          <li>{item}</li>
-        {/each}
+        <br />
+        <div class="p-2 rounded-lg bg-base-300">
+          เมื่อซื้อ จะได้รับตามรายการทั้งหมดดังต่อไปนี้<br />
+          {#each title.split(",") as item}
+            <li>{item}</li>
+          {/each}
+        </div>
       {:else if title}
         <br />
         <div class="p-2 rounded-lg bg-base-300">
-          เมื่อซื้อ จะได้รับไอเทมดังต่อไปนี้<br />
+          เมื่อซื้อ จะได้รับรายการดังต่อไปนี้<br />
           <li>{title}</li>
         </div>
       {/if}
@@ -68,18 +73,18 @@
       <div class="flex justify-center gap-2 mt-4">
         <!-- <Btncf did={id} {name} {point} {limits} /> -->
         {#if limits > 0 || limits < 0}
-  <button
-    title="คลิก"
-    class="btn btn-primary hover:scale-105 text-lg"
-    onclick="buyitem.showModal();"
-    ><i class="fa-solid fa-dollar-sign" />
-    ซื้อเลย</button
-  >
-{:else if limits <= 0}
-  <button title="คลิก" class="btn btn-warning hover:scale-105 text-lg">
-    สินค้าหมด</button
-  >
-{/if}
+          <button
+            title="คลิก"
+            class="btn btn-primary hover:scale-105 text-lg"
+            onclick="buyitem.showModal();"
+            ><i class="fa-solid fa-dollar-sign" />
+            ซื้อเลย</button
+          >
+        {:else if limits <= 0}
+          <button title="คลิก" class="btn btn-warning hover:scale-105 text-lg">
+            สินค้าหมด</button
+          >
+        {/if}
       </div>
       <div class="modal-action">
         <button title="คลิก" class="btn flex grow">เลือกดูไอเทมอื่น</button>
