@@ -26,7 +26,6 @@
     shopitems.update((items) => items);
   }
 
-
   // Function to initialize the KeenSlider
   function initializeSlider() {
     if ($shopitems !== null && $shopitems.length > 0 && !slider) {
@@ -51,9 +50,8 @@
     }
   }
 
-onMount(initializeSlider);
-afterUpdate(initializeSlider);
-
+  onMount(initializeSlider);
+  afterUpdate(initializeSlider);
 </script>
 
 <div class="grid grid-cols-1 xl:grid-cols-4 gap-3 xl:m-5">
@@ -80,7 +78,9 @@ afterUpdate(initializeSlider);
         {#if $shopitems !== null}
           {#if $shopitems.length > 0}
             {#each $shopitems.slice(0, 10) as data}
-              <Shopcard display=0 keen=true
+              <Shopcard
+                display="0"
+                keen="true"
                 id={data.id}
                 name={data.name}
                 href={cardimg}
@@ -121,35 +121,43 @@ afterUpdate(initializeSlider);
         />
       </div>
     </div>
+    <!-- <select
+      title="เลือก"
+      class="select select-bordered join-item"
+      on:change={swapdisplaymode}
+    >
+      <option disabled selected>รูปแบบรายการ</option>
+      <option value="list"><i class="fa-solid fa-list" />List</option>
 
-    <label class="swap">
-      <input type="checkbox" on:click={swapdisplaymode} />
-      <div class="swap-on">List</div>
-      <div class="swap-off">Grid</div>
-    </label>
-
-    <!-- <select title="เลือก" class="select select-bordered join-item">
-      <option disabled selected>Category</option>
-      <option>Sci-fi</option>
-      <option>Drama</option>
-      <option>Action</option>
+      <option value="table"
+        ><i class="fa-solid fa-table-cells-large" />Grid</option
+      >
     </select> -->
+    <label class="swap rounded-lg bg-primary p-3 join-item">
+      <input type="checkbox" on:click={swapdisplaymode} />
+      <div class="swap-on"><i class="fa-solid fa-list" /></div>
+      <div class="swap-off">
+        <i class="fa-solid fa-table-cells-large" />
+      </div>
+    </label>
   </div>
 </div>
 
 {#if displaymode}
   {#if $shopitems !== null && $shopitems.length > 0}
     {#each $shopitems.filter(filterShopItems).slice(0, 18) as data}
-    <Shopcard display=1 keen=false
-    id={data.id}
-    name={data.name}
-    href={cardimg}
-    buycount={data.buycount}
-    point={data.point}
-    limits={data.limits}
-    description={data.description}
-    title={data.titles}
-  />
+      <Shopcard
+        display="1"
+        keen="false"
+        id={data.id}
+        name={data.name}
+        href={cardimg}
+        buycount={data.buycount}
+        point={data.point}
+        limits={data.limits}
+        description={data.description}
+        title={data.titles}
+      />
     {/each}
     {#if $shopitems.filter(filterShopItems).length === 0}
       <div class="mockup-window border border-base-300">
@@ -169,16 +177,18 @@ afterUpdate(initializeSlider);
   >
     {#if $shopitems !== null && $shopitems.length > 0}
       {#each $shopitems.filter(filterShopItems).slice(0, 18) as data}
-      <Shopcard display=0 keen=false
-      id={data.id}
-      name={data.name}
-      href={cardimg}
-      buycount={data.buycount}
-      point={data.point}
-      limits={data.limits}
-      description={data.description}
-      title={data.titles}
-    />
+        <Shopcard
+          display="0"
+          keen="false"
+          id={data.id}
+          name={data.name}
+          href={cardimg}
+          buycount={data.buycount}
+          point={data.point}
+          limits={data.limits}
+          description={data.description}
+          title={data.titles}
+        />
       {/each}
       {#if $shopitems.filter(filterShopItems).length === 0}
         <div class="mockup-window border border-base-300">

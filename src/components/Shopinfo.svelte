@@ -81,7 +81,7 @@
             ซื้อเลย</button
           >
         {:else if limits <= 0}
-          <button title="คลิก" class="btn btn-warning hover:scale-105 text-lg">
+          <button title="คลิก" class="btn btn-error hover:scale-105 text-lg">
             สินค้าหมด</button
           >
         {/if}
