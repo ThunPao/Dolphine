@@ -5,7 +5,7 @@ import Navtop from "../sections/admin/Navtop.astro";
 import DevDashboard from "../sections/admin/DevDashboard.astro";
 import Sandbox from "../sections/admin/Sandbox.astro";
 import Sandbox2 from "../sections/admin/Sandbox2.svelte";
-
+import Fire from "../sections/admin/Fire.svelte";
 import RedeemBox from "../sections/admin/components/Redeem.svelte";
 ---
 
@@ -35,7 +35,9 @@ import RedeemBox from "../sections/admin/components/Redeem.svelte";
       <!-- <Sandbox /> -->
 
       <div class="pt-4"></div>
-      <Sandbox2 />
+      <!-- <Sandbox2 /> -->
+
+      <Fire client:visible/>
 
       <div class="grid md:grid-cols-4 gap-3">
         <!-- <DevDashboard /> -->
