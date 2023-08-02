@@ -3,12 +3,7 @@
   import { onMount } from "svelte";
   import { buyitem } from "../services/ShopController";
 
-  // export let did;
-  // export let name;
-  // export let point;
-  // export let limits;
-    // import {id,name,href,buycount,point,limits,description,title} from "../components/Shopitem.svelte"
-    import {shopData} from "../services/ShopController";
+  import { shopData } from "../services/ShopController";
   // Define the variables where you want to store the shop item data
   let id, name, href, buycount, point, limits, description, title;
 
@@ -36,6 +31,7 @@
     }
   });
 </script>
+
 <dialog id="buyitem" class="modal modal-bottom sm:modal-middle">
   <form method="dialog" class="modal-box text-center">
     <h3 class="font-bold text-2xl text-cyan-400 dark:text-cyan-200">

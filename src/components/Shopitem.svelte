@@ -2,6 +2,8 @@
   import { onMount } from "svelte";
 
   import { shopData } from "../services/ShopController";
+  import lozad from "lozad";
+  // Initialize lozad
 
   export let id;
   export let name;
@@ -25,6 +27,11 @@
       description,
       title,
     });
+    const observer = lozad(".lozad", {
+      rootMargin: "10px 0px", // Adjust the rootMargin as needed
+      threshold: 0.1, // Adjust the threshold as needed
+    });
+    observer.observe();
   });
   function setShopdata() {
     shopData.set({
@@ -63,7 +70,7 @@
 
           <div class="place-items-center w-full">
             <figure>
-              <img src={href} alt="Img" class="rounded-lg w-full" />
+              <img data-src={href} alt="Img" class="rounded-lg w-full lozad" />
             </figure>
           </div>
         </div>
@@ -99,7 +106,7 @@
     </div>
   {:else}
     <div class="p-3 card card-side bg-base-100 shadow-xl">
-      <figure><img src={href} alt="รูปภาพ" /></figure>
+      <figure><img data-src={href} alt="รูปภาพ" class="lozad" /></figure>
       <div class="card-body">
         <h2 class="card-title">{name}</h2>
         <p>{description}</p>

@@ -1,0 +1,48 @@
+---
+import "../styles/base.scss";
+import Btm from "../sections/bottom.astro";
+import Navtop from "../sections/admin/Navtop.astro";
+import DevDashboard from "../sections/admin/DevDashboard.astro";
+import Sandbox from "../sections/admin/Sandbox.astro";
+import Sandbox2 from "../sections/admin/Sandbox2.svelte";
+
+import RedeemBox from "../sections/admin/components/Redeem.svelte";
+import { ViewTransitions } from "astro:transitions";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dolphine</title>
+    <link rel="icon" type="image/png" href="images/DPicon.png" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    /><link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Kanit"
+    />
+    <ViewTransitions />
+  </head>
+
+  <main data-theme="dark" class="bg-base-300">
+    <Navtop />
+    <div class="container mx-auto text-center h-[100dvh]">
+      <!-- <Sandbox /> -->
+
+      <div class="pt-4"></div>
+      <Sandbox2 />
+
+      <div class="grid md:grid-cols-4 gap-3">
+        <!-- <DevDashboard /> -->
+      </div>
+    </div>
+    <RedeemBox client:visible />
+  </main>
+</html>

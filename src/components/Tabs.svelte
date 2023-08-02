@@ -2,8 +2,8 @@
   import { onMount } from "svelte";
   import { shopitems } from "../services/ShopController";
 
-  let tabs = ["ไอเทมเข้าใหม่", "ไอเทมยอดนิยม", "อันดับ #3"];
-  let activeTabIndex = 1;
+  let tabs = ["ไอเทมใหม่", "ไอเทมยอดฮิต", "อันดับเทพทรู"];
+  let activeTabIndex = 2;
 
   //
   let data = null;
@@ -167,5 +167,72 @@
   </table>{/if}
 
 {#if activeTabIndex == 2}
-  <div>content 3</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th />
+        <th>ผู้เล่น</th>
+        <th>จำนวน</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- row loop -->
+      {#if $shopitems !== null}
+        {#if $shopitems.length > 0}
+          {#each $shopitems.slice(0, 5) as data, index}
+            <tr class="hover:bg-base-100" title={data.name}>
+              {#if index === 0}
+                <th><i class="fa-solid fa-xl fa-trophy text-amber-400" /></th>
+              {:else if index === 1}
+                <th><i class="fa-solid fa-xl fa-trophy text-zinc-300" /></th>
+              {:else if index === 2}
+                <th><i class="fa-solid fa-xl fa-trophy text-amber-600" /></th>
+              {:else}
+                <th />
+              {/if}
+
+              <td>
+                <div class="flex items-center space-x-3">
+                  <div class="avatar">
+                    <div class="mask mask-squircle w-12 h-12">
+                      <img
+                        src="https://daisyui.com/tailwind-css-component-profile-4@56w.png"
+                        alt="Avatar Tailwind CSS Component"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-bold">{data.name}</div>
+                  </div>
+                </div>
+              </td>
+              <td>{data.buycount}</td>
+            </tr>
+          {/each}
+        {:else}
+          <p>ไม่มีข้อมูล.</p>
+        {/if}
+      {:else}
+        {#each Array(5) as _, i}
+          <tr class="animate-pulse">
+            {#if i === 0}
+              <th><i class="fa-solid fa-xl fa-trophy text-amber-400" /></th>
+            {:else if i === 1}
+              <th><i class="fa-solid fa-xl fa-trophy text-zinc-300" /></th>
+            {:else if i === 2}
+              <th><i class="fa-solid fa-xl fa-trophy text-amber-600" /></th>
+            {:else}
+              <th />
+            {/if}
+            <td>
+              <div class="h-4 bg-slate-700 rounded" />
+            </td>
+            <td>
+              <div class="h-3 bg-slate-700 rounded" />
+            </td>
+          </tr>
+        {/each}
+      {/if}
+    </tbody>
+  </table>
 {/if}
