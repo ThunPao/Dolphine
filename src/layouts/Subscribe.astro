@@ -1,0 +1,25 @@
+<div class="subscribe-container" transition:name="subscribe-container">
+  <h2>Subscribe to Our Newsletter</h2>
+  <p>Stay up to date with the latest news and updates.</p>
+  <form>
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis
+    voluptatum eveniet nisi soluta harum nesciunt dolores magnam sequi enim
+    commodi.
+    <!-- ...subscribe form content... -->
+  </form>
+</div>
+
+<style>
+  .subscribe-container {
+    background-color: #f4f4f4;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .subscribe-container:is(:focus, :hover) {
+    transform: scale(1.03);
+  }
+
+  /* ...other styles... */
+</style>

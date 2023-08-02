@@ -7,7 +7,6 @@ import Sandbox from "../sections/admin/Sandbox.astro";
 import Sandbox2 from "../sections/admin/Sandbox2.svelte";
 
 import RedeemBox from "../sections/admin/components/Redeem.svelte";
-import { ViewTransitions } from "astro:transitions";
 ---
 
 <!DOCTYPE html>
@@ -28,7 +27,6 @@ import { ViewTransitions } from "astro:transitions";
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Kanit"
     />
-    <ViewTransitions />
   </head>
 
   <main data-theme="dark" class="bg-base-300">
@@ -45,4 +43,5 @@ import { ViewTransitions } from "astro:transitions";
     </div>
     <RedeemBox client:visible />
   </main>
+
 </html>

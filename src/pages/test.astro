@@ -2,6 +2,7 @@
 import Layout from "../layouts/DevTest.astro";
 import { ViewTransitions } from "astro:transitions";
 import Testfa from "../sections/test.svelte";
+import Subscribe from "../layouts/Subscribe.astro";
 ---
 
 <!DOCTYPE html>
@@ -11,12 +12,11 @@ import Testfa from "../sections/test.svelte";
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <ViewTransitions />
-  </head>
-  <body>
-    <Testfa/>
+  </head><body>
+    <!-- <Testfa/> -->
     <!-- <Layout /> -->
-    <a href="#" type="button" class="btn btn-info">HHHSassfasasfsf</a>
+
+    <h1 transition:name="subscribe-container"># subscribe-container</h1>
 
     <style is:global>
       :root {
@@ -37,8 +37,10 @@ import Testfa from "../sections/test.svelte";
           DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
       }
     </style>
-    <header>
-      <a transition:name="test2" href="#">sfwassfasasfsf</a>
-    </header>
+    <Layout>
+      <header>
+        <Subscribe />
+      </header>
+    </Layout>
   </body>
 </html>
