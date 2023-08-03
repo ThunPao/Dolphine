@@ -30,7 +30,7 @@ async function signInAndAccessDatabase() {
     const userCredential = await signInWithEmailAndPassword(auth, 'kpza1360@gmail.com', 'dgSDAHIO1aefww684');
 
     // User signed in successfully
-    const user = userCredential.user;
+    // const user = userCredential.user;
     // console.log('User signed in:', user);
 
     // Access the Realtime Database
