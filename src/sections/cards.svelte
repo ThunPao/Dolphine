@@ -89,6 +89,7 @@
                 limits={data.limits}
                 description={data.description}
                 title={data.titles}
+                expired_date={data.expired_date}
               />
             {/each}
           {/if}
@@ -157,6 +158,7 @@
         limits={data.limits}
         description={data.description}
         title={data.titles}
+        expired_date={data.expired_date}
       />
     {/each}
     {#if $shopitems.filter(filterShopItems).length === 0}
@@ -188,6 +190,7 @@
           limits={data.limits}
           description={data.description}
           title={data.titles}
+          expired_date={data.expired_date}
         />
       {/each}
       {#if $shopitems.filter(filterShopItems).length === 0}

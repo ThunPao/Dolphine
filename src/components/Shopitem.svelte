@@ -1,8 +1,10 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   import { shopData } from "../services/ShopController";
   import lozad from "lozad";
+  import moment from "moment";
+  moment.locale = "thai";
   // Initialize lozad
 
   export let id;
@@ -13,9 +15,29 @@
   export let limits;
   export let description;
   export let title;
+  export let expired_date;
+
+  // let date = moment(expired_date).endOf("day").fromNow();
 
   export let display = 0;
   export let keen;
+
+  let dateDiff;
+
+  function updateDateDiff() {
+    if (expired_date) {
+      const currentDate = moment();
+      const endDate = moment(expired_date);
+      if (currentDate.isBefore(endDate)) {
+        dateDiff = endDate.from(currentDate);
+      } else {
+        dateDiff = null;
+      }
+    }
+  }
+
+  let interval;
+
   onMount(() => {
     shopData.set({
       id,
@@ -26,12 +48,18 @@
       limits,
       description,
       title,
+      expired_date,
     });
     const observer = lozad(".lozad", {
       rootMargin: "10px 0px", // Adjust the rootMargin as needed
       threshold: 0.1, // Adjust the threshold as needed
     });
     observer.observe();
+    updateDateDiff(); // Initial calculation
+    interval = setInterval(updateDateDiff, 5000); // Update every 1 second
+  });
+  onDestroy(() => {
+    clearInterval(interval);
   });
   function setShopdata() {
     shopData.set({
@@ -43,6 +71,7 @@
       limits,
       description,
       title,
+      expired_date,
     });
   }
 </script>
@@ -68,19 +97,33 @@
             {/if}
           </span>
 
+          {#if limits == 0 || (expired_date && !dateDiff)}
+            <span
+              class="indicator-item indicator-middle indicator-center badge badge-error md:py-3 bg-opacity-50"
+              >สินค้าหมด</span
+            >
+          {/if}
+
           <div class="place-items-center w-full">
             <figure>
               <img data-src={href} alt="Img" class="rounded-lg w-full lozad" />
             </figure>
           </div>
         </div>
-
+        <span class="flex justify-between mx-1">
+          <div class="font-medium text-sm">
+            {dateDiff ? dateDiff : ""}
+          </div>
+          <div class="font-medium text-sm">
+            {buycount} ขายแล้ว
+          </div>
+        </span>
         <div class="card-body">
           <h2 class="card-title h-10 text-lg justify-center leading-none">
             {name}
           </h2>
           <div
-            class="card-actions justify-center md:justify-between align-bottom h-10"
+            class="card-actions justify-center md:justify-between align-bottom"
           >
             <div class="font-bold text-md">
               {#if limits > 0}
@@ -93,12 +136,10 @@
                 </div>
               {:else if limits < 0}
                 <div class="badge badge-info md:py-3">สินค้าประจำ</div>
-              {:else if limits <= 0}
-                <div class="badge badge-error md:py-3">สินค้าหมด</div>
               {/if}
             </div>
             <div class="badge badge-base-200 font-medium text-md md:py-3">
-              {buycount} ขายแล้ว
+              widget
             </div>
           </div>
         </div>

@@ -87,9 +87,9 @@
           {/each}
         </tbody>
       {:else}
-        <div class="flex text-center justify-center">
+        <div class="grid text-center justify-center">
           <span class="text-2xl">Fetching</span>
-          <span class="loading loading-infinity loading-lg" />
+          <progress class="progress w-56" />
         </div>
       {/if}
     </table>
@@ -100,7 +100,7 @@
 <dialog id="editblog" class="modal">
   <form method="dialog" class="modal-box">
     <h3 class="font-bold text-4xl text-info">Edit</h3>
-    <div class="grid gap-1">
+    <div class="grid gap-1 justify-center">
       <p class="py-4">Title</p>
 
       <input
@@ -122,7 +122,7 @@
       <button
         class="btn btn-info"
         onclick="editblog.showModal()"
-        on:click={editBlog(blog_id)}>Edit</button
+        on:click={editBlog(blog_id)}>Submit</button
       >
       <!-- if there is a button in form, it will close the modal -->
       <button class="btn">Close</button>
