@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword,onAuthStateChanged  } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,32 +24,35 @@ export const database = getDatabase(app);
 
 const auth = getAuth(app);
 // Example function to sign in and access the database
+
+// Check if a user is already signed in
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // console.log('User is already signed in:', user);
+    // You can redirect to a protected route or perform any necessary actions here
+  } else {
+    signInAndAccessDatabase
+    // console.log('No user is signed in');
+  }
+});
+
+
 async function signInAndAccessDatabase() {
   try {
-    // Sign in with email and password
-    const userCredential = await signInWithEmailAndPassword(auth, 'kpza1360@gmail.com', 'dgSDAHIO1aefww684');
-
-    // User signed in successfully
-    // const user = userCredential.user;
-    // console.log('User signed in:', user);
-
-    // Access the Realtime Database
 
 
-    // const dataRef = ref(database, 'data'); // Replace 'data' with your desired path
-    // const newData = {
-    //   title: 'Sample Title',
-    //   content: 'Sample Content',
-    // };
-    // await set(dataRef, newData);
+      // If not signed in, perform sign-in
+      const userCredential = await signInWithEmailAndPassword(auth, 'user@example.com', '123456');
+      user = userCredential.user;
+      console.log('User successfully logged in:', user);
 
 
+    // You can redirect to a protected route or perform any necessary actions here
 
-    // console.log('Data added to the database');
   } catch (error) {
     console.error('Error:', error.message);
   }
 }
 
 // Call the function to sign in and access the database
-signInAndAccessDatabase();
+// signInAndAccessDatabase();
