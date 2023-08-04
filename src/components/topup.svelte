@@ -2,7 +2,7 @@
   import { topup } from "../services/topup.js";
   import { inputValue } from "../services/fieldcontrol.js";
   inputValue.set("");
-let topupimg = ["images/topup/step1.jpg","images/topup/step2.jpg"];
+let topupimg = ["images/topup/step1.webp","images/topup/step2.webp"];
 let tabs = ["Step 1", "Step 2"];
 let activeTabIndex = 0;
 </script>

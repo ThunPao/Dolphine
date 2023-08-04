@@ -8,7 +8,7 @@
   import Topup from "../components/topup.svelte";
   import Redeem from "../components/redeem.svelte";
 
-  let logoimg = "images/dpbg.png";
+  let logoimg = "images/dpbg.webp";
 
   onMount(async () => {
     await tick(); // Wait for the DOM to be fully updated

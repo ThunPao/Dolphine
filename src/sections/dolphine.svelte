@@ -16,8 +16,8 @@
   let sub = false;
   let cooldown = false;
 
-  let logoimgvip = "images/dpchan.png";
-  let logoimg = "images/dpchan1.png";
+  let logoimgvip = "images/dpchan2.webp";
+  let logoimg = "images/dpchan1.webp";
 
   function togglesub() {
     if (!cooldown) {
@@ -61,14 +61,10 @@
 </script>
 
 <div class="card bg-base-100 shadow-xl px-2 w-full">
-  <!-- <img class="bg-cover inset-0"
-    src="images/00132-3553236710.png"
-    alt="Cover"
-  /> -->
   <div class="w-full h-52 md:h-[30rem] relative">
     <div
       class="absolute inset-0 bg-cover bg-top bg-no-repeat"
-      style="background-image: url('images/00010.png');"
+      style="background-image: url('images/00010.webp');"
     />
   </div>
   <div class="lg:container lg:mx-auto rounded-lg">
