@@ -41,12 +41,12 @@ let logoimg = "images/dpchan1.webp";
     import "@fontsource/kanit";
   </script>
 
-  <main data-theme="kpz" class="bg-base-300">
+  <main data-theme="kpz" class="bg-[url('images/Bodies/Cardsecbg.webp')] bg-no-repeat bg-cover">
     <!-- class="bg-gradient-to-r from-blue-200 via-sky-100 to-purple-200" -->
     <Navbar client:load />
     <Intro />
     <div
-      class="lg:container lg:mx-auto rounded-lg border-4 border-base-200 bg-base-100"
+      class="lg:container lg:mx-auto rounded-lg bg-base-100 bg-opacity-80 backdrop-blur-md"
     >
       <Slides />
       <!-- <Qsc /> -->
