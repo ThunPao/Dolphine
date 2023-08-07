@@ -142,7 +142,7 @@
                 <div class="badge badge-error md:py-3">สินค้าหมด</div>
               {/if}
             </div>
-            <div class="badge badge-base-200 font-medium text-xs md:py-3">
+            <!-- <div class="badge badge-base-200 font-medium text-xs md:py-3">
               <div class="rating rating-sm">
                 <input
                   type="radio"
@@ -172,7 +172,7 @@
                   class="mask mask-star-2 bg-orange-400"
                 />
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </button>
