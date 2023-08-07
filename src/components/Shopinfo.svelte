@@ -1,13 +1,32 @@
 <script>
-  // import {id,name,href,buycount,point,limits,description,title} from "../components/Shopitem.svelte"
   import { shopData } from "../services/ShopController";
-  // import { onMount } from 'svelte';
+
   // Define the variables where you want to store the shop item data
-  let id, name, href, buycount, point, limits, description, title;
+  let id,
+    name,
+    href,
+    buycount,
+    point,
+    limits,
+    description,
+    title,
+    expired_date,
+    dateDiff;
 
   // Subscribe to the shopData store to get updates
   shopData.subscribe((data) => {
-    ({ id, name, href, buycount, point, limits, description, title } = data);
+    ({
+      id,
+      name,
+      href,
+      buycount,
+      point,
+      limits,
+      description,
+      title,
+      expired_date,
+      dateDiff,
+    } = data);
   });
 </script>
 
@@ -27,6 +46,12 @@
           <p class="font-extrabold text-success">แจกฟรี</p>
         {/if}
       </span>
+      {#if limits == 0 || (expired_date && !dateDiff)}
+        <span
+          class="indicator-item indicator-middle indicator-center badge badge-error md:py-3 bg-opacity-50"
+          >สินค้าหมด</span
+        >
+      {/if}
 
       <div class="place-items-center w-full">
         <figure>

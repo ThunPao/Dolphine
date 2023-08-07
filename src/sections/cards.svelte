@@ -90,6 +90,7 @@
                 description={data.description}
                 title={data.titles}
                 expired_date={data.expired_date}
+                dateDiff={null}
               />
             {/each}
           {/if}

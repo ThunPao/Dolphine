@@ -103,6 +103,7 @@ const initialShopData = {
   limits: 0,
   description: '',
   title: '',
-  expired_date: null
+  expired_date: null,
+  dateDiff: null
 };
 export const shopData = writable(initialShopData);

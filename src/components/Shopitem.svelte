@@ -4,9 +4,9 @@
   import { shopData } from "../services/ShopController";
   import lozad from "lozad";
   import moment from "moment";
-  moment.locale = "thai";
-  // Initialize lozad
+  import "moment/locale/th";
 
+  // Initialize lozad
   export let id;
   export let name;
   export let href;
@@ -16,13 +16,18 @@
   export let description;
   export let title;
   export let expired_date;
+  export let dateDiff = null;
 
-  // let date = moment(expired_date).endOf("day").fromNow();
+  let date;
+
+  if (expired_date) {
+    date = moment(expired_date).endOf("day").fromNow();
+    // date = moment(expired_date).format("LT");
+    console.log(date);
+  }
 
   export let display = 0;
   export let keen;
-
-  let dateDiff;
 
   function updateDateDiff() {
     if (expired_date) {
@@ -39,6 +44,8 @@
   let interval;
 
   onMount(() => {
+    moment.locale("th");
+
     shopData.set({
       id,
       name,
@@ -49,6 +56,7 @@
       description,
       title,
       expired_date,
+      dateDiff,
     });
     const observer = lozad(".lozad", {
       rootMargin: "10px 0px", // Adjust the rootMargin as needed
@@ -56,7 +64,7 @@
     });
     observer.observe();
     updateDateDiff(); // Initial calculation
-    interval = setInterval(updateDateDiff, 5000); // Update every 1 second
+    interval = setInterval(updateDateDiff, 1000); // Update every 1 second
   });
   onDestroy(() => {
     clearInterval(interval);
@@ -72,6 +80,7 @@
       description,
       title,
       expired_date,
+      dateDiff,
     });
   }
 </script>
