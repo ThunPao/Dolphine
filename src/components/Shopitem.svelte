@@ -5,6 +5,7 @@
   import lozad from "lozad";
   import { DateTime } from "luxon";
   import { Settings } from "luxon";
+
   // Set the locale to Thai
   Settings.defaultLocale = "th";
   // Initialize lozad
@@ -17,19 +18,18 @@
   export let description;
   export let title;
   export let expired_date;
+  export let sale_date = null;
   export let dateDiff = null;
 
   export let display = 0;
   export let keen;
 
   function updateDateDiff() {
-    if (expired_date) {
-      const currentDate = DateTime.local();
-      const endDate = DateTime.fromISO(expired_date);
-      if (currentDate < endDate) {
-        dateDiff = endDate.toRelative();
-      } else {
-        dateDiff = null;
+    if (sale_date && DateTime.fromISO(sale_date) > DateTime.local()) {
+      dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).toRelative();
+    } else {
+      if (expired_date && DateTime.local() < DateTime.fromISO(expired_date)) {
+        dateDiff = "จบ" + DateTime.fromISO(expired_date).toRelative();
       }
     }
   }
@@ -46,6 +46,7 @@
       limits,
       description,
       title,
+      sale_date,
       expired_date,
       dateDiff,
     });
@@ -70,6 +71,7 @@
       limits,
       description,
       title,
+      sale_date,
       expired_date,
       dateDiff,
     });
@@ -100,7 +102,7 @@
           {#if limits == 0 || (expired_date && !dateDiff)}
             <span
               class="indicator-item indicator-middle indicator-center badge badge-error md:py-3 bg-opacity-50"
-              >สินค้าหมด</span
+              >หมดแล้วจ้า</span
             >
           {/if}
 
@@ -123,7 +125,7 @@
             {name}
           </h2>
           <div
-            class="card-actions justify-center md:justify-between align-bottom"
+            class="card-actions justify-center md:justify-between align-bottom h-10"
           >
             <div class="font-bold text-md">
               {#if limits > 0}
@@ -136,10 +138,40 @@
                 </div>
               {:else if limits < 0}
                 <div class="badge badge-info md:py-3">สินค้าประจำ</div>
+              {:else}
+                <div class="badge badge-error md:py-3">สินค้าหมด</div>
               {/if}
             </div>
-            <div class="badge badge-base-200 font-medium text-md md:py-3">
-              widget
+            <div class="badge badge-base-200 font-medium text-xs md:py-3">
+              <div class="rating rating-sm">
+                <input
+                  type="radio"
+                  name="rating-2"
+                  class="mask mask-star-2 bg-orange-400"
+                />
+                <input
+                  type="radio"
+                  name="rating-2"
+                  class="mask mask-star-2 bg-orange-400"
+                  checked
+                />
+                <input
+                  type="radio"
+                  name="rating-2"
+                  class="mask mask-star-2 bg-orange-400"
+                />
+                <input
+                  checked
+                  type="radio"
+                  name="rating-2"
+                  class="mask mask-star-2 bg-orange-400"
+                />
+                <input
+                  type="radio"
+                  name="rating-2"
+                  class="mask mask-star-2 bg-orange-400"
+                />
+              </div>
             </div>
           </div>
         </div>

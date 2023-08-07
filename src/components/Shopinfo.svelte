@@ -38,7 +38,7 @@
     <h3 class="font-bold text-lg">รายละเอียดสินค้า</h3>
     <div class="indicator w-full">
       <span
-        class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-200 font-extrabold sm:text-lg md:text-xl"
+        class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 font-extrabold sm:text-lg md:text-xl"
       >
         {#if point > 0}
           <p class="font-extrabold text-info">{point} DP</p>
@@ -46,10 +46,11 @@
           <p class="font-extrabold text-success">แจกฟรี</p>
         {/if}
       </span>
+
       {#if limits == 0 || (expired_date && !dateDiff)}
         <span
           class="indicator-item indicator-middle indicator-center badge badge-error md:py-3 bg-opacity-50"
-          >สินค้าหมด</span
+          >หมดแล้วจ้า</span
         >
       {/if}
 
@@ -60,17 +61,15 @@
       </div>
     </div>
 
-    <div class="flex justify-between">
-      <div class="hidden badge badge-success font-bold text-lg">
-        สินค้าเข้าใหม่
+    <span class="flex justify-between mx-1">
+      <div class="font-medium text-sm">
+        {dateDiff ? dateDiff : ""}
       </div>
+      <div class="font-medium text-sm">
+        {buycount} ขายแล้ว
+      </div>
+    </span>
 
-      <div>
-        <div class="hidden badge badge-primary font-bold text-lg">
-          {buycount} ซื้อแล้ว
-        </div>
-      </div>
-    </div>
     <div class="modal-body text-clip overflow-hidden">
       <h2 class="card-title">
         {name}

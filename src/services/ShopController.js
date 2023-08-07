@@ -29,7 +29,7 @@ export let shopitems = writable(null);
       const data = await response.json();
       // console.log(data.message);
         
-      toastr.warning(
+      return toastr.warning(
           ""+ data.message,
           "ซื้อสินค้าไม่สำเร็จ!",
           {
@@ -103,6 +103,7 @@ const initialShopData = {
   limits: 0,
   description: '',
   title: '',
+  sale_date: null,
   expired_date: null,
   dateDiff: null
 };
