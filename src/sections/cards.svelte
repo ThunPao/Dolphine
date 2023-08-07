@@ -136,12 +136,13 @@
         ><i class="fa-solid fa-table-cells-large" />Grid</option
       >
     </select> -->
-    <label class="swap rounded-lg bg-primary p-3 join-item" title=" ">
+    <label class="swap rounded-lg bg-primary p-3 join-item">
       <input type="checkbox" on:click={swapdisplaymode}/>
       <div class="swap-on"><i class="fa-solid fa-list" /></div>
       <div class="swap-off">
         <i class="fa-solid fa-table-cells-large" />
       </div>
+      <span class="sr-only">สลับโหมด</span>
     </label>
   </div>
 </div>
