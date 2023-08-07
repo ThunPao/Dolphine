@@ -6,7 +6,6 @@
 <!-- Open the modal using ID.showModal() method -->
 <dialog id="loginuser_pop" class="modal">
   <form method="dialog" class="modal-box w-11/12 max-w-5xl">
-    <h3 class="font-bold text-lg text-center">ระบบสมาชิก</h3>
 
     <!-- <div
       class="hidden gallery flex gap-4 items-center snap-x snap-mandatory overflow-x-scroll"
@@ -34,9 +33,8 @@
       </div>
     </div> -->
     <div class="grid gap-3 justify-center text-center">
-      <h1 class="font-bold text-4xl">Dolphine</h1>
-      <h4>เข้าสู่ระบบ</h4>
-
+      <p class="font-bold text-4xl">Dolphine</p>
+    <p class="font-bold text-lg text-center">ระบบสมาชิก / เข้าสู่ระบบ</p>
       <div class="join grid gap-3">
         <input
           type="text"

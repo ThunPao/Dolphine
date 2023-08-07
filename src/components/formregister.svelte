@@ -10,10 +10,9 @@
 <!-- Open the modal using ID.showModal() method -->
 <dialog id="reguser_pop" class="modal">
   <form method="dialog" class="modal-box w-11/12 max-w-5xl">
-    <h3 class="font-bold text-lg text-center">ระบบสมาชิก</h3>
     <div class="grid gap-3 justify-center text-center">
-      <h1 class="font-bold text-4xl">Dolphine</h1>
-      <h4>สมัครสมาชิก</h4>
+      <p class="font-bold text-4xl">Dolphine</p>
+      <p class="font-bold text-lg text-center">ระบบสมาชิก / สมัครสมาชิก</p>
 
       <div class="join grid gap-3">
         <input

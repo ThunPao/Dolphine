@@ -142,6 +142,7 @@
       <div class="swap-off">
         <i class="fa-solid fa-table-cells-large" />
       </div>
+      สลับโหมด
     </label>
   </div>
 </div>
