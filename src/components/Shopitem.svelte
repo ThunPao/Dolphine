@@ -106,9 +106,9 @@
             >
           {/if}
 
-          <div class="place-items-center w-full">
+          <div class="place-items-center">
             <figure>
-              <img data-src={href} alt="Img" class="rounded-lg w-full lozad" />
+              <img data-src={href} alt="Img" class="rounded-lg lozad" />
             </figure>
           </div>
         </div>
