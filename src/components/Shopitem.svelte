@@ -3,9 +3,10 @@
 
   import { shopData } from "../services/ShopController";
   import lozad from "lozad";
-  import moment from "moment";
-  import "moment/locale/th";
-
+  import { DateTime } from "luxon";
+  import { Settings } from "luxon";
+  // Set the locale to Thai
+  Settings.defaultLocale = "th";
   // Initialize lozad
   export let id;
   export let name;
@@ -18,23 +19,15 @@
   export let expired_date;
   export let dateDiff = null;
 
-  let date;
-
-  if (expired_date) {
-    date = moment(expired_date).endOf("day").fromNow();
-    // date = moment(expired_date).format("LT");
-    console.log(date);
-  }
-
   export let display = 0;
   export let keen;
 
   function updateDateDiff() {
     if (expired_date) {
-      const currentDate = moment();
-      const endDate = moment(expired_date);
-      if (currentDate.isBefore(endDate)) {
-        dateDiff = endDate.from(currentDate);
+      const currentDate = DateTime.local();
+      const endDate = DateTime.fromISO(expired_date);
+      if (currentDate < endDate) {
+        dateDiff = endDate.toRelative();
       } else {
         dateDiff = null;
       }
@@ -44,8 +37,6 @@
   let interval;
 
   onMount(() => {
-    moment.locale("th");
-
     shopData.set({
       id,
       name,
