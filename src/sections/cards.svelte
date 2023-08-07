@@ -178,7 +178,7 @@
   {/if}
 {:else}
   <div
-    class="grid gap-2 xl:grid-rows-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 p-1 "
+    class="grid gap-2 xl:grid-rows-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 p-1"
   >
     {#if $shopitems !== null && $shopitems.length > 0}
       {#each $shopitems.filter(filterShopItems).slice(0, 18) as data}
