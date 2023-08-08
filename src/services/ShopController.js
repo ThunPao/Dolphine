@@ -5,6 +5,7 @@ import {apiurl} from "../services/apiurl";
 
 export let shopitems = writable(null);
 
+
 // async function handleclick() {
 //     await new Promise((resolve) => setTimeout(resolve, 500));
 

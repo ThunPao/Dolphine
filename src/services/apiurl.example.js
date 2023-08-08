@@ -7,3 +7,5 @@ apiurl = "https://dolphine-fastify.vercel.app/";
 if(svless == 2){
     apiurl = "http://dolphine.servegame.com:3005/"
 }
+
+export var imgurl = apiurl+"images/"

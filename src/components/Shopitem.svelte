@@ -3,8 +3,9 @@
 
   import { shopData } from "../services/ShopController";
   import lozad from "lozad";
-  import { DateTime } from "luxon";
-  import { Settings } from "luxon";
+  import { DateTime,Settings } from "luxon";
+  import {imgurl} from "../services/apiurl";
+
 
   // Set the locale to Thai
   Settings.defaultLocale = "th";
@@ -57,6 +58,9 @@
     observer.observe();
     updateDateDiff(); // Initial calculation
     interval = setInterval(updateDateDiff, 1000); // Update every 1 second
+    if (!href){
+      href = "default.webp"
+    }
   });
   onDestroy(() => {
     clearInterval(interval);
@@ -108,7 +112,7 @@
 
           <div class="place-items-center">
             <figure>
-              <img data-src={href} alt="Img" class="rounded-lg lozad" />
+              <img data-src={imgurl+href} alt="Img" class="rounded-lg lozad" />
             </figure>
           </div>
         </div>
@@ -179,7 +183,7 @@
     </div>
   {:else}
     <div class="p-3 card card-side bg-base-100 shadow-xl">
-      <figure><img data-src={href} alt="รูปภาพ" class="lozad" /></figure>
+      <figure><img data-src={imgurl+href} alt="รูปภาพ" class="lozad" /></figure>
       <div class="card-body">
         <h2 class="card-title">{name}</h2>
         <p>{description}</p>

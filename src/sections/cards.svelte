@@ -1,5 +1,5 @@
 <script>
-  const cardimg = "https://via.placeholder.com/464x387";
+  // const cardimg = "https://via.placeholder.com/464x387";
   import Shopcard from "../components/Shopitem.svelte";
   import MockupCard from "../components/Mockup_card.svelte";
   import { getshopitems, shopitems } from "../services/ShopController";
@@ -83,7 +83,7 @@
                 keen="true"
                 id={data.id}
                 name={data.name}
-                href={cardimg}
+                href={data.href}
                 buycount={data.buycount}
                 point={data.point}
                 limits={data.limits}
@@ -155,7 +155,7 @@
         keen="false"
         id={data.id}
         name={data.name}
-        href={cardimg}
+        href={data.href}
         buycount={data.buycount}
         point={data.point}
         limits={data.limits}
@@ -187,7 +187,7 @@
           keen="false"
           id={data.id}
           name={data.name}
-          href={cardimg}
+          href={data.href}
           buycount={data.buycount}
           point={data.point}
           limits={data.limits}
