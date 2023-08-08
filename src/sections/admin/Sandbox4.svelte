@@ -31,12 +31,14 @@
     commands = [
       ...commands,
       {
-        // shop_id: 1,
         title: "",
         rcon_command: "",
         visibled: true,
       },
     ];
+  }
+  function removeItem(index) {
+    commands = commands.filter((_, i) => i !== index);
   }
   async function saveCommands(shop_id) {
     try {
@@ -194,6 +196,9 @@
 
     {#each commands as command, index}
       <div class="flex gap-1" key={index}>
+        <button class="btn btn-error btn-sm" on:click={() => removeItem(index)}
+          >ลบ</button
+        >
         <input
           type="text"
           placeholder="title"
