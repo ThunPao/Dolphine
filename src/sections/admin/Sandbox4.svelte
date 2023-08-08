@@ -1,5 +1,7 @@
 <!-- ShopItems.svelte -->
 <script>
+import {apiurl} from "../../services/apiurl";
+
   let name = "";
   let description = "";
   let limits = -1;
@@ -44,7 +46,7 @@
     try {
       const shopid = shop_id;
       const response = await fetch(
-        `http://127.0.0.1:3005/addcmd?shop_id=${shopid}`,
+        apiurl+`addcmd?shop_id=${shopid}`,
         {
           method: "POST",
           headers: {
@@ -84,7 +86,7 @@
     formData.append("quality", 20);
 
     try {
-      const response = await fetch("http://localhost:3005/shopitems", {
+      const response = await fetch(apiurl+"shopitems", {
         method: "POST",
         body: formData,
       });
