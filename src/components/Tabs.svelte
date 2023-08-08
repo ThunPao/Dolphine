@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { shopitems, shopData } from "../services/ShopController";
+  import {imgurl} from "../services/apiurl";
 
   let tabs = ["ไอเทมใหม่", "ไอเทมยอดฮิต", "อันดับเทพทรู"];
   let activeTabIndex = 2;
@@ -18,7 +19,11 @@
       expired_date: data.expired_date,
       dateDiff: data.dateDiff,
     });
+    if (!href){
+      href = "default.webp"
+    }
   }
+
 </script>
 
 <div class="tabs d-flex justify-center">
@@ -51,7 +56,7 @@
       <!-- row loop -->
       {#if $shopitems !== null}
         {#if $shopitems.length > 0}
-          {#each $shopitems.slice(0, 9) as item, index}
+          {#each $shopitems.slice(0, 5) as item, index}
             <tr
               onclick="shopinfo.showModal()"
               on:click={setShopdata(item)}
@@ -68,7 +73,21 @@
                 <th />
               {/if}
 
-              <td>{item.name}</td>
+              <td>
+                <div class="flex items-center space-x-3">
+                  <div class="avatar">
+                    <div class="mask mask-squircle w-12 h-12">
+                      <img
+                        src={!item.href ? imgurl+"default.webp" : imgurl+item.href}
+                        alt="Avatar Tailwind CSS Component"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-bold">{item.name}</div>
+                  </div>
+                </div>
+              </td>
               <td>{item.buycount}</td>
             </tr>
           {/each}
