@@ -9,6 +9,10 @@
   import KeenSlider from "keen-slider";
   import "keen-slider/keen-slider.min.css";
   import { DateTime, Settings } from "luxon";
+  import { imgurl } from "../services/apiurl";
+
+  const defaultimg = imgurl + "default.webp";
+
   // import { dateDiff } from "../services/Playdate";
 
   // Set the locale to Thai
@@ -112,7 +116,7 @@
                 keen="true"
                 id={data.id}
                 name={data.name}
-                href={!data.href ? "default.webp" : data.href}
+                href={!data.href ? defaultimg : imgurl + data.href}
                 buycount={data.buycount}
                 point={data.point}
                 limits={data.limits}
@@ -186,7 +190,7 @@
         keen="false"
         id={data.id}
         name={data.name}
-        href={!data.href ? "default.webp" : data.href}
+        href={!data.href ? defaultimg : imgurl + data.href}
         buycount={data.buycount}
         point={data.point}
         limits={data.limits}
@@ -219,7 +223,7 @@
           keen="false"
           id={data.id}
           name={data.name}
-          href={!data.href ? "default.webp" : data.href}
+          href={!data.href ? defaultimg : imgurl + data.href}
           buycount={data.buycount}
           point={data.point}
           limits={data.limits}

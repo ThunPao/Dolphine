@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
 
   import { shopData } from "../services/ShopController";
-  import { imgurl } from "../services/apiurl";
+  // import { imgurl } from "../services/apiurl";
   import { observer } from "../services/basectl";
   import { DateTime, Settings } from "luxon";
   Settings.defaultLocale = "th";
@@ -110,11 +110,7 @@
 
           <div class="place-items-center">
             <figure>
-              <img
-                data-src={imgurl + href}
-                alt="Img"
-                class="rounded-lg lozad"
-              />
+              <img data-src={href} alt="Img" class="rounded-lg lozad" />
             </figure>
           </div>
         </div>

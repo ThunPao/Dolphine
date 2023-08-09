@@ -1,6 +1,6 @@
 <script>
   import { shopData } from "../services/ShopController";
-  import {imgurl} from "../services/apiurl";
+  import { imgurl } from "../services/apiurl";
 
   // Define the variables where you want to store the shop item data
   let id,
@@ -28,9 +28,6 @@
       expired_date,
       dateDiff,
     } = data);
-    if (!href){
-      href = "default.webp"
-    }
   });
 </script>
 
@@ -60,7 +57,7 @@
 
       <div class="place-items-center w-full">
         <figure>
-          <img src={imgurl+href} alt="Img" class="rounded-lg w-full" />
+          <img src={href} alt="Img" class="rounded-lg w-full" />
         </figure>
       </div>
     </div>
