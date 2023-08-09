@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { shopitems, shopData } from "../services/ShopController";
-  import {imgurl} from "../services/apiurl";
+  import { imgurl } from "../services/apiurl";
 
   let tabs = ["ไอเทมใหม่", "ไอเทมยอดฮิต", "อันดับเทพทรู"];
   let activeTabIndex = 2;
@@ -19,11 +19,10 @@
       expired_date: data.expired_date,
       dateDiff: data.dateDiff,
     });
-    if (!href){
-      href = "default.webp"
+    if (!data.href) {
+      data.href = "default.webp";
     }
   }
-
 </script>
 
 <div class="tabs d-flex justify-center">
@@ -78,7 +77,9 @@
                   <div class="avatar">
                     <div class="mask mask-squircle w-12 h-12">
                       <img
-                        src={!item.href ? imgurl+"default.webp" : imgurl+item.href}
+                        src={!item.href
+                          ? imgurl + "default.webp"
+                          : imgurl + item.href}
                         alt="Avatar Tailwind CSS Component"
                       />
                     </div>

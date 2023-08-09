@@ -2,13 +2,11 @@
   import { onMount, onDestroy } from "svelte";
 
   import { shopData } from "../services/ShopController";
-  import lozad from "lozad";
-  import { DateTime,Settings } from "luxon";
-  import {imgurl} from "../services/apiurl";
-
-
-  // Set the locale to Thai
+  import { imgurl } from "../services/apiurl";
+  import { observer } from "../services/basectl";
+  import { DateTime, Settings } from "luxon";
   Settings.defaultLocale = "th";
+  // import { updateDateDiff } from "../services/Playdate";
   // Initialize lozad
   export let id;
   export let name;
@@ -25,18 +23,7 @@
   export let display = 0;
   export let keen;
 
-  function updateDateDiff() {
-    if (sale_date && DateTime.fromISO(sale_date) > DateTime.local()) {
-      dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).toRelative();
-    } else {
-      if (expired_date && DateTime.local() < DateTime.fromISO(expired_date)) {
-        dateDiff = "จบ" + DateTime.fromISO(expired_date).toRelative();
-      }
-    }
-  }
-
   let interval;
-
   onMount(() => {
     shopData.set({
       id,
@@ -51,20 +38,31 @@
       expired_date,
       dateDiff,
     });
-    const observer = lozad(".lozad", {
-      rootMargin: "10px 0px", // Adjust the rootMargin as needed
-      threshold: 0.1, // Adjust the threshold as needed
-    });
     observer.observe();
-    updateDateDiff(); // Initial calculation
-    interval = setInterval(updateDateDiff, 1000); // Update every 1 second
-    if (!href){
-      href = "default.webp"
+
+    if (sale_date > DateTime.local()) {
+      interval = setInterval(updateDateDiff, 1000); // Update every 1 second
+    }
+    if (expired_date < DateTime.local()) {
+      interval = setInterval(updateDateDiff, 3000); // Update every 1 second
     }
   });
   onDestroy(() => {
     clearInterval(interval);
   });
+
+  function updateDateDiff() {
+    console.log("Ping");
+    if (sale_date && DateTime.fromISO(sale_date) > DateTime.local()) {
+      dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).toRelative();
+    } else {
+      if (expired_date && DateTime.local() < DateTime.fromISO(expired_date)) {
+        dateDiff = "จบ" + DateTime.fromISO(expired_date).toRelative();
+      }
+    }
+    return dateDiff;
+  }
+
   function setShopdata() {
     shopData.set({
       id,
@@ -82,7 +80,7 @@
   }
 </script>
 
-<div class={keen ? "keen-slider__slide px-1 pb-1" : ""}>
+<span class={keen ? "keen-slider__slide px-1 pb-1" : ""}>
   {#if display == 0}
     <div
       class="card card-compact shadow-md dark:hover:shadow-amber-500 hover:shadow-blue-500 bg-base-200 dark:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
@@ -112,7 +110,11 @@
 
           <div class="place-items-center">
             <figure>
-              <img data-src={imgurl+href} alt="Img" class="rounded-lg lozad" />
+              <img
+                data-src={imgurl + href}
+                alt="Img"
+                class="rounded-lg lozad"
+              />
             </figure>
           </div>
         </div>
@@ -153,28 +155,6 @@
                   name="rating-2"
                   class="mask mask-star-2 bg-orange-400"
                 />
-                <input
-                  type="radio"
-                  name="rating-2"
-                  class="mask mask-star-2 bg-orange-400"
-                  checked
-                />
-                <input
-                  type="radio"
-                  name="rating-2"
-                  class="mask mask-star-2 bg-orange-400"
-                />
-                <input
-                  checked
-                  type="radio"
-                  name="rating-2"
-                  class="mask mask-star-2 bg-orange-400"
-                />
-                <input
-                  type="radio"
-                  name="rating-2"
-                  class="mask mask-star-2 bg-orange-400"
-                />
               </div>
             </div> -->
           </div>
@@ -183,7 +163,7 @@
     </div>
   {:else}
     <div class="p-3 card card-side bg-base-100 shadow-xl">
-      <figure><img data-src={imgurl+href} alt="รูปภาพ" class="lozad" /></figure>
+      <!-- <figure><img data-src={imgurl+href} alt="รูปภาพ" class="lozad" /></figure> -->
       <div class="card-body">
         <h2 class="card-title">{name}</h2>
         <p>{description}</p>
@@ -199,4 +179,4 @@
       </div>
     </div>
   {/if}
-</div>
+</span>

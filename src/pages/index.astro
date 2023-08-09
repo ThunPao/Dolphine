@@ -11,6 +11,7 @@ import Btm from "../sections/bottom.astro";
 // import Cheri from '../sections/cheri.svelte';
 import Intro from "../sections/intro.astro";
 import "../styles/base.scss";
+
 import Shopinfo from "../components/Shopinfo.svelte";
 import Btncf from "../components/buyshopitem.svelte";
 let logoimg = "images/dpchan1.webp";
@@ -38,32 +39,36 @@ let logoimg = "images/dpchan1.webp";
     <meta property="og:image" content={logoimg} />
     <meta property="og:url" content="http://dolphine.servegame.com/" />
     <meta property="og:type" content="website" />
-  </head>
-  <script>
-    import "@fontsource/kanit";
-  </script>
+    <script>
+      import "@fontsource/kanit";
+    </script></head
+  >
 
-  <main data-theme="kpz" class="origin bg-no-repeat bg-cover" style="background-image: url('images/Cardsecbg.webp')">
+  <main
+    data-theme="kpz"
+    class="origin bg-no-repeat bg-cover"
+    style="background-image: url('images/Cardsecbg.webp')"
+  >
     <!-- class="bg-gradient-to-r from-blue-200 via-sky-100 to-purple-200" -->
     <Navbar client:load />
     <Intro />
     <div
       class="lg:container lg:mx-auto rounded-lg bg-base-100 bg-opacity-80 backdrop-blur-md"
-
     >
       <Slides />
       <!-- <Qsc /> -->
       <Alerts />
       <!-- <Cheri client:load/> -->
       <Cards client:only="svelte" />
-      <Shopinfo client:load />
-      <Btncf client:load />
+
       <!-- <SSRCards /> -->
       <!-- SSR Astro -->
       <!-- <Blogs /> -->
     </div>
     <Btm />
     <!-- <Apitest/> -->
+    <Shopinfo client:load />
+    <Btncf client:load />
   </main>
 
 

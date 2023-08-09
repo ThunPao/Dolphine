@@ -8,6 +8,11 @@
   import { onMount, tick, afterUpdate } from "svelte";
   import KeenSlider from "keen-slider";
   import "keen-slider/keen-slider.min.css";
+  import { DateTime, Settings } from "luxon";
+  // import { dateDiff } from "../services/Playdate";
+
+  // Set the locale to Thai
+  Settings.defaultLocale = "th";
 
   let slider = null;
   let searchQuery = "";
@@ -15,13 +20,31 @@
   function swapdisplaymode() {
     displaymode = !displaymode;
   }
+  function updateDateDiff(start, end) {
+    let dateDiff = null;
+    if (!start && !end) {
+      return null;
+    } else if (start && DateTime.fromISO(start) > DateTime.local()) {
+      return (dateDiff = "เริ่ม" + DateTime.fromISO(start).toRelative());
+    } else {
+      if (end && DateTime.local() < DateTime.fromISO(end)) {
+        return (dateDiff = "จบ" + DateTime.fromISO(end).toRelative());
+      }
+    }
+  }
   onMount(async () => {
     getshopitems();
     await tick(); // Wait for the DOM to be fully updated
   });
+
   function filterShopItems(item) {
     return item.name.toLowerCase().includes(searchQuery.toLowerCase());
   }
+
+  function findshoptimed(item) {
+    return item.sale_date;
+  }
+
   function gofinditem() {
     shopitems.update((items) => items);
   }
@@ -52,9 +75,15 @@
 
   onMount(initializeSlider);
   afterUpdate(initializeSlider);
+
+  //   if (shopitems !== null && shopitems.length > 0){
+  // each(shopitems.slice(0, 10) as data){
+
+  // }
+  //   }
 </script>
 
-<div class="grid grid-cols-1 xl:grid-cols-4 gap-3 xl:m-5">
+<div class="grid grid-cols-1 xl:grid-cols-4 xl:m-5">
   <div class="carditems md:col-span-3">
     <!--  -->
     <div class="alert shadow-lg">
@@ -77,13 +106,13 @@
         <!-- Slides -->
         {#if $shopitems !== null}
           {#if $shopitems.length > 0}
-            {#each $shopitems.slice(0, 10) as data}
+            {#each $shopitems.slice(0, 9) as data}
               <Shopcard
                 display="0"
                 keen="true"
                 id={data.id}
                 name={data.name}
-                href={data.href}
+                href={!data.href ? "default.webp" : data.href}
                 buycount={data.buycount}
                 point={data.point}
                 limits={data.limits}
@@ -91,7 +120,7 @@
                 title={data.titles}
                 sale_date={data.sale_date}
                 expired_date={data.expired_date}
-                dateDiff={null}
+                dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
               />
             {/each}
           {/if}
@@ -103,14 +132,16 @@
       <!-- </div> -->
     </div>
   </div>
-  <div class="side-carditems bg-base-200 rounded-lg">
+  <div class="bg-base-200 rounded-lg">
     <div class="overflow-x-auto">
       <Tabs />
     </div>
   </div>
 </div>
 
-<div class="bg-base-200 grid gap-2 p-3 justify-center focus:bg-white">
+<div
+  class="bg-base-200 grid gap-2 p-3 justify-center focus:bg-white rounded-lg"
+>
   <div class="text-2xl font-medium">รายการไอเทมทั้งหมด</div>
 
   <div class="join">
@@ -137,7 +168,7 @@
       >
     </select> -->
     <label class="swap rounded-lg bg-primary p-3 join-item">
-      <input type="checkbox" on:click={swapdisplaymode}/>
+      <input type="checkbox" on:click={swapdisplaymode} />
       <div class="swap-on"><i class="fa-solid fa-list" /></div>
       <div class="swap-off">
         <i class="fa-solid fa-table-cells-large" />
@@ -155,13 +186,14 @@
         keen="false"
         id={data.id}
         name={data.name}
-        href={data.href}
+        href={!data.href ? "default.webp" : data.href}
         buycount={data.buycount}
         point={data.point}
         limits={data.limits}
         description={data.description}
         title={data.titles}
         expired_date={data.expired_date}
+        dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
       />
     {/each}
     {#if $shopitems.filter(filterShopItems).length === 0}
@@ -187,13 +219,14 @@
           keen="false"
           id={data.id}
           name={data.name}
-          href={data.href}
+          href={!data.href ? "default.webp" : data.href}
           buycount={data.buycount}
           point={data.point}
           limits={data.limits}
           description={data.description}
           title={data.titles}
           expired_date={data.expired_date}
+          dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
         />
       {/each}
       {#if $shopitems.filter(filterShopItems).length === 0}
