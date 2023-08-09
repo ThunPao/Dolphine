@@ -1,6 +1,5 @@
 <script>
   import { shopData } from "../services/ShopController";
-  import { imgurl } from "../services/apiurl";
 
   // Define the variables where you want to store the shop item data
   let id,

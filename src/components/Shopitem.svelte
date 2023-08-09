@@ -52,7 +52,6 @@
   });
 
   function updateDateDiff() {
-    console.log("Ping");
     if (sale_date && DateTime.fromISO(sale_date) > DateTime.local()) {
       dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).toRelative();
     } else {
