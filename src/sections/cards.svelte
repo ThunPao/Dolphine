@@ -97,7 +97,7 @@
         <i class="fa-solid fa-rocket mt-4 md:mt-0" />
       </span>
       <div>
-        <h3 class="font-bold text-lg">Trends สินค้าติดเทรนด์!</h3>
+        <p class="font-bold text-lg">Trends สินค้าติดเทรนด์!</p>
         <div class="text-xs">สินค้าที่มีคนซื้อมากที่สุด</div>
       </div>
     </div>
