@@ -88,15 +88,25 @@
         <br />
         <div class="p-2 rounded-lg bg-base-300">
           เมื่อซื้อ จะได้รับตามรายการทั้งหมดดังต่อไปนี้<br />
-          {#each title.split(",") as item}
-            <li>{item}</li>
-          {/each}
+          <ul>
+            {#each title.split(",") as item}
+              <ul class="menu bg-base-200 w-56 rounded-box">
+                <li>
+                  {item}
+                </li>
+              </ul>
+            {/each}
+          </ul>
         </div>
       {:else if title}
         <br />
         <div class="p-2 rounded-lg bg-base-300">
           เมื่อซื้อ จะได้รับรายการดังต่อไปนี้<br />
-          <li>{title}</li>
+          <ul class="menu bg-base-200 w-56 rounded-box">
+            <li>
+              {title}
+            </li>
+          </ul>
         </div>
       {/if}
 
