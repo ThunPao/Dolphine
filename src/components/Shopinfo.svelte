@@ -100,9 +100,9 @@
         </div>
       {:else if title}
         <br />
-        <div class="p-2 rounded-lg bg-base-300">
+        <div class="p-2 rounded-lg bg-base-300 text-center">
           เมื่อซื้อ จะได้รับรายการดังต่อไปนี้<br />
-          <ul class="menu bg-base-200 w-56 rounded-box">
+          <ul class="menu bg-base-200 rounded-box">
             <li>
               {title}
             </li>
