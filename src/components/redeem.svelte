@@ -10,7 +10,7 @@
     <h1 class="font-bold text-4xl text-amber-400 dark:text-amber-200">
       กรอกโค๊ดรหัส
     </h1>
-    <h4>กรอกรหัสแลกรับ</h4>
+    <p class="text-md">กรอกรหัสแลกรับ</p>
     <div class="p-3">
       <input
         type="text"
