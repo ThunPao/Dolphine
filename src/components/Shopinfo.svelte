@@ -86,11 +86,11 @@
 
       {#if title && title.includes(",")}
         <br />
-        <div class="p-2 rounded-lg bg-base-300">
+        <div class="p-2 rounded-lg bg-base-300 text-center">
           เมื่อซื้อ จะได้รับตามรายการทั้งหมดดังต่อไปนี้<br />
           <ul>
             {#each title.split(",") as item}
-              <ul class="menu bg-base-200 w-56 rounded-box">
+              <ul class="menu bg-base-200 rounded-box">
                 <li>
                   {item}
                 </li>
