@@ -56,7 +56,13 @@
 
       <div class="place-items-center w-full">
         <figure>
-          <img src={href} alt="Img" class="rounded-lg w-full" />
+          <img
+            src={href}
+            alt="Img"
+            class="rounded-lg img-fluid"
+            width="500"
+            height="200"
+          />
         </figure>
       </div>
     </div>

@@ -109,7 +109,13 @@
 
           <div class="place-items-center">
             <figure>
-              <img data-src={href} alt="Img" class="rounded-lg lozad" />
+              <img
+                data-src={href}
+                alt="Img"
+                class="rounded-lg lozad"
+                width="464"
+                height="387"
+              />
             </figure>
           </div>
         </div>
