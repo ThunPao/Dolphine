@@ -8,10 +8,10 @@
 
 <dialog id="fast_menu" class="modal">
   <form method="dialog" class="modal-box">
-    <h3 class="font-medium text-4xl text-center">เมนู</h3>
-    <p class="py-4">Press ESC key or click outside to close</p>
-
-    <div class="grid gap-4 grid-cols-2 md:grid-flow-col">
+    <div class="font-medium text-4xl text-center py-4">
+      <p>เมนู</p>
+    </div>
+    <div class="grid gap-4 grid-cols-2 md:gap-4 md:grid-cols-3">
       <a href="/">
         <div class="indicator">
           <span class="indicator-item badge badge-primary">new</span>
