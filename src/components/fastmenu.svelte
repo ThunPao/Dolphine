@@ -41,6 +41,8 @@
             title="คลิก"
             onclick="topup.showModal()"
             on:click={clearinput}
+            class="hover:text-sky-400 hover:font-bold text-lg"
+
           >
             <div class="grid grid-rows-2 place-items-center">
               <i class="fa-solid fa-wallet fa-2xl" />
@@ -58,6 +60,8 @@
             title="คลิก"
             onclick="redeem.showModal()"
             on:click={clearinput}
+            class="hover:text-sky-400 hover:font-bold text-lg"
+
           >
             <div class="grid grid-rows-2 place-items-center">
               <i class="fa-solid fa-barcode fa-2xl" />กรอกโค๊ด
