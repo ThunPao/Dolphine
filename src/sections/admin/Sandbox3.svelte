@@ -1,4 +1,6 @@
 <script>
+import {apiurl} from "../../services/apiurl";
+
   let width = "";
   let height = "";
   let quality = "";
@@ -20,7 +22,7 @@
     formData.append("storagePath", selectedFile.name);
 
     try {
-      const response = await fetch("http://localhost:3005/uploadimg", {
+      const response = await fetch(apiurl+"uploadimg", {
         method: "POST",
         body: formData,
         headers: {
@@ -30,7 +32,7 @@
       });
 
       if (response.ok) {
-        uploadedImage = `http://localhost:3005/images/${imgRealName}`;
+        uploadedImage = apiurl+`images/${imgRealName}`;
       } else {
         console.error("Error uploading and converting image.");
       }
