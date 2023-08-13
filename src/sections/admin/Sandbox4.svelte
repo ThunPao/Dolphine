@@ -90,8 +90,8 @@ import {apiurl} from "../../services/apiurl";
         method: "POST",
         body: formData,
       });
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
         saveCommands(data.id);
         message = `Shop item added with ID: ${data.id}`;
       } else {
