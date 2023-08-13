@@ -162,7 +162,7 @@ export async function logout() {
     const response = await fetch(apiurl+"logout", {
       method: "POST",
       headers: {
-        // "Content-Type": "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, // Include the authentication bearer token
       },
     });
