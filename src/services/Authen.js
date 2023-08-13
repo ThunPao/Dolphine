@@ -55,7 +55,6 @@ try {
 
   if (response.ok) {
     const data = await response.json();
-    console.log("REST OK GET PLAYER INFO NOW")
     currentuser.set(data);
     return data;
   } else {
