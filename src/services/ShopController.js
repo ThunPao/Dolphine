@@ -18,9 +18,11 @@ export let shopitems = writable(null);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        // 'Content-Type': 'application/json', if body using this
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
+          // Send an empty JSON payload (you can adjust this if needed)
+    body: JSON.stringify({}),
 
     });
     if (!response.ok) {
