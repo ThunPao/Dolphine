@@ -47,34 +47,6 @@ export async function getPlayerInfo(token) {
   if(token){
 try {
   const url = apiurl+'playerinfo';
-
-  // // Check if the token is expired
-  // const isTokenExpired = () => {
-  //   if(token){
-  //     const decodedToken = jwt_decode(token);
-  //     const currentTime = Math.floor(Date.now() / 1000);
-  //   return decodedToken.exp < currentTime;
-  //   }else{
-  //     return null;
-  //   }
-
-  // };
-
-  //   // Token is expired, refresh the page
-
-  // if (isTokenExpired()) {
-    
-  //   handleLogout();
-  //   // location.reload();
-  //   Swal.fire({
-  //     title: 'TOKEN EXPIRED!',
-  //     icon: 'error',
-  //     timer: 2000,
-  //     timerProgressBar: true,
-  //   })
-  //   return;
-  // }
-
   const response = await fetch(url, {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -82,8 +54,8 @@ try {
   });
 
   if (response.ok) {
-    
     const data = await response.json();
+    console.log("REST OK GET PLAYER INFO NOW")
     currentuser.set(data);
     return data;
   } else {

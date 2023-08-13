@@ -20,7 +20,7 @@
       dateDiff: data.dateDiff,
     });
     if (!data.href) {
-      data.href = "default.webp";
+      data.href = imgurl + "default.webp";
     }
   }
 </script>

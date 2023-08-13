@@ -107,7 +107,7 @@
             >
           {/if}
 
-          <div class="place-items-center">
+          <div class="place-items-center overflow-hidden">
             <figure>
               <img
                 data-src={href}
@@ -120,7 +120,7 @@
           </div>
         </div>
         <span class="flex justify-between mx-1">
-          <div class="font-medium text-sm">
+          <div class="font-medium text-sm h-10 md:h-0">
             {dateDiff ? dateDiff : ""}
           </div>
           <div class="font-medium text-sm">
@@ -132,7 +132,7 @@
             {name}
           </h2>
           <div
-            class="card-actions justify-center md:justify-between align-bottom h-10"
+            class="card-actions justify-center md:justify-between align-bottom h-4 md:h-10"
           >
             <div class="font-bold text-md">
               {#if limits > 0}
@@ -144,7 +144,7 @@
                   เหลือ {limits}
                 </div>
               {:else if limits < 0}
-                <div class="badge badge-info md:py-3">สินค้าประจำ</div>
+                <div class="badge badge-info md:py-3">ขายประจำ</div>
               {:else}
                 <div class="badge badge-error md:py-3">สินค้าหมด</div>
               {/if}
