@@ -8,13 +8,15 @@ import { DateTime,Settings } from "luxon";
 
 
 
-// export function updateDateDiff(sale_date,expired_date) {
-//     if (sale_date && DateTime.fromISO(sale_date) > DateTime.local()) {
-//       dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).toRelative();
-//     } else {
-//       if (expired_date && DateTime.local() < DateTime.fromISO(expired_date)) {
-//         dateDiff = "จบ" + DateTime.fromISO(expired_date).toRelative();
-//       }
-//     }
-//     return dateDiff;
-//   }
+  export function updateDateDiff(start, end) {
+    let dateDiff = null;
+    if (!start && !end) {
+      return null;
+    } else if (start && DateTime.fromISO(start) > DateTime.local()) {
+      return (dateDiff = "เริ่ม" + DateTime.fromISO(start).toRelative());
+    } else {
+      if (end && DateTime.local() < DateTime.fromISO(end)) {
+        return (dateDiff = "จบ" + DateTime.fromISO(end).toRelative());
+      }
+    }
+  }

@@ -1,7 +1,8 @@
 <script>
-  import { onMount } from "svelte";
   import { shopitems, shopData } from "../services/ShopController";
   import { imgurl } from "../services/apiurl";
+  const defaultimg = imgurl + "default.webp";
+  import {updateDateDiff} from "../services/Playdate";
 
   let tabs = ["ไอเทมใหม่", "ไอเทมยอดฮิต", "อันดับเทพทรู"];
   let activeTabIndex = 2;
@@ -10,19 +11,19 @@
     shopData.set({
       id: data.id,
       name: data.name,
-      href: data.href,
+      href: !data.href ? defaultimg : imgurl + data.href,
       buycount: data.buycount,
       point: data.point,
       limits: data.limits,
       description: data.description,
       title: data.titles,
       expired_date: data.expired_date,
-      dateDiff: data.dateDiff,
+      dateDiff: updateDateDiff(data.sale_date, data.expired_date),
     });
-    if (!data.href) {
-      data.href = imgurl + "default.webp";
-    }
   }
+
+
+
 </script>
 
 <div class="tabs d-flex justify-center">

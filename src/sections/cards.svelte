@@ -4,37 +4,20 @@
   import MockupCard from "../components/Mockup_card.svelte";
   import { getshopitems, shopitems } from "../services/ShopController";
   import Tabs from "../components/Tabs.svelte";
-  // import "../services/Sliders";
   import { onMount, tick, afterUpdate } from "svelte";
   import KeenSlider from "keen-slider";
   import "keen-slider/keen-slider.min.css";
-  import { DateTime, Settings } from "luxon";
   import { imgurl } from "../services/apiurl";
+  import {updateDateDiff} from "../services/Playdate";
 
   const defaultimg = imgurl + "default.webp";
 
-  // import { dateDiff } from "../services/Playdate";
-
-  // Set the locale to Thai
-  Settings.defaultLocale = "th";
 
   let slider = null;
   let searchQuery = "";
   let displaymode = false;
   function swapdisplaymode() {
     displaymode = !displaymode;
-  }
-  function updateDateDiff(start, end) {
-    let dateDiff = null;
-    if (!start && !end) {
-      return null;
-    } else if (start && DateTime.fromISO(start) > DateTime.local()) {
-      return (dateDiff = "เริ่ม" + DateTime.fromISO(start).toRelative());
-    } else {
-      if (end && DateTime.local() < DateTime.fromISO(end)) {
-        return (dateDiff = "จบ" + DateTime.fromISO(end).toRelative());
-      }
-    }
   }
   onMount(async () => {
     getshopitems();
@@ -43,10 +26,6 @@
 
   function filterShopItems(item) {
     return item.name.toLowerCase().includes(searchQuery.toLowerCase());
-  }
-
-  function findshoptimed(item) {
-    return item.sale_date;
   }
 
   function gofinditem() {
