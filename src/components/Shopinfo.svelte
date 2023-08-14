@@ -54,7 +54,7 @@ onMount(() =>{
       interval = setInterval(updateDateDiff, 1000); // Update every 1 second
     }
     if (expired_date < DateTime.local()) {
-      interval = setInterval(updateDateDiff, 3000); // Update every 1 second
+      interval = setInterval(updateDateDiff, 1000); // Update every 1 second
     }
 });
 
