@@ -175,6 +175,7 @@
         limits={data.limits}
         description={data.description}
         title={data.titles}
+        sale_date={data.sale_date}
         expired_date={data.expired_date}
         dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
       />
@@ -208,6 +209,7 @@
           limits={data.limits}
           description={data.description}
           title={data.titles}
+          sale_date={data.sale_date}
           expired_date={data.expired_date}
           dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
         />
