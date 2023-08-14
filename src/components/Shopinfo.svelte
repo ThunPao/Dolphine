@@ -1,8 +1,8 @@
 <script>
   import { shopData } from "../services/ShopController";
   import { onMount, onDestroy } from "svelte";
-  import { DateTime, Settings } from "luxon";
-  Settings.defaultLocale = "th";
+  import { DateTime } from "luxon";
+  // Settings.defaultLocale = "th";
 
   // Define the variables where you want to store the shop item data
   let id,
@@ -33,22 +33,20 @@
       dateDiff,
     } = data);
   });
-
   let interval;
-
-  let curdate = null;
-
   function updateDateDiff() {
-    if (sale_date && DateTime.fromISO(sale_date) > DateTime.local()) {
-      dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).toRelative();
-    } else {
-      if (expired_date && DateTime.local() < DateTime.fromISO(expired_date)) {
-        dateDiff = "จบ" + DateTime.fromISO(expired_date).toRelative();
-      }
-    }
-    return dateDiff;
+  const CurDate = DateTime.local().setZone('Asia/Bangkok');
+  
+  if (sale_date && DateTime.fromISO(sale_date).minus({ hours: 7 }) > CurDate) {
+    dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).minus({ hours: 7 }).toRelative();
+  } else if (expired_date && CurDate < DateTime.fromISO(expired_date).minus({ hours: 7 })) {
+    dateDiff = "จบ" + DateTime.fromISO(expired_date).minus({ hours: 7 }).toRelative();
+  } else {
+    dateDiff = null;
   }
 
+  return dateDiff;
+}
 onMount(() =>{
   if (sale_date > DateTime.local()) {
       interval = setInterval(updateDateDiff, 1000); // Update every 1 second

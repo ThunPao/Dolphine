@@ -1,22 +1,27 @@
 
 import { DateTime,Settings } from "luxon";
   Settings.defaultLocale = "th";
-
+  Settings.defaultZone = "Asia/Bangkok";
   export let dateDiff;
   export let sale_date,expired_date;
 
 
-
-
-  export function updateDateDiff(start, end) {
+  export function updateDateDiff(saleDateISO, expireDateISO) {
+    const CurDate = DateTime.local().setZone('Asia/Bangkok');
+    
+    const saleDate = DateTime.fromISO(saleDateISO).minus({ hours: 7 });
+    const expireDate = DateTime.fromISO(expireDateISO).minus({ hours: 7 });
     let dateDiff = null;
-    if (!start && !end) {
+    
+    if (!saleDateISO && !expireDateISO) {
       return null;
-    } else if (start && DateTime.fromISO(start) > DateTime.local()) {
-      return (dateDiff = "เริ่ม" + DateTime.fromISO(start).toRelative());
+    } else if (saleDateISO && saleDate > CurDate) {
+      dateDiff = "เริ่ม" + saleDate.toRelative();
     } else {
-      if (end && DateTime.local() < DateTime.fromISO(end)) {
-        return (dateDiff = "จบ" + DateTime.fromISO(end).toRelative());
+      if (expireDateISO && CurDate < expireDate) {
+        dateDiff = "จบ" + expireDate.toRelative();
       }
     }
+    
+    return dateDiff;
   }

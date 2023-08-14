@@ -4,8 +4,7 @@
   import { shopData } from "../services/ShopController";
   // import { imgurl } from "../services/apiurl";
   import { observer } from "../services/basectl";
-  import { DateTime, Settings } from "luxon";
-  Settings.defaultLocale = "th";
+  import { DateTime } from "luxon";
   // import { updateDateDiff } from "../services/Playdate";
   // Initialize lozad
   export let id;
@@ -17,13 +16,26 @@
   export let description;
   export let title;
   export let expired_date;
-  export let sale_date = null;
+  export let sale_date;
   export let dateDiff = null;
 
   export let display = 0;
   export let keen;
 
   let interval;
+  const CurDate = DateTime.local().setZone('Asia/Bangkok');
+  function updateDateDiff() {
+  
+  if (sale_date && DateTime.fromISO(sale_date).minus({ hours: 7 }) > CurDate) {
+    dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).minus({ hours: 7 }).toRelative();
+  } else if (expired_date && CurDate < DateTime.fromISO(expired_date).minus({ hours: 7 })) {
+    dateDiff = "จบ" + DateTime.fromISO(expired_date).minus({ hours: 7 }).toRelative();
+  } else {
+    dateDiff = null;
+  }
+
+  return dateDiff;
+}
   onMount(() => {
     shopData.set({
       id,
@@ -40,27 +52,19 @@
     });
     observer.observe();
 
-    if (sale_date > DateTime.local()) {
-      interval = setInterval(updateDateDiff, 1000); // Update every 1 second
-    }
-    if (expired_date < DateTime.local()) {
-      interval = setInterval(updateDateDiff, 3000); // Update every 1 second
-    }
+    if (sale_date && DateTime.fromISO(sale_date).minus({ hours: 7 }) > CurDate) {
+  interval = setInterval(updateDateDiff, 1000); // Update every 1 second
+
+}
+if (expired_date && CurDate < DateTime.fromISO(expired_date).minus({ hours: 7 })) {
+  interval = setInterval(updateDateDiff, 3000); // Update every 3 seconds
+}
   });
   onDestroy(() => {
     clearInterval(interval);
   });
 
-  function updateDateDiff() {
-    if (sale_date && DateTime.fromISO(sale_date) > DateTime.local()) {
-      dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).toRelative();
-    } else {
-      if (expired_date && DateTime.local() < DateTime.fromISO(expired_date)) {
-        dateDiff = "จบ" + DateTime.fromISO(expired_date).toRelative();
-      }
-    }
-    return dateDiff;
-  }
+
 
   function setShopdata() {
     shopData.set({
