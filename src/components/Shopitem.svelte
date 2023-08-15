@@ -23,19 +23,18 @@
   export let keen;
 
   let interval;
-  const CurDate = DateTime.local().setZone('Asia/Bangkok');
+  const CurDate = DateTime.local().setZone("Asia/Bangkok");
   function updateDateDiff() {
-  
-  if (sale_date && DateTime.fromISO(sale_date).minus({ hours: 7 }) > CurDate) {
-    dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).minus({ hours: 7 }).toRelative();
-  } else if (expired_date && CurDate < DateTime.fromISO(expired_date).minus({ hours: 7 })) {
-    dateDiff = "จบ" + DateTime.fromISO(expired_date).minus({ hours: 7 }).toRelative();
-  } else {
-    dateDiff = null;
-  }
+    if (sale_date && DateTime.fromISO(sale_date) > CurDate) {
+      dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).toRelative();
+    } else if (expired_date && CurDate < DateTime.fromISO(expired_date)) {
+      dateDiff = "จบ" + DateTime.fromISO(expired_date).toRelative();
+    } else {
+      dateDiff = null;
+    }
 
-  return dateDiff;
-}
+    return dateDiff;
+  }
   onMount(() => {
     shopData.set({
       id,
@@ -52,19 +51,16 @@
     });
     observer.observe();
 
-    if (sale_date && DateTime.fromISO(sale_date).minus({ hours: 7 }) > CurDate) {
-  interval = setInterval(updateDateDiff, 1000); // Update every 1 second
-
-}
-if (expired_date && CurDate < DateTime.fromISO(expired_date).minus({ hours: 7 })) {
-  interval = setInterval(updateDateDiff, 3000); // Update every 3 seconds
-}
+    if (sale_date && DateTime.fromISO(sale_date) > CurDate) {
+      interval = setInterval(updateDateDiff, 1000); // Update every 1 second
+    }
+    if (expired_date && CurDate < DateTime.fromISO(expired_date)) {
+      interval = setInterval(updateDateDiff, 3000); // Update every 3 seconds
+    }
   });
   onDestroy(() => {
     clearInterval(interval);
   });
-
-
 
   function setShopdata() {
     shopData.set({

@@ -35,29 +35,26 @@
   });
   let interval;
   function updateDateDiff() {
-  const CurDate = DateTime.local().setZone('Asia/Bangkok');
-  
-  if (sale_date && DateTime.fromISO(sale_date).minus({ hours: 7 }) > CurDate) {
-    dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).minus({ hours: 7 }).toRelative();
-  } else if (expired_date && CurDate < DateTime.fromISO(expired_date).minus({ hours: 7 })) {
-    dateDiff = "จบ" + DateTime.fromISO(expired_date).minus({ hours: 7 }).toRelative();
-  } else {
-    dateDiff = null;
-  }
+    const CurDate = DateTime.local().setZone("Asia/Bangkok");
 
-  return dateDiff;
-}
-onMount(() =>{
-  if (sale_date > DateTime.local()) {
+    if (sale_date && DateTime.fromISO(sale_date) > CurDate) {
+      dateDiff = "เริ่ม" + DateTime.fromISO(sale_date).toRelative();
+    } else if (expired_date && CurDate < DateTime.fromISO(expired_date)) {
+      dateDiff = "จบ" + DateTime.fromISO(expired_date).toRelative();
+    } else {
+      dateDiff = null;
+    }
+
+    return dateDiff;
+  }
+  onMount(() => {
+    if (sale_date > DateTime.local()) {
       interval = setInterval(updateDateDiff, 1000); // Update every 1 second
     }
     if (expired_date < DateTime.local()) {
       interval = setInterval(updateDateDiff, 1000); // Update every 1 second
     }
-});
-
-
-
+  });
 
   onDestroy(() => {
     clearInterval(interval);
@@ -123,7 +120,7 @@ onMount(() =>{
           เมื่อซื้อ จะได้รับตามรายการทั้งหมดดังต่อไปนี้<br />
           <ul>
             {#each title.split(",") as item}
-              <ul class="menu bg-base-200 rounded-box">
+              <ul class="menu bg-base-200 rounded-box m-2">
                 <li>
                   {item}
                 </li>

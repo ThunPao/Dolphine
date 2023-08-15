@@ -9,8 +9,8 @@ import { DateTime,Settings } from "luxon";
   export function updateDateDiff(saleDateISO, expireDateISO) {
     const CurDate = DateTime.local().setZone('Asia/Bangkok');
     
-    const saleDate = DateTime.fromISO(saleDateISO).minus({ hours: 7 });
-    const expireDate = DateTime.fromISO(expireDateISO).minus({ hours: 7 });
+    const saleDate = DateTime.fromISO(saleDateISO);
+    const expireDate = DateTime.fromISO(expireDateISO);
     let dateDiff = null;
     
     if (!saleDateISO && !expireDateISO) {
