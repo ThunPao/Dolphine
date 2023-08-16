@@ -19,7 +19,6 @@
     "@fontsource/kanit": "^5.0.7",
     "@sweetalert2/theme-borderless": "^5.0.15",
     "@sweetalert2/themes": "^5.0.15",
-    "@vercel/analytics": "^1.0.2",
     "astro": "^2.9.6",
     "firebase": "^10.1.0",
     "font-awesome": "^4.7.0",
