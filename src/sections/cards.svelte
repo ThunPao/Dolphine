@@ -8,10 +8,11 @@
   import KeenSlider from "keen-slider";
   import "keen-slider/keen-slider.min.css";
   import { imgurl } from "../services/apiurl";
-  import {updateDateDiff} from "../services/Playdate";
+  import { updateDateDiff } from "../services/Playdate";
+  import { inject } from "@vercel/analytics";
 
+  inject({ mode: dev ? "development" : "production" });
   const defaultimg = imgurl + "default.webp";
-
 
   let slider = null;
   let searchQuery = "";
