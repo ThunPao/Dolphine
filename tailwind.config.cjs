@@ -43,7 +43,7 @@ module.exports = {
 			{
 				kpz: {
           
-					"primary": "#2563eb",
+					"primary": "#2463eb",
 							 
 					"secondary": "#f000b8",
 							 
@@ -59,7 +59,7 @@ module.exports = {
 							 
 					"warning": "#fbbf24",
 							 
-					"error": "#e11d48",
+					"error": "#dc2828",
 
 					".modal-box": {
 						"color": "#FFFFFF",
