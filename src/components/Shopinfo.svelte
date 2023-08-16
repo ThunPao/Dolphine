@@ -66,7 +66,7 @@
     method="dialog"
     class="modal-box shadow-md dark:shadow-amber-300 shadow-blue-300"
   >
-    <h3 class="font-bold text-lg">รายละเอียดสินค้า</h3>
+    <p class="font-bold text-lg">รายละเอียดสินค้า</p>
     <div class="indicator w-full">
       <span
         class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 font-extrabold sm:text-lg md:text-xl"
