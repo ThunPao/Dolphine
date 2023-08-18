@@ -8,7 +8,7 @@ if(svless == 2){
     apiurl = "http://dolphine.servegame.com:3005/"
 }
 if(svless == 3){
-    apiurl = "http://119.59.100.49/";
+    apiurl = "https://fish.dolphine.online/";
 }
 export var imgurl = apiurl+"images/shopitems/"
 
