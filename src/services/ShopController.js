@@ -1,7 +1,7 @@
 import toastr from "toastr";
 import { writable } from "svelte/store";
 import { token,handleLoadinfo,updateplayerinfo } from "../services/Authen";
-import {apiurl} from "../services/apiurl";
+import {apiurl} from "./apiurl";
 
 export let shopitems = writable(null);
 

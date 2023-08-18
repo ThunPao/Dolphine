@@ -2,12 +2,12 @@
 import "../styles/base.scss";
 // import Btm from "../sections/bottom.astro";
 import Navtop from "../sections/admin/Navtop.astro";
-// import DevDashboard from "../sections/admin/DevDashboard.astro";
+import DevDashboard from "../sections/admin/DevDashboard.svelte";
 // import Sandbox from "../sections/admin/Sandbox.astro";
 // import Sandbox2 from "../sections/admin/Sandbox2.svelte";
-import Sandbox3 from "../sections/admin/Sandbox3.svelte";
+// import Sandbox3 from "../sections/admin/Sandbox3.svelte";
 
-import Sandbox4 from "../sections/admin/Sandbox4.svelte";
+// import Sandbox4 from "../sections/admin/Sandbox4.svelte";
 import Fire from "../sections/admin/Fire.astro";
 import RedeemBox from "../sections/admin/components/Redeem.svelte";
 ---
@@ -35,6 +35,7 @@ import RedeemBox from "../sections/admin/components/Redeem.svelte";
   <main data-theme="dark" class="bg-base-300">
     <Navtop />
     <div class="container mx-auto text-center h-[100dvh]">
+      <DevDashboard client:visible />
       <!-- <Sandbox /> -->
       <!-- <Sandbox3 client:only /> -->
       <div class="pt-4"></div>

@@ -1,4 +1,4 @@
-import {apiurl} from "../services/apiurl";
+import {apiurl} from "./apiurl";
 import Swal from 'sweetalert2';
 import {token,handleLoadinfo} from '../services/Authen';
 

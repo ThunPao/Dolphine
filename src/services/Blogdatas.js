@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import {apiurl} from "../services/apiurl";
+import {apiurl} from "./apiurl";
 export let blogsvip = writable(null);
 export let blogdata = writable(null);
 export let blogdata_p = writable(null);

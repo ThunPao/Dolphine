@@ -3,7 +3,7 @@ import { writable } from "svelte/store";
 import {blogsvip,getblogsvip,getblogdataplayer,blogdata_p} from "./Blogdatas";
 import Swal from 'sweetalert2';
 import jwt_decode from 'jwt-decode';
-import {apiurl} from "../services/apiurl";
+import {apiurl} from "./apiurl";
 import {shopitems} from "../services/ShopController";
 
 
