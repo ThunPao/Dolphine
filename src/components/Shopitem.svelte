@@ -128,7 +128,9 @@
           </div>
         </span>
         <div class="card-body">
-          <h2 class="card-title h-10 text-lg justify-center leading-none">
+          <h2
+            class="card-title h-10 text-md md:text-lg justify-center leading-none"
+          >
             {name}
           </h2>
           <div
