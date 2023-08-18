@@ -1,6 +1,6 @@
 <!-- ShopItems.svelte -->
 <script>
-import {apiurl} from "../../services/apiurl";
+  import { apiurl } from "../../../services/apiurl";
 
   let name = "";
   let description = "";
@@ -45,16 +45,13 @@ import {apiurl} from "../../services/apiurl";
   async function saveCommands(shop_id) {
     try {
       const shopid = shop_id;
-      const response = await fetch(
-        apiurl+`addcmd?shop_id=${shopid}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(commands),
-        }
-      );
+      const response = await fetch(apiurl + `addcmd?shop_id=${shopid}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commands),
+      });
 
       if (response.ok) {
         // Data inserted successfully
@@ -86,7 +83,7 @@ import {apiurl} from "../../services/apiurl";
     formData.append("quality", 20);
 
     try {
-      const response = await fetch(apiurl+"shopitems", {
+      const response = await fetch(apiurl + "shopitems", {
         method: "POST",
         body: formData,
       });
@@ -172,27 +169,27 @@ import {apiurl} from "../../services/apiurl";
   </div>
 
   <!-- <div class="grid justify-center gap-2 bg-base-200 rounded-lg p-2">
-      Commands:
-
-      <div class="flex gap-1">
-        <input
-          type="text"
-          placeholder="ชื่อคำสั่ง"
-          class="input input-bordered input-primary w-1/2 input-sm"
-          bind:value={cmd_title}
-        />
-        <input
-          type="text"
-          placeholder="Type command %username%"
-          class="input input-bordered input-secondary w-full max-w-xs input-sm"
-          bind:value={cmd_command}
-        />
-        <input type="checkbox" class="toggle toggle-lg" checked />
-      </div>
-      <div class="flex justify-center">
-        <button class="btn btn-wide btn-success">Add More</button>
-      </div>
-    </div> -->
+          Commands:
+    
+          <div class="flex gap-1">
+            <input
+              type="text"
+              placeholder="ชื่อคำสั่ง"
+              class="input input-bordered input-primary w-1/2 input-sm"
+              bind:value={cmd_title}
+            />
+            <input
+              type="text"
+              placeholder="Type command %username%"
+              class="input input-bordered input-secondary w-full max-w-xs input-sm"
+              bind:value={cmd_command}
+            />
+            <input type="checkbox" class="toggle toggle-lg" checked />
+          </div>
+          <div class="flex justify-center">
+            <button class="btn btn-wide btn-success">Add More</button>
+          </div>
+        </div> -->
   <div class="grid justify-center gap-2 bg-base-200 rounded-lg p-2">
     <h2 class="text-center font-bold text-lg mb-2">Commands:</h2>
 
@@ -226,8 +223,8 @@ import {apiurl} from "../../services/apiurl";
         >Add More</button
       >
       <!-- <button class="btn btn-wide btn-primary" on:click={saveCommands}
-        >Save Commands</button
-      > -->
+            >Save Commands</button
+          > -->
     </div>
   </div>
 

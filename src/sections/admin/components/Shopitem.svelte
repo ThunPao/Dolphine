@@ -19,7 +19,8 @@
 <dialog id="Shopitem" class="modal">
   <form method="dialog" class="modal-box text-center max-w-5xl">
     <h3 class="font-bold text-4xl">Shopitem</h3>
-    <div class="overflow-x-auto overscroll-y-auto">
+
+    <div class="overflow-x-auto overscroll-y-auto h-96">
       <table class="table">
         <thead>
           <tr>
@@ -40,6 +41,7 @@
       </table>
     </div>
     <div class="modal-action">
+      <button class="btn btn-success">เพิ่มสินค้า</button>
       <button class="btn">Close</button>
     </div>
   </form>

@@ -7,10 +7,10 @@ import DevDashboard from "../sections/admin/DevDashboard.svelte";
 // import Sandbox2 from "../sections/admin/Sandbox2.svelte";
 // import Sandbox3 from "../sections/admin/Sandbox3.svelte";
 
-// import Sandbox4 from "../sections/admin/Sandbox4.svelte";
 import Fire from "../sections/admin/Fire.astro";
 import RedeemBox from "../sections/admin/components/Redeem.svelte";
 import ShopItemBox from "../sections/admin/components/Shopitem.svelte";
+import AddshopItemBox from "../sections/admin/components/Addshopitem.svelte";
 ---
 
 <!DOCTYPE html>
@@ -41,7 +41,6 @@ import ShopItemBox from "../sections/admin/components/Shopitem.svelte";
       <!-- <Sandbox3 client:only /> -->
       <div class="pt-4"></div>
       <!-- <Sandbox2 /> -->
-      <!-- <Sandbox4 client:only /> -->
       <!-- <Fire /> -->
 
       <div class="grid md:grid-cols-4 gap-3">
@@ -50,6 +49,7 @@ import ShopItemBox from "../sections/admin/components/Shopitem.svelte";
     </div>
     <RedeemBox client:visible />
     <ShopItemBox client:visible />
+    <AddshopItemBox client:visible />
   </main>
 
 
