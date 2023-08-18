@@ -107,155 +107,136 @@
   }
 </script>
 
-<h1>Add Shop Item</h1>
-<!-- <form on:submit|preventDefault={handleSubmit}> -->
-<div class="grid justify-center gap-2 mx-2">
-  <input
-    type="text"
-    placeholder="Name"
-    bind:value={name}
-    required
-    class="input w-full"
-  />
+<dialog id="Add_shopitem" class="modal">
+  <form method="dialog" class="modal-box">
+    <p class="font-bold text-4xl">Add Shopitem</p>
+    <div class="grid justify-center gap-2 mx-2">
+      <input
+        type="text"
+        placeholder="Name"
+        bind:value={name}
+        required
+        class="input w-full"
+      />
 
-  <textarea
-    class="textarea"
-    placeholder="Description"
-    bind:value={description}
-    required
-  />
-  <div class="join gap-2">
-    <input
-      type="number"
-      placeholder="Buy Count"
-      bind:value={buycount}
-      class="input w-full"
-    />
-    <input
-      type="number"
-      placeholder="Point"
-      bind:value={point}
-      class="input w-full"
-    />
-  </div>
-  <input
-    type="number"
-    placeholder="Limits"
-    bind:value={limits}
-    class="input w-full"
-    disabled={!limitedsale}
-  />
-  <div class="join justify-center gap-2">
-    <div class="form-control">
-      <label class="label cursor-pointer">
-        <span class="label-text text-lg">จำกัดการขาย</span>
+      <textarea
+        class="textarea"
+        placeholder="Description"
+        bind:value={description}
+        required
+      />
+      <div class="join gap-2">
         <input
-          type="checkbox"
-          class="toggle toggle-secondary toggle-lg"
-          on:change={handleLimited}
-        />
-      </label>
-    </div>
-    <div class="form-control">
-      <label class="label cursor-pointer">
-        <span class="label-text text-lg">แสดงไอเทม</span>
-        <input
-          type="checkbox"
-          class="toggle toggle-info toggle-lg"
-          on:change={handleShow}
-        />
-      </label>
-    </div>
-  </div>
-
-  <!-- <div class="grid justify-center gap-2 bg-base-200 rounded-lg p-2">
-          Commands:
-    
-          <div class="flex gap-1">
-            <input
-              type="text"
-              placeholder="ชื่อคำสั่ง"
-              class="input input-bordered input-primary w-1/2 input-sm"
-              bind:value={cmd_title}
-            />
-            <input
-              type="text"
-              placeholder="Type command %username%"
-              class="input input-bordered input-secondary w-full max-w-xs input-sm"
-              bind:value={cmd_command}
-            />
-            <input type="checkbox" class="toggle toggle-lg" checked />
-          </div>
-          <div class="flex justify-center">
-            <button class="btn btn-wide btn-success">Add More</button>
-          </div>
-        </div> -->
-  <div class="grid justify-center gap-2 bg-base-200 rounded-lg p-2">
-    <h2 class="text-center font-bold text-lg mb-2">Commands:</h2>
-
-    {#each commands as command, index}
-      <div class="flex gap-1" key={index}>
-        <button class="btn btn-error btn-sm" on:click={() => removeItem(index)}
-          >ลบ</button
-        >
-        <input
-          type="text"
-          placeholder="title"
-          class="input input-bordered input-primary w-1/2 input-sm"
-          bind:value={commands[index].title}
+          type="number"
+          placeholder="Buy Count"
+          bind:value={buycount}
+          class="input w-full"
         />
         <input
-          type="text"
-          placeholder="rcon_command"
-          class="input input-bordered input-secondary w-full max-w-xs input-sm"
-          bind:value={commands[index].rcon_command}
-        />
-        <input
-          type="checkbox"
-          class="toggle toggle-lg"
-          bind:checked={commands[index].visibled}
+          type="number"
+          placeholder="Point"
+          bind:value={point}
+          class="input w-full"
         />
       </div>
-    {/each}
+      <input
+        type="number"
+        placeholder="Limits"
+        bind:value={limits}
+        class="input w-full"
+        disabled={!limitedsale}
+      />
+      <div class="join justify-center gap-2">
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class="label-text text-lg">จำกัดการขาย</span>
+            <input
+              type="checkbox"
+              class="toggle toggle-secondary toggle-lg"
+              on:change={handleLimited}
+            />
+          </label>
+        </div>
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class="label-text text-lg">แสดงไอเทม</span>
+            <input
+              type="checkbox"
+              class="toggle toggle-info toggle-lg"
+              on:change={handleShow}
+            />
+          </label>
+        </div>
+      </div>
+      <div class="grid justify-center gap-2 bg-base-200 rounded-lg p-2">
+        <h2 class="text-center font-bold text-lg mb-2">Commands:</h2>
 
-    <div class="flex justify-center">
-      <button class="btn btn-wide btn-success" on:click={addMore}
-        >Add More</button
-      >
-      <!-- <button class="btn btn-wide btn-primary" on:click={saveCommands}
-            >Save Commands</button
-          > -->
+        {#each commands as command, index}
+          <div class="flex gap-1" key={index}>
+            <button
+              class="btn btn-error btn-sm"
+              on:click={() => removeItem(index)}>ลบ</button
+            >
+            <input
+              type="text"
+              placeholder="title"
+              class="input input-bordered input-primary w-1/2 input-sm"
+              bind:value={commands[index].title}
+            />
+            <input
+              type="text"
+              placeholder="rcon_command"
+              class="input input-bordered input-secondary w-full max-w-xs input-sm"
+              bind:value={commands[index].rcon_command}
+            />
+            <input
+              type="checkbox"
+              class="toggle toggle-lg"
+              bind:checked={commands[index].visibled}
+            />
+          </div>
+        {/each}
+
+        <div class="flex justify-center">
+          <button class="btn btn-wide btn-success" on:click={addMore}
+            >Add More</button
+          >
+        </div>
+      </div>
+
+      <div class="flex">
+        Start
+        <input
+          type="date"
+          placeholder="Sale Date"
+          bind:value={sale_date}
+          class="input w-full max-w-xs input-sm"
+        />
+        End
+        <input
+          type="date"
+          placeholder="Expired Date"
+          bind:value={expired_date}
+          class="input w-full max-w-xs input-sm"
+        />
+      </div>
+
+      <input
+        type="file"
+        class="file-input file-input-info w-full"
+        on:change={handleFileChange}
+      />
+      <div class="flex justify-between">
+        <button
+          class="btn btn-primary w-6/12"
+          type="submit"
+          on:click={handleSubmit}>Add Item</button
+        >
+        <button class="btn w-4/12">Close</button>
+      </div>
     </div>
-  </div>
-
-  <div class="flex">
-    Start
-    <input
-      type="date"
-      placeholder="Sale Date"
-      bind:value={sale_date}
-      class="input w-full max-w-xs input-sm"
-    />
-    End
-    <input
-      type="date"
-      placeholder="Expired Date"
-      bind:value={expired_date}
-      class="input w-full max-w-xs input-sm"
-    />
-  </div>
-
-  <input
-    type="file"
-    class="file-input file-input-info w-full"
-    on:change={handleFileChange}
-  />
-  <!-- handleSubmit -->
-  <button class="btn btn-primary" type="submit" on:click={handleSubmit}
-    >Add Item</button
-  >
-</div>
-<!-- </form> -->
-{#if message}
-  <p>{message}</p>
-{/if}
+    {#if message}
+      <p>{message}</p>
+    {/if}
+  </form>
+</dialog>

@@ -41,7 +41,9 @@
       </table>
     </div>
     <div class="modal-action">
-      <button class="btn btn-success">เพิ่มสินค้า</button>
+      <button class="btn btn-success" onclick="Add_shopitem.showModal()"
+        >เพิ่มสินค้า</button
+      >
       <button class="btn">Close</button>
     </div>
   </form>
