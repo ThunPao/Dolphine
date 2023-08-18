@@ -43,7 +43,7 @@ module.exports = {
 			{
 				kpz: {
           
-					"primary": "#3574ff",
+					"primary": "#0046df",
 							 
 					"secondary": "#f000b8",
 							 

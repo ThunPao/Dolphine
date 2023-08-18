@@ -91,7 +91,7 @@
       >
         <div class="indicator w-full">
           <span
-            class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 font-extrabold sm:text-lg md:text-xl"
+            class="indicator-item indicator-bottom indicator-center p-2 md:p-3 mb-2 badge badge-base-400 badge-sm font-extrabold sm:text-lg md:text-xl"
           >
             {#if point > 0}
               <p class="font-extrabold text-info">{point} DP</p>
@@ -120,16 +120,16 @@
           </div>
         </div>
         <span class="flex justify-between mx-1">
-          <div class="font-medium text-sm h-10 md:h-0">
+          <div class="font-medium text-xs md:text-sm h-8 md:h-0">
             {dateDiff ? dateDiff : ""}
           </div>
-          <div class="font-medium text-sm">
+          <div class="font-medium text-xs md:text-sm">
             {buycount} ขายแล้ว
           </div>
         </span>
         <div class="card-body">
           <h2
-            class="card-title h-10 text-md md:text-lg justify-center leading-none"
+            class="card-title h-6 md:h-10 text-sm md:text-lg justify-center leading-none"
           >
             {name}
           </h2>
@@ -139,16 +139,23 @@
             <div class="font-bold text-md">
               {#if limits > 0}
                 <div
-                  class="badge badge-warning md:py-3 {limits <= 10
+                  class="badge badge-warning badge-sm md:badge-md md:py-3 {limits <=
+                  10
                     ? 'animate-pulse'
                     : ''}"
                 >
                   เหลือ {limits}
                 </div>
               {:else if limits < 0}
-                <div class="badge badge-info md:py-3">ขายประจำ</div>
+                <div class="badge badge-info badge-sm md:badge-md md:py-3">
+                  ขายประจำ
+                </div>
               {:else}
-                <div class="badge badge-error md:py-3">สินค้าหมด</div>
+                <div
+                  class="badge badge-error badge-sm md:badge-md md:py-3 font-medium"
+                >
+                  สินค้าหมด
+                </div>
               {/if}
             </div>
             <!-- <div class="badge badge-base-200 font-medium text-xs md:py-3">
