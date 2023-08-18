@@ -1,9 +1,3 @@
-<script>
-  import getshopitems from "../../services/AdminServices";
-
-  let shopitems = getshopitems;
-</script>
-
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div class="grid grid-cols-2 md:stats shadow">
   <div class="stat">
@@ -46,7 +40,7 @@
     <div class="stat-desc">↗︎ 400 (22%)</div>
   </div>
 
-  <div class="stat">
+  <div class="stat" onclick="Shopitem.showModal()">
     <div class="stat-figure text-secondary">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -85,9 +79,3 @@
     <div class="stat-desc">↘︎ 90 (14%)</div>
   </div>
 </div>
-
-{#if $shopitems !== null && $shopitems.length > 0}
-  {#each $shopitems.slice(0, 9) as data}
-    {data.name}
-  {/each}
-{/if}
