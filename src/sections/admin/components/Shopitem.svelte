@@ -2,9 +2,11 @@
   import { onMount } from "svelte";
   import { getshopitems } from "../../../services/AdminServices"; // Correct the import path
   import type { ShopItem } from "../../../models/shopitems";
+  import ShopModal from "./ShopitemCRUD.svelte";
 
   let shopitems: ShopItem[] = [];
   let tableHeaders: (keyof ShopItem)[] = [];
+  let selectedItem: ShopItem[] = [];
 
   onMount(async () => {
     try {
@@ -14,6 +16,11 @@
       console.error(error);
     }
   });
+
+  function handleClick(item: ShopItem) {
+    selectedItem = [item];
+    console.log(selectedItem);
+  }
 </script>
 
 <dialog id="Shopitem" class="modal">
@@ -33,7 +40,29 @@
           {#each shopitems.slice(0, 9) as item (item.id)}
             <tr>
               {#each tableHeaders as header}
-                <td class="px-4 py-2">{item[header]}</td>
+                <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <td
+                  class="px-4 py-2"
+                  tabindex="0"
+                  on:click={() => {
+                    handleClick(item);
+                    ShopitemForm.showModal();
+                  }}
+                  aria-hidden="true"
+                >
+                  {#if header === "commands"}
+                    <div class="grid gap-2 justify-center text-center">
+                      {#each item[header] as command}
+                        <div class="rounded-md bg-base-200 px-2">
+                          {command.title}
+                        </div>
+                      {/each}
+                    </div>
+                  {:else}
+                    {item[header]}
+                  {/if}
+                </td>
               {/each}
             </tr>
           {/each}
@@ -41,14 +70,14 @@
       </table>
     </div>
     <div class="modal-action">
-      <button class="btn btn-success" onclick="Add_shopitem.showModal()"
-        >เพิ่มสินค้า</button
-      >
+      <additem
+        for="Add_shopitem"
+        class="btn btn-success"
+        onclick="ShopitemForm.showModal()"
+        >เพิ่มสินค้า
+      </additem>
       <button class="btn">Close</button>
     </div>
   </form>
 </dialog>
-
-<style>
-  /* Your modal and table styling here */
-</style>
+<ShopModal {selectedItem} />

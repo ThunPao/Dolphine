@@ -2,7 +2,7 @@ import {apiurl} from "./apiurl";
 
 export async function getshopitems() {
     try {
-      const response = await fetch(apiurl + "shopitems");
+      const response = await fetch(apiurl + "allshopitems");
       if (!response.ok) {
         if(response.status === 429) {
           window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';

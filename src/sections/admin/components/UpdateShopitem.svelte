@@ -1,4 +1,3 @@
-<!-- ShopItems.svelte -->
 <script>
   import { apiurl } from "../../../services/apiurl";
 
@@ -42,11 +41,16 @@
   function removeItem(index) {
     commands = commands.filter((_, i) => i !== index);
   }
-  async function saveCommands(shop_id) {
+  function handleFileChange(event) {
+    image = event.target.files[0];
+    href = image.name.split(".").slice(0, -1).join(".") + ".webp";
+  }
+
+  async function updateCommands(shop_id) {
     try {
       const shopid = shop_id;
-      const response = await fetch(apiurl + `addcmd?shop_id=${shopid}`, {
-        method: "POST",
+      const response = await fetch(apiurl + `updatecmd?shop_id=${shopid}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -54,8 +58,8 @@
       });
 
       if (response.ok) {
-        // Data inserted successfully
-        // console.log("Commands added successfully.");
+        // Data updated successfully
+        // console.log("Commands updated successfully.");
       } else {
         // Handle error response from the server
         const errorMessage = await response.text();
@@ -89,21 +93,16 @@
       });
       const data = await response.json();
       if (response.ok) {
-        saveCommands(data.id);
-        message = `Shop item added with ID: ${data.id}`;
+        updateCommands(data.id); // Call updateCommands instead of saveCommands
+        message = `Shop item updated with ID: ${data.id}`;
       } else {
-        message = "Error adding shop item";
+        message = "Error updating shop item";
         console.log(data);
       }
     } catch (error) {
       console.error("Error:", error);
       message = "An error occurred";
     }
-  }
-
-  function handleFileChange(event) {
-    image = event.target.files[0];
-    href = image.name.split(".").slice(0, -1).join(".") + ".webp";
   }
 </script>
 
