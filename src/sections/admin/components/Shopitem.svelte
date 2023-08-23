@@ -7,6 +7,7 @@
   let shopitems: ShopItem[] = [];
   let tableHeaders: (keyof ShopItem)[] = [];
   let selectedItem: ShopItem[] = [];
+  let isEditMode = false;
 
   onMount(async () => {
     try {
@@ -17,9 +18,29 @@
     }
   });
 
-  function handleClick(item: ShopItem) {
+  function EditShopItem(item: ShopItem) {
     selectedItem = [item];
+    isEditMode = true;
+    //@ts-ignore
+    ShopitemForm.showModal();
     console.log(selectedItem);
+  }
+  function AddShopitem() {
+    selectedItem = [
+      {
+        id: 0,
+        name: "",
+        description: "",
+        limits: 0,
+        buycount: 0,
+        commands: [],
+        point: 0,
+        href: null,
+        sale_date: null,
+        expired_date: null,
+      },
+    ]; // Update the global selectedItem
+    isEditMode = false; // Set isEditMode to false
   }
 </script>
 
@@ -37,7 +58,7 @@
           </tr>
         </thead>
         <tbody>
-          {#each shopitems.slice(0, 9) as item (item.id)}
+          {#each shopitems.slice(0, 15) as item (item.id)}
             <tr>
               {#each tableHeaders as header}
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -46,8 +67,7 @@
                   class="px-4 py-2"
                   tabindex="0"
                   on:click={() => {
-                    handleClick(item);
-                    ShopitemForm.showModal();
+                    EditShopItem(item);
                   }}
                   aria-hidden="true"
                 >
@@ -71,13 +91,17 @@
     </div>
     <div class="modal-action">
       <additem
+        aria-hidden="true"
         for="Add_shopitem"
         class="btn btn-success"
         onclick="ShopitemForm.showModal()"
+        on:click={() => {
+          AddShopitem();
+        }}
         >เพิ่มสินค้า
       </additem>
       <button class="btn">Close</button>
     </div>
   </form>
 </dialog>
-<ShopModal {selectedItem} />
+<ShopModal {selectedItem} EditMode={isEditMode} />

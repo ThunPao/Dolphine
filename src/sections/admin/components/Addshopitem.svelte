@@ -228,7 +228,6 @@
           class="input w-full max-w-xs input-sm"
         />
       </div>
-
       <input
         type="file"
         class="file-input file-input-info w-full"

@@ -1,19 +1,14 @@
 <script lang="ts">
   import type { ShopItem } from "../../../models/shopitems";
+  import { apiurl, imgurl } from "../../../services/apiurl";
 
   export let selectedItem: ShopItem[] = [];
-  // export let selectedItem: ShopItem | null = null;
-  export let commands: {
-    title: string;
-    rcon_command: string;
-    visibled: boolean;
-  }[] = [];
+  export let EditMode: boolean = false;
 
   let limitedsale = false;
   let limits: number | null = null;
   let toggled = false;
   let image: File | null = null;
-  let href = "";
 
   function handleLimited() {
     limitedsale = !limitedsale;
@@ -46,11 +41,6 @@
       (_, i) => i !== index
     );
     console.log(index, "Removed REF:" + index);
-  }
-
-  function handleFileChange(event: { target: { files: FileList } }) {
-    image = event.target.files[0];
-    href = image.name.split(".").slice(0, -1).join(".") + ".webp";
   }
 </script>
 
@@ -117,13 +107,13 @@
         <div class="collapse bg-base-200">
           <input type="checkbox" />
           <div class="collapse-title text-xl font-medium text-center">
-            ไอเทมตำสั่ง : {selectedItem[0].commands.length > 0
+            คำสั่งทั้งหมด : {selectedItem[0].commands.length > 0
               ? selectedItem[0].commands.length
               : "Empty"}
           </div>
           <div class="collapse-content">
             <div class="grid justify-center gap-2 bg-base-200 rounded-lg p-2">
-              <h2 class="text-center font-bold text-lg mb-2">จัดการคำสั่</h2>
+              <h2 class="text-center font-bold text-lg mb-2">จัดการคำสั่ง</h2>
               {#each selectedItem[0].commands as command, index}
                 <div class="flex gap-1">
                   <span
@@ -181,20 +171,32 @@
             class="input w-full max-w-xs input-sm"
           />
         </div>
-
-        <input
-          type="file"
-          class="file-input file-input-info w-full"
-          on:change={handleFileChange}
-        />
+        {#if selectedItem.length > 0}
+          <img
+            src={selectedItem[0].href
+              ? imgurl + selectedItem[0].href
+              : imgurl + "default.webp"}
+            alt=""
+            width="350"
+            height="350"
+          />
+        {/if}
+        <input type="file" class="file-input file-input-info w-full" />
         <div class="flex justify-between">
-          {#if selectedItem[0].name.length > 0 && selectedItem[0].description.length > 0 && selectedItem[0].commands.length > 0 && image}
-            <button class="btn btn-primary w-8/12" type="submit"
-              >Sample {selectedItem[0].name}
-            </button>
-            <button class="btn w-4/12">ยกเลิก</button>
+          {#if !EditMode}
+            {#if selectedItem[0].name.length > 0 && selectedItem[0].description.length > 0 && selectedItem[0].commands.length > 0 && image}
+              <button class="btn btn-primary w-8/12" type="submit"
+                >เพิ่ม {selectedItem[0].name}
+              </button>
+              <button class="btn w-4/12">ยกเลิก</button>
+            {:else}
+              <button class="btn w-full">ปิด</button>
+            {/if}
           {:else}
-            <button class="btn w-full">ปิด</button>
+            <button class="btn btn-primary w-8/12"
+              >แก้ไข {selectedItem[0].name}
+            </button>
+            <button class="btn w-4/12">ปิด</button>
           {/if}
         </div>
       {/if}
