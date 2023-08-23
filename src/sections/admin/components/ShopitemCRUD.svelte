@@ -4,6 +4,7 @@
 
   export let selectedItem: ShopItem[] = [];
   export let EditMode: boolean = false;
+  export let clearimg: boolean = false;
 
   let limitedsale = false;
   let limits: number | null = null;
@@ -41,6 +42,16 @@
       (_, i) => i !== index
     );
     console.log(index, "Removed REF:" + index);
+  }
+
+  // let imageSrc: string | null = null;
+  function showImage(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (file) {
+      selectedItem[0].href = URL.createObjectURL(file);
+    }
   }
 </script>
 
@@ -171,17 +182,24 @@
             class="input w-full max-w-xs input-sm"
           />
         </div>
-        {#if selectedItem.length > 0}
-          <img
-            src={selectedItem[0].href
-              ? imgurl + selectedItem[0].href
-              : imgurl + "default.webp"}
-            alt=""
-            width="350"
-            height="350"
-          />
-        {/if}
-        <input type="file" class="file-input file-input-info w-full" />
+        <!-- svelte-ignore a11y-img-redundant-alt -->
+        <img
+          alt="Uploaded Image"
+          src={image
+            ? URL.createObjectURL(image)
+            : selectedItem[0].href !== null
+            ? imgurl + selectedItem[0].href
+            : imgurl + "default.webp"}
+          width="464"
+          height="387"
+        />
+
+        <input
+          type="file"
+          class="file-input file-input-info w-full"
+          on:change={showImage}
+        />
+
         <div class="flex justify-between">
           {#if !EditMode}
             {#if selectedItem[0].name.length > 0 && selectedItem[0].description.length > 0 && selectedItem[0].commands.length > 0 && image}
