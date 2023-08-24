@@ -38,6 +38,7 @@
         href: null,
         sale_date: null,
         expired_date: null,
+        toggled: false,
       },
     ]; // Update the global selectedItem
     isEditMode = false; // Set isEditMode to false

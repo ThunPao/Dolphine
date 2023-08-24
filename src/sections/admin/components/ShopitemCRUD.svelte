@@ -9,13 +9,22 @@
   let limits: number | null = null;
   let toggled = false;
   let image: File | null = null;
-
   function handleLimited() {
     limitedsale = !limitedsale;
     if (!limitedsale) {
       limits = -1;
     } else {
       limits = null;
+    }
+  }
+
+  export function resetimg() {
+    image = null;
+    const input = document.querySelector(
+      "input[type='file']"
+    ) as HTMLInputElement;
+    if (input) {
+      input.value = "";
     }
   }
 
@@ -40,16 +49,75 @@
     selectedItem[0].commands = selectedItem[0].commands.filter(
       (_, i) => i !== index
     );
-    console.log(index, "Removed REF:" + index);
   }
 
-  let imageSrc: string | null = null;
   function showImage(event: Event) {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
 
     if (file) {
-      imageSrc = URL.createObjectURL(file);
+      image = file;
+    }
+  }
+
+  async function updateCommands(shop_id: number) {
+    try {
+      const shopid = shop_id;
+      const response = await fetch(apiurl + `updatecmd?shop_id=${shopid}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(selectedItem[0].commands),
+      });
+
+      if (response.ok) {
+        // Data updated successfully
+        console.log("Commands updated successfully.");
+      } else {
+        // Handle error response from the server
+        const errorMessage = await response.text();
+        console.error("Error:", errorMessage);
+      }
+    } catch (error: any) {
+      console.error("Error:", error.message);
+    }
+  }
+
+  async function handleSubmit() {
+    const formData = new FormData();
+    formData.append("name", selectedItem[0].name);
+    formData.append("description", selectedItem[0].description);
+    formData.append("limits", String(selectedItem[0].limits)); // Convert to string
+    formData.append("buycount", String(selectedItem[0].buycount)); // Convert to string
+    formData.append("point", String(selectedItem[0].point)); // Convert to string
+    formData.append("sale_date", selectedItem[0].sale_date || ""); // Handle null or undefined
+    formData.append("expired_date", selectedItem[0].expired_date || ""); // Handle null or undefined
+    formData.append("image", image || ""); // Handle null or undefined
+    formData.append("toggled", selectedItem[0].toggled ? "true" : "false"); // Convert boolean to string
+    formData.append("href", selectedItem[0].href || ""); // Handle null or undefined
+    formData.append("width", "464"); // Convert to string
+    formData.append("height", "387"); // Convert to string
+    formData.append("quality", "20"); // Convert to string
+
+    try {
+      const response = await fetch(apiurl + "shopitems/" + selectedItem[0].id, {
+        method: "PUT",
+        body: formData,
+      });
+      const data = await response.json();
+      if (response.ok) {
+        updateCommands(data.id); // Call updateCommands instead of saveCommands
+        // message = `Shop item updated with ID: ${data.id}`;
+        alert(data.message);
+      } else {
+        alert("เจ๊ง " + data.message);
+        // message = "Error updating shop item";
+        console.log(data);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      // message = "An error occurred";
     }
   }
 </script>
@@ -184,16 +252,19 @@
         <!-- svelte-ignore a11y-img-redundant-alt -->
         <img
           alt="Uploaded Image"
-          src={image
-            ? URL.createObjectURL(image)
-            : selectedItem[0].href &&
-              selectedItem[0].href?.indexOf(".webp") >= 0
+          src={EditMode && selectedItem[0].href
             ? imgurl + selectedItem[0].href
+            : selectedItem[0].href && selectedItem[0].href.length <= 4
+            ? imgurl + "default.webp"
+            : image
+            ? URL.createObjectURL(image)
             : imgurl + "default.webp"}
           width="464"
           height="387"
         />
-
+        1 : {selectedItem[0].href}
+        2 : {EditMode}
+        3 : {image}
         <input
           type="file"
           class="file-input file-input-info w-full"
@@ -208,10 +279,10 @@
               </button>
               <button class="btn w-4/12">ยกเลิก</button>
             {:else}
-              <button class="btn w-full">ปิด</button>
+              <button class="btn w-full" on:click={resetimg}>ปิด</button>
             {/if}
           {:else}
-            <button class="btn btn-primary w-8/12"
+            <button class="btn btn-primary w-8/12" on:click={handleSubmit}
               >แก้ไข {selectedItem[0].name}
             </button>
             <button class="btn w-4/12">ปิด</button>
