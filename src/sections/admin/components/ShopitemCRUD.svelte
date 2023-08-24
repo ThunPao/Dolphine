@@ -184,12 +184,29 @@
       console.error("Error:", error);
     }
   }
+  async function removeshopitem(){
+    try {
+      const shopid = selectedItem[0].id;
+      const response = await fetch(apiurl + `shopitems/${shopid}`, {
+        method: "DELETE",
+      });
+      const data = response.json();
+      if (response.ok) {
+        location.reload();
+      } else {
+        console.log(data);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+  };
+}
 
 </script>
 
 <dialog id="ShopitemForm" class="modal">
   <form method="dialog" class="modal-box">
-    <p class="font-bold text-4xl">CRUD Shopitem</p>
+    <p class="font-bold text-4xl">จัดการสินค้า</p>
+    <button class="btn btn-sm btn-error absolute right-2 top-2" on:click={removeshopitem}>ลบไอเทม</button>
     <div class="grid justify-center gap-2 mx-2">
       {#if selectedItem != null && selectedItem.length > 0}
         <input
@@ -327,9 +344,6 @@
           width="464"
           height="387"
         />
-        1 : {selectedItem[0].href}
-        2 : {EditMode}
-        3 : {image}
         <input
           type="file"
           class="file-input file-input-info w-full"
