@@ -36,7 +36,6 @@
       selectedItem[0].commands = [
         ...selectedItem[0].commands,
         {
-          id: null,
           title: "",
           rcon_command: "",
           visibled: true, // Assuming 'visibled' is a string value
@@ -63,16 +62,17 @@
   async function updateCommands(shop_id: number) {
     try {
       const shopid = shop_id;
-      const response = await fetch(apiurl + `updatecmd/${shopid}`, {
+      const response = await fetch(apiurl + `updatecmds/${shopid}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(selectedItem[0].commands),
       });
+      console.log("RAW :" + JSON.stringify(selectedItem[0].commands));
+
       if (response.ok) {
         // Data updated successfully
-        console.log("RAW :" + JSON.stringify(selectedItem[0].commands));
         console.log("RES :" + JSON.stringify(response.body));
 
         console.log("Commands updated successfully.");
@@ -110,9 +110,9 @@
       });
       const data = await response.json();
       if (response.ok) {
-        updateCommands(data.id); // Call updateCommands instead of saveCommands
+        updateCommands(data.id);
         // message = `Shop item updated with ID: ${data.id}`;
-        location.reload();
+        // location.reload();
       } else {
         // message = "Error updating shop item";
         console.log(data);
