@@ -8,7 +8,6 @@
   let tableHeaders: (keyof ShopItem)[] = [];
   let selectedItem: ShopItem[] = [];
   let isEditMode = false;
-  let Clearfileimg = false;
 
   onMount(async () => {
     try {
@@ -105,4 +104,4 @@
     </div>
   </form>
 </dialog>
-<ShopModal {selectedItem} EditMode={isEditMode} clearimg={Clearfileimg} />
+<ShopModal {selectedItem} EditMode={isEditMode} />

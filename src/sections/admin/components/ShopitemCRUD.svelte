@@ -4,7 +4,6 @@
 
   export let selectedItem: ShopItem[] = [];
   export let EditMode: boolean = false;
-  export let clearimg: boolean = false;
 
   let limitedsale = false;
   let limits: number | null = null;
@@ -44,13 +43,13 @@
     console.log(index, "Removed REF:" + index);
   }
 
-  // let imageSrc: string | null = null;
+  let imageSrc: string | null = null;
   function showImage(event: Event) {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
 
     if (file) {
-      selectedItem[0].href = URL.createObjectURL(file);
+      imageSrc = URL.createObjectURL(file);
     }
   }
 </script>
@@ -187,7 +186,8 @@
           alt="Uploaded Image"
           src={image
             ? URL.createObjectURL(image)
-            : selectedItem[0].href !== null
+            : selectedItem[0].href &&
+              selectedItem[0].href?.indexOf(".webp") >= 0
             ? imgurl + selectedItem[0].href
             : imgurl + "default.webp"}
           width="464"

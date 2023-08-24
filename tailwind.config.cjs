@@ -4,7 +4,22 @@ module.exports = {
 	  },
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
-		extend: {},
+		keyframes: {
+			wiggle: {
+			  '0%, 100%': { transform: 'rotate(-3deg)' },
+			  '50%': { transform: 'rotate(3deg)' },
+			},
+			beat: {
+				'0%, 100%': { transform: 'scale(95%)' },
+				'50%': { transform: 'scale(100%)' },
+			  }
+		  },
+		extend: {
+			animation: {
+				wiggle: 'wiggle 1s ease-in-out infinite',
+				beat: 'beat 1s ease-in-out infinite',
+			  }
+		},
 	},
 	plugins: [require("daisyui")],
 	daisyui: {

@@ -18,11 +18,11 @@
     if (navigator && navigator.userAgent) {
       const userAgent = navigator.userAgent.toLowerCase();
       if (userAgent.includes("win")) {
-        platform = "Windows";
+        platform = 0;
       } else if (userAgent.includes("linux")) {
-        platform = "Linux";
+        platform = 1;
       } else if (userAgent.includes("mac")) {
-        platform = "macOS";
+        platform = 2;
       } else {
         platform = "Unknown";
       }
@@ -62,7 +62,7 @@
           title="คลิก"
           class="btn text-xl {$currentuser?.points - point < 0
             ? 'btn-warning'
-            : 'btn-success'}"
+            : 'btn-success animate-beat'}"
           on:click={() => {
             $currentuser?.points - point < 0 ? "" : buyitem(id);
           }}>{$currentuser?.points - point < 0 ? "DP ไม่พอ" : "ตกลง"}</button
@@ -76,7 +76,7 @@
       {/if}
       <button title="คลิก" class="btn btn-base-200 text-xl">ยกเลิก</button>
     </div>
-    {#if platform !== "Unknown"}
+    {#if platform <= 2}
       กดปุ่ม<kbd class="kbd kbd-sm mt-2 animate-bounce">Enter</kbd> เพื่อซื้อทันที
     {/if}
   </form>

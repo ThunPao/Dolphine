@@ -143,7 +143,7 @@
         {#if limits > 0 || limits < 0}
           <button
             title="คลิก"
-            class="btn btn-primary hover:scale-105 text-lg"
+            class="btn btn-primary hover:scale-100 scale-95 duration-75 text-lg w-full"
             onclick="buyitem.showModal();"
             ><i class="fa-solid fa-dollar-sign" />
             ซื้อเลย</button

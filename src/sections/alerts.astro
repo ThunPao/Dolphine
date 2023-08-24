@@ -1,8 +1,9 @@
 ---
+let speaker = "images/icons/speaker.webp";
 ---
 
-<div class="alert alert-info mt-5">
-  <svg
+<div class="alert mt-2">
+  <!-- <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
@@ -12,8 +13,26 @@
       stroke-linejoin="round"
       stroke-width="2"
       d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
-  >
-  <span id="carditems">เตือนๆๆ</span>
+  > -->
+  <div class="indicator">
+    <img
+      class="animate animate-wiggle"
+      src={speaker}
+      alt="แตร๊นนนนนนนนนน~~~~~~~"
+      width="64"
+      height="64"
+    />
+    <span
+      id="carditems"
+      class="indicator-item indicator-bottom indicator-center badge badge-secondary text-lg font-medium"
+      >ประกาศ</span
+    >
+  </div>
+  <div class="text-2xl w-full">
+    <marquee
+      >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, ipsam!</marquee
+    >
+  </div>
 </div>
 <progress class="progress progress-base-200 w-full" value="100" max="100"
 ></progress>
