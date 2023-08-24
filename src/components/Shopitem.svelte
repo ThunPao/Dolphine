@@ -120,44 +120,46 @@
           </div>
         </div>
         <span class="flex justify-between mx-1">
-          <div class="font-medium text-xs md:text-sm h-8 md:h-0">
-            {dateDiff ? dateDiff : ""}
+          <div class="font-bold text-md">
+            {#if limits > 0}
+              <div
+                class="badge badge-warning badge-sm md:badge-md md:py-3 {limits <=
+                10
+                  ? 'animate-pulse'
+                  : ''}"
+              >
+                เหลือ {limits}
+              </div>
+            {:else if limits < 0}
+              <div class="badge badge-info badge-sm md:badge-md md:py-3">
+                ขายประจำ
+              </div>
+            {:else}
+              <div
+                class="badge badge-error badge-sm md:badge-md md:py-3 font-medium"
+              >
+                สินค้าหมด
+              </div>
+            {/if}
           </div>
-          <div class="font-medium text-xs md:text-sm">
+          <div class="font-medium text-xs md:text-sm badge badge-neutral badge-sm md:py-3">
             {buycount} ขายแล้ว
           </div>
         </span>
+        
         <div class="card-body">
+        
           <h2
             class="card-title h-6 md:h-10 text-sm md:text-lg justify-center leading-none"
           >
             {name}
           </h2>
           <div
-            class="card-actions justify-center md:justify-between align-bottom h-4 md:h-10"
+            class="card-actions justify-center align-bottom h-4"
           >
-            <div class="font-bold text-md">
-              {#if limits > 0}
-                <div
-                  class="badge badge-warning badge-sm md:badge-md md:py-3 {limits <=
-                  10
-                    ? 'animate-pulse'
-                    : ''}"
-                >
-                  เหลือ {limits}
-                </div>
-              {:else if limits < 0}
-                <div class="badge badge-info badge-sm md:badge-md md:py-3">
-                  ขายประจำ
-                </div>
-              {:else}
-                <div
-                  class="badge badge-error badge-sm md:badge-md md:py-3 font-medium"
-                >
-                  สินค้าหมด
-                </div>
-              {/if}
-            </div>
+          <div class="font-medium text-xs md:text-sm h-8 md:h-0">
+            {dateDiff ? dateDiff : ""}
+          </div>
             <!-- <div class="badge badge-base-200 font-medium text-xs md:py-3">
               <div class="rating rating-sm">
                 <input
