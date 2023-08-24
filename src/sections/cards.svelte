@@ -44,7 +44,7 @@
             slides: { perView: 3, spacing: 10 },
           },
           "(min-width: 1000px)": {
-            slides: { perView: 4, spacing: 10 },
+            slides: { perView: 5, spacing: 10 },
           },
         },
         slides: {
@@ -68,7 +68,7 @@
 <div class="grid grid-cols-1 xl:grid-cols-4 xl:m-5">
   <div class="carditems md:col-span-3">
     <!--  -->
-    <div class="alert shadow-lg">
+    <div class="alert xl:rounded-r-none shadow-lg">
       <span
         class="text-4xl bg-gradient-to-r from-pink-500 to-blue-500 text-transparent bg-clip-text"
       >
@@ -88,7 +88,7 @@
         <!-- Slides -->
         {#if $shopitems !== null}
           {#if $shopitems.length > 0}
-            {#each $shopitems.slice(0, 9) as data}
+            {#each $shopitems.slice(0, 5) as data}
               <Shopcard
                 display="0"
                 keen="true"
@@ -114,7 +114,7 @@
       <!-- </div> -->
     </div>
   </div>
-  <div class="bg-base-200 rounded-lg">
+  <div class="bg-base-200 rounded-lg xl:rounded-l-none">
     <div class="overflow-x-auto">
       <Tabs />
     </div>

@@ -2,7 +2,7 @@
   import { shopitems, shopData } from "../services/ShopController";
   import { imgurl } from "../services/apiurl";
   const defaultimg = imgurl + "default.webp";
-  import {updateDateDiff} from "../services/Playdate";
+  import { updateDateDiff } from "../services/Playdate";
 
   let tabs = ["ไอเทมใหม่", "ไอเทมยอดฮิต", "อันดับเทพทรู"];
   let activeTabIndex = 2;
@@ -22,9 +22,6 @@
       dateDiff: updateDateDiff(data.sale_date, data.expired_date),
     });
   }
-
-
-
 </script>
 
 <div class="tabs d-flex justify-center">

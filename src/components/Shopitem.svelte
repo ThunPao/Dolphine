@@ -79,7 +79,7 @@
   }
 </script>
 
-<span class={keen ? "keen-slider__slide px-1 pb-1" : ""}>
+<span class={keen ? "keen-slider__slide px-1 pb-1 lazy__slide" : ""}>
   {#if display == 0}
     <div
       class="card card-compact shadow-md dark:hover:shadow-amber-500 hover:shadow-blue-500 bg-base-200 dark:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
