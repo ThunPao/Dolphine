@@ -56,6 +56,7 @@
 
     if (file) {
       image = file;
+      // selectedItem[0].href = image.name.split(".").slice(0, -1).join(".") + ".webp";
     }
   }
 
@@ -102,7 +103,7 @@
     formData.append("href", selectedItem[0].href || ""); // Handle null or undefined
     formData.append("width", "464"); // Convert to string
     formData.append("height", "387"); // Convert to string
-    formData.append("quality", "20"); // Convert to string
+    formData.append("quality", "67"); // Convert to string
 
     try {
       const response = await fetch(apiurl + "shopitems/" + selectedItem[0].id, {
@@ -113,7 +114,7 @@
       if (response.ok) {
         updateCommands(data.id);
         // message = `Shop item updated with ID: ${data.id}`;
-        // location.reload();
+        location.reload();
       } else {
         // message = "Error updating shop item";
         console.log(data);
@@ -158,12 +159,12 @@
     formData.append("point", String(selectedItem[0].point)); // Convert to string
     formData.append("sale_date", selectedItem[0].sale_date || ""); // Handle null or undefined
     formData.append("expired_date", selectedItem[0].expired_date || ""); // Handle null or undefined
-    formData.append("image", image || ""); // Handle null or undefined
+    formData.append("image", image || ""); // 
     formData.append("toggled", selectedItem[0].toggled ? "true" : "false"); // Convert boolean to string
-    formData.append("href", selectedItem[0].href || ""); // Handle null or undefined
+    formData.append("href", image ? image.name.split(".").slice(0, -1).join(".") + ".webp" : ""); // Handle null or undefined
     formData.append("width", "464"); // Convert to string
     formData.append("height", "387"); // Convert to string
-    formData.append("quality", "20"); // Convert to string
+    formData.append("quality", "67"); // Convert to string
 
     try {
       const response = await fetch(apiurl + "shopitems", {
@@ -174,8 +175,8 @@
       console.log("ID: "+data.id+" FORM: "+formData);
 
       if (response.ok) {
-        alert("ID: "+data.id+" FORM: "+formData);
         saveCommands(data.id);
+        location.reload();
       } else {
         console.log(data);
       }

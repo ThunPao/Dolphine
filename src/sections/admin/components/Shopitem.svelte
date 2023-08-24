@@ -59,7 +59,7 @@
           </tr>
         </thead>
         <tbody>
-          {#each shopitems.slice(0, 15) as item (item.id)}
+          {#each shopitems.slice(0, 50) as item (item.id)}
             <tr>
               {#each tableHeaders as header}
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
