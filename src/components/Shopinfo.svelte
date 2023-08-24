@@ -113,8 +113,7 @@
       <div class="bg-base-200 rounded p-2">
         {description}
       </div>
-
-      {#if title && title.includes(",")}
+      <!-- {#if title && title.includes(",")}
         <br />
         <div class="p-2 rounded-lg bg-base-300 text-center">
           เมื่อซื้อ จะได้รับตามรายการทั้งหมดดังต่อไปนี้<br />
@@ -136,8 +135,30 @@
             </li>
           </ul>
         </div>
-      {/if}
-
+      {/if} -->
+      {#if title}
+      <br />
+      <div class="p-2 rounded-lg bg-base-300 text-center">
+        {#if title.length > 0}
+          <div>
+            เมื่อซื้อ จะได้รับตามรายการทั้งหมดดังต่อไปนี้
+          </div>
+          {#each title as item}
+            <ul class="menu bg-base-200 rounded-box m-2">
+              <li>{item}</li>
+            </ul>
+          {/each}
+        {:else}
+          <div>
+            เมื่อซื้อ จะได้รับรายการดังต่อไปนี้
+          </div>
+          <ul class="menu bg-base-200 rounded-box">
+            <li>{title}</li>
+          </ul>
+        {/if}
+      </div>
+    {/if}
+    
       <div class="flex justify-center gap-2 mt-4">
         <!-- <Btncf did={id} {name} {point} {limits} /> -->
         {#if limits > 0 || limits < 0}

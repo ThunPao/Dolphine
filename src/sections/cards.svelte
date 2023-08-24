@@ -162,7 +162,7 @@
 
 {#if displaymode}
   {#if $shopitems !== null && $shopitems.length > 0}
-    {#each $shopitems.filter(filterShopItems).slice(0, 18) as data}
+    {#each $shopitems.filter(filterShopItems).slice(0, 12) as data}
       <Shopcard
         display="1"
         keen="false"

@@ -68,6 +68,7 @@
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ commands: selectedItem[0].commands }),
+
       });
       console.log("RAW :" + JSON.stringify(selectedItem[0].commands));
 
@@ -122,6 +123,67 @@
       // message = "An error occurred";
     }
   }
+  async function saveCommands(shop_id: number) {
+  try {
+    const response = await fetch(apiurl + 'addcmd', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        shop_id: shop_id,
+        commands: selectedItem[0].commands
+      }),
+    });
+    console.log("RAW ADD :" + JSON.stringify(selectedItem[0].commands));
+    if (response.ok) {
+      // Data inserted successfully
+      console.log("Commands added successfully.");
+    } else {
+      // Handle error response from the server
+      const errorMessage = await response.text();
+      console.error("Error:", errorMessage);
+    }
+  } catch (error: any) {
+    console.error("Error:", error.message);
+  }
+}
+
+  async function addItem() {
+    const formData = new FormData();
+    formData.append("name", selectedItem[0].name);
+    formData.append("description", selectedItem[0].description);
+    formData.append("limits", String(selectedItem[0].limits)); // Convert to string
+    formData.append("buycount", String(selectedItem[0].buycount)); // Convert to string
+    formData.append("point", String(selectedItem[0].point)); // Convert to string
+    formData.append("sale_date", selectedItem[0].sale_date || ""); // Handle null or undefined
+    formData.append("expired_date", selectedItem[0].expired_date || ""); // Handle null or undefined
+    formData.append("image", image || ""); // Handle null or undefined
+    formData.append("toggled", selectedItem[0].toggled ? "true" : "false"); // Convert boolean to string
+    formData.append("href", selectedItem[0].href || ""); // Handle null or undefined
+    formData.append("width", "464"); // Convert to string
+    formData.append("height", "387"); // Convert to string
+    formData.append("quality", "20"); // Convert to string
+
+    try {
+      const response = await fetch(apiurl + "shopitems", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      console.log("ID: "+data.id+" FORM: "+formData);
+
+      if (response.ok) {
+        alert("ID: "+data.id+" FORM: "+formData);
+        saveCommands(data.id);
+      } else {
+        console.log(data);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
 </script>
 
 <dialog id="ShopitemForm" class="modal">
@@ -276,7 +338,7 @@
         <div class="flex justify-between">
           {#if !EditMode}
             {#if selectedItem[0].name.length > 0 && selectedItem[0].description.length > 0 && selectedItem[0].commands.length > 0 && image}
-              <button class="btn btn-primary w-8/12" type="submit"
+              <button class="btn btn-primary w-8/12" type="submit" on:click={addItem}
                 >เพิ่ม {selectedItem[0].name}
               </button>
               <button class="btn w-4/12">ยกเลิก</button>
@@ -292,7 +354,5 @@
         </div>
       {/if}
     </div>
-
-    Msg
   </form>
 </dialog>
