@@ -1,4 +1,5 @@
 export interface ShopCommand {
+  id: number | null;
   title: string;
   rcon_command: string;
   visibled: boolean; // Or boolean if it's a boolean value
