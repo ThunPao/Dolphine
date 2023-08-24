@@ -67,7 +67,7 @@
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(selectedItem[0].commands),
+        body: JSON.stringify({ commands: selectedItem[0].commands }),
       });
       console.log("RAW :" + JSON.stringify(selectedItem[0].commands));
 
