@@ -181,6 +181,6 @@
     </div>
   </form>
   <form method="dialog" class="modal-backdrop">
-    <button title="คลิก" />
+    <button aria-hidden="true" />
   </form>
 </dialog>
