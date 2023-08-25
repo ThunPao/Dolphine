@@ -31,7 +31,7 @@
         id: 0,
         name: "",
         description: "",
-        limits: 0,
+        limits: -1,
         buycount: 0,
         commands: [],
         point: 0,

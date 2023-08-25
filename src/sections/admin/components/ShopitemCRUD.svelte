@@ -5,15 +5,15 @@
   export let EditMode: boolean = false;
 
   let limitedsale = false;
-  let limits: number | null = null;
-  let toggled = false;
+  // let limits: number | null = null;
+  // let toggled = false;
   let image: File | null = null;
   function handleLimited() {
     limitedsale = !limitedsale;
     if (!limitedsale) {
-      limits = -1;
+      selectedItem[0].limits = -1;
     } else {
-      limits = null;
+      selectedItem[0].limits = null;
     }
   }
 
@@ -98,7 +98,7 @@
     formData.append("sale_date", selectedItem[0].sale_date || ""); // Handle null or undefined
     formData.append("expired_date", selectedItem[0].expired_date || ""); // Handle null or undefined
     formData.append("image", image || ""); // Handle null or undefined
-    formData.append("toggled", selectedItem[0].toggled ? "true" : "false"); // Convert boolean to string
+    formData.append("toggled", selectedItem[0].toggled ? "true" : "false");
     formData.append("href", selectedItem[0].href || ""); // Handle null or undefined
     formData.append("width", "464"); // Convert to string
     formData.append("height", "387"); // Convert to string
@@ -113,7 +113,7 @@
       if (response.ok) {
         updateCommands(data.id);
         // message = `Shop item updated with ID: ${data.id}`;
-        location.reload();
+        // location.reload();
       } else {
         // message = "Error updating shop item";
         console.log(data);
@@ -263,8 +263,10 @@
               <input
                 type="checkbox"
                 class="toggle toggle-info toggle-lg"
-                on:change={handleShow}
+                bind:checked={selectedItem[0].toggled}
               />
+              {typeof selectedItem[0].toggled}
+              <!-- on:change={handleShow} -->
             </label>
           </div>
         </div>
@@ -302,6 +304,7 @@
                     class="toggle toggle-lg"
                     bind:checked={command.visibled}
                   />
+                  {typeof command.visibled}
                 </div>
               {/each}
 
