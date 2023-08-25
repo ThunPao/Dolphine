@@ -28,7 +28,7 @@
   }
 
   function handleShow() {
-    toggled = !toggled;
+    selectedItem[0].toggled = !selectedItem[0].toggled;
   }
 
   function addMore() {
@@ -69,7 +69,6 @@
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ commands: selectedItem[0].commands }),
-
       });
       console.log("RAW :" + JSON.stringify(selectedItem[0].commands));
 
@@ -125,30 +124,30 @@
     }
   }
   async function saveCommands(shop_id: number) {
-  try {
-    const response = await fetch(apiurl + 'addcmd', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        shop_id: shop_id,
-        commands: selectedItem[0].commands
-      }),
-    });
-    console.log("RAW ADD :" + JSON.stringify(selectedItem[0].commands));
-    if (response.ok) {
-      // Data inserted successfully
-      console.log("Commands added successfully.");
-    } else {
-      // Handle error response from the server
-      const errorMessage = await response.text();
-      console.error("Error:", errorMessage);
+    try {
+      const response = await fetch(apiurl + "addcmd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          shop_id: shop_id,
+          commands: selectedItem[0].commands,
+        }),
+      });
+      console.log("RAW ADD :" + JSON.stringify(selectedItem[0].commands));
+      if (response.ok) {
+        // Data inserted successfully
+        console.log("Commands added successfully.");
+      } else {
+        // Handle error response from the server
+        const errorMessage = await response.text();
+        console.error("Error:", errorMessage);
+      }
+    } catch (error: any) {
+      console.error("Error:", error.message);
     }
-  } catch (error: any) {
-    console.error("Error:", error.message);
   }
-}
 
   async function addItem() {
     const formData = new FormData();
@@ -159,9 +158,12 @@
     formData.append("point", String(selectedItem[0].point)); // Convert to string
     formData.append("sale_date", selectedItem[0].sale_date || ""); // Handle null or undefined
     formData.append("expired_date", selectedItem[0].expired_date || ""); // Handle null or undefined
-    formData.append("image", image || ""); // 
+    formData.append("image", image || ""); //
     formData.append("toggled", selectedItem[0].toggled ? "true" : "false"); // Convert boolean to string
-    formData.append("href", image ? image.name.split(".").slice(0, -1).join(".") + ".webp" : ""); // Handle null or undefined
+    formData.append(
+      "href",
+      image ? image.name.split(".").slice(0, -1).join(".") + ".webp" : ""
+    ); // Handle null or undefined
     formData.append("width", "464"); // Convert to string
     formData.append("height", "387"); // Convert to string
     formData.append("quality", "67"); // Convert to string
@@ -172,7 +174,7 @@
         body: formData,
       });
       const data = await response.json();
-      console.log("ID: "+data.id+" FORM: "+formData);
+      console.log("ID: " + data.id + " FORM: " + formData);
 
       if (response.ok) {
         saveCommands(data.id);
@@ -184,7 +186,7 @@
       console.error("Error:", error);
     }
   }
-  async function removeshopitem(){
+  async function removeshopitem() {
     try {
       const shopid = selectedItem[0].id;
       const response = await fetch(apiurl + `shopitems/${shopid}`, {
@@ -198,15 +200,17 @@
       }
     } catch (error) {
       console.error("Error:", error);
-  };
-}
-
+    }
+  }
 </script>
 
 <dialog id="ShopitemForm" class="modal">
   <form method="dialog" class="modal-box">
     <p class="font-bold text-4xl">จัดการสินค้า</p>
-    <button class="btn btn-sm btn-error absolute right-2 top-2" on:click={removeshopitem}>ลบไอเทม</button>
+    <button
+      class="btn btn-sm btn-error absolute right-2 top-2"
+      on:click={removeshopitem}>ลบไอเทม</button
+    >
     <div class="grid justify-center gap-2 mx-2">
       {#if selectedItem != null && selectedItem.length > 0}
         <input
@@ -353,7 +357,10 @@
         <div class="flex justify-between">
           {#if !EditMode}
             {#if selectedItem[0].name.length > 0 && selectedItem[0].description.length > 0 && selectedItem[0].commands.length > 0 && image}
-              <button class="btn btn-primary w-8/12" type="submit" on:click={addItem}
+              <button
+                class="btn btn-primary w-8/12"
+                type="submit"
+                on:click={addItem}
                 >เพิ่ม {selectedItem[0].name}
               </button>
               <button class="btn w-4/12">ยกเลิก</button>
