@@ -16,5 +16,5 @@ export interface ShopItem {
   href: string | null;
   sale_date: string | null;
   expired_date: string | null;
-  toggled: boolean;
+  toggled: string;
 }

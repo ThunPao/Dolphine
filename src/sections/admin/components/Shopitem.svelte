@@ -11,11 +11,12 @@
   });
   let selectedItem = shopItemsController.selectedItem;
   let isEditMode: boolean;
+
   function EditShopItem(item: ShopItem) {
     selectedItem = [item];
     shopItemsController.editShopItem(item);
     isEditMode = true;
-    console.log(shopItemsController.selectedItem);
+    // console.log(shopItemsController.selectedItem);
   }
 
   function AddShopitem() {
@@ -31,7 +32,7 @@
         href: null,
         sale_date: null,
         expired_date: null,
-        toggled: false,
+        toggled: "false",
       },
     ];
     isEditMode = false;
@@ -58,7 +59,7 @@
               {#each shopItemsController.tableHeaders as header}
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
                 <td
-                  class="px-4 py-2"
+                class="px-4 py-2"
                   tabindex="0"
                   on:click={() => {
                     EditShopItem(item);

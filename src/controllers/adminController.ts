@@ -19,7 +19,7 @@ export const shopItemsController = {
       }
       const responseData = await response.json();
       this.shopitems = responseData;
-      console.log(responseData);
+      // console.log(responseData);
       this.tableHeaders = Object.keys(responseData[0]) as (keyof ShopItem)[];
     } catch (error) {
       console.error(error);

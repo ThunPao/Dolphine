@@ -6,7 +6,6 @@
 
   let limitedsale = false;
   // let limits: number | null = null;
-  // let toggled = false;
   let image: File | null = null;
   function handleLimited() {
     limitedsale = !limitedsale;
@@ -28,8 +27,18 @@
   }
 
   function handleShow() {
-    selectedItem[0].toggled = !selectedItem[0].toggled;
+    if (selectedItem[0].toggled == "true"){
+      selectedItem[0].toggled = "false"
+    }else{
+      selectedItem[0].toggled = "true"
+
+    }
+// console.log(typeof(selectedItem[0].toggled))
   }
+export let iscmdVisibled = false;
+function handleshowcmd(){
+  iscmdVisibled = !iscmdVisibled;
+}
 
   function addMore() {
     if (selectedItem.length > 0) {
@@ -98,7 +107,7 @@
     formData.append("sale_date", selectedItem[0].sale_date || ""); // Handle null or undefined
     formData.append("expired_date", selectedItem[0].expired_date || ""); // Handle null or undefined
     formData.append("image", image || ""); // Handle null or undefined
-    formData.append("toggled", selectedItem[0].toggled ? "true" : "false");
+    formData.append("toggled", selectedItem[0].toggled);
     formData.append("href", selectedItem[0].href || ""); // Handle null or undefined
     formData.append("width", "464"); // Convert to string
     formData.append("height", "387"); // Convert to string
@@ -112,8 +121,7 @@
       const data = await response.json();
       if (response.ok) {
         updateCommands(data.id);
-        // message = `Shop item updated with ID: ${data.id}`;
-        // location.reload();
+        location.reload();
       } else {
         // message = "Error updating shop item";
         console.log(data);
@@ -135,12 +143,9 @@
           commands: selectedItem[0].commands,
         }),
       });
-      console.log("RAW ADD :" + JSON.stringify(selectedItem[0].commands));
+      // console.log("RAW ADD :" + JSON.stringify(selectedItem[0].commands));
       if (response.ok) {
-        // Data inserted successfully
-        console.log("Commands added successfully.");
       } else {
-        // Handle error response from the server
         const errorMessage = await response.text();
         console.error("Error:", errorMessage);
       }
@@ -159,7 +164,7 @@
     formData.append("sale_date", selectedItem[0].sale_date || ""); // Handle null or undefined
     formData.append("expired_date", selectedItem[0].expired_date || ""); // Handle null or undefined
     formData.append("image", image || ""); //
-    formData.append("toggled", selectedItem[0].toggled ? "true" : "false"); // Convert boolean to string
+    formData.append("toggled", selectedItem[0].toggled); // Convert boolean to string
     formData.append(
       "href",
       image ? image.name.split(".").slice(0, -1).join(".") + ".webp" : ""
@@ -211,18 +216,40 @@
       class="btn btn-sm btn-error absolute right-2 top-2"
       on:click={removeshopitem}>ลบไอเทม</button
     >
-    <div class="grid grid-cols-2 justify-center gap-2 mx-2">
+    <div class="lg:grid lg:grid-cols-2 justify-center gap-2 mx-2">
       {#if selectedItem != null && selectedItem.length > 0}
+      <div>
+        <!-- svelte-ignore a11y-img-redundant-alt -->
+        <img
+        class="p-3"
+          alt="Uploaded Image"
+          src={EditMode && selectedItem[0].href
+            ? imgurl + selectedItem[0].href
+            : selectedItem[0].href && selectedItem[0].href.length <= 4
+            ? imgurl + "default.webp"
+            : image
+            ? URL.createObjectURL(image)
+            : imgurl + "default.webp"}
+          width="464"
+          height="387"
+        />
+        <input
+          type="file"
+          class="file-input file-input-info w-full"
+          on:change={showImage}
+        />
+      </div>
         <div>
+      {#if !iscmdVisibled}
           <input
             type="text"
             placeholder="Name"
             bind:value={selectedItem[0].name}
-            class="input w-full"
+            class="input input-info w-full mt-2"
           />
 
           <textarea
-            class="textarea"
+            class="textarea w-full input-info mt-2"
             placeholder="Description"
             bind:value={selectedItem[0].description}
           />
@@ -231,26 +258,26 @@
               type="number"
               placeholder="Buy Count"
               bind:value={selectedItem[0].buycount}
-              class="input w-full"
+              class="input input-info w-full"
             />
             <input
               type="number"
               placeholder="Point"
               bind:value={selectedItem[0].point}
-              class="input w-full"
+              class="input input-info w-full"
             />
           </div>
           <input
             type="number"
             placeholder="Limits"
             bind:value={selectedItem[0].limits}
-            class="input w-full"
+            class="input input-info w-full mt-2"
             disabled={!limitedsale}
           />
-          <div class="join justify-center gap-2">
+          <div class="flex justify-center gap-2">
             <div class="form-control">
               <label class="label cursor-pointer">
-                <span class="label-text text-lg">จำกัดการขาย</span>
+                <span class="label-text lg:text-lg">จำกัดการขาย</span>
                 <input
                   type="checkbox"
                   class="toggle toggle-secondary toggle-lg"
@@ -260,20 +287,40 @@
             </div>
             <div class="form-control">
               <label class="label cursor-pointer">
-                <span class="label-text text-lg">แสดงไอเทม</span>
+                <span class="label-text lg:text-lg">แสดงไอเทม</span>
+
                 <input
                   type="checkbox"
                   class="toggle toggle-info toggle-lg"
-                  bind:checked={selectedItem[0].toggled}
+                  checked={selectedItem[0].toggled == "true" ? true : false}
+                on:change={handleShow}
                 />
-                {typeof selectedItem[0].toggled}
-                <!-- on:change={handleShow} -->
               </label>
             </div>
           </div>
+          <div class="flex">
+            เริ่มขาย
+            <input
+              type="date"
+              placeholder="Sale Date"
+              bind:value={selectedItem[0].sale_date}
+              class="input w-full max-w-xs input-sm"
+            />
+            หมดเวลา
+            <input
+              type="date"
+              placeholder="Expired Date"
+              bind:value={selectedItem[0].expired_date}
+              class="input w-full max-w-xs input-sm"
+            />
+          </div>
+          {/if}
+
           <div class="collapse bg-base-200">
-            <input type="checkbox" />
-            <div class="collapse-title text-xl font-medium text-center">
+            <input type="checkbox" on:change={handleshowcmd} />
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <div class="collapse-title text-xl font-medium text-center"
+            >
               คำสั่งทั้งหมด : {selectedItem[0].commands.length > 0
                 ? selectedItem[0].commands.length
                 : "Empty"}
@@ -282,16 +329,16 @@
               <div class="grid justify-center gap-2 bg-base-200 rounded-lg p-2">
                 <h2 class="text-center font-bold text-lg mb-2">จัดการคำสั่ง</h2>
                 {#each selectedItem[0].commands as command, index}
-                  <div class="flex gap-1">
+                  <div class="grid lg:flex gap-1">
                     <span
                       aria-hidden="true"
-                      class="btn btn-error btn-sm"
+                      class="btn btn-error btn-sm hidden lg:block"
                       on:click={() => removeItem(index)}>ลบ</span
                     >
                     <input
                       type="text"
                       placeholder="title"
-                      class="input input-bordered input-primary w-1/2 input-sm"
+                      class="input input-bordered input-primary lg:w-1/2 input-sm"
                       bind:value={command.title}
                     />
                     <input
@@ -300,12 +347,19 @@
                       class="input input-bordered input-secondary w-full max-w-xs input-sm"
                       bind:value={command.rcon_command}
                     />
+                    <div class="lg:hidden flex justify-between">
+                      แสดงคำสั่ง
                     <input
                       type="checkbox"
                       class="toggle toggle-lg"
                       bind:checked={command.visibled}
                     />
-                    {typeof command.visibled}
+                    <span
+                    aria-hidden="true"
+                    class="btn btn-error btn-sm"
+                    on:click={() => removeItem(index)}>ลบคำสั่ง</span
+                  >
+                    </div>
                   </div>
                 {/each}
 
@@ -323,64 +377,27 @@
             </div>
           </div>
 
-          <div class="flex">
-            Start
-            <input
-              type="date"
-              placeholder="Sale Date"
-              bind:value={selectedItem[0].sale_date}
-              class="input w-full max-w-xs input-sm"
-            />
-            End
-            <input
-              type="date"
-              placeholder="Expired Date"
-              bind:value={selectedItem[0].expired_date}
-              class="input w-full max-w-xs input-sm"
-            />
-          </div>
-        </div>
-        <div>
-          <!-- svelte-ignore a11y-img-redundant-alt -->
-          <img
-          class="p-3"
-            alt="Uploaded Image"
-            src={EditMode && selectedItem[0].href
-              ? imgurl + selectedItem[0].href
-              : selectedItem[0].href && selectedItem[0].href.length <= 4
-              ? imgurl + "default.webp"
-              : image
-              ? URL.createObjectURL(image)
-              : imgurl + "default.webp"}
-            width="464"
-            height="387"
-          />
-          <input
-            type="file"
-            class="file-input file-input-info w-full"
-            on:change={showImage}
-          />
 
-          <div class="flex justify-between">
-            {#if !EditMode}
-              {#if selectedItem[0].name.length > 0 && selectedItem[0].description.length > 0 && selectedItem[0].commands.length > 0 && image}
-                <button
-                  class="btn btn-primary w-8/12"
-                  type="submit"
-                  on:click={addItem}
-                  >เพิ่ม {selectedItem[0].name}
-                </button>
-                <button class="btn w-4/12">ยกเลิก</button>
-              {:else}
-                <button class="btn w-full" on:click={resetimg}>ปิด</button>
-              {/if}
-            {:else}
-              <button class="btn btn-primary w-8/12" on:click={handleSubmit}
-                >แก้ไข {selectedItem[0].name}
+        </div>
+        <div class="flex justify-between">
+          {#if !EditMode}
+            {#if selectedItem[0].name.length > 0 && selectedItem[0].description.length > 0 && selectedItem[0].commands.length > 0 && image}
+              <button
+                class="btn btn-primary w-8/12"
+                type="submit"
+                on:click={addItem}
+                >เพิ่ม {selectedItem[0].name}
               </button>
-              <button class="btn w-4/12">ปิด</button>
+              <button class="btn w-4/12">ยกเลิก</button>
+            {:else}
+              <button class="btn w-full" on:click={resetimg}>ปิด</button>
             {/if}
-          </div>
+          {:else}
+            <button class="btn btn-primary w-8/12" on:click={handleSubmit}
+              >แก้ไข {selectedItem[0].name}
+            </button>
+            <button class="btn w-4/12">ปิด</button>
+          {/if}
         </div>
       {/if}
     </div>
