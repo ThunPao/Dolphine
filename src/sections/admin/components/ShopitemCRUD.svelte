@@ -343,6 +343,7 @@
         <div>
           <!-- svelte-ignore a11y-img-redundant-alt -->
           <img
+          class="p-3"
             alt="Uploaded Image"
             src={EditMode && selectedItem[0].href
               ? imgurl + selectedItem[0].href

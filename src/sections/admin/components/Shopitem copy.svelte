@@ -1,23 +1,30 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { shopItemsController } from "../../../controllers/adminController";
-  import ShopModal from "./ShopitemCRUD.svelte";
+  import { getshopitems } from "../../../services/AdminServices"; // Correct the import path
   import type { ShopItem } from "../../../models/shopitems";
-  let dataLoaded = false;
+  import ShopModal from "./ShopitemCRUD.svelte";
+
+  let shopitems: ShopItem[] = [];
+  let tableHeaders: (keyof ShopItem)[] = [];
+  let selectedItem: ShopItem[] = [];
+  let isEditMode = false;
 
   onMount(async () => {
-    await shopItemsController.getShopItems();
-    dataLoaded = true; // Set dataLoaded to true when data is loaded
+    try {
+      shopitems = await getshopitems();
+      tableHeaders = Object.keys(shopitems[0]) as (keyof ShopItem)[];
+    } catch (error) {
+      console.error(error);
+    }
   });
-  let selectedItem = shopItemsController.selectedItem;
-  let isEditMode: boolean;
+
   function EditShopItem(item: ShopItem) {
     selectedItem = [item];
-    shopItemsController.editShopItem(item);
     isEditMode = true;
-    console.log(shopItemsController.selectedItem);
+    //@ts-ignore
+    ShopitemForm.showModal();
+    console.log(selectedItem);
   }
-
   function AddShopitem() {
     selectedItem = [
       {
@@ -33,30 +40,30 @@
         expired_date: null,
         toggled: false,
       },
-    ];
-    isEditMode = false;
-    shopItemsController.addShopItem();
+    ]; // Update the global selectedItem
+    isEditMode = false; // Set isEditMode to false
   }
 </script>
 
 <dialog id="Shopitem" class="modal">
   <form method="dialog" class="modal-box text-center max-w-7xl">
     <h3 class="font-bold text-4xl">Shopitem</h3>
-{#if dataLoaded}
+
     <div class="overflow-x-auto overscroll-y-auto h-96">
       <table class="table">
         <thead>
           <tr>
-            {#each shopItemsController.tableHeaders as header}
+            {#each tableHeaders as header}
               <th class="px-4 py-2">{header}</th>
             {/each}
           </tr>
         </thead>
         <tbody>
-          {#each shopItemsController.shopitems.slice(0, 50) as item (item.id)}
+          {#each shopitems.slice(0, 50) as item (item.id)}
             <tr>
-              {#each shopItemsController.tableHeaders as header}
+              {#each tableHeaders as header}
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <td
                   class="px-4 py-2"
                   tabindex="0"
@@ -83,20 +90,19 @@
         </tbody>
       </table>
     </div>
-    {/if}
     <div class="modal-action">
-      <button
+      <additem
         aria-hidden="true"
+        for="Add_shopitem"
         class="btn btn-success"
+        onclick="ShopitemForm.showModal()"
         on:click={() => {
           AddShopitem();
         }}
-      >
-        เพิ่มสินค้า
-      </button>
-
+        >เพิ่มสินค้า
+      </additem>
       <button class="btn">Close</button>
     </div>
   </form>
 </dialog>
-<ShopModal selectedItem={selectedItem} EditMode={isEditMode}/>
+<ShopModal {selectedItem} EditMode={isEditMode} />
