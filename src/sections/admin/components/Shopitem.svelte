@@ -46,7 +46,7 @@
 </script>
 
 <dialog id="Shopitem" class="modal">
-  <form method="dialog" class="modal-box text-center max-w-5xl">
+  <form method="dialog" class="modal-box text-center max-w-7xl">
     <h3 class="font-bold text-4xl">Shopitem</h3>
 
     <div class="overflow-x-auto overscroll-y-auto h-96">

@@ -205,177 +205,181 @@
 </script>
 
 <dialog id="ShopitemForm" class="modal">
-  <form method="dialog" class="modal-box">
+  <form method="dialog" class="modal-box max-w-5xl">
     <p class="font-bold text-4xl">จัดการสินค้า</p>
     <button
       class="btn btn-sm btn-error absolute right-2 top-2"
       on:click={removeshopitem}>ลบไอเทม</button
     >
-    <div class="grid justify-center gap-2 mx-2">
+    <div class="grid grid-cols-2 justify-center gap-2 mx-2">
       {#if selectedItem != null && selectedItem.length > 0}
-        <input
-          type="text"
-          placeholder="Name"
-          bind:value={selectedItem[0].name}
-          class="input w-full"
-        />
+        <div>
+          <input
+            type="text"
+            placeholder="Name"
+            bind:value={selectedItem[0].name}
+            class="input w-full"
+          />
 
-        <textarea
-          class="textarea"
-          placeholder="Description"
-          bind:value={selectedItem[0].description}
-        />
-        <div class="join gap-2">
+          <textarea
+            class="textarea"
+            placeholder="Description"
+            bind:value={selectedItem[0].description}
+          />
+          <div class="join gap-2">
+            <input
+              type="number"
+              placeholder="Buy Count"
+              bind:value={selectedItem[0].buycount}
+              class="input w-full"
+            />
+            <input
+              type="number"
+              placeholder="Point"
+              bind:value={selectedItem[0].point}
+              class="input w-full"
+            />
+          </div>
           <input
             type="number"
-            placeholder="Buy Count"
-            bind:value={selectedItem[0].buycount}
+            placeholder="Limits"
+            bind:value={selectedItem[0].limits}
             class="input w-full"
+            disabled={!limitedsale}
           />
-          <input
-            type="number"
-            placeholder="Point"
-            bind:value={selectedItem[0].point}
-            class="input w-full"
-          />
-        </div>
-        <input
-          type="number"
-          placeholder="Limits"
-          bind:value={selectedItem[0].limits}
-          class="input w-full"
-          disabled={!limitedsale}
-        />
-        <div class="join justify-center gap-2">
-          <div class="form-control">
-            <label class="label cursor-pointer">
-              <span class="label-text text-lg">จำกัดการขาย</span>
-              <input
-                type="checkbox"
-                class="toggle toggle-secondary toggle-lg"
-                on:change={handleLimited}
-              />
-            </label>
+          <div class="join justify-center gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer">
+                <span class="label-text text-lg">จำกัดการขาย</span>
+                <input
+                  type="checkbox"
+                  class="toggle toggle-secondary toggle-lg"
+                  on:change={handleLimited}
+                />
+              </label>
+            </div>
+            <div class="form-control">
+              <label class="label cursor-pointer">
+                <span class="label-text text-lg">แสดงไอเทม</span>
+                <input
+                  type="checkbox"
+                  class="toggle toggle-info toggle-lg"
+                  bind:checked={selectedItem[0].toggled}
+                />
+                {typeof selectedItem[0].toggled}
+                <!-- on:change={handleShow} -->
+              </label>
+            </div>
           </div>
-          <div class="form-control">
-            <label class="label cursor-pointer">
-              <span class="label-text text-lg">แสดงไอเทม</span>
-              <input
-                type="checkbox"
-                class="toggle toggle-info toggle-lg"
-                bind:checked={selectedItem[0].toggled}
-              />
-              {typeof selectedItem[0].toggled}
-              <!-- on:change={handleShow} -->
-            </label>
-          </div>
-        </div>
-        <div class="collapse bg-base-200">
-          <input type="checkbox" />
-          <div class="collapse-title text-xl font-medium text-center">
-            คำสั่งทั้งหมด : {selectedItem[0].commands.length > 0
-              ? selectedItem[0].commands.length
-              : "Empty"}
-          </div>
-          <div class="collapse-content">
-            <div class="grid justify-center gap-2 bg-base-200 rounded-lg p-2">
-              <h2 class="text-center font-bold text-lg mb-2">จัดการคำสั่ง</h2>
-              {#each selectedItem[0].commands as command, index}
-                <div class="flex gap-1">
+          <div class="collapse bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium text-center">
+              คำสั่งทั้งหมด : {selectedItem[0].commands.length > 0
+                ? selectedItem[0].commands.length
+                : "Empty"}
+            </div>
+            <div class="collapse-content">
+              <div class="grid justify-center gap-2 bg-base-200 rounded-lg p-2">
+                <h2 class="text-center font-bold text-lg mb-2">จัดการคำสั่ง</h2>
+                {#each selectedItem[0].commands as command, index}
+                  <div class="flex gap-1">
+                    <span
+                      aria-hidden="true"
+                      class="btn btn-error btn-sm"
+                      on:click={() => removeItem(index)}>ลบ</span
+                    >
+                    <input
+                      type="text"
+                      placeholder="title"
+                      class="input input-bordered input-primary w-1/2 input-sm"
+                      bind:value={command.title}
+                    />
+                    <input
+                      type="text"
+                      placeholder="rcon_command"
+                      class="input input-bordered input-secondary w-full max-w-xs input-sm"
+                      bind:value={command.rcon_command}
+                    />
+                    <input
+                      type="checkbox"
+                      class="toggle toggle-lg"
+                      bind:checked={command.visibled}
+                    />
+                    {typeof command.visibled}
+                  </div>
+                {/each}
+
+                <div class="flex justify-center">
                   <span
+                    class="btn btn-wide btn-success"
+                    on:click={addMore}
                     aria-hidden="true"
-                    class="btn btn-error btn-sm"
-                    on:click={() => removeItem(index)}>ลบ</span
+                    >{selectedItem[0].commands.length > 0
+                      ? "Add more"
+                      : "Add first command"}</span
                   >
-                  <input
-                    type="text"
-                    placeholder="title"
-                    class="input input-bordered input-primary w-1/2 input-sm"
-                    bind:value={command.title}
-                  />
-                  <input
-                    type="text"
-                    placeholder="rcon_command"
-                    class="input input-bordered input-secondary w-full max-w-xs input-sm"
-                    bind:value={command.rcon_command}
-                  />
-                  <input
-                    type="checkbox"
-                    class="toggle toggle-lg"
-                    bind:checked={command.visibled}
-                  />
-                  {typeof command.visibled}
                 </div>
-              {/each}
-
-              <div class="flex justify-center">
-                <span
-                  class="btn btn-wide btn-success"
-                  on:click={addMore}
-                  aria-hidden="true"
-                  >{selectedItem[0].commands.length > 0
-                    ? "Add more"
-                    : "Add first command"}</span
-                >
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="flex">
-          Start
-          <input
-            type="date"
-            placeholder="Sale Date"
-            bind:value={selectedItem[0].sale_date}
-            class="input w-full max-w-xs input-sm"
-          />
-          End
-          <input
-            type="date"
-            placeholder="Expired Date"
-            bind:value={selectedItem[0].expired_date}
-            class="input w-full max-w-xs input-sm"
-          />
+          <div class="flex">
+            Start
+            <input
+              type="date"
+              placeholder="Sale Date"
+              bind:value={selectedItem[0].sale_date}
+              class="input w-full max-w-xs input-sm"
+            />
+            End
+            <input
+              type="date"
+              placeholder="Expired Date"
+              bind:value={selectedItem[0].expired_date}
+              class="input w-full max-w-xs input-sm"
+            />
+          </div>
         </div>
-        <!-- svelte-ignore a11y-img-redundant-alt -->
-        <img
-          alt="Uploaded Image"
-          src={EditMode && selectedItem[0].href
-            ? imgurl + selectedItem[0].href
-            : selectedItem[0].href && selectedItem[0].href.length <= 4
-            ? imgurl + "default.webp"
-            : image
-            ? URL.createObjectURL(image)
-            : imgurl + "default.webp"}
-          width="464"
-          height="387"
-        />
-        <input
-          type="file"
-          class="file-input file-input-info w-full"
-          on:change={showImage}
-        />
+        <div>
+          <!-- svelte-ignore a11y-img-redundant-alt -->
+          <img
+            alt="Uploaded Image"
+            src={EditMode && selectedItem[0].href
+              ? imgurl + selectedItem[0].href
+              : selectedItem[0].href && selectedItem[0].href.length <= 4
+              ? imgurl + "default.webp"
+              : image
+              ? URL.createObjectURL(image)
+              : imgurl + "default.webp"}
+            width="464"
+            height="387"
+          />
+          <input
+            type="file"
+            class="file-input file-input-info w-full"
+            on:change={showImage}
+          />
 
-        <div class="flex justify-between">
-          {#if !EditMode}
-            {#if selectedItem[0].name.length > 0 && selectedItem[0].description.length > 0 && selectedItem[0].commands.length > 0 && image}
-              <button
-                class="btn btn-primary w-8/12"
-                type="submit"
-                on:click={addItem}
-                >เพิ่ม {selectedItem[0].name}
-              </button>
-              <button class="btn w-4/12">ยกเลิก</button>
+          <div class="flex justify-between">
+            {#if !EditMode}
+              {#if selectedItem[0].name.length > 0 && selectedItem[0].description.length > 0 && selectedItem[0].commands.length > 0 && image}
+                <button
+                  class="btn btn-primary w-8/12"
+                  type="submit"
+                  on:click={addItem}
+                  >เพิ่ม {selectedItem[0].name}
+                </button>
+                <button class="btn w-4/12">ยกเลิก</button>
+              {:else}
+                <button class="btn w-full" on:click={resetimg}>ปิด</button>
+              {/if}
             {:else}
-              <button class="btn w-full" on:click={resetimg}>ปิด</button>
+              <button class="btn btn-primary w-8/12" on:click={handleSubmit}
+                >แก้ไข {selectedItem[0].name}
+              </button>
+              <button class="btn w-4/12">ปิด</button>
             {/if}
-          {:else}
-            <button class="btn btn-primary w-8/12" on:click={handleSubmit}
-              >แก้ไข {selectedItem[0].name}
-            </button>
-            <button class="btn w-4/12">ปิด</button>
-          {/if}
+          </div>
         </div>
       {/if}
     </div>
