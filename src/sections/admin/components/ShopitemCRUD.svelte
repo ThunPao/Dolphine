@@ -347,7 +347,7 @@ function handleshowcmd(){
                       class="input input-bordered input-secondary w-full max-w-xs input-sm"
                       bind:value={command.rcon_command}
                     />
-                    <div class="lg:hidden flex justify-between">
+                    <div class="flex justify-between">
                       แสดงคำสั่ง
                     <input
                       type="checkbox"
@@ -356,7 +356,7 @@ function handleshowcmd(){
                     />
                     <span
                     aria-hidden="true"
-                    class="btn btn-error btn-sm"
+                    class="btn btn-error btn-sm lg:hidden"
                     on:click={() => removeItem(index)}>ลบคำสั่ง</span
                   >
                     </div>
