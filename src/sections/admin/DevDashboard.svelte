@@ -59,7 +59,7 @@
     <div class="stat-value">1,200</div>
     <div class="stat-desc">↘︎ 90 (14%)</div>
   </div>
-  <div class="stat" onclick="Redeem.showModal()">
+  <div class="stat" onclick="RedeemCodes.showModal()">
     <div class="stat-figure text-secondary">
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -6,9 +6,9 @@ import DevDashboard from "../sections/admin/DevDashboard.svelte";
 // import Sandbox from "../sections/admin/Sandbox.astro";
 // import Sandbox2 from "../sections/admin/Sandbox2.svelte";
 // import Sandbox3 from "../sections/admin/Sandbox3.svelte";
-
 import Fire from "../sections/admin/Fire.astro";
-import RedeemBox from "../sections/admin/components/Redeem.svelte";
+import RedeemCodesBox from "../sections/admin/components/RedeemCodes.svelte";
+
 import ShopItemBox from "../sections/admin/components/Shopitem.svelte";
 import AddshopItemBox from "../sections/admin/components/Addshopitem.svelte";
 ---
@@ -47,8 +47,8 @@ import AddshopItemBox from "../sections/admin/components/Addshopitem.svelte";
         <!-- <DevDashboard /> -->
       </div>
     </div>
-    <RedeemBox client:visible />
     <ShopItemBox client:visible />
+    <RedeemCodesBox client:visible/>
     <AddshopItemBox client:visible />
   </main>
 
