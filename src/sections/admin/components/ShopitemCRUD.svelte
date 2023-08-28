@@ -379,7 +379,7 @@ function handleshowcmd(){
 
 
         </div>
-        <div class="flex justify-between">
+        <div class="flex justify-between mt-2">
           {#if !EditMode}
             {#if selectedItem[0].name.length > 0 && selectedItem[0].description.length > 0 && selectedItem[0].commands.length > 0 && image}
               <button
