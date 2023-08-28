@@ -82,7 +82,10 @@
 <span class={keen ? "keen-slider__slide px-1 pb-1 lazy__slide" : ""}>
   {#if display == 0}
     <div
-      class="card card-compact shadow-md dark:hover:shadow-amber-500 hover:shadow-blue-500 bg-base-200 dark:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+      class="card card-compact shadow-md dark:hover:shadow-white hover:shadow-blue-500 bg-base-200 {keen ==
+      'true'
+        ? 'bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-500'
+        : ''}"
     >
       <button
         title="คลิก"
@@ -92,7 +95,7 @@
         <div class="indicator w-full">
           {#if dateDiff}
             <span
-              class="indicator-item indicator-bottom indicator-center p-2 md:p-3 mb-4 inline-flex text-shadow shadow-black justify-center badge badge-error bg-opacity-40 font-extrabold sm:text-lg md:text-xl"
+              class="indicator-item indicator-bottom indicator-center p-2 md:p-3 mb-4 inline-flex text-shadow shadow-black justify-center badge badge-error bg-opacity-40 font-extrabold sm:text-lg md:text-xl text-white"
             >
               <div class="font-medium text-xs md:text-sm">
                 {dateDiff}
@@ -101,7 +104,7 @@
           {/if}
           {#if limits == 0 || (expired_date && !dateDiff)}
             <span
-              class="indicator-item indicator-middle indicator-center badge badge-error md:py-3 bg-opacity-50"
+              class="indicator-item indicator-middle indicator-center badge badge-error md:py-3 bg-opacity-50 text-white"
               >หมดแล้วจ้า</span
             >
           {/if}
@@ -150,7 +153,10 @@
 
         <div class="card-body">
           <h2
-            class="card-title h-6 md:h-10 text-sm md:text-lg justify-center leading-none"
+            class="card-title h-6 md:h-10 text-sm md:text-lg justify-center leading-none {keen ==
+            'true'
+              ? 'text-white'
+              : ''}"
           >
             {name}
           </h2>
