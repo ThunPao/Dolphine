@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { RedeemCode } from "../../../models/redeemcodes";
-  import { writable } from 'svelte/store';
+  import { writable } from "svelte/store";
   import { apiurl } from "../../../services/apiurl";
   import { onMount } from "svelte";
 
@@ -12,7 +12,7 @@
 
   async function fetchRedeemCodes() {
     try {
-      const response = await fetch(apiurl+'crudRedeem');
+      const response = await fetch(apiurl + "crudRedeem");
       const data = await response.json();
       // Filter the data to include only the required fields
       const filteredData: RedeemCode[] = data.map((item: RedeemCode) => ({
@@ -20,19 +20,18 @@
         toggle_status: item.toggle_status,
         uses_limit: item.uses_limit,
         uses_count: item.uses_count,
-        rcon_command: item.rcon_command,
+        commands: item.commands,
       }));
       redeemcodesStore.set(filteredData);
       tableHeaders = Object.keys(data[0]) as (keyof RedeemCode)[];
     } catch (error) {
-      console.error('Error fetching redeem codes:', error);
+      console.error("Error fetching redeem codes:", error);
     }
   }
   onMount(async () => {
-    await fetchRedeemCodes();;
+    await fetchRedeemCodes();
   });
   // Fetch redeem codes when the component is mounted
-  
 </script>
 
 <dialog id="RedeemCodes" class="modal">
@@ -60,7 +59,17 @@
                   }}
                   aria-hidden="true"
                 >
-                  {item[header]}
+                  {#if header === "commands"}
+                    <div class="grid gap-2 justify-center text-center">
+                      {#each item[header] as command}
+                        <div class="rounded-md bg-base-200 px-2">
+                          {command.title}
+                        </div>
+                      {/each}
+                    </div>
+                  {:else}
+                    {item[header]}
+                  {/if}
                 </td>
               {/each}
             </tr>

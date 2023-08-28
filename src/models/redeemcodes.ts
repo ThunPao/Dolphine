@@ -1,3 +1,9 @@
+export interface Commands {
+  title: string;
+  rcon_command: string;
+  visibled: boolean; // Change to boolean if applicable
+}
+
 export interface RedeemCode {
   id: number;
   code: string;
@@ -5,7 +11,7 @@ export interface RedeemCode {
   expires_at: string | null;
   uses_limit: number;
   uses_count: number;
-  rcon_command: string | null;
+  commands: Commands[];
   created_at: string | null;
   updated_at: string | null;
 }

@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/DevTest.astro";
-import { ViewTransitions } from "astro:transitions";
-import Testfa from "../sections/test.svelte";
+// import { ViewTransitions } from "astro:transitions";
+// import Testfa from "../sections/test.svelte";
 import Subscribe from "../layouts/Subscribe.astro";
+import Sandbox2 from "../sections/admin/Sandbox2.svelte";
 ---
 
 <!DOCTYPE html>
@@ -16,7 +17,7 @@ import Subscribe from "../layouts/Subscribe.astro";
     <!-- <Testfa/> -->
     <!-- <Layout /> -->
 
-    <h1 transition:name="subscribe-container"># subscribe-container</h1>
+    <!-- <h1 transition:name="subscribe-container"># subscribe-container</h1> -->
 
     <style is:global>
       :root {
@@ -37,10 +38,11 @@ import Subscribe from "../layouts/Subscribe.astro";
           DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
       }
     </style>
-    <Layout>
+    <!-- <Layout>
       <header>
         <Subscribe />
       </header>
-    </Layout>
+    </Layout> -->
+    <Sandbox2 />
   </body>
 </html>

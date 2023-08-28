@@ -5,7 +5,7 @@
   import { updateDateDiff } from "../services/Playdate";
 
   let tabs = ["ไอเทมใหม่", "ไอเทมยอดฮิต", "อันดับเทพทรู"];
-  let activeTabIndex = 2;
+  let activeTabIndex = 0;
 
   function setShopdata(data) {
     shopData.set({
@@ -22,6 +22,8 @@
       dateDiff: updateDateDiff(data.sale_date, data.expired_date),
     });
   }
+
+  let items = ["Apple", "Banana", "Orange", "Grapes"];
 </script>
 
 <div class="tabs d-flex justify-center">
@@ -38,7 +40,42 @@
 </div>
 
 {#if activeTabIndex == 0}
-  <p>Empty here</p>
+  <div class="grid gap-1">
+    {#if items[0]}
+      <div class="join items-center">
+        <div class="indicator">
+          <span
+            class="indicator-item indicator-bottom badge badge-secondary font-extrabold mb-2 h-6"
+            >{items[0]}</span
+          >
+          <div class="avatar px-2 py-2">
+            <div
+              class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+            >
+              <img src={defaultimg} alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-rows-2 text-start mx-2">
+          <span class="text-2xl text-info">ที่หนึ่งด้านการวิ่ง</span>
+          <span class="text-md">ด้วยระยะทาง 1000 บล็อค</span>
+        </div>
+      </div>
+    {/if}
+    {#each items as data, i}
+      <div class="join items-center mx-4">
+        <div class="avatar">
+          <div class="w-12 rounded-full">
+            <img alt={data[i]} src={defaultimg} />
+          </div>
+        </div>
+        <div class="grid grid-rows-2 text-start mx-2">
+          <span class="font-bold">{data}</span>
+          <span class="text-sm">ระยะทาง 500 บล็อค</span>
+        </div>
+      </div>
+    {/each}
+  </div>
 {/if}
 
 {#if activeTabIndex == 1}

@@ -69,7 +69,7 @@
     <p class="font-bold text-lg">รายละเอียดสินค้า</p>
     <div class="indicator w-full">
       <span
-        class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 font-extrabold sm:text-lg md:text-xl"
+        class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 border-0 font-extrabold sm:text-lg md:text-xl"
       >
         {#if point > 0}
           <p class="font-extrabold text-info">{point} DP</p>
@@ -137,28 +137,24 @@
         </div>
       {/if} -->
       {#if title}
-      <br />
-      <div class="p-2 rounded-lg bg-base-300 text-center">
-        {#if title.length > 0}
-          <div>
-            เมื่อซื้อ จะได้รับตามรายการทั้งหมดดังต่อไปนี้
-          </div>
-          {#each title as item}
-            <ul class="menu bg-base-200 rounded-box m-2">
-              <li>{item}</li>
+        <br />
+        <div class="p-2 rounded-lg bg-base-300 text-center">
+          {#if title.length > 0}
+            <div>เมื่อซื้อ จะได้รับตามรายการทั้งหมดดังต่อไปนี้</div>
+            {#each title as item}
+              <ul class="menu bg-base-200 rounded-box m-2">
+                <li>{item}</li>
+              </ul>
+            {/each}
+          {:else}
+            <div>เมื่อซื้อ จะได้รับรายการดังต่อไปนี้</div>
+            <ul class="menu bg-base-200 rounded-box">
+              <li>{title}</li>
             </ul>
-          {/each}
-        {:else}
-          <div>
-            เมื่อซื้อ จะได้รับรายการดังต่อไปนี้
-          </div>
-          <ul class="menu bg-base-200 rounded-box">
-            <li>{title}</li>
-          </ul>
-        {/if}
-      </div>
-    {/if}
-    
+          {/if}
+        </div>
+      {/if}
+
       <div class="flex justify-center gap-2 mt-4">
         <!-- <Btncf did={id} {name} {point} {limits} /> -->
         {#if limits > 0 || limits < 0}

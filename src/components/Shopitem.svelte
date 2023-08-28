@@ -90,16 +90,15 @@
         on:click={setShopdata}
       >
         <div class="indicator w-full">
-          <span
-            class="indicator-item indicator-bottom indicator-center p-2 md:p-3 mb-2 badge badge-base-400 badge-sm font-extrabold sm:text-lg md:text-xl"
-          >
-            {#if point > 0}
-              <p class="font-extrabold text-info">{point} DP</p>
-            {:else}
-              <p class="font-extrabold text-success">แจกฟรี</p>
-            {/if}
-          </span>
-
+          {#if dateDiff}
+            <span
+              class="indicator-item indicator-bottom indicator-center p-2 md:p-3 mb-4 inline-flex text-shadow shadow-black justify-center badge badge-error bg-opacity-40 font-extrabold sm:text-lg md:text-xl"
+            >
+              <div class="font-medium text-xs md:text-sm">
+                {dateDiff}
+              </div>
+            </span>
+          {/if}
           {#if limits == 0 || (expired_date && !dateDiff)}
             <span
               class="indicator-item indicator-middle indicator-center badge badge-error md:py-3 bg-opacity-50"
@@ -142,24 +141,28 @@
               </div>
             {/if}
           </div>
-          <div class="font-medium text-xs md:text-sm badge badge-neutral badge-sm md:py-3">
+          <div
+            class="font-medium text-xs md:text-sm badge badge-neutral badge-sm md:py-3"
+          >
             {buycount} ขายแล้ว
           </div>
         </span>
-        
+
         <div class="card-body">
-        
           <h2
             class="card-title h-6 md:h-10 text-sm md:text-lg justify-center leading-none"
           >
             {name}
           </h2>
-          <div
-            class="card-actions justify-center align-bottom h-4"
-          >
-          <div class="font-medium text-xs md:text-sm h-8 md:h-0">
-            {dateDiff ? dateDiff : ""}
-          </div>
+          <div class="card-actions justify-center align-bottom h-4">
+            <div class="badge badge-neutral md:text-lg md:badge-lg">
+              {#if point > 0}
+                <p class="font-extrabold text-info">{point} DP</p>
+              {:else}
+                <p class="font-extrabold text-success">แจกฟรี</p>
+              {/if}
+            </div>
+
             <!-- <div class="badge badge-base-200 font-medium text-xs md:py-3">
               <div class="rating rating-sm">
                 <input
