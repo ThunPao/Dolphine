@@ -13,12 +13,21 @@ module.exports = {
 			beat: {
 				'0%, 100%': { transform: 'scale(95%)' },
 				'50%': { transform: 'scale(100%)' },
-			  }
+			  },
+			  animatedgradient: {
+				'0%': { backgroundPosition: '0% 50%' },
+				'50%': { backgroundPosition: '100% 50%' },
+				'100%': { backgroundPosition: '0% 50%' },
+			  },
 		  },
 		extend: {
+			backgroundSize: {
+				'300%': '300%',
+			  },
 			animation: {
 				wiggle: 'wiggle 1s ease-in-out infinite',
 				beat: 'beat 1s ease-in-out infinite',
+				gradient: 'animatedgradient 3s ease infinite alternate',
 			  },
 			  textShadow: {
 				sm: '0 1px 2px var(--tw-shadow-color)',

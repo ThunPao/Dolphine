@@ -84,7 +84,7 @@
     <div
       class="card card-compact shadow-md dark:hover:shadow-white hover:shadow-blue-500 bg-base-200 {keen ==
       'true'
-        ? 'bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-500'
+        ? 'bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-500 bg-300% animate-gradient'
         : ''}"
     >
       <button
@@ -122,28 +122,28 @@
           </div>
         </div>
         <span class="flex justify-between mx-1">
-          <div class="font-bold text-md">
-            {#if limits > 0}
-              <div
-                class="badge badge-warning badge-sm md:badge-md md:py-3 {limits <=
-                10
-                  ? 'animate-pulse'
-                  : ''}"
-              >
-                เหลือ {limits}
-              </div>
-            {:else if limits < 0}
-              <div class="badge badge-info badge-sm md:badge-md md:py-3">
-                ขายประจำ
-              </div>
-            {:else}
-              <div
-                class="badge badge-error badge-sm md:badge-md md:py-3 font-medium"
-              >
-                สินค้าหมด
-              </div>
-            {/if}
-          </div>
+          {#if limits > 0}
+            <div
+              class="font-bold badge badge-warning badge-sm md:badge-md md:py-3 {limits <=
+              10
+                ? 'animate-pulse'
+                : ''}"
+            >
+              เหลือ {limits}
+            </div>
+          {:else if limits < 0}
+            <div
+              class="font-bold badge badge-info badge-sm md:badge-md md:py-3"
+            >
+              ขายประจำ
+            </div>
+          {:else}
+            <div
+              class="badge badge-error badge-sm md:badge-md md:py-3 font-medium"
+            >
+              สินค้าหมด
+            </div>
+          {/if}
           <div
             class="font-medium text-xs md:text-sm badge badge-neutral badge-sm md:py-3"
           >

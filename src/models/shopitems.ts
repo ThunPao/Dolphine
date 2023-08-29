@@ -10,9 +10,9 @@ export interface ShopItem {
   name: string;
   description: string;
   limits: number | null;
-  buycount: number;
+  buycount: number | null;
   commands: ShopCommand[]; // Array of ShopCommand objects
-  point: number;
+  point: number | null;
   href: string | null;
   sale_date: string | null;
   expired_date: string | null;

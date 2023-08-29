@@ -107,53 +107,26 @@
     </span>
 
     <div class="modal-body text-clip overflow-hidden">
-      <h2 class="card-title">
+      <h2 class="card-title text-center">
         {name}
       </h2>
       <div class="bg-base-200 rounded p-2">
         {description}
       </div>
-      <!-- {#if title && title.includes(",")}
-        <br />
-        <div class="p-2 rounded-lg bg-base-300 text-center">
-          เมื่อซื้อ จะได้รับตามรายการทั้งหมดดังต่อไปนี้<br />
-          {#each title.split(",") as item}
-            <ul class="menu bg-base-200 rounded-box m-2">
-              <li>
-                {item}
-              </li>
+      <div class="collapse bg-base-200 mt-2">
+        <input type="checkbox" />
+        <div class="collapse-title text-xl font-medium">
+          ประกอบไปด้วยไอเทม {title.length} ชิ้น
+          <kbd class="kbd kbd-sm">แตะเพื่อดู</kbd>
+        </div>
+        <div class="collapse-content">
+          {#each title as item}
+            <ul class="menu rounded-box m-2">
+              <li>{item}</li>
             </ul>
           {/each}
         </div>
-      {:else if title}
-        <br />
-        <div class="p-2 rounded-lg bg-base-300 text-center">
-          เมื่อซื้อ จะได้รับรายการดังต่อไปนี้<br />
-          <ul class="menu bg-base-200 rounded-box">
-            <li>
-              {title}
-            </li>
-          </ul>
-        </div>
-      {/if} -->
-      {#if title}
-        <br />
-        <div class="p-2 rounded-lg bg-base-300 text-center">
-          {#if title.length > 0}
-            <div>เมื่อซื้อ จะได้รับตามรายการทั้งหมดดังต่อไปนี้</div>
-            {#each title as item}
-              <ul class="menu bg-base-200 rounded-box m-2">
-                <li>{item}</li>
-              </ul>
-            {/each}
-          {:else}
-            <div>เมื่อซื้อ จะได้รับรายการดังต่อไปนี้</div>
-            <ul class="menu bg-base-200 rounded-box">
-              <li>{title}</li>
-            </ul>
-          {/if}
-        </div>
-      {/if}
+      </div>
 
       <div class="flex justify-center gap-2 mt-4">
         <!-- <Btncf did={id} {name} {point} {limits} /> -->

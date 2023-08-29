@@ -121,9 +121,7 @@
   </div>
 </div>
 
-<div
-  class="bg-base-200 grid gap-2 p-3 justify-center focus:bg-white rounded-lg"
->
+<div class="bg-base-200 grid gap-2 p-3 justify-center rounded-lg">
   <div class="text-2xl font-medium">รายการไอเทมทั้งหมด</div>
 
   <div class="join">
@@ -137,18 +135,6 @@
         />
       </div>
     </div>
-    <!-- <select
-      title="เลือก"
-      class="select select-bordered join-item"
-      on:change={swapdisplaymode}
-    >
-      <option disabled selected>รูปแบบรายการ</option>
-      <option value="list"><i class="fa-solid fa-list" />List</option>
-
-      <option value="table"
-        ><i class="fa-solid fa-table-cells-large" />Grid</option
-      >
-    </select> -->
     <label class="swap rounded-lg bg-primary p-3 join-item">
       <input type="checkbox" on:click={swapdisplaymode} />
       <div class="swap-on"><i class="fa-solid fa-list" /></div>
@@ -193,7 +179,7 @@
   {/if}
 {:else}
   <div
-    class="grid gap-2 xl:grid-rows-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 p-1"
+    class="grid gap-2 xl:grid-rows-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 p-1 overscroll-y-auto"
   >
     {#if $shopitems !== null && $shopitems.length > 0}
       {#each $shopitems.filter(filterShopItems).slice(0, 18) as data}

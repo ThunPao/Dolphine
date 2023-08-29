@@ -73,7 +73,7 @@
     </a>
   </div>
   <div class="flex-none">
-    <ul class="menu menu-horizontal px-1">
+    <ul class="menu menu-horizontal">
       <!-- <li><a>Link</a></li> -->
       <!-- <li class="invisible">
         <details>

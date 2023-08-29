@@ -26,9 +26,9 @@
         name: "",
         description: "",
         limits: -1,
-        buycount: 0,
+        buycount: null,
         commands: [],
-        point: 0,
+        point: null,
         href: null,
         sale_date: null,
         expired_date: null,
@@ -43,47 +43,47 @@
 <dialog id="Shopitem" class="modal">
   <form method="dialog" class="modal-box text-center max-w-7xl">
     <h3 class="font-bold text-4xl">Shopitem</h3>
-{#if dataLoaded}
-    <div class="overflow-x-auto overscroll-y-auto h-96">
-      <table class="table">
-        <thead>
-          <tr>
-            {#each shopItemsController.tableHeaders as header}
-              <th class="px-4 py-2">{header}</th>
-            {/each}
-          </tr>
-        </thead>
-        <tbody>
-          {#each shopItemsController.shopitems.slice(0, 50) as item (item.id)}
+    {#if dataLoaded}
+      <div class="overflow-x-auto overscroll-y-auto h-96">
+        <table class="table">
+          <thead>
             <tr>
               {#each shopItemsController.tableHeaders as header}
-                <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-                <td
-                class="px-4 py-2"
-                  tabindex="0"
-                  on:click={() => {
-                    EditShopItem(item);
-                  }}
-                  aria-hidden="true"
-                >
-                  {#if header === "commands"}
-                    <div class="grid gap-2 justify-center text-center">
-                      {#each item[header] as command}
-                        <div class="rounded-md bg-base-200 px-2">
-                          {command.title}
-                        </div>
-                      {/each}
-                    </div>
-                  {:else}
-                    {item[header]}
-                  {/if}
-                </td>
+                <th class="px-4 py-2">{header}</th>
               {/each}
             </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {#each shopItemsController.shopitems.slice(0, 50) as item (item.id)}
+              <tr>
+                {#each shopItemsController.tableHeaders as header}
+                  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+                  <td
+                    class="px-4 py-2"
+                    tabindex="0"
+                    on:click={() => {
+                      EditShopItem(item);
+                    }}
+                    aria-hidden="true"
+                  >
+                    {#if header === "commands"}
+                      <div class="grid gap-2 justify-center text-center">
+                        {#each item[header] as command}
+                          <div class="rounded-md bg-base-200 px-2">
+                            {command.title}
+                          </div>
+                        {/each}
+                      </div>
+                    {:else}
+                      {item[header]}
+                    {/if}
+                  </td>
+                {/each}
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
     {/if}
     <div class="modal-action">
       <button
@@ -100,4 +100,4 @@
     </div>
   </form>
 </dialog>
-<ShopModal selectedItem={selectedItem} EditMode={isEditMode}/>
+<ShopModal {selectedItem} EditMode={isEditMode} />
