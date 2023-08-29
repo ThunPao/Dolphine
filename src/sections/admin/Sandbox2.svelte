@@ -2,6 +2,7 @@
   let items = ["Apple", "Banana", "Orange", "Grapes"];
   let imgurl =
     "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
+  let value = 0;
 </script>
 
 <div class="grid gap-1">
@@ -39,4 +40,46 @@
       {/each}
     </div>
   </div>
+</div>
+
+<!-- New -->
+แปรผัน
+<input type="range" min="0" max="100" value="25" class="range" step="25" />
+<div class="w-full flex justify-between text-xs px-2">
+  <span>|</span>
+  <span>|</span>
+  <span>|</span>
+  <span>|</span>
+  <span>|</span>
+</div>
+
+<div class="h-96 w-fit">
+  <input
+    type="range"
+    min="10"
+    max="10000"
+    bind:value
+    on:range={value}
+    class="range"
+    disabled
+  />
+
+  <p>ใส่จำนวน</p>
+  <div class="form-control w-full max-w-xs">
+    <!-- svelte-ignore a11y-label-has-associated-control -->
+    <label class="label">
+      <span class="label-text">ระบุจำนวนเงิน (10 - 10,000)</span>
+    </label>
+    <input
+      type="number"
+      placeholder="Type here"
+      class="input input-bordered input-secondary w-full max-w-xs"
+      bind:value
+    />
+  </div>
+  {#if value < 10 || value > 10000}
+    <p class="badge badge-secondary">จำนวนเงินไม่ถูกต้อง (10-10000)</p>
+  {:else}
+    <div class="badge badge-info">ได้รับ {value} DP และ {value / 10} RP</div>
+  {/if}
 </div>

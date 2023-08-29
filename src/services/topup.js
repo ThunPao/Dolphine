@@ -23,9 +23,8 @@ export async function topup(){
         handleLoadinfo();
         Swal.fire({
             title: data.message,
+            text: data.detail,
             icon: 'success',
-            timer: 5000,
-            timerProgressBar: true,
           })
       } else {
 
