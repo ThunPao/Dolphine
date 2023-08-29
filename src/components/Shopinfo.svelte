@@ -66,7 +66,6 @@
     method="dialog"
     class="modal-box shadow-md dark:shadow-amber-300 shadow-blue-300"
   >
-    <p class="font-bold text-lg">รายละเอียดสินค้า</p>
     <div class="indicator w-full">
       <span
         class="indicator-item indicator-bottom indicator-center p-3 mb-2 badge badge-base-400 border-0 font-extrabold sm:text-lg md:text-xl"
@@ -98,26 +97,25 @@
     </div>
 
     <span class="flex justify-between mx-1">
-      <div class="font-medium text-lg">
+      <div class="font-medium">
         {dateDiff ? dateDiff : ""}
       </div>
-      <div class="font-medium text-lg">
+      <div class="font-medium">
         {buycount} ขายแล้ว
       </div>
     </span>
-
+    <hr class="opacity-40 m-2" />
     <div class="modal-body text-clip overflow-hidden">
-      <h2 class="card-title text-center">
+      <h2 class="card-title">
         {name}
       </h2>
-      <div class="bg-base-200 rounded p-2">
+      <div class="p-2">
         {description}
       </div>
-      <div class="collapse bg-base-200 mt-2">
-        <input type="checkbox" />
-        <div class="collapse-title text-xl font-medium">
-          ประกอบไปด้วยไอเทม {title.length} ชิ้น
-          <kbd class="kbd kbd-sm">แตะเพื่อดู</kbd>
+      <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+      <div tabindex="0" class="collapse bg-base-200 mt-2">
+        <div class="collapse-title font-bold">
+          เมื่อซื้อ จะได้รับสินค้า {title.length} รายการ
         </div>
         <div class="collapse-content">
           {#each title as item}
@@ -135,8 +133,8 @@
             title="คลิก"
             class="btn btn-primary hover:scale-100 scale-95 duration-75 text-lg w-full"
             onclick="buyitem.showModal();"
-            ><i class="fa-solid fa-dollar-sign" />
-            ซื้อเลย</button
+          >
+            ซื้อไอเทม</button
           >
         {:else if limits <= 0}
           <button title="คลิก" class="btn btn-error hover:scale-105 text-lg">
