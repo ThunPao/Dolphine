@@ -10,11 +10,11 @@
     "images/topup/step1.webp",
     "images/topup/step2.webp",
   ];
-  let tabs = ["เรทการเติม", "วิธีเติมเงิน"];
+  let tabs = ["เรทการเติม", "อัตราแลกเปลี่ยน", "วิธีเติมเงิน"];
   let activeTabIndex = 0;
   let value = 10;
   let maxBonusPercent = 0;
-  let prices = [50, 100, 150, 300, 500, 1000, 3000];
+  let prices = [10, 50, 100, 150, 300, 500, 1000, 3000, 10000];
 
   let topuprates = [];
   async function getTopuprates() {
@@ -49,7 +49,7 @@
 
 <dialog
   id="topup"
-  class="modal modal-middle place-items-end justify-center lg:place-items-center lg:justify-normal"
+  class="modal modal-middle place-items-end justify-center md:place-items-center md:justify-normal"
 >
   <form method="dialog" class="modal-box text-center w-full max-w-5xl">
     <!-- Recommend -->
@@ -81,64 +81,57 @@
               </table>
             </div>
             <div class="">
-              <details class="collapse bg-base-200">
-                <summary class="collapse-title text-xl font-medium"
-                  >คำนวณอัตราแลกเปลี่ยน</summary
-                >
-                <div class="flex gap-2 mx-2 mb-2 overflow-x-auto max-w-xs">
-                  {#each prices as data}
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <span
-                      class="btn btn-outline btn-info"
-                      on:click={() => (value = data)}>{data}฿</span
-                    >
-                  {/each}
-                </div>
-                <div class="collapse-content">
-                  <!-- svelte-ignore a11y-label-has-associated-control -->
-                  <label class="label">
-                    <span class="label-text">ระบุจำนวนเงิน (10 - 10,000)</span>
-                  </label>
-                  <input
-                    type="range"
-                    min="10"
-                    max="10000"
-                    bind:value
-                    on:range={value}
-                    class="range"
-                    aria-label="10-10000"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Type here"
-                    class="input input-bordered input-secondary w-full max-w-xs"
-                    bind:value
-                  />
-                </div>
-                {#if value < 10 || value > 10000}
-                  <p class="badge badge-secondary">
-                    จำนวนเงินไม่ถูกต้อง (10-10000)
-                  </p>
-                {:else}
-                  <div class="text-center mb-2">
-                    ได้รับ {calculateBonus(value)} DP และ {value / 10} RP
-                  </div>
-                {/if}
-              </details>
+              <!-- Old rate -->
             </div>
           </div>
         {/if}
         {#if activeTabIndex == 1}
+          <p class="text-xl font-medium">คำนวณอัตราแลกเปลี่ยน</p>
+          <div class="mx-1 overflow-x-auto justify-center">
+            {#each prices as data}
+              <!-- svelte-ignore a11y-click-events-have-key-events -->
+              <span
+                class="btn btn-outline btn-info m-1 text-lg"
+                on:click={() => (value = data)}>{data}฿</span
+              >
+            {/each}
+          </div>
+          <!-- svelte-ignore a11y-label-has-associated-control -->
+          <input
+            type="range"
+            min="10"
+            max="10000"
+            bind:value
+            on:range={value}
+            class="range"
+            aria-label="10-10000"
+          />
+          <input
+            type="number"
+            placeholder="ระบุจำนวนเงิน (10 - 10000)"
+            class="input input-bordered input-secondary w-full max-w-xs"
+            bind:value
+          />
+          {#if value < 10 || value > 10000}
+            <p class="badge badge-secondary">จำนวนเงินไม่ถูกต้อง (10-10000)</p>
+          {:else}
+            <div class="text-center mb-2">
+              ได้รับ {calculateBonus(value)} DP และ {value / 10} RP
+            </div>
+          {/if}
+        {/if}
+        {#if activeTabIndex == 2}
           <div class="flex justify-center">
             <div class="h-96 carousel carousel-vertical">
               {#each topupimg as images}
                 <div class="carousel-item">
-                  <img src={images} alt="วิธีเติมเงิน" class="h-96" />
+                  <img src={images} alt="วิธีเติมเงิน" class="img-fluid" />
                 </div>
               {/each}
             </div>
           </div>
         {/if}
+
         <div class="tabs tabs-boxed flex justify-center">
           {#each tabs as tab, index}
             <p
@@ -158,7 +151,7 @@
         <h1 class="font-bold text-4xl text-amber-400 dark:text-amber-200">
           เติมเงิน
         </h1>
-        <p class="text-md lg:text-xl">ผ่านช่องทาง Truemoney (ระบบซองของขวัญ)</p>
+        <p class="text-md lg:text-xl">ผ่านช่องทาง Truemoney (ซองของขวัญ)</p>
         <div class="p-3">
           <input
             type="text"
