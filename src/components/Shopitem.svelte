@@ -84,7 +84,7 @@
     <div
       class="card card-compact shadow-md dark:hover:shadow-white hover:shadow-blue-500 bg-base-200 {keen ==
       'true'
-        ? 'bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-500 bg-300% animate-gradient'
+        ? 'bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-500 bg-300% hover:animate-gradient'
         : ''}"
     >
       <button
