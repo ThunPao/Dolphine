@@ -3,10 +3,10 @@
   import { imgurl } from "../services/apiurl";
   const defaultimg = imgurl + "default.webp";
   import { updateDateDiff } from "../services/Playdate";
-  import { onMount, tick } from "svelte";
+  // import { onMount, tick } from "svelte";
   let tabs = ["อันดับเทพทรู", "ไอเทมยอดฮิต", "ไอเทมใหม่"];
   let activeTabIndex = 0;
-  import { apiurl } from "../services/apiurl";
+  // import { apiurl } from "../services/apiurl";
 
   function setShopdata(data) {
     shopData.set({
@@ -24,25 +24,25 @@
     });
   }
 
-  // let items = ["Apple", "Banana", "Orange", "Grapes"];
-  let playertopup = [];
-  async function top_donates() {
-    try {
-      const url = apiurl + "playerstat?show=topup";
-      const response = await fetch(url, {});
-      if (response.ok) {
-        const data = await response.json();
-        return data;
-      }
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
-  }
-  playertopup = top_donates();
-  onMount(async () => {
-    playertopup = await top_donates();
-    await tick();
-  });
+  let playertopup = ["Apple", "Banana", "Orange", "Grapes"];
+  // let playertopup = [];
+  // async function top_donates() {
+  //   try {
+  //     const url = apiurl + "playerstat?show=topup";
+  //     const response = await fetch(url, {});
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       return data;
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error.message);
+  //   }
+  // }
+  // playertopup = top_donates();
+  // onMount(async () => {
+  //   playertopup = await top_donates();
+  //   await tick();
+  // });
 </script>
 
 <div class="tabs d-flex justify-center">

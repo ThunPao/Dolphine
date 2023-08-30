@@ -165,6 +165,11 @@
         dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
       />
     {/each}
+    <!-- {#if $shopitems.filter(filterShopItems).length === 0}
+      <div class="h-96 flex justify-center items-center">
+        <span class="text-4xl">ไม่พบไอเทม</span>
+      </div>
+    {/if} -->
   {:else}
     <p>ไม่พบไอเทม</p>
   {/if}
@@ -190,13 +195,15 @@
           dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
         />
       {/each}
+      <!-- {#if $shopitems.filter(filterShopItems).length === 0}
+        <div class="h-96 flex justify-center items-center">
+          <span class="text-4xl">ไม่พบไอเทม</span>
+        </div>
+      {/if} -->
     {:else}
-      <p>ไม่พบไอเทม</p>
+      <div class="h-96 flex justify-center items-center">
+        <span class="text-4xl">ไม่พบไอเทม</span>
+      </div>
     {/if}
-  </div>
-{/if}
-{#if $shopitems.filter(filterShopItems).length === 0}
-  <div class="h-96 flex justify-center items-center">
-    <span class="text-4xl">ไม่พบไอเทม</span>
   </div>
 {/if}
