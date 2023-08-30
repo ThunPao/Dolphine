@@ -156,36 +156,6 @@ export function updateplayerinfo(id) {
   }
 }
 
-
-// export async function logout() {
-//   password.set('');
-//     const response = await fetch(apiurl+"logout", {
-//       method: "POST",
-//       headers: {
-//         // "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`, // Include the authentication bearer token
-//       },
-//     });
-
-//     if (response.ok) {
-//         // console.log("Logout successful");
-//       // Logout successful
-//       handleLogout();
-//       toastr.success("Logged out.", "ออกจากระบบเรียบร้อย", {
-//         timeOut: 3000,
-//         positionClass: "toast-bottom-center",
-//         newestOnTop: true,
-//         progressBar: true,
-//       });
-//     } else {
-//       toastr.error("เกิดข้อผิดพลาด", "Error", {
-//         timeOut: 3000,
-//         positionClass: "toast-bottom-center",
-//         newestOnTop: true,
-//         progressBar: true,
-//       });
-//     }
-//   }
 export async function logout() {
   password.set('');
   const response = await fetch(apiurl + "logout", {

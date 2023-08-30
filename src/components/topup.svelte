@@ -1,6 +1,8 @@
 <script>
   import { topup } from "../services/topup.js";
   import { inputValue } from "../services/fieldcontrol.js";
+  import { onMount, tick } from "svelte";
+  import { apiurl } from "../services/apiurl";
 
   inputValue.set("");
   let topupimg = [
@@ -11,6 +13,38 @@
   let tabs = ["เรทการเติม", "วิธีเติมเงิน"];
   let activeTabIndex = 0;
   let value = 10;
+  let maxBonusPercent = 0;
+  let prices = [50, 100, 150, 300, 500, 1000, 3000];
+
+  let topuprates = [];
+  async function getTopuprates() {
+    try {
+      const url = apiurl + "topuprates";
+      const response = await fetch(url, {});
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  }
+  function calculateBonus(inputValue) {
+    maxBonusPercent = 0;
+    for (const row of topuprates) {
+      if (
+        inputValue >= row.topup_amount &&
+        row.bonus_percent > maxBonusPercent
+      ) {
+        maxBonusPercent = row.bonus_percent / 100; // Update max bonus percent if applicable
+      }
+    }
+    return inputValue + inputValue * maxBonusPercent;
+  }
+  onMount(async () => {
+    topuprates = await getTopuprates();
+    await tick();
+  });
 </script>
 
 <dialog
@@ -22,12 +56,12 @@
     <div class="grid lg:grid-cols-2">
       <div class="">
         {#if activeTabIndex == 0}
-          <div class="h-96 w-full">
+          <div class="w-full">
             <div class="text-xl font-bold">อัตราการเติมเงิน</div>
-            <div class="overflow-x-auto h-48 overflow-y-auto">
+            <div class="overflow-x-auto h-72">
               <table class="table text-center text-2xl">
                 <!-- head -->
-                <thead>
+                <thead class="sticky top-0 left-0 bg-base-100">
                   <tr class="text-3xl">
                     <th class="text-info">จำนวนเงินขั้นต่ำ</th>
                     <th class="text-secondary">โบนัส</th>
@@ -35,54 +69,63 @@
                 </thead>
                 <tbody>
                   <!-- row 1 -->
-                  <tr>
-                    <td>50</td>
-                    <td>5%</td>
-                  </tr>
-                  <!-- row 2 -->
-                  <tr>
-                    <td>100</td>
-                    <td>10%</td>
-                  </tr>
-                  <!-- row 3 -->
-                  <tr>
-                    <td>150</td>
-                    <td>15%</td>
-                  </tr>
+                  {#if topuprates != null && topuprates.length > 0}
+                    {#each topuprates as data}
+                      <tr>
+                        <td>{data.topup_amount}฿</td>
+                        <td>{data.bonus_percent}%</td>
+                      </tr>
+                    {/each}
+                  {/if}
                 </tbody>
               </table>
             </div>
-            <div>
-              <!-- svelte-ignore a11y-label-has-associated-control -->
-              <label class="label">
-                <span class="label-text">ระบุจำนวนเงิน (10 - 10,000)</span>
-              </label>
-              <input
-                type="range"
-                min="10"
-                max="10000"
-                bind:value
-                on:range={value}
-                class="range"
-                disabled
-                aria-label="10-10000"
-              />
-              <input
-                type="number"
-                placeholder="Type here"
-                class="input input-bordered input-secondary w-full max-w-xs"
-                bind:value
-              />
+            <div class="">
+              <details class="collapse bg-base-200">
+                <summary class="collapse-title text-xl font-medium"
+                  >คำนวณอัตราแลกเปลี่ยน</summary
+                >
+                <div class="flex gap-2 mx-2 mb-2 overflow-x-auto max-w-xs">
+                  {#each prices as data}
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <span
+                      class="btn btn-outline btn-info"
+                      on:click={() => (value = data)}>{data}฿</span
+                    >
+                  {/each}
+                </div>
+                <div class="collapse-content">
+                  <!-- svelte-ignore a11y-label-has-associated-control -->
+                  <label class="label">
+                    <span class="label-text">ระบุจำนวนเงิน (10 - 10,000)</span>
+                  </label>
+                  <input
+                    type="range"
+                    min="10"
+                    max="10000"
+                    bind:value
+                    on:range={value}
+                    class="range"
+                    aria-label="10-10000"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Type here"
+                    class="input input-bordered input-secondary w-full max-w-xs"
+                    bind:value
+                  />
+                </div>
+                {#if value < 10 || value > 10000}
+                  <p class="badge badge-secondary">
+                    จำนวนเงินไม่ถูกต้อง (10-10000)
+                  </p>
+                {:else}
+                  <div class="text-center mb-2">
+                    ได้รับ {calculateBonus(value)} DP และ {value / 10} RP
+                  </div>
+                {/if}
+              </details>
             </div>
-            {#if value < 10 || value > 10000}
-              <p class="badge badge-secondary">
-                จำนวนเงินไม่ถูกต้อง (10-10000)
-              </p>
-            {:else}
-              <div class="badge badge-secondary badge-lg">
-                ได้รับ {value} DP และ {value / 10} RP
-              </div>
-            {/if}
           </div>
         {/if}
         {#if activeTabIndex == 1}
@@ -111,11 +154,11 @@
       </div>
 
       <!-- End Recommend -->
-      <div class="">
+      <div class="grid justify-center align-middle">
         <h1 class="font-bold text-4xl text-amber-400 dark:text-amber-200">
           เติมเงิน
         </h1>
-        <p class="text-md">ผ่านช่องทาง Truemoney (ระบบซองของขวัญ)</p>
+        <p class="text-md lg:text-xl">ผ่านช่องทาง Truemoney (ระบบซองของขวัญ)</p>
         <div class="p-3">
           <input
             type="text"
