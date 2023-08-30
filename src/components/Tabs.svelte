@@ -3,9 +3,10 @@
   import { imgurl } from "../services/apiurl";
   const defaultimg = imgurl + "default.webp";
   import { updateDateDiff } from "../services/Playdate";
-
-  let tabs = ["ไอเทมใหม่", "ไอเทมยอดฮิต", "อันดับเทพทรู"];
+  import { onMount, tick } from "svelte";
+  let tabs = ["อันดับเทพทรู", "ไอเทมยอดฮิต", "ไอเทมใหม่"];
   let activeTabIndex = 0;
+  import { apiurl } from "../services/apiurl";
 
   function setShopdata(data) {
     shopData.set({
@@ -23,7 +24,25 @@
     });
   }
 
-  let items = ["Apple", "Banana", "Orange", "Grapes"];
+  // let items = ["Apple", "Banana", "Orange", "Grapes"];
+  let playertopup = [];
+  async function top_donates() {
+    try {
+      const url = apiurl + "playerstat?show=topup";
+      const response = await fetch(url, {});
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  }
+  playertopup = top_donates();
+  onMount(async () => {
+    playertopup = await top_donates();
+    await tick();
+  });
 </script>
 
 <div class="tabs d-flex justify-center">
@@ -41,12 +60,12 @@
 
 {#if activeTabIndex == 0}
   <div class="grid gap-1">
-    {#if items[0]}
+    {#if playertopup[0]}
       <div class="join items-center">
         <div class="indicator">
           <span
             class="indicator-item indicator-bottom badge badge-secondary font-extrabold mb-3 h-6"
-            >{items[0]}</span
+            >{playertopup[0]}</span
           >
           <div class="avatar px-2 py-2">
             <div
@@ -57,14 +76,14 @@
           </div>
         </div>
         <div class="grid grid-rows-2 text-start mx-2">
-          <span class="text-2xl text-info">ที่หนึ่งด้านการวิ่ง</span>
+          <span class="text-2xl text-accent">สุลต่าน No.1</span>
           <span class="text-md">Lorem ipsum dolor sit amet.</span>
         </div>
       </div>
     {/if}
     <div class="bg-base-200 p-3 overflow-y-hidden pb-8">
       <div class="join">
-        {#each items as data, i}
+        {#each playertopup as data, i}
           <div class="tooltip tooltip-bottom tooltip-netural" data-tip={data}>
             <div class="avatar">
               <div class="w-12 rounded-full">

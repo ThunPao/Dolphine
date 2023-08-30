@@ -165,17 +165,8 @@
         dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
       />
     {/each}
-    {#if $shopitems.filter(filterShopItems).length === 0}
-      <div class="mockup-window border border-base-300">
-        <div
-          class="flex justify-center px-4 py-16 border-t border-base-300 text-4xl"
-        >
-          ไม่พบไอเทม
-        </div>
-      </div>
-    {/if}
   {:else}
-    <p>No shop items found.</p>
+    <p>ไม่พบไอเทม</p>
   {/if}
 {:else}
   <div
@@ -199,17 +190,13 @@
           dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
         />
       {/each}
-      {#if $shopitems.filter(filterShopItems).length === 0}
-        <div class="mockup-window border border-base-300">
-          <div
-            class="flex justify-center px-4 py-16 border-t border-base-300 text-4xl"
-          >
-            ไม่พบไอเทม
-          </div>
-        </div>
-      {/if}
     {:else}
-      <p>No shop items found.</p>
+      <p>ไม่พบไอเทม</p>
     {/if}
+  </div>
+{/if}
+{#if $shopitems.filter(filterShopItems).length === 0}
+  <div class="h-96 flex justify-center items-center">
+    <span class="text-4xl">ไม่พบไอเทม</span>
   </div>
 {/if}

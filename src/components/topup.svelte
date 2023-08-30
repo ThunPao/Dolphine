@@ -125,7 +125,7 @@
             <div class="h-96 carousel carousel-vertical">
               {#each topupimg as images}
                 <div class="carousel-item">
-                  <img src={images} alt="วิธีเติมเงิน" class="img-fluid" />
+                  <img src={images} alt="วิธีเติมเงิน" class="h-96" />
                 </div>
               {/each}
             </div>
