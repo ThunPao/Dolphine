@@ -114,7 +114,7 @@
               <img
                 data-src={href}
                 alt="Img"
-                class="rounded-lg lozad"
+                class="rounded-lg"
                 width="464"
                 height="387"
               />
