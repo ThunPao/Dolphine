@@ -3,10 +3,11 @@
   import { imgurl } from "../services/apiurl";
   const defaultimg = imgurl + "default.webp";
   import { updateDateDiff } from "../services/Playdate";
-  // import { onMount, tick } from "svelte";
+  import { onMount, tick } from "svelte";
   let tabs = ["อันดับเทพทรู", "ไอเทมยอดฮิต", "ไอเทมใหม่"];
   let activeTabIndex = 0;
-  // import { apiurl } from "../services/apiurl";
+  import { apiurl } from "../services/apiurl";
+  // import { fade, slide } from "svelte/transition";
 
   function setShopdata(data) {
     shopData.set({
@@ -24,25 +25,24 @@
     });
   }
 
-  let playertopup = ["Apple", "Banana", "Orange", "Grapes"];
-  // let playertopup = [];
-  // async function top_donates() {
-  //   try {
-  //     const url = apiurl + "playerstat?show=topup";
-  //     const response = await fetch(url, {});
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       return data;
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error.message);
-  //   }
-  // }
-  // playertopup = top_donates();
-  // onMount(async () => {
-  //   playertopup = await top_donates();
-  //   await tick();
-  // });
+  let playertopup = [];
+  async function top_donates() {
+    try {
+      const url = apiurl + "playerstat?show=topup";
+      const response = await fetch(url, {});
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  }
+
+  onMount(async () => {
+    playertopup = await top_donates();
+    await tick();
+  });
 </script>
 
 <div class="tabs d-flex justify-center">
@@ -60,12 +60,13 @@
 
 {#if activeTabIndex == 0}
   <div class="grid gap-1">
-    {#if playertopup[0]}
+    {#if playertopup && playertopup.length > 0}
       <div class="join items-center">
         <div class="indicator">
           <span
             class="indicator-item indicator-bottom badge badge-secondary font-extrabold mb-3 h-6"
-            >{playertopup[0]}</span
+          >
+            สุลต่านตัวจริง😎</span
           >
           <div class="avatar px-2 py-2">
             <div
@@ -75,25 +76,31 @@
             </div>
           </div>
         </div>
-        <div class="grid grid-rows-2 text-start mx-2">
-          <span class="text-2xl text-accent">สุลต่าน No.1</span>
-          <span class="text-md">Lorem ipsum dolor sit amet.</span>
+        <div class="grid grid-rows-3 text-start mx-2">
+          <span class="text-2xl text-info font-bold">อันดับเทพทรู</span>
+          <span class="text-md"
+            >ได้แก่ 🥇{playertopup[0].username} เป็นผู้ที่มียอดการเติมเงินสูงสุด
+            ขอแสดงความนับถือ!</span
+          >
+        </div>
+      </div>
+      <div class="bg-base-200 p-3 overflow-y-hidden pb-8">
+        <div class="join">
+          {#each playertopup as data, i}
+            <div
+              class="tooltip tooltip-bottom tooltip-netural"
+              data-tip={data.username}
+            >
+              <div class="avatar">
+                <div class="w-12 rounded-full">
+                  <img alt={data[i]} src={defaultimg} />
+                </div>
+              </div>
+            </div>
+          {/each}
         </div>
       </div>
     {/if}
-    <div class="bg-base-200 p-3 overflow-y-hidden pb-8">
-      <div class="join">
-        {#each playertopup as data, i}
-          <div class="tooltip tooltip-bottom tooltip-netural" data-tip={data}>
-            <div class="avatar">
-              <div class="w-12 rounded-full">
-                <img alt={data[i]} src={defaultimg} />
-              </div>
-            </div>
-          </div>
-        {/each}
-      </div>
-    </div>
   </div>
 {/if}
 
