@@ -148,6 +148,6 @@
     </div>
   </form>
   <form method="dialog" class="modal-backdrop">
-    <button aria-hidden="true" />
+    <button aria-label="ปิด" />
   </form>
 </dialog>

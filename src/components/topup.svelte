@@ -13,7 +13,10 @@
   let value = 10;
 </script>
 
-<dialog id="topup" class="modal modal-middle place-items-end justify-center lg:place-items-center lg:justify-normal">
+<dialog
+  id="topup"
+  class="modal modal-middle place-items-end justify-center lg:place-items-center lg:justify-normal"
+>
   <form method="dialog" class="modal-box text-center w-full max-w-5xl">
     <!-- Recommend -->
     <div class="grid lg:grid-cols-2">
@@ -62,6 +65,7 @@
                 on:range={value}
                 class="range"
                 disabled
+                aria-label="10-10000"
               />
               <input
                 type="number"
@@ -141,7 +145,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div class="modal-action">
       <button title="คลิก" class="btn flex grow">ปิดหน้าต่างนี้</button>
