@@ -112,7 +112,7 @@
           <div class="place-items-center overflow-hidden">
             <figure>
               <img
-                data-src={href}
+                src={href}
                 alt="Img"
                 class="rounded-lg"
                 width="464"
