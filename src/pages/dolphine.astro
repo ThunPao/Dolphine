@@ -30,10 +30,10 @@ import Btm from "../sections/bottom.astro";
   >
 
   <main data-theme="dark" class="bg-base-300">
-    <Navbar client:load />
+    <Navbar client:only="svelte"  />
 
-    <DPSection client:load />
-    <Btm />
+    <DPSection client:only="svelte" />
+    <Btm client:only />
   </main>
 
 

@@ -1,10 +1,16 @@
 import { writable } from "svelte/store";
 import {apiurl} from "./apiurl";
+
 export let blogsvip = writable(null);
 export let blogdata = writable(null);
 export let blogdata_p = writable(null);
+import {getCookie, setCookie} from "../services/cookies"
 
-let token = localStorage.getItem("token");
+
+
+// let token = localStorage.getItem("token");
+// let token = "test";
+let token = getCookie("token");
 
 export async function getblogdata() {
   try {
@@ -84,7 +90,9 @@ export async function getblogsvip(datatoken) {
 
   export async function toggleFavorite(blogId) {
     try {
-      token = localStorage.getItem("token");
+      // token = localStorage.getItem("token");
+      token = getCookie("token");
+
       // Make a POST request to the server
       const response = await fetch(apiurl + "blogdata", {
         method: "POST",

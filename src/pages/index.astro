@@ -51,7 +51,7 @@ let logoimg = "images/dpchan1.webp";
     style="background-image: url('images/Cardsecbg.webp')"
   >
     <!-- class="bg-gradient-to-r from-blue-200 via-sky-100 to-purple-200" -->
-    <Navbar client:load />
+    <Navbar client:only="svelte" />
     <Intro />
     <div
       class="lg:container lg:mx-auto rounded-lg bg-base-100 bg-opacity-80 backdrop-blur-md"
@@ -66,10 +66,10 @@ let logoimg = "images/dpchan1.webp";
       <!-- SSR Astro -->
       <!-- <Blogs /> -->
     </div>
-    <Btm />
+    <Btm client:only/>
     <!-- <Apitest/> -->
-    <Shopinfo client:load />
-    <Btncf client:load />
+    <Shopinfo client:only="svelte" />
+    <Btncf client:only="svelte" />
   </main>
 
 

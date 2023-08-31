@@ -6,9 +6,11 @@ import jwt_decode from 'jwt-decode';
 import {apiurl} from "./apiurl";
 import {shopitems} from "../services/ShopController";
 
+import {getCookie, setCookie} from "../services/cookies"
 
 
-export let token = localStorage.getItem("token");
+// export let token = localStorage.getItem("token");
+export let token = getCookie("token");
 
 
 
@@ -30,7 +32,7 @@ const unsubscribePassword = regpwd.subscribe(value => {
 });
 
 
-export const tokencheck = writable(localStorage.getItem('token'));
+export const tokencheck = writable(getCookie('token'));
 
 // Create a writable store for the password field value
 export const password = writable('');
@@ -204,7 +206,8 @@ export async function logout() {
     if (response.ok) {
       // console.log(data);
       token = data.token;
-      localStorage.setItem("token", token);
+      // localStorage.setItem("token", token);
+      setCookie("token",token,7);
       tokencheck.set(writable(data.token));
       // getPlayerInfo(data.token);
       handleLoadinfo();

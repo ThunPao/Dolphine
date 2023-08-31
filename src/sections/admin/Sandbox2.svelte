@@ -3,7 +3,13 @@
   let imgurl =
     "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
   let value = 0;
+import {getCookie, setCookie} from "../../services/cookies"
+  let hello = getCookie("auth");
 </script>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="btn btn-secondary" on:click={setCookie("auth","hellowa",30)}>SET</div>
+
+THE COOKIE ARE {hello}
 
 <div class="grid gap-1">
   {#if items[0]}

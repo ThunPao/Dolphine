@@ -11,15 +11,14 @@
     "host": "astro preview --host 192.168.1.134"
   },
   "dependencies": {
-    "@astrojs/node": "^5.3.0",
-    "@astrojs/svelte": "^3.0.0",
-    "@astrojs/tailwind": "^4.0.0",
-    "@astrojs/vercel": "^3.7.0",
+    "@astrojs/svelte": "^4.0.0",
+    "@astrojs/tailwind": "^5.0.0",
+    "@astrojs/vercel": "^4.0.0",
     "@firebase/app": "^0.9.15",
     "@fontsource/kanit": "^5.0.7",
     "@sweetalert2/theme-borderless": "^5.0.15",
     "@sweetalert2/themes": "^5.0.15",
-    "astro": "^2.9.6",
+    "astro": "^3.0.3",
     "firebase": "^10.1.0",
     "font-awesome": "^4.7.0",
     "gsap": "^3.12.2",
@@ -31,14 +30,13 @@
     "luxon": "^3.3.0",
     "npm": "^9.8.0",
     "sass": "^1.63.6",
-    "sharp": "^0.32.3",
-    "svelte": "^3.59.2",
+    "svelte": "^4.2.0",
     "sweetalert2": "^11.6.13",
     "tailwindcss": "^3.3.2",
     "toastr": "^2.1.4",
     "uninstall": "^0.0.0"
   },
   "devDependencies": {
-    "daisyui": "^3.1.5"
+    "daisyui": "^3.6.4"
   }
 }
