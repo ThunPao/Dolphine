@@ -6,8 +6,7 @@
 import {getCookie, setCookie} from "../../services/cookies"
   let hello = getCookie("auth");
 </script>
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="btn btn-secondary" on:click={setCookie("auth","hellowa",30)}>SET</div>
+<!-- <div class="btn btn-secondary" on:click={setCookie("auth","hellowa",30)}>SET</div> -->
 
 THE COOKIE ARE {hello}
 
@@ -72,7 +71,6 @@ THE COOKIE ARE {hello}
 
   <p>ใส่จำนวน</p>
   <div class="form-control w-full max-w-xs">
-    <!-- svelte-ignore a11y-label-has-associated-control -->
     <label class="label">
       <span class="label-text">ระบุจำนวนเงิน (10 - 10,000)</span>
     </label>

@@ -89,14 +89,12 @@
           <p class="text-xl font-medium">คำนวณอัตราแลกเปลี่ยน</p>
           <div class="mx-1 overflow-x-auto justify-center">
             {#each prices as data}
-              <!-- svelte-ignore a11y-click-events-have-key-events -->
               <span
-                class="btn btn-outline btn-info m-1 text-lg"
+                class="btn btn-outline btn-info m-1 text-lg" aria-hidden="true"
                 on:click={() => (value = data)}>{data}฿</span
               >
             {/each}
           </div>
-          <!-- svelte-ignore a11y-label-has-associated-control -->
           <input
             type="range"
             min="10"
