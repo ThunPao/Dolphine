@@ -103,7 +103,7 @@
             max="10000"
             bind:value
             on:range={value}
-            class="range"
+            class="range range-lg m-2"
             aria-label="10-10000"
           />
           <input

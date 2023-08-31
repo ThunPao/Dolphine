@@ -2,6 +2,7 @@
   import { shopData } from "../services/ShopController";
   import { onMount, onDestroy } from "svelte";
   import { DateTime } from "luxon";
+
   // Settings.defaultLocale = "th";
 
   // Define the variables where you want to store the shop item data

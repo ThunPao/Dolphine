@@ -7,7 +7,8 @@
   let tabs = ["อันดับเทพทรู", "ไอเทมยอดฮิต", "ไอเทมใหม่"];
   let activeTabIndex = 0;
   import { apiurl } from "../services/apiurl";
-  // import { fade, slide } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
 
   function setShopdata(data) {
     shopData.set({
@@ -61,7 +62,7 @@
 {#if activeTabIndex == 0}
   <div class="grid gap-1">
     {#if playertopup && playertopup.length > 0}
-      <div class="join items-center">
+      <div class="join items-center" in:fade>
         <div class="indicator">
           <span
             class="indicator-item indicator-bottom badge badge-secondary font-extrabold mb-3 h-6"
@@ -84,14 +85,23 @@
           >
         </div>
       </div>
-      <div class="bg-base-200 p-3 overflow-y-hidden pb-8">
+      <div class="bg-base-200 mx-2 overflow-y-hidden">
         <div class="join">
           {#each playertopup as data, i}
             <div
               class="tooltip tooltip-bottom tooltip-netural"
               data-tip={data.username}
             >
-              <div class="avatar">
+              <div
+                class="avatar"
+                in:fly={{
+                  delay: 500,
+                  duration: 200 + i * 150,
+                  x: -300,
+                  opacity: 0.5,
+                  easing: quintOut,
+                }}
+              >
                 <div class="w-12 rounded-full">
                   <img alt={data[i]} src={defaultimg} />
                 </div>
