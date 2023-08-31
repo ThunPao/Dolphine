@@ -5,7 +5,8 @@ import Fastmenu from "../components/fastmenu.svelte";
 let cookieimg = "images/Cookie.webp";
 // let cookie = Astro.cookies.get("terms");
 
-let terms = Astro.cookies.get("terms").value;
+// let terms = Astro.cookies.get("terms").value;
+let terms = false;
 ---
 
 <script>
@@ -99,7 +100,9 @@ let terms = Astro.cookies.get("terms").value;
   </div>
 </footer>
 
-<Fastmenu client:media="(max-width: 480px)" />
+<!-- <Fastmenu client:media="(max-width: 480px)" /> -->
+<Fastmenu client:only="svelte" />
+
 {
   !terms ? (
     <span id="cookie-div">
