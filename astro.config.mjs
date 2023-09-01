@@ -28,7 +28,7 @@ export default defineConfig({
   //   mode: "standalone"
   // }),
 
-  output: 'hybrid',
+  output: 'server',
   adapter: vercel({
     analytics: true
   }),
