@@ -85,7 +85,7 @@
         body: formData,
       });
       if (response.ok) {
-        location.reload();
+        // location.reload();
       } else {
         console.log(response);
       }
