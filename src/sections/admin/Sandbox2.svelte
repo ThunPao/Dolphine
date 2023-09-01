@@ -3,12 +3,27 @@
   let imgurl =
     "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
   let value = 0;
-import {getCookie, setCookie} from "../../services/cookies"
+  import { getCookie, setCookie } from "../../services/cookies";
   let hello = getCookie("auth");
+  import { scale } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
 </script>
+
 <!-- <div class="btn btn-secondary" on:click={setCookie("auth","hellowa",30)}>SET</div> -->
 
 THE COOKIE ARE {hello}
+
+<div
+  transition:scale={{
+    duration: 500,
+    delay: 500,
+    opacity: 0.5,
+    start: 0.5,
+    easing: quintOut,
+  }}
+>
+  scales in and out
+</div>
 
 <div class="grid gap-1">
   {#if items[0]}

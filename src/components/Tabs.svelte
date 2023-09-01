@@ -89,7 +89,7 @@
         <div class="join">
           {#each playertopup as data, i}
             <div
-              class="tooltip tooltip-bottom tooltip-netural"
+              class="tooltip tooltip-bottom tooltip-netural z-50 mb-10"
               data-tip={data.username}
             >
               <div
