@@ -9,7 +9,7 @@ export interface RedeemCode {
   code: string;
   toggle_status: number;
   expires_at: string | null;
-  uses_limit: number;
+  uses_limit: number | null;
   uses_count: number;
   commands: Commands[];
   created_at: string | null;

@@ -3,10 +3,11 @@
   import { writable } from "svelte/store";
   import { apiurl } from "../../../services/apiurl";
   import { onMount } from "svelte";
+  import CRUDModal from "./RedeemcodeCRUD.svelte";
 
   let tableHeaders: (keyof RedeemCode)[] = [];
-  // let selectedItem: RedeemCode[] = [];
-
+  let selectedItem: RedeemCode[] = [];
+  let isEditMode: boolean;
   // Create a writable store for redeemcodes
   const redeemcodesStore = writable<RedeemCode[]>([]);
 
@@ -28,6 +29,32 @@
       console.error("Error fetching redeem codes:", error);
     }
   }
+
+  function AddRedeemCode() {
+    selectedItem = [
+      {
+        id: 0,
+        code: "",
+        toggle_status: 1,
+        expires_at: null,
+        uses_limit: null,
+        uses_count: 0,
+        commands: [],
+        created_at: null,
+        updated_at: null,
+      },
+    ];
+    isEditMode = false;
+    //@ts-ignore
+    RedeemCodeForm.showModal();
+  }
+  function EditRedeemCode(item: RedeemCode) {
+    selectedItem = [item];
+    isEditMode = true;
+    //@ts-ignore
+    RedeemCodeForm.showModal();
+  }
+
   onMount(async () => {
     await fetchRedeemCodes();
   });
@@ -55,7 +82,7 @@
                   class="px-4 py-2"
                   tabindex="0"
                   on:click={() => {
-                    // EditRedeemCode(item);
+                    EditRedeemCode(item);
                   }}
                   aria-hidden="true"
                 >
@@ -82,7 +109,7 @@
         aria-hidden="true"
         class="btn btn-success"
         on:click={() => {
-          // AddRedeemCode();
+          AddRedeemCode();
         }}
       >
         Add Code
@@ -92,3 +119,4 @@
     </div>
   </form>
 </dialog>
+<CRUDModal {selectedItem} EditMode={isEditMode} />

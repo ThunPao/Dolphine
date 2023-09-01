@@ -114,7 +114,8 @@
         {description}
       </div>
       <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-      <div tabindex="0" class="collapse bg-base-200 mt-2">
+      <div class="collapse bg-base-200 mt-2">
+        <input type="checkbox" />
         <div class="collapse-title font-bold">
           เมื่อซื้อ จะได้รับสินค้า {title.length} รายการ
         </div>
