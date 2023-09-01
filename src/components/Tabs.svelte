@@ -73,7 +73,7 @@
             <div
               class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
             >
-              <img src={defaultimg} alt="" />
+              <img src={defaultimg} alt={playertopup[0].username} />
             </div>
           </div>
         </div>
