@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/svelte": "^4.0.0",
     "@astrojs/tailwind": "^5.0.0",
-    "@astrojs/vercel": "^4.0.0",
+    "@astrojs/vercel": "^4.0.2",
     "@firebase/app": "^0.9.15",
     "@fontsource/kanit": "^5.0.7",
     "@sweetalert2/theme-borderless": "^5.0.15",
