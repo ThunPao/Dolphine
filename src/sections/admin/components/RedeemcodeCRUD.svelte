@@ -3,8 +3,19 @@
   import { apiurl } from "../../../services/apiurl";
   export let selectedItem: RedeemCode[] = [];
   export let EditMode: boolean = false;
-
+  import flatpickr from "flatpickr";
+  import "flatpickr/dist/flatpickr.min.css";
+  import { onMount } from "svelte";
   let toggles = false;
+
+  onMount(()=>{
+    // @ts-ignore
+    flatpickr(".date-input", {
+    enableTime: true, 
+    dateFormat: "Y-m-d H:i",
+    appendTo: document.querySelector("#RedeemCodeForm")
+  });
+  })
 
   function handleToggles() {
     toggles = !toggles;
@@ -179,13 +190,19 @@
               />
             </label>
             วันที่หมดอายุ
-            <input
+            <!-- <input
               type="date"
               placeholder="Expires Date"
               bind:value={selectedItem[0].expires_at}
               class="input w-full max-w-xs input-sm"
             />
-            {selectedItem[0].expires_at}
+            {selectedItem[0].expires_at} -->
+            <input
+            type="text"
+            class="date-input appearance-none bg-white border border-gray-300 rounded px-4 py-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            placeholder="Select a date and time"
+            bind:value={selectedItem[0].expires_at}
+          />
 
             {#each selectedItem[0].commands as command, index (index)}
               <div class="grid lg:flex gap-1">
