@@ -17,6 +17,7 @@
       const data = await response.json();
       // Filter the data to include only the required fields
       const filteredData: RedeemCode[] = data.map((item: RedeemCode) => ({
+        id: item.id,
         code: item.code,
         toggle_status: item.toggle_status,
         uses_limit: item.uses_limit,
