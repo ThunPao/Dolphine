@@ -1,6 +1,17 @@
 <script lang="ts">
   import type { RedeemCode } from "../../../models/redeemcodes";
   import { apiurl } from "../../../services/apiurl";
+  import flatpickr from "flatpickr";
+  import "flatpickr/dist/flatpickr.min.css";
+  import { onMount } from "svelte";
+
+  onMount(()=>{
+  flatpickr(".date-input", {
+    enableTime: true, // This enables time selection
+    dateFormat: "Y-m-d H:i", // Customize the date and time format
+  });
+  })
+
 
   export let selectedItem: RedeemCode[] = [];
   export let EditMode: boolean = false;
@@ -73,18 +84,25 @@
   }
 
   async function addItem() {
-    const formData = new FormData();
-    formData.append("code", selectedItem[0].code);
-    formData.append("toggle_status", String(selectedItem[0].toggle_status));
-    formData.append("uses_limit", String(selectedItem[0].uses_limit));
-    formData.append("rcon_command", JSON.stringify(selectedItem[0].commands)); // Handle null or undefined
+    const requestData = {
+      code: selectedItem[0].code,
+      toggle_status: selectedItem[0].toggle_status,
+      uses_limit: selectedItem[0].uses_limit,
+      expires_at: String(selectedItem[0].expires_at),
+      commands: selectedItem[0].commands,
+    };
 
     try {
       const response = await fetch(apiurl + "crudRedeem", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
       });
+
       if (response.ok) {
+        console.log(requestData);
         // location.reload();
       } else {
         console.log(response);
@@ -160,12 +178,19 @@
               />
             </label>
             วันที่หมดอายุ
-            <input
+            <!-- <input
               type="date"
               placeholder="Expires Date"
               bind:value={selectedItem[0].expires_at}
               class="input w-full max-w-xs input-sm"
+            /> -->
+            <input
+              type="text"
+              class="date-input appearance-none bg-white border border-gray-300 rounded px-4 py-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              placeholder="Select a date and time"
+              bind:value={selectedItem[0].expires_at}
             />
+            {selectedItem[0].expires_at}
 
             {#each selectedItem[0].commands as command, index (index)}
               <div class="grid lg:flex gap-1">

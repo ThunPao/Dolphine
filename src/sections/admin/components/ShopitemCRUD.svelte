@@ -178,8 +178,6 @@
         body: formData,
       });
       const data = await response.json();
-      console.log("ID: " + data.id + " FORM: " + formData);
-
       if (response.ok) {
         saveCommands(data.id);
         location.reload();
