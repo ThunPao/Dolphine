@@ -9,6 +9,7 @@
   flatpickr(".date-input", {
     enableTime: true, // This enables time selection
     dateFormat: "Y-m-d H:i", // Customize the date and time format
+    position: "above center"
   });
   })
 
