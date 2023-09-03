@@ -5,17 +5,31 @@
   export let EditMode: boolean = false;
   import flatpickr from "flatpickr";
   import "flatpickr/dist/flatpickr.min.css";
-  import { onMount } from "svelte";
+  import { onMount,afterUpdate  } from "svelte";
   let toggles = false;
 
-  onMount(()=>{
-    // @ts-ignore
-    flatpickr(".date-input", {
-    enableTime: true, 
-    dateFormat: "Y-m-d H:i",
-    appendTo: document.querySelector("#RedeemCodeForm")
+  onMount(() => {
+    initializeFlatpickr();
   });
-  })
+
+  afterUpdate(() => {
+    initializeFlatpickr();
+  });
+let flatpickr_loaded = false;
+  function initializeFlatpickr() {
+    const dateInput = document.querySelector(".date-input") as HTMLInputElement;
+    if(!flatpickr_loaded){
+      if (dateInput) {
+      //@ts-ignore
+      flatpickr(dateInput, {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        appendTo: document.querySelector("#RedeemCodeForm"),
+      });
+      flatpickr_loaded = true;
+    }
+    }
+  }
 
   function handleToggles() {
     toggles = !toggles;
@@ -73,6 +87,9 @@
         apiurl + "crudRedeem/" + selectedItem[0].id,
         {
           method: "PUT",
+          headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(requestData),
         }
       );
