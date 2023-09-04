@@ -1,12 +1,15 @@
 <script lang="ts">
   import type { RedeemCode } from "../../../models/redeemcodes";
   import { apiurl } from "../../../services/apiurl";
-  export let selectedItem: RedeemCode[] = [];
-  export let EditMode: boolean = false;
   import flatpickr from "flatpickr";
   import "flatpickr/dist/flatpickr.min.css";
-  import { onMount,afterUpdate  } from "svelte";
+  import { onMount, afterUpdate } from "svelte";
+  import { redeemcodesStore } from "../../../controllers/adminController";
+
   let toggles = false;
+
+  export let selectedItem: RedeemCode[] = [];
+  export let EditMode: boolean = false;
 
   onMount(() => {
     initializeFlatpickr();
@@ -15,19 +18,19 @@
   afterUpdate(() => {
     initializeFlatpickr();
   });
-let flatpickr_loaded = false;
+  let flatpickr_loaded = false;
   function initializeFlatpickr() {
     const dateInput = document.querySelector(".date-input") as HTMLInputElement;
-    if(!flatpickr_loaded){
+    if (!flatpickr_loaded) {
       if (dateInput) {
-      //@ts-ignore
-      flatpickr(dateInput, {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        appendTo: document.querySelector("#RedeemCodeForm"),
-      });
-      flatpickr_loaded = true;
-    }
+        //@ts-ignore
+        flatpickr(dateInput, {
+          enableTime: true,
+          dateFormat: "Y-m-d H:i",
+          appendTo: document.querySelector("#RedeemCodeForm"),
+        });
+        flatpickr_loaded = true;
+      }
     }
   }
 
@@ -88,9 +91,9 @@ let flatpickr_loaded = false;
         {
           method: "PUT",
           headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestData),
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
         }
       );
       if (response.ok) {
@@ -126,13 +129,26 @@ let flatpickr_loaded = false;
       if (response.ok) {
         console.log(requestData);
         // location.reload();
+
+        const updatedItem = selectedItem[0];
+        redeemcodesStore.update((currentValue: RedeemCode[]) => {
+          // Use map to create a new array with the updated item
+          return currentValue.map((item: RedeemCode) => {
+            // Check if the item matches the updated item by some unique identifier (e.g., id)
+            if (item.id === updatedItem.id) {
+              // Update the item with the new values from updatedItem
+              return updatedItem;
+            }
+            // If the item doesn't match, return it unchanged
+            return item;
+          });
+        });
       } else {
         console.log(response);
       }
     } catch (error) {
       console.error("Error:", error);
     }
-    
   }
 
   async function removeRedeemCode() {
@@ -215,12 +231,11 @@ let flatpickr_loaded = false;
             />
             {selectedItem[0].expires_at} -->
             <input
-            type="text"
-            class="date-input appearance-none bg-white border border-gray-300 rounded px-4 py-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            placeholder="Select a date and time"
-            bind:value={selectedItem[0].expires_at}
-          />
-
+              type="text"
+              class="date-input appearance-none bg-white border border-gray-300 rounded px-4 py-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              placeholder="Select a date and time"
+              bind:value={selectedItem[0].expires_at}
+            />
             {#each selectedItem[0].commands as command, index (index)}
               <div class="grid lg:flex gap-1">
                 <span

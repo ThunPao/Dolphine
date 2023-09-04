@@ -1,7 +1,10 @@
 // admincontroller.ts
-
+import type { RedeemCode } from "../models/redeemcodes";
 import { apiurl } from "../services/apiurl";
 import type { ShopItem } from "../models/shopitems";
+import { writable } from "svelte/store";
+export const redeemcodesStore = writable<RedeemCode[]>([]);
+
 export const shopItemsController = {
   shopitems: [] as ShopItem[],
   tableHeaders: [] as (keyof ShopItem)[],

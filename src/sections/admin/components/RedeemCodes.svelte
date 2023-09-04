@@ -4,12 +4,13 @@
   import { apiurl } from "../../../services/apiurl";
   import { onMount } from "svelte";
   import CRUDModal from "./RedeemcodeCRUD.svelte";
+  import { redeemcodesStore } from "../../../controllers/adminController";
 
   let tableHeaders: (keyof RedeemCode)[] = [];
   let selectedItem: RedeemCode[] = [];
   let isEditMode: boolean;
   // Create a writable store for redeemcodes
-  const redeemcodesStore = writable<RedeemCode[]>([]);
+  // const redeemcodesStore = writable<RedeemCode[]>([]);
 
   async function fetchRedeemCodes() {
     try {
@@ -22,6 +23,7 @@
         toggle_status: item.toggle_status,
         uses_limit: item.uses_limit,
         uses_count: item.uses_count,
+        expires_at: item.expires_at,
         commands: item.commands,
       }));
       redeemcodesStore.set(filteredData);
