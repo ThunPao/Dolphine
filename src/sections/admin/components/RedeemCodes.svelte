@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { RedeemCode } from "../../../models/redeemcodes";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import CRUDModal from "./RedeemcodeCRUD.svelte";
   import {
     redeemcodesStore,

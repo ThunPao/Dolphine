@@ -16,14 +16,18 @@
   });
   let flatpickr_loaded = false;
   function initializeFlatpickr() {
-    const dateInput = document.querySelector(".date-input") as HTMLInputElement;
+    // const dateInput = document.querySelector(".date-input") as HTMLInputElement;
+    const dateInput = document.getElementById("date-input") as HTMLInputElement;
+    const dialog = document.getElementById(
+      "RedeemCodeForm"
+    ) as HTMLInputElement;
     if (!flatpickr_loaded) {
       if (dateInput) {
-        //@ts-ignore
+        // @ts-ignore
         flatpickr(dateInput, {
           enableTime: true,
           dateFormat: "Y-m-d H:i",
-          appendTo: document.querySelector("#RedeemCodeForm"),
+          appendTo: dialog,
           defaultDate:
             selectedItem[0] && selectedItem[0].expires_at
               ? new Date(selectedItem[0].expires_at)
@@ -239,8 +243,9 @@
             </label>
             วันที่หมดอายุ
             <input
+              id="date-input"
               type="text"
-              class="date-input input"
+              class="input"
               placeholder="Select a date and time"
               bind:value={selectedItem[0].expires_at}
               readonly
