@@ -250,6 +250,13 @@
               bind:value={selectedItem[0].expires_at}
               readonly
             />
+            <input
+              type="datetime-local"
+              class="input"
+              placeholder="Select a date and time"
+              bind:value={selectedItem[0].expires_at}
+              readonly
+            />
             <h2 class="text-center font-bold text-lg mb-2">จัดการคำสั่ง</h2>
             {#each selectedItem[0].commands as command, index (index)}
               <div class="grid lg:flex gap-1">

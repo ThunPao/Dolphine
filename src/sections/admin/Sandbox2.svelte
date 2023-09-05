@@ -33,3 +33,5 @@
 </div>
 
 THE COOKIE ARE {hello}
+
+<input type="datetime-local" id="birthdaytime" name="birthdaytime" />

@@ -14,6 +14,7 @@
 
   function EditShopItem(item: ShopItem) {
     selectedItem = [item];
+    console.log(selectedItem);
     shopItemsController.editShopItem(item);
     isEditMode = true;
     // console.log(shopItemsController.selectedItem);

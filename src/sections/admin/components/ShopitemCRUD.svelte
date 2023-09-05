@@ -298,14 +298,14 @@
             <div class="flex">
               เริ่มขาย
               <input
-                type="date"
+                type="datetime-local"
                 placeholder="Sale Date"
                 bind:value={selectedItem[0].sale_date}
                 class="input w-full max-w-xs input-sm"
               />
               หมดเวลา
               <input
-                type="date"
+                type="datetime-local"
                 placeholder="Expired Date"
                 bind:value={selectedItem[0].expired_date}
                 class="input w-full max-w-xs input-sm"
