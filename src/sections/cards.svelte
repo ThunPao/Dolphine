@@ -57,12 +57,6 @@
 
   onMount(initializeSlider);
   afterUpdate(initializeSlider);
-
-  //   if (shopitems !== null && shopitems.length > 0){
-  // each(shopitems.slice(0, 10) as data){
-
-  // }
-  //   }
 </script>
 
 <div class="grid grid-cols-1 xl:grid-cols-4 xl:m-5">

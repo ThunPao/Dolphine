@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   let items = ["Apple", "Banana", "Orange", "Grapes"];
   let imgurl =
     "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
@@ -7,8 +7,26 @@
   let hello = getCookie("auth");
   import { scale } from "svelte/transition";
   import { quintOut } from "svelte/easing";
+  import flatpickr from "flatpickr";
+  import "flatpickr/dist/flatpickr.min.css";
+  import { onMount, tick } from "svelte";
+  onMount(async () => {
+    flatpickr("#Expiretime", {
+      enableTime: true,
+    });
+    await tick();
+  });
+
+  let expired_date = "2023-12-12T03:20:00.000Z";
 </script>
 
+<input
+  id="Expiretime"
+  type="text"
+  placeholder="Select a date and time"
+  bind:value={expired_date}
+  readonly
+/>
 <!-- <div class="btn btn-secondary" on:click={setCookie("auth","hellowa",30)}>SET</div> -->
 
 THE COOKIE ARE {hello}

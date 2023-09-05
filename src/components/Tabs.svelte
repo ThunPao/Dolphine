@@ -78,8 +78,10 @@
           </div>
         </div>
         <div class="grid grid-rows-3 text-start mx-2">
-          <span class="text-2xl text-info font-bold">อันดับเทพทรู</span>
-          <span class="text-md"
+          <span class="text-4xl lg:text-2xl text-info font-bold"
+            >อันดับเทพทรู</span
+          >
+          <span class="text-lg lg:text-sm"
             >ได้แก่ 🥇{playertopup[0].username} เป็นผู้ที่มียอดการเติมเงินสูงสุด
             ขอแสดงความนับถือ!</span
           >

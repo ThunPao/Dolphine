@@ -23,7 +23,8 @@ export const shopItemsController = {
       const responseData = await response.json();
       this.shopitems = responseData;
       // console.log(responseData);
-      this.tableHeaders = Object.keys(responseData[0]) as (keyof ShopItem)[];
+      // this.tableHeaders = Object.keys(responseData[0]) as (keyof ShopItem)[];
+  this.tableHeaders = ["name", "point", "buycount","commands"];
     } catch (error) {
       console.error(error);
     }
@@ -73,6 +74,29 @@ export const shopItemsController = {
     }
   },
 };
+
+export const redeemcodeController = {
+  async fetchRedeemCodes() {
+    try {
+      const response = await fetch(apiurl + "crudRedeem");
+      const data = await response.json();
+      // Filter the data to include only the required fields
+      const filteredData: RedeemCode[] = data.map((item: RedeemCode) => ({
+        id: item.id,
+        code: item.code,
+        toggle_status: item.toggle_status,
+        uses_limit: item.uses_limit,
+        uses_count: item.uses_count,
+        expires_at: item.expires_at,
+        commands: item.commands,
+      }));
+      return redeemcodesStore.set(filteredData);
+      // tableHeaders = Object.keys(data[0]) as (keyof RedeemCode)[];
+    } catch (error) {
+      console.error("Error fetching redeem codes:", error);
+    }
+  }
+}
 
 
 

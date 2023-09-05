@@ -30,7 +30,8 @@ export default defineConfig({
 
   output: 'server',
   adapter: vercel({
-    analytics: true
+    analytics: true,
+    functionPerRoute: false
   }),
   compressHTML: true,
   build: {

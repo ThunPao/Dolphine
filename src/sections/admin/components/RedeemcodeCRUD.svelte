@@ -3,17 +3,13 @@
   import { apiurl } from "../../../services/apiurl";
   import flatpickr from "flatpickr";
   import "flatpickr/dist/flatpickr.min.css";
-  import { onMount, afterUpdate } from "svelte";
+  import { onMount, afterUpdate, tick } from "svelte";
   import { redeemcodesStore } from "../../../controllers/adminController";
 
   let toggles = false;
 
   export let selectedItem: RedeemCode[] = [];
   export let EditMode: boolean = false;
-
-  onMount(() => {
-    initializeFlatpickr();
-  });
 
   afterUpdate(() => {
     initializeFlatpickr();
@@ -28,6 +24,10 @@
           enableTime: true,
           dateFormat: "Y-m-d H:i",
           appendTo: document.querySelector("#RedeemCodeForm"),
+          defaultDate:
+            selectedItem[0] && selectedItem[0].expires_at
+              ? new Date(selectedItem[0].expires_at)
+              : null,
         });
         flatpickr_loaded = true;
       }
@@ -51,11 +51,6 @@
     } else {
       selectedItem[0].uses_limit = null;
     }
-  }
-
-  // ... Other functions ...
-  async function updateCommands(shop_id: number) {
-    // ... Your implementation ...
   }
 
   function addMore() {
@@ -169,6 +164,18 @@
       console.error("Error:", error);
     }
   }
+
+  onMount(async () => {
+    initializeFlatpickr();
+    // const dateInput = document.getElementById(
+    //   "RedeemCodeForm"
+    // ) as HTMLInputElement;
+    // flatpickr("#Expiretime", {
+    //   enableTime: true,
+    //   appendTo: dateInput,
+    // });
+    await tick();
+  });
 </script>
 
 <dialog id="RedeemCodeForm" class="modal">
@@ -177,6 +184,14 @@
       <p class="font-bold text-4xl">
         {EditMode ? "จัดการรหัสแลก" : "เพิ่มรหัสแลก"}
       </p>
+      <!-- <input
+        id="Expiretime"
+        type="text"
+        class="input"
+        placeholder="Select a date and time"
+        bind:value={selectedItem[0].expires_at}
+        readonly
+      /> -->
       {#if EditMode}
         <button
           class="btn btn-sm btn-error absolute right-2 top-2"
@@ -223,19 +238,14 @@
               />
             </label>
             วันที่หมดอายุ
-            <!-- <input
-              type="date"
-              placeholder="Expires Date"
-              bind:value={selectedItem[0].expires_at}
-              class="input w-full max-w-xs input-sm"
-            />
-            {selectedItem[0].expires_at} -->
             <input
               type="text"
-              class="date-input appearance-none bg-white border border-gray-300 rounded px-4 py-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              class="date-input input"
               placeholder="Select a date and time"
               bind:value={selectedItem[0].expires_at}
+              readonly
             />
+            <h2 class="text-center font-bold text-lg mb-2">จัดการคำสั่ง</h2>
             {#each selectedItem[0].commands as command, index (index)}
               <div class="grid lg:flex gap-1">
                 <span
@@ -256,7 +266,6 @@
                   bind:value={command.rcon_command}
                 />
                 <div class="flex justify-between">
-                  Visible:
                   <input
                     type="checkbox"
                     class="toggle toggle-lg"

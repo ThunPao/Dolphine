@@ -2,7 +2,7 @@
 import "../styles/base.scss";
 // import Btm from "../sections/bottom.astro";
 import Navtop from "../sections/admin/Navtop.astro";
-import DevDashboard from "../sections/admin/DevDashboard.svelte";
+import DevDashboard from "../sections/admin/DevDashboard.astro";
 // import Sandbox from "../sections/admin/Sandbox.astro";
 // import Sandbox3 from "../sections/admin/Sandbox3.svelte";
 import Fire from "../sections/admin/Fire.astro";
@@ -35,7 +35,7 @@ import AddshopItemBox from "../sections/admin/components/Addshopitem.svelte";
   <main data-theme="dark" class="bg-base-300">
     <Navtop />
     <div class="container mx-auto text-center h-[100dvh]">
-      <DevDashboard client:visible />
+      <DevDashboard />
       <!-- <Sandbox /> -->
       <!-- <Sandbox3 client:only /> -->
       <div class="pt-4"></div>
@@ -45,9 +45,9 @@ import AddshopItemBox from "../sections/admin/components/Addshopitem.svelte";
         <!-- <DevDashboard /> -->
       </div>
     </div>
-    <ShopItemBox client:visible />
+    <ShopItemBox client:only="svelte" />
     <RedeemCodesBox client:only="svelte" />
-    <AddshopItemBox client:visible />
+    <AddshopItemBox client:only="svelte" />
   </main>
 
 

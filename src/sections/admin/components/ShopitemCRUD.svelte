@@ -213,7 +213,7 @@
       class="btn btn-sm btn-error absolute right-2 top-2"
       on:click={removeshopitem}>ลบไอเทม</button
     >
-    <div class="lg:grid lg:grid-cols-2 justify-center gap-2 mx-2">
+    <div class="lg:grid lg:grid-cols-2 justify-center gap-2">
       {#if selectedItem != null && selectedItem.length > 0}
         <div>
           <!-- svelte-ignore a11y-img-redundant-alt -->
@@ -246,7 +246,7 @@
             />
 
             <textarea
-              class="textarea w-full input-info mt-2"
+              class="textarea w-full input-info mt-2 h-40"
               placeholder="Description"
               bind:value={selectedItem[0].description}
             />
@@ -344,7 +344,6 @@
                       bind:value={command.rcon_command}
                     />
                     <div class="flex justify-between">
-                      แสดงคำสั่ง
                       <input
                         type="checkbox"
                         class="toggle toggle-lg"

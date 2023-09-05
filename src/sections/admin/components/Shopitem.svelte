@@ -38,11 +38,27 @@
     isEditMode = false;
     shopItemsController.addShopItem();
   }
+  let searchQuery = "";
 </script>
 
 <dialog id="Shopitem" class="modal">
   <form method="dialog" class="modal-box text-center max-w-7xl">
-    <h3 class="font-bold text-4xl">Shopitem</h3>
+    <h3 class="font-bold text-4xl"><i class="fa-solid fa-tag" /> Shopitem</h3>
+    <div class="join">
+      <input
+        type="text"
+        placeholder="ค้นหาไอเทม"
+        class="input input-bordered w-full max-w-xs join-item"
+        bind:value={searchQuery}
+      />
+      <span
+        aria-hidden="true"
+        class="btn btn-error join-item rounded-r-full"
+        on:click={() => {
+          searchQuery = "";
+        }}>ล้าง</span
+      >
+    </div>
     {#if dataLoaded}
       <div class="overflow-x-auto overscroll-y-auto h-96">
         <table class="table">
@@ -54,7 +70,11 @@
             </tr>
           </thead>
           <tbody>
-            {#each shopItemsController.shopitems.slice(0, 50) as item (item.id)}
+            {#each shopItemsController.shopitems
+              .filter((item) => item.name
+                  .toLowerCase()
+                  .includes(searchQuery.toLowerCase()))
+              .slice(0, 15) as item (item.id)}
               <tr>
                 {#each shopItemsController.tableHeaders as header}
                   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->

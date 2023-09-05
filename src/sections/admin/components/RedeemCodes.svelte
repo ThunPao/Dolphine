@@ -1,37 +1,18 @@
 <script lang="ts">
   import type { RedeemCode } from "../../../models/redeemcodes";
-  import { writable } from "svelte/store";
-  import { apiurl } from "../../../services/apiurl";
   import { onMount } from "svelte";
   import CRUDModal from "./RedeemcodeCRUD.svelte";
-  import { redeemcodesStore } from "../../../controllers/adminController";
+  import {
+    redeemcodesStore,
+    redeemcodeController,
+  } from "../../../controllers/adminController";
 
   let tableHeaders: (keyof RedeemCode)[] = [];
   let selectedItem: RedeemCode[] = [];
   let isEditMode: boolean;
-  // Create a writable store for redeemcodes
-  // const redeemcodesStore = writable<RedeemCode[]>([]);
 
-  async function fetchRedeemCodes() {
-    try {
-      const response = await fetch(apiurl + "crudRedeem");
-      const data = await response.json();
-      // Filter the data to include only the required fields
-      const filteredData: RedeemCode[] = data.map((item: RedeemCode) => ({
-        id: item.id,
-        code: item.code,
-        toggle_status: item.toggle_status,
-        uses_limit: item.uses_limit,
-        uses_count: item.uses_count,
-        expires_at: item.expires_at,
-        commands: item.commands,
-      }));
-      redeemcodesStore.set(filteredData);
-      tableHeaders = Object.keys(data[0]) as (keyof RedeemCode)[];
-    } catch (error) {
-      console.error("Error fetching redeem codes:", error);
-    }
-  }
+  // Create a writable store for redeemcodes
+  tableHeaders = ["code", "commands"];
 
   function AddRedeemCode() {
     selectedItem = [
@@ -58,15 +39,34 @@
     RedeemCodeForm.showModal();
   }
 
+  let searchQuery = "";
+
   onMount(async () => {
-    await fetchRedeemCodes();
+    await redeemcodeController.fetchRedeemCodes();
   });
   // Fetch redeem codes when the component is mounted
 </script>
 
 <dialog id="RedeemCodes" class="modal">
   <form method="dialog" class="modal-box text-center max-w-7xl">
-    <h3 class="font-bold text-4xl">Redeem Code</h3>
+    <h3 class="font-bold text-4xl mb-2">
+      <i class="fa-solid fa-barcode" /> Redeem Code
+    </h3>
+    <div class="join">
+      <input
+        type="text"
+        placeholder="ค้นหาโค๊ด"
+        class="input input-bordered w-full max-w-xs join-item"
+        bind:value={searchQuery}
+      />
+      <span
+        aria-hidden="true"
+        class="btn btn-error join-item rounded-r-full"
+        on:click={() => {
+          searchQuery = "";
+        }}>ล้าง</span
+      >
+    </div>
     <div class="overflow-x-auto overscroll-y-auto h-96">
       <table class="table">
         <thead>
@@ -77,7 +77,11 @@
           </tr>
         </thead>
         <tbody>
-          {#each $redeemcodesStore as item (item.code)}
+          {#each $redeemcodesStore
+            .filter((item) => item.code
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase()))
+            .slice(0, 15) as item (item.code)}
             <tr>
               {#each tableHeaders as header}
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
