@@ -1,42 +1,14 @@
 <script lang="ts">
   import type { RedeemCode } from "@models/redeemcodes";
   import { apiurl } from "@services/apiurl";
-  import flatpickr from "flatpickr";
   import "flatpickr/dist/flatpickr.min.css";
-  import { onMount, afterUpdate, tick } from "svelte";
+  import { onMount, tick } from "svelte";
   import { redeemcodesStore } from "@controllers/adminController";
 
   let toggles = false;
 
   export let selectedItem: RedeemCode[] = [];
   export let EditMode: boolean = false;
-
-  afterUpdate(() => {
-    initializeFlatpickr();
-  });
-  let flatpickr_loaded = false;
-  function initializeFlatpickr() {
-    // const dateInput = document.querySelector(".date-input") as HTMLInputElement;
-    const dateInput = document.getElementById("date-input") as HTMLInputElement;
-    const dialog = document.getElementById(
-      "RedeemCodeForm"
-    ) as HTMLInputElement;
-    if (!flatpickr_loaded) {
-      if (dateInput) {
-        // @ts-ignore
-        flatpickr(dateInput, {
-          enableTime: true,
-          dateFormat: "Y-m-d H:i",
-          appendTo: dialog,
-          defaultDate:
-            selectedItem[0] && selectedItem[0].expires_at
-              ? new Date(selectedItem[0].expires_at)
-              : null,
-        });
-        flatpickr_loaded = true;
-      }
-    }
-  }
 
   function handleToggles() {
     toggles = !toggles;
@@ -243,21 +215,11 @@
             </label>
             วันที่หมดอายุ
             <input
-              id="date-input"
-              type="text"
-              class="input"
-              placeholder="Select a date and time"
-              bind:value={selectedItem[0].expires_at}
-              readonly
-            />
-            <input
               type="datetime-local"
               class="input"
               placeholder="Select a date and time"
               bind:value={selectedItem[0].expires_at}
-              readonly
             />
-            {selectedItem[0].expires_at}
             <h2 class="text-center font-bold text-lg mb-2">จัดการคำสั่ง</h2>
             {#each selectedItem[0].commands as command, index (index)}
               <div class="grid lg:flex gap-1">
