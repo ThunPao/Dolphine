@@ -5,6 +5,12 @@ import type { ShopItem } from "@models/shopitems";
 import { writable } from "svelte/store";
 export const redeemcodesStore = writable<RedeemCode[]>([]);
 
+export function formatDatetime(datetime: string) {
+  const date = new Date(datetime);
+  const formattedDate = date.toISOString().slice(0, 16);
+  return formattedDate;
+}
+
 export const shopItemsController = {
   shopitems: [] as ShopItem[],
   tableHeaders: [] as (keyof ShopItem)[],

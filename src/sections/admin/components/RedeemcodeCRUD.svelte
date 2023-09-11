@@ -1,8 +1,6 @@
 <script lang="ts">
   import type { RedeemCode } from "@models/redeemcodes";
   import { apiurl } from "@services/apiurl";
-  import "flatpickr/dist/flatpickr.min.css";
-  import { onMount, tick } from "svelte";
   import { redeemcodesStore } from "@controllers/adminController";
 
   let toggles = false;
@@ -140,18 +138,6 @@
       console.error("Error:", error);
     }
   }
-
-  onMount(async () => {
-    initializeFlatpickr();
-    // const dateInput = document.getElementById(
-    //   "RedeemCodeForm"
-    // ) as HTMLInputElement;
-    // flatpickr("#Expiretime", {
-    //   enableTime: true,
-    //   appendTo: dateInput,
-    // });
-    await tick();
-  });
 </script>
 
 <dialog id="RedeemCodeForm" class="modal">

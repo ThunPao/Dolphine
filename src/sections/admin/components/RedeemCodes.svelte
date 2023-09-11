@@ -5,6 +5,7 @@
   import {
     redeemcodesStore,
     redeemcodeController,
+    formatDatetime,
   } from "@controllers/adminController";
 
   let tableHeaders: (keyof RedeemCode)[] = [];
@@ -32,10 +33,25 @@
     //@ts-ignore
     RedeemCodeForm.showModal();
   }
+
   function EditRedeemCode(item: RedeemCode) {
-    selectedItem = [item];
+    // selectedItem = [item];
+    selectedItem = [
+      {
+        id: item.id,
+        code: item.code,
+        toggle_status: item.toggle_status,
+        expires_at: item.expires_at
+          ? formatDatetime(String(item.expires_at))
+          : null,
+        uses_limit: item.uses_limit,
+        uses_count: item.uses_count,
+        commands: item.commands,
+        created_at: item.created_at,
+        updated_at: item.updated_at,
+      },
+    ];
     isEditMode = true;
-    console.log(selectedItem);
     //@ts-ignore
     RedeemCodeForm.showModal();
   }

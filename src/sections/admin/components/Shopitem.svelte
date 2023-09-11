@@ -1,6 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { shopItemsController } from "@controllers/adminController";
+  import {
+    shopItemsController,
+    formatDatetime,
+  } from "@controllers/adminController";
   import ShopModal from "./ShopitemCRUD.svelte";
   import type { ShopItem } from "@models/shopitems";
   let dataLoaded = false;
@@ -13,7 +16,26 @@
   let isEditMode: boolean;
 
   function EditShopItem(item: ShopItem) {
-    selectedItem = [item];
+    // selectedItem = [item];
+    selectedItem = [
+      {
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        limits: item.limits,
+        buycount: item.buycount,
+        commands: item.commands,
+        point: item.point,
+        href: item.href,
+        sale_date: item.sale_date
+          ? formatDatetime(String(item.sale_date))
+          : null,
+        expired_date: item.expired_date
+          ? formatDatetime(String(item.expired_date))
+          : null,
+        toggled: item.toggled,
+      },
+    ];
     console.log(selectedItem);
     shopItemsController.editShopItem(item);
     isEditMode = true;
