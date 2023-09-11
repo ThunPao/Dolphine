@@ -11,6 +11,7 @@
     "host": "astro preview --host 192.168.1.134"
   },
   "dependencies": {
+    "@astrojs/node": "^6.0.0",
     "@astrojs/svelte": "^4.0.0",
     "@astrojs/tailwind": "^5.0.0",
     "@astrojs/vercel": "^4.0.2",

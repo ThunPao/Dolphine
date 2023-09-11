@@ -7,16 +7,7 @@
   let hello = getCookie("auth");
   import { scale } from "svelte/transition";
   import { quintOut } from "svelte/easing";
-  import flatpickr from "flatpickr";
-  import "flatpickr/dist/flatpickr.min.css";
   import { onMount, tick } from "svelte";
-  onMount(async () => {
-    flatpickr("#Expiretime", {
-      enableTime: true,
-      dateFormat: "Y-m-d H:i",
-    });
-    await tick();
-  });
 
   let expired_date = "2023-12-12T03:20:00.000Z";
 </script>

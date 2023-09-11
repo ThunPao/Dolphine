@@ -78,7 +78,6 @@
 
       <!-- Slider main container -->
       <div id="shopitem-slides" class="keen-slider">
-        <!-- Additional required wrapper -->
         <!-- Slides -->
         {#if $shopitems !== null}
           {#if $shopitems.length > 0}
