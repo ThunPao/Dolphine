@@ -2,13 +2,7 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "paths": {
-      "@services": ["./src/services/*"],
-      "app/*": ["./src/app/*"],
-      "config/*": ["./src/app/_config/*"],
-      "environment/*": ["./src/environments/*"],
-      "shared/*": ["./src/app/_shared/*"],
-      "helpers/*": ["./src/helpers/*"],
-      "tests/*": ["./src/tests/*"]
+      "@services/*": ["./src/services/*"],
     }
   }
 }
