@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { ShopItem } from "../../../models/shopitems";
-  import { apiurl, imgurl } from "../../../services/apiurl";
+  import type { ShopItem } from "@models/shopitems";
+  import { apiurl, imgurl } from "@services/apiurl";
   export let selectedItem: ShopItem[] = [];
   export let EditMode: boolean = false;
 

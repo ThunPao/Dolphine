@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { shopItemsController } from "../../../controllers/adminController";
+  import { shopItemsController } from "@controllers/adminController";
   import ShopModal from "./ShopitemCRUD.svelte";
-  import type { ShopItem } from "../../../models/shopitems";
+  import type { ShopItem } from "@models/shopitems";
   let dataLoaded = false;
 
   onMount(async () => {

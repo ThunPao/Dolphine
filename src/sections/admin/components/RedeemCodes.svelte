@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { RedeemCode } from "../../../models/redeemcodes";
-  import { onMount, tick } from "svelte";
+  import type { RedeemCode } from "@models/redeemcodes";
+  import { onMount } from "svelte";
   import CRUDModal from "./RedeemcodeCRUD.svelte";
   import {
     redeemcodesStore,
     redeemcodeController,
-  } from "../../../controllers/adminController";
+  } from "@controllers/adminController";
 
   let tableHeaders: (keyof RedeemCode)[] = [];
   let selectedItem: RedeemCode[] = [];
@@ -35,6 +35,7 @@
   function EditRedeemCode(item: RedeemCode) {
     selectedItem = [item];
     isEditMode = true;
+    console.log(selectedItem);
     //@ts-ignore
     RedeemCodeForm.showModal();
   }

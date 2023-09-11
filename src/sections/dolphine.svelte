@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { apiurl } from "../services/apiurl";
+  import { apiurl } from "@services/apiurl";
   import Swal from "sweetalert2";
   import {
     blogsvip,

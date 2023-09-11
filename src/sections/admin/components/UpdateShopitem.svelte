@@ -1,5 +1,5 @@
 <script>
-  import { apiurl } from "../../../services/apiurl";
+  import { apiurl } from "@services/apiurl";
 
   let name = "";
   let description = "";

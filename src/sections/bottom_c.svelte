@@ -1,7 +1,7 @@
 <script>
   import Profile from "../components/profileinfo.svelte";
   import Fastmenu from "../components/fastmenu.svelte";
-  import { setCookie, getCookie, clearCookie } from "../services/cookies.js";
+  import { setCookie, getCookie, clearCookie } from "@services/cookies.js";
   import { writable } from "svelte/store";
 
   // const terms = getCookie("terms");
@@ -116,7 +116,7 @@
     >
   </div>
 </footer>
-<Fastmenu/>
+<Fastmenu />
 
 {#if !$isTerms}
   <div class="alert sticky bottom-28 md:bottom-0">

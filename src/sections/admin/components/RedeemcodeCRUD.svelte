@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { RedeemCode } from "../../../models/redeemcodes";
-  import { apiurl } from "../../../services/apiurl";
+  import type { RedeemCode } from "@models/redeemcodes";
+  import { apiurl } from "@services/apiurl";
   import flatpickr from "flatpickr";
   import "flatpickr/dist/flatpickr.min.css";
   import { onMount, afterUpdate, tick } from "svelte";
-  import { redeemcodesStore } from "../../../controllers/adminController";
+  import { redeemcodesStore } from "@controllers/adminController";
 
   let toggles = false;
 
@@ -257,6 +257,7 @@
               bind:value={selectedItem[0].expires_at}
               readonly
             />
+            {selectedItem[0].expires_at}
             <h2 class="text-center font-bold text-lg mb-2">จัดการคำสั่ง</h2>
             {#each selectedItem[0].commands as command, index (index)}
               <div class="grid lg:flex gap-1">

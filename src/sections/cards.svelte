@@ -2,13 +2,13 @@
   // const cardimg = "https://via.placeholder.com/464x387";
   import Shopcard from "../components/Shopitem.svelte";
   import MockupCard from "../components/Mockup_card.svelte";
-  import { getshopitems, shopitems } from "../services/ShopController";
+  import { getshopitems, shopitems } from "@services/ShopController";
   import Tabs from "../components/Tabs.svelte";
   import { onMount, tick, afterUpdate } from "svelte";
   import KeenSlider from "keen-slider";
   import "keen-slider/keen-slider.min.css";
-  import { imgurl } from "../services/apiurl";
-  import { updateDateDiff } from "../services/Playdate";
+  import { imgurl } from "@services/apiurl";
+  import { updateDateDiff } from "@services/Playdate";
 
   const defaultimg = imgurl + "default.webp";
 
