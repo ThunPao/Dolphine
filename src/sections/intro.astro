@@ -26,7 +26,7 @@ const raw = { online: false, players: [{ online: 0 }] };
         .then(function () {
           Swal.fire({
             title: "คัดลอกลิงค์ " + txt + " สำเร็จ",
-            icon: "success",
+            icon: "info",
             timer: 3000,
             timerProgressBar: true,
           });
@@ -65,23 +65,26 @@ const raw = { online: false, players: [{ online: 0 }] };
                   <p>ออนไลน์ {raw.players.online} ผู้เล่น</p>
                 )}
               </span>
-              <div class="grid place-items-center">
+              <div class="grid place-items-center mb-2 gap-2">
                 <p class="mb-5 text-5xl font-bold text-white">Dolphine</p>
+                <div class="join">
+                  <button
+                    type="button"
+                    class="font-bold"
+                    id="copable"
+                    title="คัดลอกIP"
+                  >
+                    Play.Dolphine.Online
+                  </button>
+                  🐬
+                </div>
               </div>
             </div>
           ) : (
             <div class="indicator">
               <span class="indicator-item badge badge-secondary">ออฟไลน์</span>
-              <div class="grid place-items-center mb-2 gap-2">
+              <div class="grid place-items-center mb-4 gap-2">
                 <p class="text-5xl font-bold text-white">Dolphine</p>
-                <button
-                  type="button"
-                  class="font-bold copable"
-                  id="copable"
-                  title="คัดลอกIP"
-                >
-                  Play.Dolphine.Online
-                </button>
               </div>
             </div>
           )
