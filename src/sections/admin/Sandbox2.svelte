@@ -5,9 +5,9 @@
   let value = 0;
   import { getCookie, setCookie } from "@services/cookies";
   let hello = getCookie("auth");
-  import { scale } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
-  import { onMount, tick } from "svelte";
+  // import { scale } from "svelte/transition";
+  // import { quintOut } from "svelte/easing";
+  // import { onMount, tick } from "svelte";
 
   let expired_date = "2023-12-12T03:20:00.000Z";
 </script>
@@ -19,7 +19,14 @@
   bind:value={expired_date}
   readonly
 />
-<div class="btn btn-secondary" on:click={setCookie("auth", "hellowa", 30)}>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div
+  class="btn btn-secondary"
+  on:click={() => {
+    setCookie("auth", "hellowa", 30);
+  }}
+>
   SET
 </div>
 
