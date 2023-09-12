@@ -7,7 +7,49 @@ let logoimg = "images/dpchan.webp";
 // ).then((response) => response.json());
 const raw = {"online":false,"players":[{"online":0}]};
 ---
+<script>
+function copyTextInsideClass(className: string) {
+  const elements = document.getElementsByClassName(className);
 
+  if (elements.length > 0) {
+    const textToCopy = elements[0].textContent || '';
+
+    if ('clipboard' in navigator) {
+      // Use the Clipboard API if available
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert('คัดลอกแล้ว!');
+        })
+        .catch((err) => {
+          console.error('Failed to copy text: ', err);
+        });
+    } else {
+      // Fallback for browsers that do not support the Clipboard API
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopy;
+      document.body.appendChild(textarea);
+
+      textarea.select();
+      document.execCommand('copy');
+
+      document.body.removeChild(textarea);
+      alert('Text copied to clipboard');
+    }
+  } else {
+    console.error(`No elements with class '${className}' found.`);
+  }
+}
+
+// Example usage
+const className = 'copable'; // Change this to the appropriate class name
+const copyButton = document.getElementById('copable'); // Replace with your button's ID or reference
+
+if (copyButton) {
+  copyButton.addEventListener('click', () => {
+    copyTextInsideClass(className);
+  });
+}
+</script>
 <div class="hero min-h-[100dvh] bg-[url('/images/Introbg.webp')]">
   <div class="hero-overlay"></div>
   <div class="w-full h-full"></div>
@@ -43,8 +85,9 @@ const raw = {"online":false,"players":[{"online":0}]};
           ) : (
             <div class="indicator">
               <span class="indicator-item badge badge-secondary">ออฟไลน์</span>
-              <div class="grid place-items-center">
-                <p class="mb-5 text-5xl font-bold text-white">Dolphine</p>
+              <div class="grid place-items-center mb-2 gap-2">
+                <p class="text-5xl font-bold text-white">Dolphine</p>
+                <p class="font-bold copable" id="copable">Play.Dolphine.Online</p>
               </div>
             </div>
           )
