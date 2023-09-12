@@ -136,7 +136,7 @@
                 />
               </button>
 
-              <div class="flex justify-start mr-3 p-3">
+              <div class="flex justify-start mx-3 p-3">
                 {#if $blogdata_p !== null && $blogdata_p.length > 0}
                   <button
                     title="คลิก"
@@ -201,7 +201,7 @@
                   alt={data.title}
                 />
               </button>
-              <div class="flex justify-start mr-3 p-3">
+              <div class="flex justify-start mx-3 p-3">
                 {#if $blogdata_p !== null && $blogdata_p.length > 0}
                   <button
                     title="คลิก"
@@ -239,7 +239,6 @@
           </div>
         {/each}
       {/if}
-
       <!-- End Loop -->
     {/if}
     <!-- {#if !blogs}
