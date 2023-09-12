@@ -6,7 +6,7 @@ let logoimg = "images/dpchan.webp";
 let cookieimg = "images/Cookie.webp";
 let terms = Astro.cookies.get("terms")?.value;
 
-export let Showfooter = false;
+const { Showfooter } = Astro.props;
 // let terms = Astro.cookies.get("terms").value;
 // let terms = false;
 ---
@@ -64,7 +64,7 @@ export let Showfooter = false;
   </button>
 </div>
 {
-  Showfooter ? (
+  Showfooter === "true" ? (
     <footer class="footer p-10 bg-neutral text-neutral-content pb-16">
       <div>
         <div class="avatar">

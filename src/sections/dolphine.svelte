@@ -135,6 +135,7 @@
                   alt={data.title}
                 />
               </button>
+
               <div class="flex justify-start mr-3 p-3">
                 {#if $blogdata_p !== null && $blogdata_p.length > 0}
                   <button
@@ -163,6 +164,7 @@
                   </button>
                 {/if}
                 <!-- blogdata -->
+
                 {#if $blogdata !== null && $blogdata.length > 0}
                   &nbsp;{$blogdata.filter((item) =>
                     item.blogliked.includes(data.id)
