@@ -6,6 +6,6 @@
       "@services/*": ["services/*"],
       "@models/*": ["models/*"],
       "@controllers/*": ["controllers/*"],
-    }
+    },
   }
 }

@@ -6,6 +6,7 @@ let logoimg = "images/dpchan.webp";
 let cookieimg = "images/Cookie.webp";
 let terms = Astro.cookies.get("terms")?.value;
 
+export let Showfooter = false;
 // let terms = Astro.cookies.get("terms").value;
 // let terms = false;
 ---
@@ -26,16 +27,14 @@ let terms = Astro.cookies.get("terms")?.value;
 </script>
 <div class="mt-5"></div>
 <div class="sticky btm-nav md:hidden z-50">
-  <button title="คลิก" class="active">
+  <button title="คลิก" class="active" onclick=`window.location.href = '#top'`>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="h-5 w-5"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      onclick="window.l
-            ochref=('/')"
-              ><path
+      ><path
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"
@@ -64,39 +63,50 @@ let terms = Astro.cookies.get("terms")?.value;
     >
   </button>
 </div>
-<footer class="footer p-10 bg-neutral text-neutral-content pb-16">
-  <div>
-    <div class="avatar">
-      <div class="w-36 rounded-full">
-        <img src={logoimg} alt="" />
+{
+  Showfooter ? (
+    <footer class="footer p-10 bg-neutral text-neutral-content pb-16">
+      <div>
+        <div class="avatar">
+          <div class="w-36 rounded-full">
+            <img src={logoimg} alt="" />
+          </div>
+        </div>
+        <p>Copyright © 2023 - All right reserved</p>
+        <b class="text-cyan-200">Dolphine</b>
+        <p>
+          <i class="fa-solid fa-server" /> The Dolphine are raised by AMD™
+          Ryzen
+        </p>
       </div>
-    </div>
-    <p>Copyright © 2023 - All right reserved</p>
-    <b class="text-cyan-200">Dolphine</b>
-    <p>
-      <i class="fa-solid fa-server"></i> The Dolphine are raised by AMD™ Ryzen
-    </p>
-  </div>
-  <div>
-    <span class="footer-title">ติดตามเราได้ที่</span>
-    <div class="grid grid-flow-col gap-4">
-      <a href="https://discord.gg/Arv42TQvGk" aria-label="ดิส"
-        ><i class="fa-brands fa-discord fa-2xl"></i></a
-      >
-      <a href="#"><i class="fa-brands fa-youtube fa-2xl"></i></a>
-      <a href="#"><i class="fa-brands fa-facebook fa-2xl"></i></a>
-    </div>
-  </div>
-  <div>
-    <iframe
-      class="rounded-xl"
-      title="ดิสคอร์ด"
-      src="https://discord.com/widget?id=1144129073967276042&theme=dark"
-      height="350"
-      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-    ></iframe>
-  </div>
-</footer>
+      <div>
+        <span class="footer-title">ติดตามเราได้ที่</span>
+        <div class="grid grid-flow-col gap-4">
+          <a href="https://discord.gg/Arv42TQvGk" aria-label="ดิส">
+            <i class="fa-brands fa-discord fa-2xl" />
+          </a>
+          <a href="#">
+            <i class="fa-brands fa-youtube fa-2xl" />
+          </a>
+          <a href="#">
+            <i class="fa-brands fa-facebook fa-2xl" />
+          </a>
+        </div>
+      </div>
+      <div>
+        <iframe
+          class="rounded-xl"
+          title="ดิสคอร์ด"
+          src="https://discord.com/widget?id=1144129073967276042&theme=dark"
+          height="350"
+          sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+        />
+      </div>
+    </footer>
+  ) : (
+    <span />
+  )
+}
 
 <!-- <Fastmenu client:media="(max-width: 480px)" /> -->
 <Fastmenu client:only="svelte" />

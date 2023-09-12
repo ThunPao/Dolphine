@@ -1,0 +1,26 @@
+<script>
+  // Wait for the DOM content to be loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    // Delay the removal of the loader to allow the fade-out effect to play
+    setTimeout(() => {
+      const loaderElement = document.getElementById("loader");
+
+      if (loaderElement) {
+        // Apply the fade-out effect by changing the opacity
+        loaderElement.style.opacity = "0";
+
+        // After the fade-out duration, remove the loader by setting innerHTML to empty
+        setTimeout(() => {
+          loaderElement.innerHTML = "";
+        }, 100); // 500ms is the duration of the fade-out effect
+      }
+    }, 200); // Delay the fade-out by 1000ms (1 second) for demonstration
+  });
+</script>
+<div id="loader">
+  <div class="absolute myloader hero bg-neutral w-screen h-[100dvh] z-[99999]">
+    <div class="join">
+      <span class="loading loading-ring loading-lg"></span>
+    </div>
+  </div>
+</div>

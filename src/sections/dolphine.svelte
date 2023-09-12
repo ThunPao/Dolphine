@@ -60,7 +60,7 @@
   onMount(getblogdata);
 </script>
 
-<div class="card bg-base-100 shadow-xl px-2 w-full">
+<div id="top" class="card bg-base-100 shadow-xl px-2 w-full">
   <div class="w-full h-52 md:h-[30rem] relative">
     <div
       class="absolute inset-0 bg-cover bg-top bg-no-repeat"
@@ -104,8 +104,8 @@
     </div>
   </div>
 
-  <div class="flex flex-col w-full mt-3">
-    <div class="grid h-20 card bg-base-100 rounded-box place-items-center" />
+  <div class="flex flex-col w-full mt-3 mb-16">
+    <!-- <div class="grid h-20 card bg-base-100 rounded-box place-items-center" /> -->
   </div>
 </div>
 <div class="container mx-auto justify-center mt-4 grid grid-flow-row gap-4">
@@ -135,12 +135,7 @@
                   alt={data.title}
                 />
               </button>
-              <div class="flex justify-end mr-3 p-3">
-                <!-- blogdata -->
-                {#if $blogdata !== null && $blogdata.length > 0}
-                  {$blogdata.filter((item) => item.blogliked.includes(data.id))
-                    .length} Likes &nbsp;
-                {/if}
+              <div class="flex justify-start mr-3 p-3">
                 {#if $blogdata_p !== null && $blogdata_p.length > 0}
                   <button
                     title="คลิก"
@@ -166,6 +161,12 @@
                   <button title="คลิก" on:click={notlogin} class="text-2xl">
                     <i class="fa-regular fa-heart active:animate-ping" />
                   </button>
+                {/if}
+                <!-- blogdata -->
+                {#if $blogdata !== null && $blogdata.length > 0}
+                  &nbsp;{$blogdata.filter((item) =>
+                    item.blogliked.includes(data.id)
+                  ).length} Likes
                 {/if}
               </div>
             </button>
@@ -198,13 +199,7 @@
                   alt={data.title}
                 />
               </button>
-              <div class="flex justify-end mr-3 p-3">
-                <!-- blogdata -->
-                {#if $blogdata !== null && $blogdata.length > 0}
-                  {$blogdata.filter((item) => item.blogliked.includes(data.id))
-                    .length} Likes &nbsp;
-                {/if}
-
+              <div class="flex justify-start mr-3 p-3">
                 {#if $blogdata_p !== null && $blogdata_p.length > 0}
                   <button
                     title="คลิก"
@@ -231,12 +226,28 @@
                     <i class="fa-regular fa-heart active:animate-ping" />
                   </button>
                 {/if}
+                <!-- blogdata -->
+                {#if $blogdata !== null && $blogdata.length > 0}
+                  &nbsp;{$blogdata.filter((item) =>
+                    item.blogliked.includes(data.id)
+                  ).length} Likes
+                {/if}
               </div>
             </button>
           </div>
         {/each}
       {/if}
+
       <!-- End Loop -->
     {/if}
+    <!-- {#if !blogs}
+      <div class="card w-full bg-base-100 shadow-xl">
+        <div class="card-body h-64">
+          <h2 class="card-title">Loading</h2>
+
+          <div class="text-sm">Loading...</div>
+        </div>
+      </div>
+    {/if} -->
   </div>
 </div>

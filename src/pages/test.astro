@@ -3,9 +3,10 @@ import Layout from "../layouts/DevTest.astro";
 // import { ViewTransitions } from "astro:transitions";
 // import Testfa from "../sections/test.svelte";
 import Subscribe from "../layouts/Subscribe.astro";
-import Sandbox2 from "../sections/admin/Sandbox2.svelte";
+import Sandbox from "../sections/admin/Sandbox.astro";
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -33,8 +34,15 @@ import Sandbox2 from "../sections/admin/Sandbox2.svelte";
         background-color: #f6f6f6;
       }
       code {
-        font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+        font-family:
+          Menlo,
+          Monaco,
+          Lucida Console,
+          Liberation Mono,
+          DejaVu Sans Mono,
+          Bitstream Vera Sans Mono,
+          Courier New,
+          monospace;
       }
     </style>
     <!-- <Layout>
@@ -42,6 +50,7 @@ import Sandbox2 from "../sections/admin/Sandbox2.svelte";
         <Subscribe />
       </header>
     </Layout> -->
-    <Sandbox2 client:only="svelte" />
+    <!-- <Sandbox2 client:only="svelte" /> -->
+    <Sandbox />
   </body>
 </html>

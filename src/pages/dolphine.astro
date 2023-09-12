@@ -3,9 +3,10 @@ import "../styles/base.scss";
 import DPSection from "../sections/dolphine.svelte";
 import Navbar from "../sections/top.svelte";
 import Btm from "../sections/bottom.astro";
+import Loader from "sections/admin/components/Loader.astro";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,10 +31,11 @@ import Btm from "../sections/bottom.astro";
   >
 
   <main data-theme="dark" class="bg-base-300">
-    <Navbar client:only="svelte"  />
+    <Loader />
 
+    <Navbar client:only="svelte" />
     <DPSection client:only="svelte" />
-    <Btm />
+    <Btm footer=false />
   </main>
 
 
