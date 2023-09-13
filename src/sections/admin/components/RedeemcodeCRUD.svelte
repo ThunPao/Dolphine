@@ -3,11 +3,11 @@
   import { apiurl } from "@services/apiurl";
   import { redeemcodesStore } from "@controllers/adminController";
   import { getCookie } from "@services/cookiemanager";
+  const token = getCookie("blyatnakuy");
   let toggles = false;
 
   export let selectedItem: RedeemCode[] = [];
   export let EditMode: boolean = false;
-  const token = getCookie("blyatnakuy");
 
   function handleToggles() {
     toggles = !toggles;

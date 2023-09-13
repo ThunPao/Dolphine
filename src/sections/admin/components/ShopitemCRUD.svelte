@@ -3,7 +3,8 @@
   import { apiurl, imgurl } from "@services/apiurl";
   export let selectedItem: ShopItem[] = [];
   export let EditMode: boolean = false;
-
+  import { getCookie } from "@services/cookiemanager";
+  const token = getCookie("blyatnakuy");
   let limitedsale = false;
   // let limits: number | null = null;
   let image: File | null = null;
@@ -75,6 +76,7 @@
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ commands: selectedItem[0].commands }),
       });
@@ -115,6 +117,9 @@
     try {
       const response = await fetch(apiurl + "shopitems/" + selectedItem[0].id, {
         method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       });
       const data = await response.json();
