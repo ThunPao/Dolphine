@@ -48,100 +48,106 @@
   }
 
   async function handleSubmit() {
-    const requestData = {
-      code: selectedItem[0].code,
-      toggle_status: selectedItem[0].toggle_status,
-      uses_limit: selectedItem[0].uses_limit,
-      expires_at: String(selectedItem[0].expires_at),
-      commands: selectedItem[0].commands,
-    };
-    try {
-      const response = await fetch(
-        apiurl + "crudRedeem/" + selectedItem[0].id,
-        {
-          method: "PUT",
+    if (token) {
+      const requestData = {
+        code: selectedItem[0].code,
+        toggle_status: selectedItem[0].toggle_status,
+        uses_limit: selectedItem[0].uses_limit,
+        expires_at: String(selectedItem[0].expires_at),
+        commands: selectedItem[0].commands,
+      };
+      try {
+        const response = await fetch(
+          apiurl + "crudRedeem/" + selectedItem[0].id,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(requestData),
+          }
+        );
+        if (response.ok) {
+          console.log(requestData);
+          // location.reload();
+        } else {
+          console.log(response);
+        }
+        // ... Your implementation ...
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  }
+
+  async function addItem() {
+    if (token) {
+      const requestData = {
+        code: selectedItem[0].code,
+        toggle_status: selectedItem[0].toggle_status,
+        uses_limit: selectedItem[0].uses_limit,
+        expires_at: String(selectedItem[0].expires_at),
+        commands: selectedItem[0].commands,
+      };
+
+      try {
+        const response = await fetch(apiurl + "crudRedeem", {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(requestData),
-        }
-      );
-      if (response.ok) {
-        console.log(requestData);
-        // location.reload();
-      } else {
-        console.log(response);
-      }
-      // ... Your implementation ...
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
-
-  async function addItem() {
-    const requestData = {
-      code: selectedItem[0].code,
-      toggle_status: selectedItem[0].toggle_status,
-      uses_limit: selectedItem[0].uses_limit,
-      expires_at: String(selectedItem[0].expires_at),
-      commands: selectedItem[0].commands,
-    };
-
-    try {
-      const response = await fetch(apiurl + "crudRedeem", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(requestData),
-      });
-
-      if (response.ok) {
-        console.log(requestData);
-        // location.reload();
-
-        const updatedItem = selectedItem[0];
-        redeemcodesStore.update((currentValue: RedeemCode[]) => {
-          // Use map to create a new array with the updated item
-          return currentValue.map((item: RedeemCode) => {
-            // Check if the item matches the updated item by some unique identifier (e.g., id)
-            if (item.id === updatedItem.id) {
-              // Update the item with the new values from updatedItem
-              return updatedItem;
-            }
-            // If the item doesn't match, return it unchanged
-            return item;
-          });
         });
-      } else {
-        console.log(response);
+
+        if (response.ok) {
+          console.log(requestData);
+          // location.reload();
+
+          const updatedItem = selectedItem[0];
+          redeemcodesStore.update((currentValue: RedeemCode[]) => {
+            // Use map to create a new array with the updated item
+            return currentValue.map((item: RedeemCode) => {
+              // Check if the item matches the updated item by some unique identifier (e.g., id)
+              if (item.id === updatedItem.id) {
+                // Update the item with the new values from updatedItem
+                return updatedItem;
+              }
+              // If the item doesn't match, return it unchanged
+              return item;
+            });
+          });
+        } else {
+          console.log(response);
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
     }
   }
 
   async function removeRedeemCode() {
-    try {
-      const redeemCodeId = selectedItem[0].id;
-      console.log(redeemCodeId);
-      const response = await fetch(apiurl + `crudRedeem/${redeemCodeId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.ok) {
-        location.reload();
-      } else {
-        console.log(response);
-      }
+    if (token) {
+      try {
+        const redeemCodeId = selectedItem[0].id;
+        console.log(redeemCodeId);
+        const response = await fetch(apiurl + `crudRedeem/${redeemCodeId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          location.reload();
+        } else {
+          console.log(response);
+        }
 
-      // ... Your implementation ...
-    } catch (error) {
-      console.error("Error:", error);
+        // ... Your implementation ...
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
   }
 </script>
