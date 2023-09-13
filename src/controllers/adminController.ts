@@ -165,6 +165,7 @@ export const shopItemsController = {
 
 export const redeemcodeController = {
   async fetchRedeemCodes() {
+    // if(token){}
     try {
       const response = await fetch(apiurl + "crudRedeem", {
         headers: {
