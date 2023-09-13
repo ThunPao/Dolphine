@@ -12,8 +12,9 @@ export function formatDatetime(datetime: string) {
   const formattedDate = date.toISOString().slice(0, 16);
   return formattedDate;
 }
-export const authController = {
 
+const token = getCookie("blyatnakuy");
+export const authController = {
   async authAdmin(password: string) {
     try {
       const response = await fetch(apiurl + "dpmauth_cykablyatnakuy", {
@@ -47,7 +48,7 @@ export const authController = {
   },
 
   async getAuthadmin() {
-    const token = getCookie("blyatnakuy");
+    // const token = getCookie("blyatnakuy");
     if (token) {
       try {
         const url = apiurl + 'dpminfo_cykablyatnakuy';
@@ -91,7 +92,12 @@ export const shopItemsController = {
 
   async getShopItems() {
     try {
-      const response = await fetch(apiurl + "allshopitems");
+      const response = await fetch(apiurl + "allshopitems", {
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (!response.ok) {
         if (response.status === 429) {
           window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
@@ -140,6 +146,10 @@ export const shopItemsController = {
       const shopid = selectedItem[0].id;
       const response = await fetch(apiurl + `shopitems/${shopid}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
+        }
       });
       const data = response.json();
       if (response.ok) {
@@ -156,7 +166,12 @@ export const shopItemsController = {
 export const redeemcodeController = {
   async fetchRedeemCodes() {
     try {
-      const response = await fetch(apiurl + "crudRedeem");
+      const response = await fetch(apiurl + "crudRedeem", {
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const data = await response.json();
       // Filter the data to include only the required fields
       const filteredData: RedeemCode[] = data.map((item: RedeemCode) => ({
