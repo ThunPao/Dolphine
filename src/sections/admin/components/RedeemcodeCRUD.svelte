@@ -199,16 +199,18 @@
                 placeholder="จำกัดการใช้งาน"
                 bind:value={selectedItem[0].uses_limit}
                 class="input input-info w-full mt-2"
-                disabled={!limitedtoggle}
               />
             {/if}
-
             <label class="label cursor-pointer">
               <span class="label-text lg:text-lg">จำกัดการใช้งาน</span>
               <input
                 type="checkbox"
                 class="toggle toggle-secondary toggle-lg"
                 on:change={handleLimited}
+                checked={selectedItem[0].uses_limit &&
+                selectedItem[0].uses_limit > 0
+                  ? true
+                  : false}
               />
             </label>
             วันที่หมดอายุ
