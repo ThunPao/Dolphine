@@ -91,26 +91,28 @@ export const shopItemsController = {
   isEditMode: false,
 
   async getShopItems() {
-    try {
-      const response = await fetch(apiurl + "allshopitems", {
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`
+    if (token) {
+      try {
+        const response = await fetch(apiurl + "allshopitems", {
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) {
+          if (response.status === 429) {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+          }
+          throw new Error("Request failed");
         }
-      });
-      if (!response.ok) {
-        if (response.status === 429) {
-          window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-        }
-        throw new Error("Request failed");
+        const responseData = await response.json();
+        this.shopitems = responseData;
+        // console.log(responseData);
+        // this.tableHeaders = Object.keys(responseData[0]) as (keyof ShopItem)[];
+        this.tableHeaders = ["name", "point", "buycount", "commands"];
+      } catch (error) {
+        console.error(error);
       }
-      const responseData = await response.json();
-      this.shopitems = responseData;
-      // console.log(responseData);
-      // this.tableHeaders = Object.keys(responseData[0]) as (keyof ShopItem)[];
-      this.tableHeaders = ["name", "point", "buycount", "commands"];
-    } catch (error) {
-      console.error(error);
     }
   },
   editShopItem(item: ShopItem) {
@@ -142,56 +144,58 @@ export const shopItemsController = {
   },
 
   async removeshopitem(selectedItem: ShopItem[]) {
-    try {
-      const shopid = selectedItem[0].id;
-      const response = await fetch(apiurl + `shopitems/${shopid}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`
+    if (token) {
+      try {
+        const shopid = selectedItem[0].id;
+        const response = await fetch(apiurl + `shopitems/${shopid}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = response.json();
+        if (response.ok) {
+          location.reload();
+        } else {
+          console.log(data);
         }
-      });
-      const data = response.json();
-      if (response.ok) {
-        location.reload();
-      } else {
-        console.log(data);
+      } catch (error) {
+        console.error("Error:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
     }
   },
 };
 
 export const redeemcodeController = {
   async fetchRedeemCodes() {
-    // if(token){}
-    try {
-      const response = await fetch(apiurl + "crudRedeem", {
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const data = await response.json();
-      // Filter the data to include only the required fields
-      const filteredData: RedeemCode[] = data.map((item: RedeemCode) => ({
-        id: item.id,
-        code: item.code,
-        toggle_status: item.toggle_status,
-        uses_limit: item.uses_limit,
-        uses_count: item.uses_count,
-        expires_at: item.expires_at,
-        commands: item.commands,
-      }));
-      return redeemcodesStore.set(filteredData);
-      // tableHeaders = Object.keys(data[0]) as (keyof RedeemCode)[];
-    } catch (error) {
-      console.error("Error fetching redeem codes:", error);
+    if (token) {
+      try {
+        const response = await fetch(apiurl + "crudRedeem", {
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await response.json();
+        // Filter the data to include only the required fields
+        const filteredData: RedeemCode[] = data.map((item: RedeemCode) => ({
+          id: item.id,
+          code: item.code,
+          toggle_status: item.toggle_status,
+          uses_limit: item.uses_limit,
+          uses_count: item.uses_count,
+          expires_at: item.expires_at,
+          commands: item.commands,
+        }));
+        return redeemcodesStore.set(filteredData);
+        // tableHeaders = Object.keys(data[0]) as (keyof RedeemCode)[];
+      } catch (error) {
+        console.error("Error fetching redeem codes:", error);
+      }
     }
   }
 }
-
 
 
 
