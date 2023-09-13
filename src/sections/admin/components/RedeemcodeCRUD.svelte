@@ -2,11 +2,12 @@
   import type { RedeemCode } from "@models/redeemcodes";
   import { apiurl } from "@services/apiurl";
   import { redeemcodesStore } from "@controllers/adminController";
-
+  import { getCookie } from "@services/cookiemanager";
   let toggles = false;
 
   export let selectedItem: RedeemCode[] = [];
   export let EditMode: boolean = false;
+  const token = getCookie("blyatnakuy");
 
   function handleToggles() {
     toggles = !toggles;
@@ -61,6 +62,7 @@
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(requestData),
         }
@@ -91,6 +93,7 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(requestData),
       });
@@ -126,6 +129,9 @@
       console.log(redeemCodeId);
       const response = await fetch(apiurl + `crudRedeem/${redeemCodeId}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (response.ok) {
         location.reload();
