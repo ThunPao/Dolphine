@@ -141,6 +141,7 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           shop_id: shop_id,
@@ -180,6 +181,9 @@
     try {
       const response = await fetch(apiurl + "shopitems", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       });
       const data = await response.json();
@@ -198,6 +202,9 @@
       const shopid = selectedItem[0].id;
       const response = await fetch(apiurl + `shopitems/${shopid}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       const data = response.json();
       if (response.ok) {
