@@ -3,12 +3,84 @@ import type { RedeemCode } from "@models/redeemcodes";
 import { apiurl } from "@services/apiurl";
 import type { ShopItem } from "@models/shopitems";
 import { writable } from "svelte/store";
+import Swal from "sweetalert2";
 export const redeemcodesStore = writable<RedeemCode[]>([]);
+import { setCookie, getCookie } from "@services/cookiemanager";
 
 export function formatDatetime(datetime: string) {
   const date = new Date(datetime);
   const formattedDate = date.toISOString().slice(0, 16);
   return formattedDate;
+}
+export const authController = {
+
+  async authAdmin(password: string) {
+    try {
+      const response = await fetch(apiurl + "dpmauth_cykablyatnakuy", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      if (!response.ok) {
+        Swal.fire(
+          'เข้าสู่ระบบไม่สำเร็จ',
+        )
+        if (response.status === 429) {
+          window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
+        throw new Error("Request failed");
+      } else {
+        // Swal.fire(
+        //   'เข้าสู่ระบบสำเร็จ',
+        // )
+        location.reload();
+      }
+      const responseData = await response.json();
+      const token = responseData.token; // Assuming the token is in the JSON response
+      return setCookie('blyatnakuy', token, 7);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  async getAuthadmin() {
+    const token = getCookie("blyatnakuy");
+    if (token) {
+      try {
+        const url = apiurl + 'dpminfo_cykablyatnakuy';
+        const response = await fetch(url, {
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          if (token) {
+            Swal.fire({
+              title: 'TOKEN EXPIRED!',
+              icon: 'error',
+              timer: 2000,
+              timerProgressBar: true,
+            });
+          }
+          return false;
+        }
+
+        // If the response is OK, return true directly
+        return true;
+      } catch (error: any) {
+        console.error("Error:", error.message);
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
 }
 
 export const shopItemsController = {
@@ -30,7 +102,7 @@ export const shopItemsController = {
       this.shopitems = responseData;
       // console.log(responseData);
       // this.tableHeaders = Object.keys(responseData[0]) as (keyof ShopItem)[];
-  this.tableHeaders = ["name", "point", "buycount","commands"];
+      this.tableHeaders = ["name", "point", "buycount", "commands"];
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +110,7 @@ export const shopItemsController = {
   editShopItem(item: ShopItem) {
     this.selectedItem = [item];
     this.isEditMode = true;
-        // @ts-ignore
+    // @ts-ignore
     ShopitemForm.showModal();
   },
 
@@ -59,8 +131,8 @@ export const shopItemsController = {
     //   },
     // ];
     // this.isEditMode = false;
-            // @ts-ignore
-            ShopitemForm.showModal();
+    // @ts-ignore
+    ShopitemForm.showModal();
   },
 
   async removeshopitem(selectedItem: ShopItem[]) {

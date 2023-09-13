@@ -60,7 +60,7 @@
   onMount(getblogdata);
 </script>
 
-<div id="top" class="card bg-base-100 shadow-xl px-2 w-full">
+<div id="top" class="card bg-base-100 shadow-xl w-full">
   <div class="w-full h-52 md:h-[30rem] relative">
     <div
       class="absolute inset-0 bg-cover bg-top bg-no-repeat"
@@ -113,7 +113,7 @@
     {#if blogvipstate == false}
       <!-- Begin Loop -->
       {#if blogs !== null && blogs.length > 0}
-        {#each blogs as data, index}
+        {#each blogs as data}
           <div class="card w-full bg-base-100 shadow-xl">
             <div class="card-body">
               <h2 class="card-title">{data.title}</h2>
