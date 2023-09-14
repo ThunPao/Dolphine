@@ -164,39 +164,34 @@
       </div>
     {/if} -->
   {:else}
-    <p>ไม่พบไอเทม</p>
+    <div class="h-96 flex justify-center items-center">
+      <span class="text-4xl">ไม่พบไอเทม</span>
+    </div>
   {/if}
-{:else}
+{:else if $shopitems !== null && $shopitems.length > 0}
   <div
     class="grid gap-2 xl:grid-rows-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 p-1 overscroll-y-auto"
   >
-    {#if $shopitems !== null && $shopitems.length > 0}
-      {#each $shopitems.filter(filterShopItems).slice(0, 18) as data}
-        <Shopcard
-          display="0"
-          keen="false"
-          id={data.id}
-          name={data.name}
-          href={!data.href ? defaultimg : imgurl + data.href}
-          buycount={data.buycount}
-          point={data.point}
-          limits={data.limits}
-          description={data.description}
-          title={data.titles}
-          sale_date={data.sale_date}
-          expired_date={data.expired_date}
-          dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
-        />
-      {/each}
-      <!-- {#if $shopitems.filter(filterShopItems).length === 0}
-        <div class="h-96 flex justify-center items-center">
-          <span class="text-4xl">ไม่พบไอเทม</span>
-        </div>
-      {/if} -->
-    {:else}
-      <div class="h-96 flex justify-center items-center">
-        <span class="text-4xl">ไม่พบไอเทม</span>
-      </div>
-    {/if}
+    {#each $shopitems.filter(filterShopItems).slice(0, 18) as data}
+      <Shopcard
+        display="0"
+        keen="false"
+        id={data.id}
+        name={data.name}
+        href={!data.href ? defaultimg : imgurl + data.href}
+        buycount={data.buycount}
+        point={data.point}
+        limits={data.limits}
+        description={data.description}
+        title={data.titles}
+        sale_date={data.sale_date}
+        expired_date={data.expired_date}
+        dateDiff={updateDateDiff(data.sale_date, data.expired_date)}
+      />
+    {/each}
+  </div>
+{:else}
+  <div class="h-96 flex justify-center items-center">
+    <span class="text-4xl">ไม่พบไอเทม</span>
   </div>
 {/if}
