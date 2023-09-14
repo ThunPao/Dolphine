@@ -1,13 +1,26 @@
 <script lang="ts">
   import { onMount } from "svelte";
+
   let isAuth: boolean = false;
   let authpwd = "";
-  import { authController } from "@controllers/adminController";
+  import {
+    authController,
+    playerController,
+    redeemcodesStore,
+    shopitemStore,
+    playerStore,
+    topupController,
+    topupList,
+  } from "@controllers/adminController";
   async function checkAuth() {
     isAuth = await authController.getAuthadmin();
   }
   onMount(() => {
     checkAuth();
+  });
+  onMount(async () => {
+    await playerController.fetchPlayers();
+    await topupController.getTopuplist();
   });
 </script>
 
@@ -51,8 +64,12 @@
         >
       </div>
       <div class="stat-title">ยอดการเติมเงิน</div>
-      <div class="stat-value">31K</div>
-      <div class="stat-desc">Jan 1st - Feb 1st</div>
+      <div class="stat-value">
+        {$topupList.reduce((total, item) => total + item.topup_amount, 0)}
+      </div>
+      <div class="stat-desc">
+        {$topupList.reduce((total, item) => total + item.topup_point, 0)} DP
+      </div>
     </div>
 
     <div class="stat">
@@ -71,8 +88,8 @@
         >
       </div>
       <div class="stat-title">ไอดีผู้เล่น</div>
-      <div class="stat-value">4,200</div>
-      <div class="stat-desc">↗︎ 400 (22%)</div>
+      <div class="stat-value">{$playerStore.length}</div>
+      <!-- <div class="stat-desc">↗︎ 400 (22%)</div> -->
     </div>
     <div class="stat" onclick="Shopitem.showModal()">
       <div class="stat-figure text-secondary">
@@ -90,8 +107,8 @@
         >
       </div>
       <div class="stat-title">สินค้า</div>
-      <div class="stat-value">1,200</div>
-      <div class="stat-desc">↘︎ 90 (14%)</div>
+      <div class="stat-value">{$shopitemStore.length}</div>
+      <!-- <div class="stat-desc">↘︎ 90 (14%)</div> -->
     </div>
     <div class="stat" onclick="RedeemCodes.showModal()">
       <div class="stat-figure text-secondary">
@@ -109,7 +126,7 @@
         >
       </div>
       <div class="stat-title">รหัสแลกรับ</div>
-      <div class="stat-value">1,200</div>
+      <div class="stat-value">{$redeemcodesStore.length}</div>
       <div class="stat-desc">↘︎ 90 (14%)</div>
     </div>
   </div>

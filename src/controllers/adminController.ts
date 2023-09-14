@@ -1,11 +1,17 @@
 // admincontroller.ts
 import type { RedeemCode } from "@models/redeemcodes";
-import { apiurl } from "@services/apiurl";
 import type { ShopItem } from "@models/shopitems";
+import type { PlayerModel } from "@models/players";
+import { apiurl } from "@services/apiurl";
 import { writable } from "svelte/store";
 import Swal from "sweetalert2";
 export const redeemcodesStore = writable<RedeemCode[]>([]);
-import { setCookie, getCookie } from "@services/cookiemanager";
+export const shopitemStore = writable<ShopItem[]>([]);
+export const playerStore = writable<PlayerModel[]>([]);
+export const topupList = writable<TopupList[]>([]);
+
+
+import { setCookie, getCookie, clearCookie } from "@services/cookiemanager";
 
 export function formatDatetime(datetime: string) {
   const date = new Date(datetime);
@@ -61,12 +67,14 @@ export const authController = {
 
         if (!response.ok) {
           if (token) {
-            Swal.fire({
-              title: 'TOKEN EXPIRED!',
-              icon: 'error',
-              timer: 2000,
-              timerProgressBar: true,
-            });
+            // Swal.fire({
+            //   title: 'TOKEN EXPIRED!',
+            //   icon: 'error',
+            //   timer: 2000,
+            //   timerProgressBar: true,
+            // });
+            clearCookie("blyatnakuy");
+            location.reload();
           }
           return false;
         }
@@ -110,6 +118,8 @@ export const shopItemsController = {
         // console.log(responseData);
         // this.tableHeaders = Object.keys(responseData[0]) as (keyof ShopItem)[];
         this.tableHeaders = ["name", "point", "buycount", "commands"];
+        return shopitemStore.set(responseData);
+
       } catch (error) {
         console.error(error);
       }
@@ -197,5 +207,43 @@ export const redeemcodeController = {
   }
 }
 
+export const playerController = {
+  async fetchPlayers() {
+    if (token) {
+      try {
+        const response = await fetch(apiurl + "allplayers", {
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await response.json();
+        return playerStore.set(data);
+        // tableHeaders = Object.keys(data[0]) as (keyof RedeemCode)[];
+      } catch (error) {
+        console.error("Error fetching redeem codes:", error);
+      }
+    }
+  }
+}
+export const topupController = {
 
+  async getTopuplist() {
+    if (token) {
+      try {
+        const response = await fetch(apiurl + "playertopupsumed", {
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await response.json();
+        return topupList.set(data);
+        // tableHeaders = Object.keys(data[0]) as (keyof RedeemCode)[];
+      } catch (error) {
+        console.error("Error fetching redeem codes:", error);
+      }
+    }
+  }
+}
 

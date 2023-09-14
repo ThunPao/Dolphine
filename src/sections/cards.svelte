@@ -164,7 +164,7 @@
       </div>
     {/if} -->
   {:else}
-    <div class="h-96 flex justify-center items-center">
+    <div class="h-96 hero">
       <span class="text-4xl">ไม่พบไอเทม</span>
     </div>
   {/if}
@@ -191,7 +191,7 @@
     {/each}
   </div>
 {:else}
-  <div class="h-96 flex justify-center items-center">
+  <div class="h-96 hero">
     <span class="text-4xl">ไม่พบไอเทม</span>
   </div>
 {/if}
