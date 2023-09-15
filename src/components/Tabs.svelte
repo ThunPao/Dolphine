@@ -105,7 +105,7 @@
                 }}
               >
                 <div class="w-12 rounded-full">
-                  <img alt={data[i]} src={defaultimg} />
+                  <img alt={data.username} src={defaultimg} />
                 </div>
               </div>
             </div>
