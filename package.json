@@ -24,7 +24,7 @@
     "font-awesome": "^4.7.0",
     "gsap": "^3.12.2",
     "install": "^0.13.0",
-    "install-missing": "^1.1.30",
+    "install-missing": "^1.1.52",
     "jwt-decode": "^3.1.2",
     "keen-slider": "^6.8.6",
     "lozad": "^1.16.0",
