@@ -6,7 +6,7 @@
 </script>
 
 {#if mobile === "true"}
-  <div class="join mb-12">
+  <div class="join mb-20">
     <div class="avatar" onclick="fast_menu.showModal()">
       <div class="w-20 rounded-full flex">
         <img
