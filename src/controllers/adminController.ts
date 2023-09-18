@@ -43,7 +43,7 @@ export const authController = {
         // Swal.fire(
         //   'เข้าสู่ระบบสำเร็จ',
         // )
-        location.reload();
+        // location.reload();
       }
       const responseData = await response.json();
       const token = responseData.token; // Assuming the token is in the JSON response
