@@ -28,6 +28,19 @@
   <div class="hero min-h-screen bg-base-200">
     <div class="hero-content text-center">
       <div class="max-w-md">
+          <div class="grid grid-rows-2 grid-flow-col gap-4 justify-start m-4">
+            <div class="row-span-3">
+              <div class="avatar">
+                <div
+                  class="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+                >
+                <img src="images/DPicon.webp" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="col-span-3 text-2xl font-medium pt-4 text-start">Dolphine DevDash</div>
+              <div class="text-md font-bold text-warning">Are you really my manager?</div>
+          </div>
         <div class="join">
           <input
             class="input input-bordered join-item"
@@ -36,7 +49,7 @@
             bind:value={authpwd}
           />
           <button
-            class="btn join-item rounded-r-full"
+            class="btn btn-secondary join-item rounded-r-full"
             on:click={async () => {
               await authController.authAdmin(authpwd);
             }}>ล็อคอิน</button
