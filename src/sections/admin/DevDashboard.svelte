@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  let isAuth: boolean = false;
+  export let isAuth: boolean = false;
   let authpwd = "";
   import {
     authController,
@@ -15,12 +15,12 @@
   async function checkAuth() {
     isAuth = await authController.getAuthadmin();
   }
-  onMount(() => {
-    checkAuth();
+  onMount(async () => {
+    await checkAuth();
   });
   onMount(async () => {
     await playerController.fetchPlayers();
-    await topupController.getTopuplist();
+    await topupController.getTopupall();
   });
 </script>
 
@@ -28,48 +28,47 @@
   <div class="hero min-h-screen bg-base-200">
     <div class="hero-content">
       <div class="max-w-md">
-          <div class="grid grid-rows-2 grid-flow-col gap-4 justify-start m-4">
-            <div class="row-span-3">
-              <div class="avatar">
-                <div
-                  class="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
-                >
-                <img src="images/DPicon.webp" alt="DDD">
-                </div>
+        
+          <div class="join join-vertical justify-center gap-y-2 text-center mb-10">
+            <!-- <div class="avatar">
+              <div
+                class="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+              >
+                <img src="images/DPicon.webp" alt="DDD" />
               </div>
+            </div> -->
+            <div class="text-4xl font-medium">
+              Dolphine DevDash
             </div>
-            <div class="col-span-3 text-2xl font-medium pt-4 text-start">Dolphine DevDash</div>
-              <div class="text-md font-bold text-warning">Are you really my manager?</div>
-          </div>
-          <form>
-
-        <div class="join">
-          <input
-            class="input input-bordered join-item"
-            placeholder="รหัสผ่าน"
-            type="password"
-            bind:value={authpwd}
-          />
-          <button
-            class="btn btn-secondary join-item rounded-r-full"
+            <div class="text-lg font-bold text-warning">
+              Are you really my manager?
+            </div>
+        </div>
+        <!-- <form
+        > -->
+          <div class="join">
+            <input
+              class="input input-bordered join-item"
+              placeholder="รหัสผ่าน"
+              type="password"
+              bind:value={authpwd}
+            />
+            <button
             on:click={async () => {
               await authController.authAdmin(authpwd);
             }}
-            on:submit={async () => {
-              await authController.authAdmin(authpwd);
-            }}
-            >ล็อคอิน</button
-          >
-        </div>
-      </form>
-
+              class="btn btn-secondary join-item rounded-r-full">ล็อคอิน</button
+            >
+          </div>
+        <!-- </form> -->
       </div>
     </div>
   </div>
 {:else}
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <div class="grid grid-cols-2 md:stats shadow">
-    <div class="stat">
+    
+    <div class="stat" onclick="Topuplist.showModal()">
       <div class="stat-figure text-secondary">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +85,7 @@
       </div>
       <div class="stat-title">ยอดการเติมเงิน</div>
       <div class="stat-value">
-        {$topupList.reduce((total, item) => total + item.topup_amount, 0)}
+        {$topupList.reduce((total, item) => total + item.amounts, 0)}
       </div>
       <div class="stat-desc">
         {$topupList.reduce((total, item) => total + item.topup_point, 0)} DP
@@ -150,5 +149,6 @@
       <div class="stat-value">{$redeemcodesStore.length}</div>
       <div class="stat-desc">↘︎ 90 (14%)</div>
     </div>
+    
   </div>
 {/if}
