@@ -1,6 +1,7 @@
 // admincontroller.ts
 import type { RedeemCode } from "@models/redeemcodes";
 import type { ShopItem } from "@models/shopitems";
+import type { TopupRate } from "@models/Topuprate";
 import type { PlayerModel } from "@models/players";
 import type { TopupList } from "@models/Topuplist";
 import { apiurl } from "@services/apiurl";
@@ -10,6 +11,8 @@ export const redeemcodesStore = writable<RedeemCode[]>([]);
 export const shopitemStore = writable<ShopItem[]>([]);
 export const playerStore = writable<PlayerModel[]>([]);
 export const topupList = writable<TopupList[]>([]);
+export const topupRate = writable<TopupRate[]>([]);
+
 
 import { setCookie, getCookie, clearCookie } from "@services/cookiemanager";
 

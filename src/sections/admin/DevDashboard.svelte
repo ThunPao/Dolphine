@@ -22,44 +22,48 @@
     await playerController.fetchPlayers();
     await topupController.getTopupall();
   });
+
+  let tabs = ["ยอดการเติมเงิน", "ประวัติการเติมเงิน", "ไอเทมใหม่"];
+  let activeTabIndex = 0;
+  import TopuprateCRUD from "./components/TopuprateCRUD.svelte";
+  import TopuplistBox from "./components/Topuplist.svelte";
 </script>
 
 {#if !isAuth}
   <div class="hero min-h-screen bg-base-200">
     <div class="hero-content">
       <div class="max-w-md">
-        
-          <div class="join join-vertical justify-center gap-y-2 text-center mb-10">
-            <!-- <div class="avatar">
+        <div
+          class="join join-vertical justify-center gap-y-2 text-center mb-10"
+        >
+          <!-- <div class="avatar">
               <div
                 class="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
               >
                 <img src="images/DPicon.webp" alt="DDD" />
               </div>
             </div> -->
-            <div class="text-4xl font-medium">
-              Dolphine DevDash
-            </div>
-            <div class="text-lg font-bold text-warning">
-              Are you really my manager?
-            </div>
+          <div class="text-4xl font-medium">Dolphine DevDash</div>
+          <div class="text-lg font-bold text-warning">
+            Are you really my manager?
+          </div>
         </div>
         <!-- <form
         > -->
-          <div class="join">
-            <input
-              class="input input-bordered join-item"
-              placeholder="รหัสผ่าน"
-              type="password"
-              bind:value={authpwd}
-            />
-            <button
+        <div class="join">
+          <input
+            class="input input-bordered join-item"
+            placeholder="รหัสผ่าน"
+            type="password"
+            bind:value={authpwd}
+          />
+          <button
             on:click={async () => {
               await authController.authAdmin(authpwd);
             }}
-              class="btn btn-secondary join-item rounded-r-full">ล็อคอิน</button
-            >
-          </div>
+            class="btn btn-secondary join-item rounded-r-full">ล็อคอิน</button
+          >
+        </div>
         <!-- </form> -->
       </div>
     </div>
@@ -67,8 +71,7 @@
 {:else}
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <div class="grid grid-cols-2 md:stats shadow">
-    
-    <div class="stat" onclick="Topuplist.showModal()">
+    <div class="stat">
       <div class="stat-figure text-secondary">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -149,6 +152,24 @@
       <div class="stat-value">{$redeemcodesStore.length}</div>
       <div class="stat-desc">↘︎ 90 (14%)</div>
     </div>
-    
+  </div>
+
+  <div class="container mx-auto">
+    <div class="tabs tabs-boxed justify-center" aria-hidden="true">
+      {#each tabs as tab, index}
+        <span
+          class="tab"
+          aria-hidden="true"
+          on:click={() => (activeTabIndex = index)}
+          class:tab-active={activeTabIndex == index}>{tab}</span
+        >
+      {/each}
+    </div>
+    {#if activeTabIndex == 0}
+      <TopuprateCRUD />
+    {/if}
+    {#if activeTabIndex == 1}
+      <TopuplistBox />
+    {/if}
   </div>
 {/if}

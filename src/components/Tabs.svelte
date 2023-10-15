@@ -46,7 +46,7 @@
   });
 </script>
 
-<div class="tabs d-flex justify-center">
+<div class="tabs justify-center">
   {#each tabs as tab, index}
     <p
       class="tab tab-bordered"

@@ -9,8 +9,6 @@
   tableHeaders = ["playername", "amounts","topup_point","created_at"];
 </script>
 
-<dialog id="Topuplist" class="modal">
-  <form method="dialog" class="modal-box text-center max-w-7xl">
     <h3 class="font-bold text-4xl mb-2">
       <i class="fa-solid fa-barcode" /> ประวัติการเติมเงิน
     </h3>
@@ -60,15 +58,5 @@
         </tbody>
       </table>
     </div>
-    <div class="modal-action">
-      <button
-        aria-hidden="true"
-        class="btn btn-success"
-        
-      >
-        จัดการอัตราการเติมเงิน
-      </button>
-      <button class="btn">Close</button>
-    </div>
-  </form>
-</dialog>
+   
+
