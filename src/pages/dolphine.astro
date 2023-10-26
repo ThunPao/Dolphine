@@ -37,7 +37,9 @@ import Loader from "sections/admin/components/Loader.astro";
     <Loader />
 
     <Navbar client:only="svelte" />
+    <div class="min-h-[100dvh] p-24">
     <DPSection client:only="svelte" />
+  </div>
     <Btm Showfooter="false" />
   </main>
 

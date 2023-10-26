@@ -3,34 +3,60 @@
 </script>
 
 <div class="container mx-auto">
-    <div class="join justify-center">
-        <div class="w-4/12">
+    <div class="lg:join justify-center">
+        <div class="lg:w-4/12">
             <div class="card w-96 bg-base-100 shadow-xl">
                 <figure>
-                    <img
-                        src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                        alt="Shoes"
-                    />
+                    <div class="indicator">
+                        <span
+                            class="indicator-item indicator-center badge badge-secondary w-11/12 mt-4"
+                            >Mileage</span
+                        >
+                        <img
+                            src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                            alt="Shoes"
+                        />
+                    </div>
                 </figure>
-                <div class="card-body bg-white text-red-500">
-<div class="join rounded-none">
-    <div class="w-8/12 bg-green-500">
-        wads
-    </div>
-    <div class="w-6/12 bg-neutral">
-        <div class="card-actions justify-end">
-            <div class="join join-vertical">
-                <span> INSERT COIN HERE </span>
-                <button class="btn btn-primary">START</button>
-            </div>
-        </div>
-
-    </div>
-</div>
+                <div class="grid h-44 bg-white rounded-none text-red-500">
+                    <div class="join rounded-none">
+                        <div class="w-6/12 self-center text-center">
+                            DROP GACHA
+                        </div>
+                        <div class="w-8/12 bg-neutral">
+                            <div class="grid grid-rows-2 h-full">
+                                <div class="text-center self-center">
+                                    <select class="select w-full max-w-xs">
+                                        <option disabled selected
+                                            >Pick your favorite Simpson</option
+                                        >
+                                        <option>Homer</option>
+                                        <option>Marge</option>
+                                        <option>Bart</option>
+                                        <option>Lisa</option>
+                                        <option>Maggie</option>
+                                    </select>
+                                    <div class="tabs tabs-boxed">
+                                        <a class="tab">Tab 1</a>
+                                        <a class="tab tab-active">Tab 2</a>
+                                        <a class="tab">Tab 3</a>
+                                    </div>
+                                </div>
+                                <div class="text-center self-center">
+                                    <div class="text-lg text-white">
+                                        INSERT COIN HERE
+                                    </div>
+                                    <button class="btn btn-primary rounded-full"
+                                        >START</button
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="w-6/12">
+        <div class="lg:w-6/12">
             <div class="card card-compact bg-base-100 shadow-xl">
                 <figure>
                     <img
