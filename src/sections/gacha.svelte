@@ -5,20 +5,27 @@
 <div class="container mx-auto">
     <div class="lg:join justify-center">
         <div class="lg:w-4/12">
-            <div class="card w-96 bg-base-100 shadow-xl">
+            <div class="card w-96 bg-base-100 shadow-xl p-4">
                 <figure>
                     <div class="indicator">
                         <span
-                            class="indicator-item indicator-center badge badge-secondary w-11/12 mt-4"
-                            >Mileage</span
+                            class="indicator-item indicator-center badge mt-4 p-3 gap-2 text-lg"
                         >
+                            <div class="text-info">การันตี</div>
+                            <progress
+                                class="progress progress-success w-56"
+                                value="80"
+                                max="100"
+                            />
+                            80%
+                        </span>
                         <img
                             src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
                             alt="Shoes"
                         />
                     </div>
                 </figure>
-                <div class="grid h-44 bg-white rounded-none text-red-500">
+                <div class="grid h-44 bg-white rounded-none">
                     <div class="join rounded-none">
                         <div class="w-6/12 self-center text-center">
                             DROP GACHA
@@ -43,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center self-center">
-                                    <div class="text-lg text-white">
+                                    <div class="text-lg ">
                                         INSERT COIN HERE
                                     </div>
                                     <button class="btn btn-primary rounded-full"
