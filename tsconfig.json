@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "@Style/*": ["styles/*"],
       "@services/*": ["services/*"],
       "@models/*": ["models/*"],
       "@controllers/*": ["controllers/*"],

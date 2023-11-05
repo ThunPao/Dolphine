@@ -5,7 +5,12 @@ import Layout from "../layouts/DevTest.astro";
 import Subscribe from "../layouts/Subscribe.astro";
 import Sandbox from "../sections/admin/Sandbox.astro";
 import Gacha from "sections/gacha.svelte";
+import "@Style/base.scss";
+
 ---
+<script>
+  import "@fontsource/kanit";
+</script>
 
 <!doctype html>
 <html lang="en">
@@ -15,6 +20,6 @@ import Gacha from "sections/gacha.svelte";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head><body>
-    <Gacha/>
+    <Gacha client:only="svelte"/>
   </body>
 </html>

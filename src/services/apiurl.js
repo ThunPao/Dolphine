@@ -11,5 +11,3 @@ if (svless == 3) {
   apiurl = "https://fish.dolphine.online/";
 }
 export var imgurl = apiurl + "images/shopitems/";
-
-//

@@ -56,7 +56,7 @@
 <Redeem />
 <!-- from-slate-200 dark:from-slate-800 -->
 <div
-  class="navbar backdrop-blur-sm backdrop-opacity-50 fixed z-50 bg-opacity-50 md:hover:bg-opacity-90 bg-gradient-to-b from-slate-800 from-0% z-[789]"
+  class="navbar backdrop-blur-sm backdrop-opacity-50 fixed bg-opacity-50 md:hover:bg-opacity-90 bg-gradient-to-b from-slate-800 from-0% z-[789]"
 >
   <div class="flex-1">
     <!-- <a href="/" class="btn btn-ghost normal-case text-3xl text-cyan-200 font-bold">Dolphine</a> -->

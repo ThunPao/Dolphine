@@ -114,10 +114,10 @@
       <!-- Begin Loop -->
       {#if blogs !== null && blogs.length > 0}
         {#each blogs as data}
-          <div class="card w-full bg-base-100 shadow-xl">
+          <div class="card  bg-base-100 shadow-xl">
             <div class="card-body">
               <h2 class="card-title">{data.title}</h2>
-              <div class="text-sm">
+              <div class="text-sm max-w-sm">
                 {data.description}
               </div>
             </div>
@@ -130,7 +130,6 @@
             >
               <button title="คลิก">
                 <img
-                  class="rounded-t-lg w-full"
                   src={data.img_cover}
                   alt={data.title}
                 />
